@@ -555,6 +555,13 @@ body::before { animation: none !important; opacity: .3; filter: blur(10px); }
   .winter-snowman, .admin-entry button { animation: none !important; }
 }
 
+
+.admin-entry { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+.admin-entry .wezy-admin-entry { background:linear-gradient(110deg,#18534b,#284d82,#6b4c83); border-color:rgba(156,229,189,.65); }
+.wezy-event-links { display:grid; gap:7px; margin-top:12px; }
+.wezy-event-links a { color:#a9c6ff; overflow-wrap:anywhere; }
+.notification-publication { border-color:rgba(244,201,121,.38); background:rgba(87,61,22,.18); }
+
 </style>
 
 </head>
@@ -571,7 +578,7 @@ body::before { animation: none !important; opacity: .3; filter: blur(10px); }
     <div class="brand-name">ПЕРФОРАТОРЫ</div>
     <div class="brand-caption">ИНФОРМАЦИОННЫЙ ПОРТАЛ</div>
     <div class="header-squirrels">🐿️ ✦ 🐿️</div>
-    <div class="admin-entry"><button type="button" onclick="openAdminLogin()">⚙ Администратор</button></div>
+    <div class="admin-entry"><button type="button" onclick="openAdminLogin()">⚙ Администратор</button><button type="button" class="wezy-admin-entry" onclick="openWezyLogin()">🎄 Wezy Allinvain</button></div>
   </header>
 
   <main class="container">
@@ -665,7 +672,7 @@ body::before { animation: none !important; opacity: .3; filter: blur(10px); }
 
       <section class="panel content-section" id="eventsSection">
         <div class="section-heading"><span class="section-emoji small">🎉</span><div><h2>Ивенты</h2><p>События и объявления.</p></div></div>
-        <div id="eventsList" class="publication-list"></div>
+        <div id="notificationsList" class="publication-list"></div><div id="eventsList" class="publication-list"></div>
       </section>
 
       <div class="logout-row"><button class="button button-quiet" onclick="logout()">Выйти из личного кабинета</button></div>
@@ -713,6 +720,46 @@ body::before { animation: none !important; opacity: .3; filter: blur(10px); }
         <button class="button button-quiet" type="button" onclick="adminLogout()">Выйти из админ-панели</button>
       </section>
   </main>
+
+
+    <section class="panel admin-login-box" id="wezyLoginBox" hidden>
+      <h2>Панель Wezy Allinvain</h2>
+      <label class="admin-field">Отдельный пароль Wezy<input id="wezyPassword" type="password" autocomplete="current-password" placeholder="Введите пароль"></label>
+      <button class="button button-primary" type="button" onclick="wezyLogin()">Войти</button>
+      <button class="button button-quiet" type="button" onclick="closeWezyLogin()">Отмена</button>
+      <div class="status-line" id="wezyLoginMessage"></div>
+    </section>
+    <section class="panel admin-panel" id="wezyAdminPanel" hidden>
+      <div class="section-heading"><span class="section-emoji small">🎄</span><div><h2>Панель Wezy Allinvain</h2><p>Отдельное управление проектами, ивентами и уведомлениями.</p></div></div>
+      <h3>🎉 Создание и управление ивентами</h3>
+      <form id="wezyEventForm" class="admin-form">
+        <input type="hidden" id="wezyEventId">
+        <label class="admin-field full">Название проекта<input id="wezyEventTitle" required maxlength="160" placeholder="Например: Новогодний марафон"></label>
+        <label class="admin-field full">Краткая информация — что нужно сделать<textarea id="wezyEventInfo" required placeholder="Опишите задачу участникам, условия и порядок участия"></textarea></label>
+        <label class="admin-field">Действует до<input id="wezyEventEnd" type="date" required></label>
+        <label class="admin-field">Необходимые ссылки<textarea id="wezyEventLinks" placeholder="Каждая ссылка с новой строки"></textarea></label>
+        <label class="admin-check"><input id="wezyEventPublished" type="checkbox" checked> Опубликовать ивент на портале</label>
+        <label class="admin-check"><input id="wezyEventTelegram" type="checkbox"> Отправить анонс в Telegram</label>
+        <div class="full"><button class="button button-primary" type="submit" id="wezyEventSave">Сохранить ивент</button><button class="button button-quiet" type="button" onclick="wezyResetEventForm()">Очистить</button></div>
+      </form>
+      <div class="admin-list-heading"><h3>Список ивентов</h3><button class="button button-quiet" type="button" onclick="wezyLoadEvents()">Обновить</button></div>
+      <div class="admin-list" id="wezyEventsAdminList"></div>
+      <hr style="border:0;border-top:1px solid var(--panel-border);margin:24px 0">
+      <h3>🔔 Создание уведомления</h3>
+      <form id="wezyNotificationForm" class="admin-form">
+        <input type="hidden" id="wezyNotificationId">
+        <label class="admin-field full">Заголовок уведомления<input id="wezyNotificationTitle" required maxlength="160" placeholder="Важная информация"></label>
+        <label class="admin-field full">Текст уведомления<textarea id="wezyNotificationText" required placeholder="Что должны узнать участники"></textarea></label>
+        <label class="admin-field full">Ссылки<textarea id="wezyNotificationLinks" placeholder="Каждая ссылка с новой строки"></textarea></label>
+        <label class="admin-check"><input id="wezyNotificationPublished" type="checkbox" checked> Показать уведомление на портале</label>
+        <label class="admin-check"><input id="wezyNotificationTelegram" type="checkbox"> Отправить в Telegram</label>
+        <div class="full"><button class="button button-primary" type="submit" id="wezyNotificationSave">Сохранить уведомление</button><button class="button button-quiet" type="button" onclick="wezyResetNotificationForm()">Очистить</button></div>
+      </form>
+      <div class="admin-list-heading"><h3>Список уведомлений</h3><button class="button button-quiet" type="button" onclick="wezyLoadNotifications()">Обновить</button></div>
+      <div class="admin-list" id="wezyNotificationsAdminList"></div>
+      <div class="status-line" id="wezyAdminMessage" aria-live="polite"></div>
+      <button class="button button-quiet" type="button" onclick="wezyLogout()">Выйти из панели Wezy</button>
+    </section>
 
   <footer>🐿️ ПЕРФОРАТОРЫ · 2026</footer>
   <section class="panel admin-login-box" id="adminLoginBox" hidden><h2>Вход администратора</h2><label class="admin-field">Пароль администратора<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Введите пароль"></label><button class="button button-primary" type="button" onclick="adminLogin()">Войти</button><button class="button button-quiet" type="button" onclick="closeAdminLogin()">Отмена</button><div class="status-line" id="adminLoginMessage"></div></section>
@@ -809,6 +856,7 @@ async function loadPortal() {
     renderImmunity(data.immunity || {});
     renderArticleArchive(data.articles || []);
     renderPublications('eventsList', data.events || [], 'Пока нет опубликованных ивентов.');
+    renderWezyNotifications(data.notifications || []);
     renderHistory(data.history || []);
     renderStatus(data.status || {});
   } catch (err) {
@@ -961,6 +1009,13 @@ $('backToArticleDates').addEventListener('click', () => {
   $('articleDates').hidden = false;
 });
 
+function renderWezyNotifications(items) {
+  const target=$('notificationsList'); if(!target)return; target.replaceChildren();
+  if(!items.length)return;
+  const heading=document.createElement('h3');heading.textContent='🔔 Важные уведомления';target.appendChild(heading);
+  items.forEach(item=>{const card=document.createElement('article');card.className='publication notification-publication';const title=document.createElement('h3');title.textContent=item.title||'Уведомление';const body=document.createElement('p');body.className='publication-text';body.textContent=item.text||'';card.append(title,body);String(item.links||'').split(/\n|;/).map(v=>v.trim()).filter(Boolean).forEach((raw,i)=>{const m=raw.match(/https?:\/\/[^\s]+/i);if(!m)return;const a=document.createElement('a');a.className='publication-link';a.href=m[0].replace(/[),.;]+$/,'');a.target='_blank';a.rel='noopener';a.textContent='Открыть ссылку '+(i+1)+' ↗';card.appendChild(a);});target.appendChild(card);});
+}
+
 function renderPublications(targetId, items, emptyText) {
   const target = $(targetId);
   target.replaceChildren();
@@ -988,6 +1043,8 @@ function renderPublications(targetId, items, emptyText) {
     text.textContent = item.text || '';
 
     article.append(date, title, text);
+    if (item.endDate) { const until=document.createElement('div'); until.className='publication-date'; until.textContent='Действует до: '+item.endDate; article.appendChild(until); }
+    if (item.links) { const linksBox=document.createElement('div'); linksBox.className='wezy-event-links'; String(item.links).split(/\n|;/).map(v=>v.trim()).filter(Boolean).forEach((raw,i)=>{ const url=(raw.match(/https?:\/\/[^\s]+/i)||[])[0]; if(!url)return; const a=document.createElement('a');a.href=url.replace(/[),.;]+$/,'');a.target='_blank';a.rel='noopener';a.textContent='Открыть ссылку '+(i+1)+' ↗';linksBox.appendChild(a); }); if(linksBox.childNodes.length)article.appendChild(linksBox); }
 
     (item.images || '').split(/\n|;/).map(v => v.trim()).filter(Boolean).forEach(url => {
       const imageUrl = normalizeImageUrl(url);
@@ -1323,7 +1380,22 @@ async function adminArchiveNow(){
   catch(err){$('adminMessage').textContent=err.message||'Ошибка архивации.';$('adminMessage').className='status-line error';}
   finally{button.disabled=false;button.textContent='Перенести старые ответы в архив';}
 }
-window.addEventListener('load',()=>{fillWeekSelectors();syncAnswerDateFromSelectors();if(adminToken){$('adminPanel').hidden=false;adminLoadAnswers();adminLoadParticipants();}});
+window.addEventListener('load',()=>{fillWeekSelectors();syncAnswerDateFromSelectors();if(adminToken){$('adminPanel').hidden=false;adminLoadAnswers();adminLoadParticipants();}if(wezyToken){$('wezyAdminPanel').hidden=false;wezyLoadEvents();wezyLoadNotifications();}});
+
+
+// ---------------- ПАНЕЛЬ WEZY ALLINVAIN ----------------
+let wezyToken=sessionStorage.getItem('perforator_wezy_token')||'';
+function openWezyLogin(){$('wezyLoginBox').hidden=false;$('wezyPassword').focus();}
+function closeWezyLogin(){$('wezyLoginBox').hidden=true;$('wezyLoginMessage').textContent='';}
+async function wezyLogin(){const password=$('wezyPassword').value;if(!password){$('wezyLoginMessage').textContent='Введите пароль.';return;}$('wezyLoginMessage').textContent='Проверяем доступ…';try{const data=await apiCall('wezyLogin',{password});wezyToken=data.token;sessionStorage.setItem('perforator_wezy_token',wezyToken);$('wezyPassword').value='';closeWezyLogin();$('wezyAdminPanel').hidden=false;$('wezyAdminPanel').scrollIntoView({behavior:'smooth',block:'start'});await Promise.all([wezyLoadEvents(),wezyLoadNotifications()]);}catch(e){$('wezyLoginMessage').textContent=e.message||'Ошибка входа.';}}
+function wezyLogout(){wezyToken='';sessionStorage.removeItem('perforator_wezy_token');$('wezyAdminPanel').hidden=true;wezyResetEventForm();wezyResetNotificationForm();}
+function wezyMessage(text,error=false){$('wezyAdminMessage').textContent=text;$('wezyAdminMessage').className='status-line '+(error?'error':'success');}
+function wezyResetEventForm(){['wezyEventId','wezyEventTitle','wezyEventInfo','wezyEventEnd','wezyEventLinks'].forEach(id=>$(id).value='');$('wezyEventPublished').checked=true;$('wezyEventTelegram').checked=false;$('wezyEventSave').textContent='Сохранить ивент';}
+function wezyResetNotificationForm(){['wezyNotificationId','wezyNotificationTitle','wezyNotificationText','wezyNotificationLinks'].forEach(id=>$(id).value='');$('wezyNotificationPublished').checked=true;$('wezyNotificationTelegram').checked=false;$('wezyNotificationSave').textContent='Сохранить уведомление';}
+async function wezyLoadEvents(){if(!wezyToken)return;try{const items=await apiCall('wezyEvents',{token:wezyToken});const box=$('wezyEventsAdminList');box.replaceChildren();if(!items.length){box.textContent='Ивентов пока нет.';return;}items.forEach(item=>{const row=document.createElement('div');row.className='admin-row';const info=document.createElement('div');const title=document.createElement('strong');title.textContent=item.title;const small=document.createElement('small');small.textContent=(item.published?'Опубликован':'Черновик')+' · до '+item.endDate;info.append(title,small);const actions=document.createElement('div');actions.className='admin-row-actions';const edit=document.createElement('button');edit.textContent='Изменить';edit.onclick=()=>{ $('wezyEventId').value=item.id;$('wezyEventTitle').value=item.title;$('wezyEventInfo').value=item.info;$('wezyEventEnd').value=(item.endDate||'').split('.').reverse().join('-');$('wezyEventLinks').value=item.links;$('wezyEventPublished').checked=item.published;$('wezyEventTelegram').checked=false;$('wezyEventSave').textContent='Сохранить изменения';$('wezyAdminPanel').scrollIntoView({behavior:'smooth'});};const del=document.createElement('button');del.textContent='Удалить';del.onclick=async()=>{if(!confirm('Удалить ивент «'+item.title+'»?'))return;try{await apiCall('wezyDeleteEvent',{token:wezyToken,id:item.id});wezyMessage('Ивент удалён.');await wezyLoadEvents();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}};actions.append(edit,del);row.append(info,actions);box.append(row);});}catch(e){wezyMessage(e.message,true);}}
+$('wezyEventForm').addEventListener('submit',async e=>{e.preventDefault();if(!wezyToken)return;const b=$('wezyEventSave');b.disabled=true;try{await apiCall('wezySaveEvent',{token:wezyToken,id:$('wezyEventId').value,title:$('wezyEventTitle').value,info:$('wezyEventInfo').value,endDate:$('wezyEventEnd').value,links:$('wezyEventLinks').value,published:$('wezyEventPublished').checked,notifyTelegram:$('wezyEventTelegram').checked});wezyMessage('Ивент сохранён.');wezyResetEventForm();await wezyLoadEvents();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}finally{b.disabled=false;}});
+async function wezyLoadNotifications(){if(!wezyToken)return;try{const items=await apiCall('wezyNotifications',{token:wezyToken});const box=$('wezyNotificationsAdminList');box.replaceChildren();if(!items.length){box.textContent='Уведомлений пока нет.';return;}items.forEach(item=>{const row=document.createElement('div');row.className='admin-row';const info=document.createElement('div');const title=document.createElement('strong');title.textContent=item.title;const small=document.createElement('small');small.textContent=(item.published?'На портале':'Черновик')+' · Telegram: '+(item.telegramSent?'отправлено':'не отправлено');info.append(title,small);const actions=document.createElement('div');actions.className='admin-row-actions';const edit=document.createElement('button');edit.textContent='Изменить';edit.onclick=()=>{$('wezyNotificationId').value=item.id;$('wezyNotificationTitle').value=item.title;$('wezyNotificationText').value=item.text;$('wezyNotificationLinks').value=item.links;$('wezyNotificationPublished').checked=item.published;$('wezyNotificationTelegram').checked=false;$('wezyNotificationSave').textContent='Сохранить изменения';$('wezyAdminPanel').scrollIntoView({behavior:'smooth'});};const del=document.createElement('button');del.textContent='Удалить';del.onclick=async()=>{if(!confirm('Удалить уведомление «'+item.title+'»?'))return;try{await apiCall('wezyDeleteNotification',{token:wezyToken,id:item.id});wezyMessage('Уведомление удалено.');await wezyLoadNotifications();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}};actions.append(edit,del);row.append(info,actions);box.append(row);});}catch(e){wezyMessage(e.message,true);}}
+$('wezyNotificationForm').addEventListener('submit',async e=>{e.preventDefault();if(!wezyToken)return;const b=$('wezyNotificationSave');b.disabled=true;try{await apiCall('wezySaveNotification',{token:wezyToken,id:$('wezyNotificationId').value,title:$('wezyNotificationTitle').value,text:$('wezyNotificationText').value,links:$('wezyNotificationLinks').value,published:$('wezyNotificationPublished').checked,notifyTelegram:$('wezyNotificationTelegram').checked});wezyMessage('Уведомление сохранено.');wezyResetNotificationForm();await wezyLoadNotifications();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}finally{b.disabled=false;}});
 
 // Визуальные анимации отключены для быстрой работы портала.
 
