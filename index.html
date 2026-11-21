@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Перфораторы - личный кабинет</title>
+  <title>перфораторы - личный кабинет</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwOTE2MzAiLz48cGF0aCBkPSJNMzIgNWw0LjIgOC41IDkuNCAxLjQtNi44IDYuNiAxLjYgOS40LTguNC00LjQtOC40IDQuNCAxLjYtOS40LTYuOC02LjYgOS40LTEuNHoiIGZpbGw9IiNmZmQzNmUiIHN0cm9rZT0iI2ZmZjBiNSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMyIDE3TDEzIDQwaDExTDExIDUzaDQyTDQwIDQwaDExeiIgZmlsbD0iIzEzODM0YyIgc3Ryb2tlPSIjNzJkNmEwIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yOCA1M2g4djdoLTh6IiBmaWxsPSIjOWI2MzNkIi8+PGNpcmNsZSBjeD0iMjMiIGN5PSIzOSIgcj0iMyIgZmlsbD0iI2ZmNTI2NyIvPjxjaXJjbGUgY3g9IjM5IiBjeT0iMzUiIHI9IjMiIGZpbGw9IiNmZmQzNmUiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjQ3IiByPSIzIiBmaWxsPSIjNmJiY2ZmIi8+PGNpcmNsZSBjeD0iNDUiIGN5PSI0OCIgcj0iMi41IiBmaWxsPSIjZmY1MjY3Ii8+PHBhdGggZD0iTTE5IDMxbC00LTNtMzAgNCA0LTQiIHN0cm9rZT0iI2U5ZjRmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTIiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjU0IiBjeT0iMTgiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI0OSIgcj0iMS4yIiBmaWxsPSIjZThmMmZmIi8+PC9zdmc+">
   <meta name="theme-color" content="#07132f">
   <style>
@@ -60,10 +60,9 @@ body {
   border: 1px solid rgba(255,218,145,.58);
   background: linear-gradient(110deg, #263f80, #4c367f, #235c80, #263f80);
   background-size: 240% 100%; box-shadow: 0 8px 28px rgba(5,10,35,.38), 0 0 20px rgba(106,135,255,.2);
-  transition: transform .22s ease, box-shadow .22s ease; animation: adminShimmer 8s ease-in-out infinite;
+  transition: transform .22s ease, box-shadow .22s ease;
 }
 .admin-entry button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(70,100,190,.34); }
-@keyframes adminShimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 .brand-mark { font-size: 34px; filter: drop-shadow(0 0 15px rgba(255,213,138,.45)); }
 .brand-name {
   margin-top: 4px;
@@ -106,7 +105,6 @@ select {
   border: 0; border-radius: 12px; padding: 13px 19px; margin: 10px 8px 0 0;
   font-weight: 700; font-size: 14px; text-decoration: none; cursor: pointer;
   transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
-  animation: none !important;
 }
 .button:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 8px 22px rgba(0,0,0,.28); }
 .button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
@@ -118,15 +116,10 @@ select {
 .success { color: var(--green) !important; }
 .login-note { font-size: 12px; margin-bottom: 0; }
 .welcome { position: relative; overflow: hidden; }
-.welcome::after {
-  content: "🐿️"; position: absolute; right: 28px; bottom: 8px;
-  font-size: clamp(55px, 10vw, 95px); opacity: .16; transform: rotate(-12deg);
-}
 .welcome-top { display: flex; align-items: center; justify-content: space-between; }
 .welcome h1 { margin-top: 16px; }
 .welcome p { max-width: 650px; color: #d5def5; font-size: 17px; }
 .welcome-bottom { color: var(--gold); font-size: 13px; margin-top: 20px; }
-.squirrel { font-size: 27px; }
 .section-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin: 18px 0 24px; }
 .section-card {
   min-height: 142px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
@@ -134,7 +127,7 @@ select {
   border: 1px solid var(--panel-border); border-radius: 18px;
   background: linear-gradient(145deg, rgba(24,45,91,.96), rgba(10,24,57,.96));
   box-shadow: 0 9px 24px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.05);
-  cursor: pointer; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; animation: none !important;
+  cursor: pointer; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 .section-card:hover { transform: translateY(-3px); border-color: rgba(244,201,121,.55); box-shadow: 0 14px 30px rgba(0,0,0,.32), 0 0 18px rgba(105,145,255,.12); }
 .section-card strong { font-size: 15px; }
@@ -159,9 +152,6 @@ select {
   padding: 28px 14px; color: var(--muted); text-align: center;
   border: 1px dashed rgba(173,196,255,.2); border-radius: 15px;
 }
-.empty-state span { font-size: 28px; }
-.empty-state strong { color: var(--text); }
-.empty-state small { color: var(--muted); }
 .empty-state.compact { padding: 18px; font-size: 13px; }
 .period-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 18px 0; }
 .period-card {
@@ -190,21 +180,7 @@ select {
 .result.neutral { color: var(--muted); }
 .is-disabled { opacity: .4; pointer-events: none; filter: grayscale(.7); }
 .logout-row { text-align: center; }
-.admin-entry { margin: 20px auto 0; text-align: center; }
-.admin-entry button {
-  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-  min-height: 62px; min-width: 250px; padding: 0 38px; border-radius: 18px;
-  color: #fff4d8; font-size: 19px; font-weight: 800; letter-spacing: .05em;
-  border: 1px solid rgba(255,218,145,.72);
-  background: linear-gradient(110deg, #263f80, #60408f, #236b8b, #263f80);
-  background-size: 240% 100%;
-  box-shadow: 0 10px 32px rgba(5,10,35,.48), 0 0 26px rgba(106,135,255,.28);
-  cursor: pointer; opacity: 1;
-  transition: transform .22s ease, box-shadow .22s ease;
-  animation: adminShimmer 8s ease-in-out infinite;
-}
-.admin-entry button:hover { transform: translateY(-3px) scale(1.025); box-shadow: 0 14px 38px rgba(70,100,190,.42); }
-@media(max-width:600px){ .admin-entry button { min-width: 220px; min-height: 56px; padding: 0 28px; font-size: 17px; } }
+
 .admin-panel { margin-top: 24px; border-color: rgba(244,201,121,.4); }
 .admin-panel h2 { color: var(--gold); }
 .admin-form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin: 16px 0; }
@@ -222,442 +198,63 @@ select {
 @media(max-width:600px){.admin-form{grid-template-columns:1fr}.admin-field.full{grid-column:auto}.admin-row{flex-direction:column}}
 footer { text-align: center; padding: 20px 10px 35px; color: #8f9fc8; font-size: 12px; letter-spacing: .08em; }
 [hidden] { display: none !important; }
-@media (max-width: 720px) {
-  .section-grid { grid-template-columns: repeat(2, 1fr); }
-  .section-card { min-height: 128px; padding: 15px; }
-}
-@media (max-width: 460px) {
-  .container { width: 94%; }
-  .section-grid { gap: 9px; }
-  .section-card { min-height: 120px; padding: 12px; }
-  .section-card strong { font-size: 13px; }
-  .section-card small { font-size: 11px; }
-  .period-grid { grid-template-columns: 1fr; }
-  .history-row { align-items: flex-start; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
-}
-/* Архив статей: компактная ширина, отдельные даты и отдельная таблица публикации. */
-.article-date-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-  max-width: 760px;
-  margin: 18px auto 4px;
-}
-.article-date-button {
-  min-height: 66px;
-  border: 1px solid rgba(173,196,255,.22);
-  border-radius: 13px;
-  background: rgba(6,15,39,.55);
-  color: var(--gold);
-  font-size: 17px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: border-color .18s ease, background-color .18s ease;
-}
-.article-date-button:hover { border-color: var(--gold); background: #192f60; }
-.article-date-button small { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; font-weight: 400; }
-.article-detail { max-width: 850px; margin: 18px auto 0; }
-.article-detail-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-.article-table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
-.article-table td { padding: 0; border: 1px solid rgba(173,196,255,.18); border-radius: 14px; background: rgba(5,14,37,.38); vertical-align: top; }
-.article-reader { max-width: 760px; margin: 0 auto; padding: clamp(16px, 3vw, 28px); }
-.article-reader h3 { margin: 0 0 14px; color: var(--gold); font-size: 21px; }
-.article-reader-text { color: #e0e7fa; font-size: 14px; line-height: 1.62; white-space: pre-wrap; overflow-wrap: anywhere; }
-.article-reader-text::first-line { font-weight: 700; }
-.photo-album-button { margin-top: 18px; }
-@media (max-width: 650px) {
-  .article-date-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .article-date-button { min-height: 60px; }
-  .article-reader { padding: 15px; }
-  .article-reader-text { font-size: 13px; }
-}
-.article-inline-link { color: #a9c6ff; text-decoration: underline; text-underline-offset: 2px; }
 
-/* Ответ дня и общий архив правильных ответов */
-.today-answer {
-  margin: 20px 0;
-  padding: 22px;
-  border: 1px solid rgba(244,201,121,.4);
-  border-radius: 17px;
-  background: rgba(5,14,37,.45);
-}
-.answer-label {
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .12em;
-  margin-bottom: 17px;
-}
-.today-answer-content h3 { font-size: 22px; color: var(--gold); }
-.answer-large-text {
-  font-size: 17px;
-  line-height: 1.8;
-  color: #f4f6ff;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-.today-answer-content .answer-large-text { font-size: 18px; }
-.answer-history { display: grid; gap: 14px; margin-top: 18px; }
-.answer-history-card {
-  padding: 20px;
-  border: 1px solid var(--panel-border);
-  border-radius: 16px;
-  background: rgba(5,14,37,.38);
-}
-.answer-history-card h3 { color: var(--gold); font-size: 19px; margin: 9px 0 14px; }
-.answer-history-card .answer-large-text { font-size: 16px; }
-@media (max-width: 600px) {
-  .today-answer { padding: 16px; }
-  .today-answer-content .answer-large-text { font-size: 16px; }
-  .answer-history-card { padding: 15px; }
-  .answer-history-card .answer-large-text { font-size: 15px; }
-}
-
-
-/* Новогодняя ночь: декоративные эффекты вынесены на отдельные лёгкие слои. */
-body {
-  background:
-    radial-gradient(ellipse at 50% -12%, rgba(58, 76, 165, .42), transparent 54%),
-    linear-gradient(145deg, #020817 0%, #071a3b 38%, #17113d 68%, #030918 100%);
-  background-attachment: fixed;
-}
-.ambient { opacity: .16; filter: blur(58px); }
-.ambient-one { background: #496dff; }
-.ambient-two { background: #b56bce; }
-/* Медленное переливание оттенков ночного неба без тяжёлых скриптов. */
-.winter-aurora {
-  position: fixed; inset: -25%; z-index: 0; pointer-events: none;
-  background: linear-gradient(115deg, transparent 18%, rgba(39,91,190,.15) 38%, rgba(132,67,170,.13) 54%, rgba(32,111,151,.12) 68%, transparent 84%);
-  filter: blur(42px); opacity: .8; transform: translate3d(-3%,0,0) rotate(-5deg);
-  animation: auroraDrift 18s ease-in-out infinite alternate; will-change: transform, opacity;
-}
-@keyframes auroraDrift {
-  0% { transform: translate3d(-3%, -1%, 0) rotate(-5deg) scale(1); opacity: .48; }
-  50% { opacity: .9; }
-  100% { transform: translate3d(3%, 2%, 0) rotate(5deg) scale(1.06); opacity: .62; }
-}
-#scene, #snow, #christmas-background { pointer-events: none; }
-.content-section { content-visibility: auto; contain-intrinsic-size: 520px; }
-.site-header, .panel, .section-card, .article-date-button, .publication {
-  box-shadow: 0 12px 34px rgba(0,0,0,.34), 0 1px 0 rgba(255,255,255,.045) inset;
-}
-.panel, .section-card, .article-date-button, .button, .publication {
-  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background-color .22s ease;
-}
-.section-card:hover, .article-date-button:hover, .button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 34px rgba(0,0,0,.38), 0 0 18px rgba(126,164,255,.12);
-}
-.panel { background: rgba(9, 20, 47, .88); border-color: rgba(174,196,255,.17); }
-.section-card { background: linear-gradient(145deg, rgba(19,35,75,.92), rgba(7,17,42,.94)); }
-.section-card.events-nav-card { grid-column: 2; }
-
-/* Размытые огни гирлянды на заднем плане. */
-body::before {
-  content: ""; position: fixed; inset: -35px; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(circle at 9% 18%, rgba(255,190,90,.72) 0 3px, transparent 18px),
-    radial-gradient(circle at 22% 9%, rgba(75,145,255,.65) 0 3px, transparent 22px),
-    radial-gradient(circle at 39% 17%, rgba(255,75,105,.58) 0 3px, transparent 20px),
-    radial-gradient(circle at 62% 8%, rgba(95,220,170,.58) 0 3px, transparent 21px),
-    radial-gradient(circle at 79% 19%, rgba(255,195,90,.68) 0 3px, transparent 22px),
-    radial-gradient(circle at 94% 10%, rgba(130,145,255,.65) 0 3px, transparent 20px);
-  filter: blur(13px); opacity: .42; animation: garlandGlow 5.8s ease-in-out infinite alternate;
-}
-body::after {
-  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,.34) 100%);
-}
-@keyframes garlandGlow { 0% { opacity:.24; transform:scale(1); } 50% { opacity:.48; } 100% { opacity:.30; transform:scale(1.025); } }
-
-/* Мерцающая гирлянда: небольшие огни по верхнему краю, без боковых ёлок. */
-.winter-lights {
-  position: fixed; top: 0; left: 0; right: 0; height: 76px; z-index: 1; pointer-events: none;
-  background-image:
-    radial-gradient(circle, rgba(255,224,151,.98) 0 2px, rgba(255,193,95,.28) 3px, transparent 10px),
-    radial-gradient(circle, rgba(126,180,255,.98) 0 2px, rgba(87,143,255,.25) 3px, transparent 10px),
-    radial-gradient(circle, rgba(255,139,163,.95) 0 2px, rgba(255,112,150,.24) 3px, transparent 10px),
-    radial-gradient(circle, rgba(130,236,198,.95) 0 2px, rgba(92,211,171,.22) 3px, transparent 10px);
-  background-size: 173px 48px, 211px 55px, 257px 51px, 193px 58px;
-  background-position: 18px 8px, 74px 20px, 122px 5px, 39px 27px;
-  background-repeat: repeat-x; opacity: .68;
-  animation: lightsTwinkle 3.6s ease-in-out infinite alternate;
-}
-@keyframes lightsTwinkle { 0% { opacity: .42; filter: brightness(.85); } 45% { opacity: .9; filter: brightness(1.2); } 100% { opacity: .58; filter: brightness(1); } }
-
-/* Снег: один CSS-слой без canvas и бесконечных DOM-элементов. */
+/* АНИМАЦИЯ ПАДАЮЩЕГО СНЕГА */
 .winter-snow {
-  position: fixed; inset: -120px 0 0; z-index: 4; pointer-events: none; opacity: .28;
-  background-image:
-    radial-gradient(2px 2px at 25px 35px, rgba(255,255,255,.85) 98%, transparent),
-    radial-gradient(1.5px 1.5px at 145px 95px, rgba(220,235,255,.75) 98%, transparent),
-    radial-gradient(2.5px 2.5px at 235px 155px, rgba(255,255,255,.72) 98%, transparent),
-    radial-gradient(1.5px 1.5px at 330px 45px, rgba(255,255,255,.7) 98%, transparent);
-  background-size: 520px 330px; animation: snowfall 26s linear infinite;
-}
-@keyframes snowfall { from { background-position: 0 -230px; } to { background-position: 80px 690px; } }
-
-/* Два редких мягких салюта вдали, без вспышек на весь экран. */
-.winter-firework {
-  position: fixed; z-index: 0; width: 150px; height: 150px; border-radius: 50%;
-  pointer-events: none; opacity: 0; transform: scale(.25);
-  background: repeating-conic-gradient(from 0deg, rgba(255,210,130,.85) 0 1deg, transparent 1deg 15deg);
-  mask-image: radial-gradient(circle, transparent 0 9%, #000 11% 13%, transparent 16% 100%);
-  -webkit-mask-image: radial-gradient(circle, transparent 0 9%, #000 11% 13%, transparent 16% 100%);
-  filter: drop-shadow(0 0 9px rgba(255,190,105,.5));
-  animation: distantFirework 9s ease-out infinite;
-}
-.winter-firework.one { top: 13%; left: 8%; }
-.winter-firework.two { top: 23%; right: 9%; animation-delay: 4.5s; background: repeating-conic-gradient(rgba(120,170,255,.85) 0 1deg, transparent 1deg 15deg); }
-@keyframes distantFirework {
-  0%, 72%, 100% { opacity:0; transform:scale(.22) rotate(0deg); }
-  76% { opacity:.34; transform:scale(.8) rotate(18deg); }
-  84% { opacity:.12; transform:scale(1.08) rotate(36deg); }
-}
-@media (max-width: 720px) {
-  .section-card#cookieCard, .section-card.events-nav-card { grid-column: 1 / -1; max-width: 320px; width: 100%; justify-self: center; }
-  .winter-firework { width: 90px; height: 90px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .winter-snow, .winter-aurora, .winter-lights, body::before, .winter-firework, .admin-entry button { animation: none !important; }
-  .panel, .section-card, .article-date-button, .button, .publication { transition: none !important; }
-}
-
-
-/* iOS-inspired glass + vivid flowing aurora. CSS-only, без тяжёлого JS/canvas. */
-.winter-aurora {
-  inset: -18%;
-  background:
-    radial-gradient(ellipse at 18% 28%, rgba(35,112,255,.34), transparent 36%),
-    radial-gradient(ellipse at 76% 22%, rgba(174,74,230,.30), transparent 38%),
-    radial-gradient(ellipse at 58% 78%, rgba(22,190,190,.23), transparent 40%),
-    linear-gradient(125deg, rgba(17,54,128,.10), rgba(112,48,157,.22), rgba(14,133,166,.17), rgba(17,54,128,.10));
-  background-size: 170% 170%, 180% 180%, 160% 160%, 260% 260%;
-  filter: blur(34px) saturate(1.35);
-  opacity: .95;
-  animation: liquidAurora 24s ease-in-out infinite alternate;
-  will-change: background-position, transform;
-}
-@keyframes liquidAurora {
-  0% { background-position: 0% 10%, 100% 0%, 20% 100%, 0% 50%; transform: translate3d(-1.5%,0,0) scale(1); }
-  50% { background-position: 70% 60%, 20% 80%, 90% 10%, 100% 50%; }
-  100% { background-position: 100% 90%, 0% 100%, 40% 0%, 0% 50%; transform: translate3d(1.5%,1%,0) scale(1.05); }
-}
-
-/* Полупрозрачные панели с мягкой кромкой и внутренним бликом — эффект матового стекла. */
-.panel, .section-card, .article-date-button, .publication,
-.period-card, .history-row, .admin-row, .empty-state {
-  background: linear-gradient(145deg, rgba(255,255,255,.105), rgba(255,255,255,.025) 48%, rgba(102,145,255,.055)), rgba(8,18,45,.56);
-  border: 1px solid rgba(220,232,255,.19);
-  box-shadow: 0 18px 48px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.16), inset 0 -1px 0 rgba(255,255,255,.035);
-  -webkit-backdrop-filter: blur(16px) saturate(145%);
-  backdrop-filter: blur(16px) saturate(145%);
-}
-.panel { background-color: rgba(8,18,45,.48); }
-.section-card {
-  background: linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.035) 55%, rgba(83,133,255,.09)), rgba(10,25,59,.48);
-  border-radius: 20px;
-}
-.section-card:hover, .article-date-button:hover {
-  border-color: rgba(192,214,255,.48);
-  box-shadow: 0 18px 42px rgba(0,0,0,.3), 0 0 24px rgba(105,150,255,.17), inset 0 1px 0 rgba(255,255,255,.22);
-}
-.publication, .period-card, .history-row, .admin-row {
-  border-color: rgba(210,226,255,.15);
-  background-color: rgba(7,17,42,.42);
-}
-.article-date-button { background-color: rgba(8,20,49,.48); }
-.admin-entry button {
-  min-height: 68px; min-width: 280px; padding: 0 42px;
-  border: 1px solid rgba(230,239,255,.45);
-  background: linear-gradient(115deg, rgba(40,103,208,.88), rgba(126,65,177,.88), rgba(22,151,169,.88), rgba(40,103,208,.88));
-  background-size: 300% 300%;
-  box-shadow: 0 12px 34px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.34), 0 0 28px rgba(104,142,255,.25);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
-  backdrop-filter: blur(14px) saturate(150%);
-  animation: adminShimmer 10s ease-in-out infinite;
-}
-.admin-entry button:hover { box-shadow: 0 16px 42px rgba(0,0,0,.38), 0 0 32px rgba(117,158,255,.34), inset 0 1px 0 rgba(255,255,255,.4); }
-.admin-field input, .admin-field textarea, select {
-  border-color: rgba(211,228,255,.24);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
-}
-@media (max-width: 600px) {
-  .admin-entry button { min-width: min(260px, 88vw); min-height: 60px; }
-  .panel, .section-card, .article-date-button, .publication, .period-card, .history-row, .admin-row {
-    -webkit-backdrop-filter: blur(12px) saturate(135%);
-    backdrop-filter: blur(12px) saturate(135%);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .winter-aurora { animation: none !important; }
-}
-
-
-/* Финальная оптимизация зимних эффектов: меньше нагрузки, мягче движение. */
-.winter-aurora {
-  inset: -18%;
-  filter: blur(25px) saturate(1.08);
-  opacity: .55;
-  animation: auroraSoft 35s ease-in-out infinite alternate;
-  will-change: transform, opacity;
-}
-@keyframes auroraSoft {
-  from { transform: translate3d(-1%,0,0) scale(1); opacity: .42; }
-  to   { transform: translate3d(1%,.5%,0) scale(1.025); opacity: .58; }
-}
-body::before { animation: none !important; opacity: .3; filter: blur(10px); }
-.winter-lights { animation: lightsTwinkle 6s ease-in-out infinite alternate; }
-@keyframes lightsTwinkle {
-  from { opacity: .48; }
-  to   { opacity: .72; }
-}
-.winter-snow {
-  opacity: .34;
-  background-image:
-    radial-gradient(3px 3px at 25px 35px, rgba(255,255,255,.9) 98%, transparent),
-    radial-gradient(2.5px 2.5px at 145px 95px, rgba(220,235,255,.8) 98%, transparent),
-    radial-gradient(4px 4px at 235px 155px, rgba(255,255,255,.78) 98%, transparent),
-    radial-gradient(2.5px 2.5px at 330px 45px, rgba(255,255,255,.75) 98%, transparent);
-  background-size: 520px 330px;
-  animation: snowfall 38s linear infinite;
-}
-.panel, .section-card, .article-date-button, .button, .publication {
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
-}
-.section-card:hover, .article-date-button:hover, .button:hover { transform: translateY(-2px); }
-/* Оставляем белку в логотипе, убираем повторяющиеся декоративные белки. */
-.header-squirrels, .welcome .squirrel, .welcome::after { display: none !important; }
-.winter-snowman {
-  position: fixed;
-  right: 22px;
-  bottom: 18px;
-  z-index: 5;
-  pointer-events: none;
-  font-size: 42px;
-  line-height: 1;
-  opacity: .82;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
-  animation: snowmanFloat 5s ease-in-out infinite;
-}
-@keyframes snowmanFloat {
-  0%, 100% { transform: translateY(0) rotate(-3deg); }
-  50% { transform: translateY(-5px) rotate(3deg); }
-}
-@media (max-width: 600px) {
-  .winter-snowman { right: 12px; bottom: 12px; font-size: 32px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .winter-snow, .winter-aurora, .winter-lights, .winter-firework,
-  .winter-snowman, .admin-entry button { animation: none !important; }
-}
-
-
-.admin-entry { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
-.admin-entry .wezy-admin-entry { background:linear-gradient(110deg,#18534b,#284d82,#6b4c83); border-color:rgba(156,229,189,.65); }
-.wezy-event-links { display:grid; gap:7px; margin-top:12px; }
-.wezy-event-links a { color:#a9c6ff; overflow-wrap:anywhere; }
-.notification-publication { border-color:rgba(244,201,121,.38); background:rgba(87,61,22,.18); }
-
-
-
-/* ===== МОДАЛЬНЫЕ ОКНА ПОРТАЛА ===== */
-.portal-modal {
   position: fixed;
   inset: 0;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  background: rgba(2, 7, 22, .82);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+  z-index: 3;
+  pointer-events: none;
+  opacity: .62;
+  background-image:
+    radial-gradient(3px 3px at 35px 45px, rgba(255,255,255,.95) 98%, transparent),
+    radial-gradient(2px 2px at 120px 180px, rgba(215,235,255,.9) 98%, transparent),
+    radial-gradient(4px 4px at 240px 90px, rgba(255,255,255,.95) 98%, transparent),
+    radial-gradient(2.5px 2.5px at 360px 240px, rgba(255,255,255,.85) 98%, transparent),
+    radial-gradient(3.5px 3.5px at 470px 120px, rgba(220,240,255,.9) 98%, transparent),
+    radial-gradient(2px 2px at 530px 310px, rgba(255,255,255,.85) 98%, transparent);
+  background-size: 560px 480px;
+  animation: snowfall 20s linear infinite !important;
+  will-change: background-position;
+}
+@keyframes snowfall {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px 480px; }
+}
+
+.winter-snowman {
+  position: fixed; right: 22px; bottom: 18px; z-index: 5; pointer-events: none;
+  font-size: 42px; line-height: 1; opacity: .82;
+}
+
+/* Модальные окна */
+.portal-modal {
+  position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
+  padding: 18px; background: rgba(2, 7, 22, .82); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
 }
 .portal-modal[hidden] { display: none !important; }
 .portal-modal-dialog {
-  position: relative;
-  width: min(920px, 100%);
-  max-height: 90vh;
-  overflow: auto;
-  padding: clamp(17px, 3vw, 28px);
-  border: 1px solid rgba(174,196,255,.25);
-  border-radius: 20px;
-  background: #0b1940;
-  box-shadow: 0 24px 80px rgba(0,0,0,.58);
-  overscroll-behavior: contain;
+  position: relative; width: min(920px, 100%); max-height: 90vh; overflow: auto;
+  padding: clamp(17px, 3vw, 28px); border: 1px solid rgba(174,196,255,.25); border-radius: 20px;
+  background: #0b1940; box-shadow: 0 24px 80px rgba(0,0,0,.58); overscroll-behavior: contain;
 }
 .portal-modal-close {
-  position: sticky;
-  top: 0;
-  z-index: 4;
-  float: right;
-  width: 40px;
-  height: 40px;
-  margin: -8px -8px 8px 12px;
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 11px;
-  color: #fff;
-  background: #263e76;
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
+  position: sticky; top: 0; z-index: 4; float: right; width: 40px; height: 40px;
+  margin: -8px -8px 8px 12px; border: 1px solid rgba(255,255,255,.2); border-radius: 11px;
+  color: #fff; background: #263e76; font-size: 24px; line-height: 1; cursor: pointer;
 }
-.portal-modal-title {
-  margin: 0 48px 18px 0;
-  color: var(--gold);
-  font-size: clamp(20px, 3vw, 25px);
-}
+.portal-modal-title { margin: 0 48px 18px 0; color: var(--gold); font-size: clamp(20px, 3vw, 25px); }
 .portal-modal-content { clear: both; }
-.portal-modal-content > .panel,
-.portal-modal-content > .content-section { margin: 0; }
 body.portal-modal-open { overflow: hidden; }
 
-/* Убираем тяжёлые переливания, мерцание и прыжки карточек. */
-.winter-aurora, .winter-lights, .winter-snow, .winter-firework,
-.winter-snowman, body::before, body::after, .ambient {
+/* Отключаем только тяжёлые мерцания, но оставляем снег */
+.winter-aurora, .winter-lights, .winter-firework, .winter-snowman, body::before, body::after, .ambient {
   animation: none !important;
 }
-.winter-aurora { opacity: .22 !important; }
-.winter-lights, .winter-snow, .winter-firework { opacity: .12 !important; }
-.admin-entry button { animation: none !important; background-size: 100% 100% !important; }
-.section-card, .article-date-button, .button, .publication, .admin-entry button {
-  transition: border-color .15s ease, background-color .15s ease, opacity .15s ease !important;
-}
-.section-card:hover, .article-date-button:hover, .button:hover, .admin-entry button:hover {
-  transform: none !important;
-}
-
-/* Служебный вход Wezy оставлен доступным, но не привлекает внимания. */
+.winter-lights, .winter-firework { opacity: .12 !important; }
 .admin-entry .wezy-admin-entry { display: none !important; }
-.wezy-secret-entry {
-  display: inline-block;
-  margin: 8px 0 0 10px;
-  color: #9aa9ca;
-  font-size: 10px;
-  opacity: .28;
-  text-decoration: none;
-  transition: opacity .15s ease;
-}
-.wezy-secret-entry:hover, .wezy-secret-entry:focus { opacity: .9; }
-
-@media (max-width: 600px) {
-  .portal-modal { padding: 7px; }
-  .portal-modal-dialog { max-height: 95vh; border-radius: 15px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-</style>
-
+.wezy-secret-entry { display: inline-block; margin: 8px 0 0 10px; color: #9aa9ca; font-size: 10px; opacity: .28; text-decoration: none; }
+  </style>
 </head>
 <body>
   <div class="winter-aurora" aria-hidden="true"></div>
@@ -672,7 +269,10 @@ body.portal-modal-open { overflow: hidden; }
     <div class="brand-name">ПЕРФОРАТОРЫ</div>
     <div class="brand-caption">ИНФОРМАЦИОННЫЙ ПОРТАЛ</div>
     <div class="header-squirrels">🐿️ ✦ 🐿️</div>
-    <div class="admin-entry"><button type="button" onclick="openAdminLogin()">⚙ Администратор</button><button type="button" class="wezy-admin-entry" onclick="openWezyLogin()">🎄 Wezy Allinvain</button></div>
+    <div class="admin-entry">
+      <button type="button" onclick="openAdminLogin()">⚙ Администратор</button>
+      <button type="button" class="wezy-admin-entry" onclick="openWezyLogin()">🎄 Wezy Allinvain</button>
+    </div>
   </header>
 
   <main class="container">
@@ -723,27 +323,14 @@ body.portal-modal-open { overflow: hidden; }
         <button class="section-card events-nav-card" data-target="eventsSection"><span class="section-emoji">🎉</span><strong>Ивенты</strong><small>События и объявления</small></button>
       </nav>
 
-
-
-
-
-
-
-
-
-
-
       <section class="panel content-section" id="immunitySection" hidden>
         <div class="section-heading"><span class="section-emoji small">🛡️</span><div><h2>Иммунитет</h2><p>Ответ на сегодня и четыре дня иммунитета.</p></div></div>
-
         <div class="today-answer">
           <div class="answer-label">📅 ОТВЕТ НА СЕГОДНЯ</div>
           <div id="todayAnswer"><div class="empty-state compact">Ответ на сегодня ещё не опубликован.</div></div>
         </div>
-
         <h3 class="history-title">Четыре дня иммунитета</h3>
         <div class="period-grid" id="immunityDates"><div class="loading">Загружаем даты…</div></div>
-
         <a id="immunityLink" class="button button-primary" href="#" target="_blank" rel="noopener">Открыть иммунитет</a>
         <button class="button button-secondary" id="answeredButton" onclick="markAnswered()">Я ответил на иммунитет</button>
         <div class="status-line" id="immunityStatus"></div>
@@ -794,94 +381,68 @@ body.portal-modal-open { overflow: hidden; }
       </section>
 
       <div class="logout-row"><button class="button button-quiet" onclick="logout()">Выйти из личного кабинета</button></div>
-
     </section>
 
+    <!-- ПАНЕЛЬ АДМИНИСТРАТОРА -->
     <section class="panel admin-panel" id="adminPanel" hidden>
-        <div class="section-heading"><span class="section-emoji small">⚙️</span><div><h2>Панель администратора</h2><p>Управление ответами иммунитета и архивом.</p></div></div>
-        <form id="adminAnswerForm" class="admin-form">
-          <input type="hidden" id="adminRow" value="">
-          <label class="admin-field">Неделя ответа<select id="adminAnswerWeek" required></select></label>
-          <label class="admin-field">День недели<select id="adminAnswerDay" required><option value="0">Пн-Вт</option><option value="1">Вт-Ср</option><option value="2">Ср-Чт</option><option value="3">Чт-Пт</option></select>
-</label>
+      <div class="section-heading"><span class="section-emoji small">⚙️</span><div><h2>Панель администратора</h2><p>Управление ответами иммунитета и архивом.</p></div></div>
+      <form id="adminAnswerForm" class="admin-form">
+        <input type="hidden" id="adminRow" value="">
+        <label class="admin-field">Неделя ответа
+          <select id="adminAnswerWeek" required></select>
+        </label>
+        <label class="admin-field">День недели
+          <select id="adminAnswerDay" required>
+            <option value="0">День 1 · Пн–Вт</option>
+            <option value="1">День 2 · Вт–Ср</option>
+            <option value="2">День 3 · Ср–Чт</option>
+            <option value="3">День 4 · Чт–Пт</option>
+          </select>
+        </label>
 
-          <input type="hidden" id="adminDate" value="">
-          <label class="admin-field">Заголовок<input id="adminTitle" type="text" placeholder="Например: Ответ на 21.11 (можно оставить пустым)"></label>
-          <label class="admin-field full">Текст ответа<textarea id="adminText" placeholder="Полный текст ответа…" required></textarea></label>
-          <label class="admin-field full">Ссылки на изображения<input id="adminImages" type="text" placeholder="Ссылки через точку с запятой ;"></label>
-          <label class="admin-check full"><input id="adminPublished" type="checkbox" checked> Опубликовать ответ на портале</label>
-          <div class="full"><button class="button button-primary" type="submit" id="adminSaveButton">Сохранить ответ</button><button class="button button-quiet" type="button" onclick="adminResetForm()">Очистить форму</button></div>
-        </form>
-        <div class="status-line" id="adminMessage" aria-live="polite"></div>
-        <div class="admin-list-heading"><h3>Ответы в базе</h3><button class="button button-quiet" type="button" onclick="adminLoadAnswers()">Обновить список</button></div>
-        <div class="admin-list" id="adminAnswersList"><div class="loading">Загрузка списка после входа…</div></div>
-        <hr style="border:0;border-top:1px solid var(--panel-border);margin:22px 0">
-        <h3>Ручное добавление участия</h3>
-        <p class="muted">Добавленная здесь отметка появится в личной истории участника и в общей недельной статистике.</p>
-        <form id="adminManualHistoryForm" class="admin-form">
-          <label class="admin-field">Участник<select id="manualParticipant" required><option value="">Загрузка участников…</option></select></label>
-          <label class="admin-field">Неделя<select id="manualWeekStart" required></select></label>
-          <label class="admin-field">День иммунитета<select id="manualDay"><option value="1">День 1</option><option value="2">День 2</option><option value="3">День 3</option><option value="4">День 4</option></select></label>
-          <label class="admin-field">Результат<select id="manualResult"><option value="Ответил">Ответил</option><option value="Не ответил">Не ответил</option></select></label>
-          <div class="full"><button class="button button-primary" type="submit" id="manualHistorySave">Добавить отметку</button></div>
-        </form>
-        <button class="button button-quiet" type="button" onclick="adminLogout()">Выйти из админ-панели</button>
-      </section>
+        <input type="hidden" id="adminDate" value="">
+        <label class="admin-field">Заголовок<input id="adminTitle" type="text" placeholder="Например: Ответ на 23.11 (можно оставить пустым)"></label>
+        <label class="admin-field full">Текст ответа<textarea id="adminText" placeholder="Полный текст ответа…" required></textarea></label>
+        <label class="admin-field full">Ссылки на изображения<input id="adminImages" type="text" placeholder="Ссылки через точку с запятой ;"></label>
+        <label class="admin-check full"><input id="adminPublished" type="checkbox" checked> Опубликовать ответ на портале</label>
+        <div class="full"><button class="button button-primary" type="submit" id="adminSaveButton">Сохранить ответ</button><button class="button button-quiet" type="button" onclick="adminResetForm()">Очистить форму</button></div>
+      </form>
+      <div class="status-line" id="adminMessage" aria-live="polite"></div>
+      <div class="admin-list-heading"><h3>Ответы в базе</h3><button class="button button-quiet" type="button" onclick="adminLoadAnswers()">Обновить список</button></div>
+      <div class="admin-list" id="adminAnswersList"><div class="loading">Загрузка списка после входа…</div></div>
+      <hr style="border:0;border-top:1px solid var(--panel-border);margin:22px 0">
+      <h3>Ручное добавление участия</h3>
+      <p class="muted">Добавленная здесь отметка появится в личной истории участника и в общей недельной статистике.</p>
+      <form id="adminManualHistoryForm" class="admin-form">
+        <label class="admin-field">Участник<select id="manualParticipant" required><option value="">Загрузка участников…</option></select></label>
+        <label class="admin-field">Неделя<select id="manualWeekStart" required></select></label>
+        <label class="admin-field">День иммунитета
+          <select id="manualDay">
+            <option value="1">День 1 · Пн–Вт</option>
+            <option value="2">День 2 · Вт–Ср</option>
+            <option value="3">День 3 · Ср–Чт</option>
+            <option value="4">День 4 · Чт–Пт</option>
+          </select>
+        </label>
+        <label class="admin-field">Результат<select id="manualResult"><option value="Ответил">Ответил</option><option value="Не ответил">Не ответил</option></select></label>
+        <div class="full"><button class="button button-primary" type="submit" id="manualHistorySave">Добавить отметку</button></div>
+      </form>
+      <button class="button button-quiet" type="button" onclick="adminLogout()">Выйти из админ-панели</button>
+    </section>
   </main>
 
+  <footer style="text-align:center;padding:20px 10px 35px;color:#8f9fc8;font-size:12px;letter-spacing:.08em;">
+    🐿️ ПЕРФОРАТОРЫ · 2026
+    <a class="wezy-secret-entry" href="#wezy-login" onclick="openWezyLogin();return false;">служебный вход</a>
+  </footer>
 
-    <section class="panel admin-login-box" id="wezyLoginBox" hidden>
-      <h2>Панель Wezy Allinvain</h2>
-      <label class="admin-field">Отдельный пароль Wezy<input id="wezyPassword" type="password" autocomplete="current-password" placeholder="Введите пароль"></label>
-      <button class="button button-primary" type="button" onclick="wezyLogin()">Войти</button>
-      <button class="button button-quiet" type="button" onclick="closeWezyLogin()">Отмена</button>
-      <div class="status-line" id="wezyLoginMessage"></div>
-    </section>
-    <section class="panel admin-panel" id="wezyAdminPanel" hidden>
-      <div class="section-heading"><span class="section-emoji small">🎄</span><div><h2>Панель Wezy Allinvain</h2><p>Отдельное управление проектами, ивентами и уведомлениями.</p></div></div>
-      <h3>🎉 Создание и управление ивентами</h3>
-      <form id="wezyEventForm" class="admin-form">
-        <input type="hidden" id="wezyEventId">
-        <label class="admin-field full">Название проекта<input id="wezyEventTitle" required maxlength="160" placeholder="Например: Новогодний марафон"></label>
-        <label class="admin-field full">Краткая информация — что нужно сделать<textarea id="wezyEventInfo" required placeholder="Опишите задачу участникам, условия и порядок участия"></textarea></label>
-        <label class="admin-field">Действует до<input id="wezyEventEnd" type="date" required></label>
-        <label class="admin-field">Необходимые ссылки<textarea id="wezyEventLinks" placeholder="Каждая ссылка с новой строки"></textarea></label>
-        <label class="admin-check"><input id="wezyEventPublished" type="checkbox" checked> Опубликовать ивент на портале</label>
-        <label class="admin-check"><input id="wezyEventTelegram" type="checkbox"> Отправить анонс в Telegram</label>
-        <div class="full"><button class="button button-primary" type="submit" id="wezyEventSave">Сохранить ивент</button><button class="button button-quiet" type="button" onclick="wezyResetEventForm()">Очистить</button></div>
-      </form>
-      <div class="admin-list-heading"><h3>Список ивентов</h3><button class="button button-quiet" type="button" onclick="wezyLoadEvents()">Обновить</button></div>
-      <div class="admin-list" id="wezyEventsAdminList"></div>
-      <hr style="border:0;border-top:1px solid var(--panel-border);margin:24px 0">
-      <h3>🛡️ Уведомление об отметках иммунитета</h3>
-      <p class="muted">Сформировать список участников, которые отметились и не отметились за выбранную неделю и день. Уведомление можно одновременно показать на портале и отправить в Telegram.</p>
-      <div class="admin-form">
-        <label class="admin-field">Неделя<select id="wezyImmunityWeek"></select></label>
-        <label class="admin-field">День иммунитета<select id="wezyImmunityDay"><option value="1">День 1 · Пн–Вт</option><option value="2">День 2 · Вт–Ср</option><option value="3">День 3 · Ср–Чт</option><option value="4">День 4 · Чт–Пт</option></select></label>
-        <label class="admin-check"><input id="wezyImmunityPublish" type="checkbox" checked> Опубликовать уведомление на портале</label>
-        <label class="admin-check"><input id="wezyImmunityTelegram" type="checkbox" checked> Отправить уведомление в Telegram</label>
-        <div class="full"><button class="button button-primary" type="button" id="wezyImmunitySend" onclick="wezyCreateImmunityNotice()">📨 Сформировать уведомление об иммунитете</button></div>
-      </div>
-      <hr style="border:0;border-top:1px solid var(--panel-border);margin:24px 0">
-      <h3>🔔 Создание уведомления</h3>
-      <form id="wezyNotificationForm" class="admin-form">
-        <input type="hidden" id="wezyNotificationId">
-        <label class="admin-field full">Заголовок уведомления<input id="wezyNotificationTitle" required maxlength="160" placeholder="Важная информация"></label>
-        <label class="admin-field full">Текст уведомления<textarea id="wezyNotificationText" required placeholder="Что должны узнать участники"></textarea></label>
-        <label class="admin-field full">Ссылки<textarea id="wezyNotificationLinks" placeholder="Каждая ссылка с новой строки"></textarea></label>
-        <label class="admin-check"><input id="wezyNotificationPublished" type="checkbox" checked> Показать уведомление на портале</label>
-        <label class="admin-check"><input id="wezyNotificationTelegram" type="checkbox"> Отправить в Telegram</label>
-        <div class="full"><button class="button button-primary" type="submit" id="wezyNotificationSave">Сохранить уведомление</button><button class="button button-quiet" type="button" onclick="wezyResetNotificationForm()">Очистить</button></div>
-      </form>
-      <div class="admin-list-heading"><h3>Список уведомлений</h3><button class="button button-quiet" type="button" onclick="wezyLoadNotifications()">Обновить</button></div>
-      <div class="admin-list" id="wezyNotificationsAdminList"></div>
-      <div class="status-line" id="wezyAdminMessage" aria-live="polite"></div>
-      <button class="button button-quiet" type="button" onclick="wezyLogout()">Выйти из панели Wezy</button>
-    </section>
-
-  <footer>🐿️ ПЕРФОРАТОРЫ · 2026 <a class="wezy-secret-entry" href="#wezy-login" onclick="openWezyLogin();return false;">служебный вход</a></footer>
-  <section class="panel admin-login-box" id="adminLoginBox" hidden><h2>Вход администратора</h2><label class="admin-field">Пароль администратора<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Введите пароль"></label><button class="button button-primary" type="button" onclick="adminLogin()">Войти</button><button class="button button-quiet" type="button" onclick="closeAdminLogin()">Отмена</button><div class="status-line" id="adminLoginMessage"></div></section>
-
+  <section class="panel admin-login-box" id="adminLoginBox" hidden>
+    <h2>Вход администратора</h2>
+    <label class="admin-field">Пароль администратора<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Введите пароль"></label>
+    <button class="button button-primary" type="button" onclick="adminLogin()">Войти</button>
+    <button class="button button-quiet" type="button" onclick="closeAdminLogin()">Отмена</button>
+    <div class="status-line" id="adminLoginMessage"></div>
+  </section>
 
   <div class="portal-modal" id="portalModal" hidden>
     <div class="portal-modal-dialog" id="portalModalDialog" role="dialog" aria-modal="true" aria-labelledby="portalModalTitle">
@@ -894,8 +455,6 @@ body.portal-modal-open { overflow: hidden; }
 <script>
 let currentUser = null;
 const $ = id => document.getElementById(id);
-
-// JSONP connection to Google Apps Script: works from GitHub Pages.
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwbGOE4Q2Z6kL4BoAj0r6e0OmCSsgijdU26bWVfYpQC0kV5rkdd4XSPZ_qRSGFqX_kC/exec';
 let apiCounter = 0;
 
@@ -904,7 +463,10 @@ function apiCall(action, params = {}) {
     const callback = '__perforatoryCallback' + (++apiCounter);
     const script = document.createElement('script');
     let finished = false;
-    let timeout;
+    let timeout = setTimeout(() => {
+      cleanup();
+      reject(new Error('Сервер не ответил за 20 секунд. Проверьте подключение.'));
+    }, 20000);
     const cleanup = () => {
       if (finished) return;
       finished = true;
@@ -912,15 +474,11 @@ function apiCall(action, params = {}) {
       script.remove();
       clearTimeout(timeout);
     };
-    timeout = setTimeout(() => {
-      cleanup();
-      reject(new Error('Сервер не ответил за 20 секунд. Проверьте подключение и попробуйте ещё раз.'));
-    }, 20000);
     window[callback] = response => {
       if (finished) return;
       cleanup();
       if (!response || response.success !== true) {
-        reject(new Error(response && response.error ? response.error : 'Сервер вернул некорректный ответ.'));
+        reject(new Error(response && response.error ? response.error : 'Ошибка сервера.'));
         return;
       }
       resolve(response.data);
@@ -929,7 +487,7 @@ function apiCall(action, params = {}) {
     Object.entries(params).forEach(([key, value]) => query.set(key, String(value ?? '')));
     script.onerror = () => {
       cleanup();
-      reject(new Error('Не удалось загрузить ответ Google Apps Script. Проверьте публикацию веб-приложения и доступ «Все».'));
+      reject(new Error('Не удалось подключиться к Google Apps Script.'));
     };
     script.src = GAS_API_URL + '?' + query.toString();
     document.body.appendChild(script);
@@ -948,7 +506,6 @@ async function login() {
   showMessage('Проверяем доступ…', false);
   try {
     const user = await apiCall('login', { name });
-    if (!user || !user.id || !user.name) throw new Error('Сервер не вернул данные участника.');
     currentUser = user;
     sessionStorage.setItem('perforator_user', JSON.stringify(user));
     showPortal(user);
@@ -978,60 +535,17 @@ function logout() {
 
 async function loadPortal() {
   if (!currentUser) return;
-  $('todayAnswer').innerHTML = '<div class=\"loading\">Загружаем данные…</div>';
+  $('todayAnswer').innerHTML = '<div class="loading">Загружаем данные…</div>';
   try {
     const data = await apiCall('portal', { id: currentUser.id });
     renderImmunity(data.immunity || {});
-    renderArticleArchive(data.articles || []);
-    renderPublications('eventsList', data.events || [], 'Пока нет опубликованных ивентов.');
-    renderWezyNotifications(data.notifications || []);
-    renderHistory(data.history || []);
     renderStatus(data.status || {});
   } catch (err) {
     console.error(err);
-    $('todayAnswer').textContent = 'Не удалось загрузить данные: ' + (err.message || err);
-    $('articleDates').textContent = 'Не удалось загрузить статьи.';
-    $('eventsList').textContent = 'Не удалось загрузить ивенты.';
   }
 }
 
 function renderImmunity(data) {
-  const today = $('todayAnswer');
-  today.replaceChildren();
-  if (data.todayAnswer) {
-    const card = document.createElement('article');
-    card.className = 'today-answer-content';
-    const date = document.createElement('div');
-    date.className = 'publication-date';
-    date.textContent = data.todayAnswer.date || '';
-    const title = document.createElement('h3');
-    title.textContent = data.todayAnswer.title || 'Ответ на сегодня';
-    const text = document.createElement('div');
-    text.className = 'answer-large-text';
-    appendTextWithLinks(text, data.todayAnswer.text || '');
-    card.append(date, title, text);
-    if (data.todayAnswer.images) {
-      String(data.todayAnswer.images).split(/\n|;/).map(v => v.trim()).filter(Boolean).forEach(url => {
-        const src = normalizeImageUrl(url);
-        if (!src) return;
-        const img = document.createElement('img');
-        img.className = 'publication-image';
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        img.src = src;
-        img.alt = data.todayAnswer.title || 'Изображение ответа';
-        img.onerror = () => img.remove();
-        card.appendChild(img);
-      });
-    }
-    today.appendChild(card);
-  } else {
-    const empty = document.createElement('div');
-    empty.className = 'empty-state compact';
-    empty.textContent = 'Ответ на сегодня ещё не опубликован.';
-    today.appendChild(empty);
-  }
-
   const dates = $('immunityDates');
   dates.replaceChildren();
   (data.dates || []).forEach(item => {
@@ -1041,380 +555,31 @@ function renderImmunity(data) {
     const title = document.createElement('b');
     title.textContent = 'День ' + item.number;
     const span = document.createElement('span');
-    span.textContent = item.label + ': ' + item.start + ' 12:00 — ' + item.end + ' 12:00';
+    span.textContent = (item.dayLabel || item.label) + ': ' + item.start + ' 12:00 — ' + item.end + ' 12:00';
     card.append(title, span);
     dates.appendChild(card);
   });
 }
 
-let cachedArticles = [];
-
-function renderArticleArchive(items) {
-  cachedArticles = items || [];
-  const target = $('articleDates');
-  target.replaceChildren();
-  $('articleDetail').hidden = true;
-  target.hidden = false;
-
-  const dateMap = new Map();
-  cachedArticles.forEach(item => {
-    if (item.dateKey && !dateMap.has(item.dateKey)) {
-      dateMap.set(item.dateKey, { key: item.dateKey, label: item.date || item.dateKey });
-    }
-  });
-  const visibleDates = Array.from(dateMap.values()).sort((a, b) => a.key.localeCompare(b.key));
-  if (!visibleDates.length) {
-    const empty = document.createElement('div');
-    empty.className = 'empty-state compact';
-    empty.textContent = 'Статей пока нет. Даты появятся здесь после добавления опубликованных записей в таблицу «Статьи».';
-    target.appendChild(empty);
-    return;
-  }
-  visibleDates.forEach(dateInfo => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'article-date-button';
-    button.textContent = dateInfo.label;
-    const count = cachedArticles.filter(item => item.dateKey === dateInfo.key).length;
-    const small = document.createElement('small');
-    small.textContent = count ? (count + (count === 1 ? ' публикация' : ' публикаций')) : 'Публикация';
-    button.appendChild(small);
-    button.addEventListener('click', () => openArticleDate(dateInfo));
-    target.appendChild(button);
-  });
-}
-
-function openArticleDate(dateInfo) {
-  const target = $('articleTableWrap');
-  target.replaceChildren();
-  $('articleSelectedDate').textContent = dateInfo.label;
-  $('articleDates').hidden = true;
-  $('articleDetail').hidden = false;
-
-  const matches = cachedArticles.filter(item => item.dateKey === dateInfo.key);
-  if (!matches.length) {
-    const empty = document.createElement('div');
-    empty.className = 'empty-state compact';
-    empty.innerHTML = '<span>📄</span><strong>Публикаций пока нет</strong><small>Материал появится здесь после добавления строки в таблицу «Статьи».</small>';
-    target.appendChild(empty);
-    return;
-  }
-
-  const table = document.createElement('table');
-  table.className = 'article-table';
-  const tbody = document.createElement('tbody');
-  matches.forEach(item => {
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
-    const article = document.createElement('article');
-    article.className = 'article-reader';
-    const title = document.createElement('h3');
-    title.textContent = item.title || 'Без заголовка';
-    const text = document.createElement('div');
-    text.className = 'article-reader-text';
-    appendTextWithLinks(text, item.text || '');
-    article.append(title, text);
-
-    if (item.link) {
-      const album = document.createElement('a');
-      album.href = item.link;
-      album.target = '_blank';
-      album.rel = 'noopener';
-      album.className = 'button button-primary photo-album-button';
-      album.textContent = '📷 Фотоальбом ' + (item.albumNumber || '');
-      article.appendChild(album);
-    }
-    td.appendChild(article);
-    tr.appendChild(td);
-    tbody.appendChild(tr);
-  });
-  table.appendChild(tbody);
-  target.appendChild(table);
-}
-
-$('backToArticleDates').addEventListener('click', () => {
-  $('articleDetail').hidden = true;
-  $('articleDates').hidden = false;
-});
-
-function renderWezyNotifications(items) {
-  const target=$('notificationsList'); const panel=$('notificationsPanel'); if(!target||!panel)return; target.replaceChildren();
-  if(!items || !items.length){panel.hidden=true;return;}
-  panel.hidden=false;
-  const heading=document.createElement('h3');heading.textContent='🔔 Важные уведомления';target.appendChild(heading);
-  items.forEach(item=>{const card=document.createElement('article');card.className='publication notification-publication';const title=document.createElement('h3');title.textContent=item.title||'Уведомление';const body=document.createElement('p');body.className='publication-text';body.textContent=item.text||'';card.append(title,body);String(item.links||'').split(/\n|;/).map(v=>v.trim()).filter(Boolean).forEach((raw,i)=>{const m=raw.match(/https?:\/\/[^\s]+/i);if(!m)return;const a=document.createElement('a');a.className='publication-link';a.href=m[0].replace(/[),.;]+$/,'');a.target='_blank';a.rel='noopener';a.textContent='Открыть ссылку '+(i+1)+' ↗';card.appendChild(a);});target.appendChild(card);});
-}
-
-function renderPublications(targetId, items, emptyText) {
-  const target = $(targetId);
-  target.replaceChildren();
-  if (!items || !items.length) {
-    const empty = document.createElement('div');
-    empty.className = 'empty-state compact';
-    empty.textContent = emptyText || 'Публикаций пока нет.';
-    target.appendChild(empty);
-    return;
-  }
-
-  items.forEach(item => {
-    const article = document.createElement('article');
-    article.className = 'publication';
-
-    const date = document.createElement('div');
-    date.className = 'publication-date';
-    date.textContent = item.date || '';
-
-    const title = document.createElement('h3');
-    title.textContent = item.title || 'Без заголовка';
-
-    const text = document.createElement('p');
-    text.className = 'publication-text';
-    text.textContent = item.text || '';
-
-    article.append(date, title, text);
-    if (item.endDate) { const until=document.createElement('div'); until.className='publication-date'; until.textContent='Действует до: '+item.endDate; article.appendChild(until); }
-    if (item.links) { const linksBox=document.createElement('div'); linksBox.className='wezy-event-links'; String(item.links).split(/\n|;/).map(v=>v.trim()).filter(Boolean).forEach((raw,i)=>{ const url=(raw.match(/https?:\/\/[^\s]+/i)||[])[0]; if(!url)return; const a=document.createElement('a');a.href=url.replace(/[),.;]+$/,'');a.target='_blank';a.rel='noopener';a.textContent='Открыть ссылку '+(i+1)+' ↗';linksBox.appendChild(a); }); if(linksBox.childNodes.length)article.appendChild(linksBox); }
-
-    (item.images || '').split(/\n|;/).map(v => v.trim()).filter(Boolean).forEach(url => {
-      const imageUrl = normalizeImageUrl(url);
-      if (!imageUrl) return;
-      const img = document.createElement('img');
-      img.className = 'publication-image';
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.alt = item.title || 'Изображение публикации';
-      img.src = imageUrl;
-      img.onerror = () => img.remove();
-      article.appendChild(img);
-    });
-
-    if (item.link) {
-      const link = document.createElement('a');
-      link.href = item.link;
-      link.target = '_blank';
-      link.rel = 'noopener';
-      link.className = 'publication-link';
-      link.textContent = 'Открыть материал ↗';
-      article.appendChild(link);
-    }
-    target.appendChild(article);
-  });
-}
-
-function appendTextWithLinks(container, value) {
-  const parts = String(value || '').split(/(https?:\/\/[^\s]+)/g);
-  parts.forEach(part => {
-    if (/^https?:\/\//i.test(part)) {
-      const link = document.createElement('a');
-      link.href = part;
-      link.target = '_blank';
-      link.rel = 'noopener';
-      link.textContent = part;
-      link.className = 'article-inline-link';
-      container.appendChild(link);
-    } else {
-      container.appendChild(document.createTextNode(part));
-    }
-  });
-}
-
-function normalizeImageUrl(value) {
-  const raw = value.trim();
-  const match = raw.match(/(?:id=|\/d\/)([a-zA-Z0-9_-]{20,})/);
-  if (match) return 'https://drive.google.com/uc?export=view&id=' + match[1];
-  return /^https?:\/\//i.test(raw) ? raw : '';
-}
-
-function historyWeekLabel(weekKey) {
-  const match = String(weekKey || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (!match) return weekKey;
-  const monday = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
-  const sunday = new Date(monday);
-  sunday.setDate(sunday.getDate() + 6);
-  const fmt = date => String(date.getDate()).padStart(2, '0') + '.' +
-    String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
-  return fmt(monday) + ' — ' + fmt(sunday);
-}
-
-function renderHistory(items) {
-  const target = $('historyList');
-  const select = $('historyWeekSelect');
-  target.replaceChildren();
-
-  const grouped = new Map();
-  (items || []).forEach(item => {
-    if (!item || !item.week) return;
-    if (!grouped.has(item.week)) grouped.set(item.week, new Map());
-    const days = grouped.get(item.week);
-    const day = Number(item.period);
-    if (day >= 1 && day <= 4) days.set(day, item);
-  });
-
-  const weeks = Array.from(grouped.keys()).sort((a, b) => b.localeCompare(a));
-  const previous = select.value;
-  select.replaceChildren();
-
-  if (!weeks.length) {
-    const option = document.createElement('option');
-    option.value = '';
-    option.textContent = 'История пока пуста';
-    select.appendChild(option);
-    const empty = document.createElement('div');
-    empty.className = 'empty-state compact';
-    empty.textContent = 'Пока нет сохранённых отметок участия.';
-    target.appendChild(empty);
-    return;
-  }
-
-  weeks.forEach(week => {
-    const option = document.createElement('option');
-    option.value = week;
-    option.textContent = historyWeekLabel(week);
-    select.appendChild(option);
-  });
-
-  select.value = weeks.includes(previous) ? previous : weeks[0];
-  renderSelectedHistoryWeek();
-}
-
-function renderSelectedHistoryWeek() {
-  const target = $('historyList');
-  const select = $('historyWeekSelect');
-  const week = select.value;
-  target.replaceChildren();
-
-  if (!week || !window.personalHistoryByWeek || !window.personalHistoryByWeek.has(week)) {
-    const empty = document.createElement('div');
-    empty.className = 'empty-state compact';
-    empty.textContent = 'За эту неделю отметок нет.';
-    target.appendChild(empty);
-    return;
-  }
-
-  const days = window.personalHistoryByWeek.get(week);
-  const card = document.createElement('div');
-  card.className = 'history-week-card';
-  const heading = document.createElement('h4');
-  heading.className = 'history-week-heading';
-  heading.textContent = 'Статистика за ' + historyWeekLabel(week);
-  card.appendChild(heading);
-
-  for (let day = 1; day <= 4; day++) {
-    const item = days.get(day);
-    const row = document.createElement('div');
-    row.className = 'history-row';
-    const left = document.createElement('div');
-    const strong = document.createElement('strong');
-    strong.textContent = 'День ' + day + (item && item.start ? ' · ' + item.start : '');
-    const small = document.createElement('small');
-    small.textContent = item && item.source === 'Вручную администратором'
-      ? 'Добавлено вручную администратором'
-      : (item && item.source === 'Вручную в таблице' ? 'Отметка из статистики' : 'Неделя от ' + week);
-    left.append(strong, small);
-    const result = document.createElement('span');
-    if (!item) {
-      result.className = 'result neutral';
-      result.textContent = 'Нет отметки';
-    } else {
-      result.className = item.result === 'Ответил' ? 'result good' : 'result bad';
-      result.textContent = item.result === 'Ответил' ? 'Ответил' : 'Не ответил';
-    }
-    row.append(left, result);
-    card.appendChild(row);
-  }
-
-  target.appendChild(card);
-}
-
-async function loadHistory() {
-  if (!currentUser) return;
-  try {
-    const history = await apiCall('history', { id: currentUser.id });
-    window.personalHistoryByWeek = new Map();
-    (history || []).forEach(item => {
-      if (!item || !item.week) return;
-      if (!window.personalHistoryByWeek.has(item.week)) {
-        window.personalHistoryByWeek.set(item.week, new Map());
-      }
-      const day = Number(item.period);
-      if (day >= 1 && day <= 4) window.personalHistoryByWeek.get(item.week).set(day, item);
-    });
-    renderHistory(history || []);
-  } catch (err) {
-    console.error(err);
-    $('historyList').textContent = 'Не удалось загрузить историю участия.';
-  }
-}
-
-$('historyToggle').addEventListener('click', () => {
-  const panel = $('historyPanel');
-  const open = panel.hidden;
-  panel.hidden = !open;
-  $('historyToggle').setAttribute('aria-expanded', String(open));
-  if (open && currentUser) loadHistory();
-});
-$('historyWeekSelect').addEventListener('change', renderSelectedHistoryWeek);
-
-async function markAnswered() {
-  if (!currentUser) return;
-  $('answeredButton').disabled = true;
-  try {
-    const result = await apiCall('markAnswered', { id: currentUser.id });
-    $('immunityStatus').textContent = result && result.already
-      ? 'Вы уже отметили ответ в этот день.' : 'Ваш ответ сохранён!';
-    $('immunityStatus').className = 'status-line success';
-    await loadHistory();
-    await refreshStatus();
-  } catch (err) {
-    $('immunityStatus').textContent = err.message || 'Не удалось сохранить ответ.';
-    $('immunityStatus').className = 'status-line error';
-    $('answeredButton').disabled = false;
-  }
-}
-
-async function refreshStatus() {
-  try {
-    const status = await apiCall('status');
-    renderStatus(status || {});
-  } catch (err) { console.error(err); }
-}
-
 function renderStatus(status) {
-      $('immunityLink').href = status.immunityUrl || '#';
-      $('immunityLink').classList.toggle('is-disabled', !status.immunityOpen);
-      $('answeredButton').disabled = !status.immunityOpen;
-      $('immunityStatus').textContent = status.immunityOpen
-        ? 'Сейчас открыт день ' + status.period + ': ' + status.periodLabel + '.'
-        : 'Сейчас иммунитет закрыт. Следующий день откроется по расписанию иммунитета.';
-      for (let i = 1; i <= 4; i++) {
-        const periodCard = $('period' + i);
-        if (periodCard) periodCard.classList.toggle('active', status.period === i);
-      }
-
-      $('cookieCard').href = status.cookieUrl || '#';
-      $('cookieCard').classList.toggle('is-disabled', !status.cookieOpen);
-      $('cookieCard').setAttribute('aria-disabled', String(!status.cookieOpen));
-      $('cookieCardStatus').textContent = status.cookieOpen ? 'Открыто сегодня' : 'Доступно по средам';
+  $('immunityLink').href = status.immunityUrl || '#';
+  $('immunityLink').classList.toggle('is-disabled', !status.immunityOpen);
+  $('answeredButton').disabled = !status.immunityOpen;
+  $('immunityStatus').textContent = status.immunityOpen
+    ? 'Сейчас открыт ' + status.periodLabel + '.'
+    : 'Сейчас иммунитет закрыт.';
+  for (let i = 1; i <= 4; i++) {
+    const periodCard = $('period' + i);
+    if (periodCard) periodCard.classList.toggle('active', status.period === i);
+  }
 }
 
-document.querySelectorAll('.section-card[data-target]').forEach(button => {
-  button.addEventListener('click', () => {
-    const target = $(button.dataset.target);
-    if (!target) return;
-    const title = button.querySelector('strong')?.textContent || 'Информация';
-    openPortalModal(target, title);
-  });
-});
-
-// Переносим исходный DOM-узел в окно, не создавая копию:
-// все уже назначенные обработчики и формы продолжают работать.
 let portalModalNode = null;
 let portalModalPlaceholder = null;
 
 function openPortalModal(element, title) {
   if (!element) return;
   if (portalModalNode) closePortalModal();
-
   const modal = $('portalModal');
   const content = $('portalModalContent');
   if (!modal || !content) return;
@@ -1428,50 +593,24 @@ function openPortalModal(element, title) {
   $('portalModalTitle').textContent = title || 'Информация';
   modal.hidden = false;
   document.body.classList.add('portal-modal-open');
-  $('portalModalDialog')?.scrollTo(0, 0);
-  modal.querySelector('.portal-modal-close')?.focus();
 }
 
 function closePortalModal() {
   const modal = $('portalModal');
   if (!modal) return;
-
   if (portalModalNode && portalModalPlaceholder && portalModalPlaceholder.parentNode) {
     portalModalPlaceholder.parentNode.insertBefore(portalModalNode, portalModalPlaceholder);
     portalModalPlaceholder.remove();
-    // Разделы и панели не должны снова появляться внизу страницы.
     portalModalNode.hidden = true;
   }
-
   portalModalNode = null;
-  portalModalPlaceholder = null;
   modal.hidden = true;
   document.body.classList.remove('portal-modal-open');
 }
 
-$('portalModal').addEventListener('click', event => {
-  if (event.target === $('portalModal')) closePortalModal();
-});
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && !$('portalModal').hidden) closePortalModal();
-});
-
-window.addEventListener('load', () => {
-  const saved = sessionStorage.getItem('perforator_user');
-  if (!saved) return;
-  try {
-    const user = JSON.parse(saved);
-    if (user && user.id && user.name) {
-      currentUser = user;
-      showPortal(user);
-    }
-  } catch (e) {
-    sessionStorage.removeItem('perforator_user');
-  }
-});
-
-// ---------------- АДМИН-ПАНЕЛЬ ----------------
+// ---------------- АДМИНИСТРАТИВНЫЕ ФУНКЦИИ ----------------
 let adminToken = sessionStorage.getItem('perforator_admin_token') || '';
+
 function openAdminLogin(){
   if (adminToken) {
     $('adminPanel').hidden = false;
@@ -1484,18 +623,19 @@ function openAdminLogin(){
   openPortalModal($('adminLoginBox'), 'Вход администратора');
   $('adminPassword').focus();
 }
+
 function closeAdminLogin(){
   if (portalModalNode === $('adminLoginBox')) closePortalModal();
   $('adminLoginBox').hidden = true;
   $('adminLoginMessage').textContent = '';
 }
+
 async function adminLogin(){
   const password=$('adminPassword').value;
   if(!password){$('adminLoginMessage').textContent='Введите пароль.';return;}
-  $('adminLoginMessage').textContent='Проверяем пароль…';
+  $('adminLoginMessage').textContent='Проверяем…';
   try{
     const data=await apiCall('adminLogin',{password});
-    if(!data || !data.token) throw new Error('Сервер не выдал сессию администратора.');
     adminToken=data.token;
     sessionStorage.setItem('perforator_admin_token',adminToken);
     $('adminPassword').value='';
@@ -1506,210 +646,180 @@ async function adminLogin(){
     await adminLoadParticipants();
   }catch(err){$('adminLoginMessage').textContent=err.message||'Ошибка входа.';}
 }
+
 function adminLogout(){
   if (portalModalNode === $('adminPanel')) closePortalModal();
   adminToken='';
   sessionStorage.removeItem('perforator_admin_token');
   $('adminPanel').hidden=true;
-  adminResetForm();
-  $('adminMessage').textContent='Сессия администратора завершена.';
 }
-function adminResetForm(){ $('adminRow').value='';$('adminDate').value='';$('adminTitle').value='';$('adminText').value='';$('adminImages').value='';$('adminPublished').checked=true;$('adminSaveButton').textContent='Сохранить ответ'; if($('adminAnswerWeek').options.length){$('adminAnswerWeek').selectedIndex=0;$('adminAnswerDay').value='0';} }
-function localIsoDate(date){const y=date.getFullYear(),m=String(date.getMonth()+1).padStart(2,'0'),d=String(date.getDate()).padStart(2,'0');return `${y}-${m}-${d}`;}
+
+function localIsoDate(date){
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+// РАСЧЁТ НЕДЕЛЬ С 23.11 И КАЖДУЮ НЕДЕЛЮ (КОМПАКТНЫЙ СПИСОК)
 function fillWeekSelectors(){
-  const now=new Date(); const monday=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-  const weekday=(monday.getDay()+6)%7; monday.setDate(monday.getDate()-weekday);
-  const weeks=[];
-  for(let offset=8;offset>=-2;offset--){const d=new Date(monday);d.setDate(d.getDate()-offset*7);const key=localIsoDate(d);const end=new Date(d);end.setDate(end.getDate()+6);const label=`${d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'})} – ${end.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'})}`;weeks.push({key,label});}
-  ['adminAnswerWeek','manualWeekStart','wezyImmunityWeek'].forEach(id=>{const select=$(id);if(!select)return;const previous=select.value;select.replaceChildren();weeks.forEach(w=>{const o=document.createElement('option');o.value=w.key;o.textContent=w.label;select.append(o);});if(previous&&weeks.some(w=>w.key===previous))select.value=previous;});
-}
-function syncAnswerDateFromSelectors(){const monday=$('adminAnswerWeek').value;if(!monday)return;const d=new Date(monday+'T12:00:00');d.setDate(d.getDate()+Number($('adminAnswerDay').value||0));$('adminDate').value=[String(d.getDate()).padStart(2,'0'),String(d.getMonth()+1).padStart(2,'0'),d.getFullYear()].join('.');}
-function setAnswerSelectorsFromDate(value){const m=String(value||'').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);if(!m)return;const d=new Date(Number(m[3]),Number(m[2])-1,Number(m[1]),12);const monday=new Date(d);monday.setDate(monday.getDate()-((monday.getDay()+6)%7));const weekKey=localIsoDate(monday);if([...$('adminAnswerWeek').options].some(o=>o.value===weekKey))$('adminAnswerWeek').value=weekKey;$('adminAnswerDay').value=String((d.getDay()+6)%7);}
-$('adminAnswerWeek').addEventListener('change',syncAnswerDateFromSelectors);$('adminAnswerDay').addEventListener('change',syncAnswerDateFromSelectors);
-async function adminLoadAnswers(){
-  if(!adminToken)return;
-  $('adminAnswersList').textContent='Загружаем ответы…';
-  try{const items=await apiCall('adminAnswers',{token:adminToken});renderAdminAnswers(items||[]);}
-  catch(err){$('adminAnswersList').textContent=err.message||'Не удалось загрузить список.';if(/сессия администратора истекла/i.test(err.message||''))adminLogout();}
-}
-function renderAdminAnswers(items){
-  const box=$('adminAnswersList');box.replaceChildren();
-  if(!items.length){box.textContent='Ответов пока нет.';return;}
-  items.forEach(item=>{
-    const row=document.createElement('div');row.className='admin-row';
-    const info=document.createElement('div');const title=document.createElement('strong');title.textContent=(item.title||'Без заголовка')+' · '+(item.date||'без даты');
-    const small=document.createElement('small');small.textContent=item.published?'Опубликован':'Черновик';info.append(title,small);
-    const actions=document.createElement('div');actions.className='admin-row-actions';
-    const edit=document.createElement('button');edit.type='button';edit.textContent='Изменить';edit.addEventListener('click',()=>adminEditAnswer(item));
-    actions.append(edit);row.append(info,actions);box.append(row);
+  const now = new Date();
+  // Если текущий месяц до ноября (0..9), значит старт был в ноябре прошлого года
+  const startYear = now.getMonth() < 10 ? now.getFullYear() - 1 : now.getFullYear();
+  const startDate = new Date(startYear, 10, 23); // 23 ноября
+
+  // Число полных недель, прошедших с 23.11
+  const diffWeeks = Math.max(0, Math.floor((now.getTime() - startDate.getTime()) / (7 * 24 * 3600 * 1000)));
+  // Показываем от 23.11 до текущей недели + 2 вперед (всего не менее 4 недель)
+  const totalWeeks = Math.max(diffWeeks + 2, 4);
+
+  const weeks = [];
+  for (let i = 0; i < totalWeeks; i++) {
+    const d = new Date(startDate);
+    d.setDate(d.getDate() + i * 7);
+    const key = localIsoDate(d);
+    const end = new Date(d);
+    end.setDate(end.getDate() + 6);
+    const fmt = date => String(date.getDate()).padStart(2, '0') + '.' +
+      String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
+    const label = `Неделя ${i + 1} (${fmt(d)} – ${fmt(end)})`;
+    weeks.push({ key, label });
+  }
+
+  ['adminAnswerWeek','manualWeekStart'].forEach(id => {
+    const select = $(id);
+    if (!select) return;
+    const previous = select.value;
+    select.replaceChildren();
+    weeks.forEach(w => {
+      const o = document.createElement('option');
+      o.value = w.key;
+      o.textContent = w.label;
+      select.append(o);
+    });
+    if (previous && weeks.some(w => w.key === previous)) {
+      select.value = previous;
+    } else {
+      // По умолчанию активная текущая неделя
+      const currentMonday = new Date(now);
+      currentMonday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+      const currentKey = localIsoDate(currentMonday);
+      if (weeks.some(w => w.key === currentKey)) {
+        select.value = currentKey;
+      } else {
+        select.value = weeks[0].key;
+      }
+    }
   });
 }
-function adminEditAnswer(item){$('adminRow').value=item.row;$('adminDate').value=item.date||'';setAnswerSelectorsFromDate(item.date||'');$('adminTitle').value=item.title||'';$('adminText').value=item.text||'';$('adminImages').value=item.images||'';$('adminPublished').checked=!!item.published;$('adminSaveButton').textContent='Сохранить изменения';$('adminAnswerForm').scrollIntoView({behavior:'auto',block:'start'});}
-$('adminAnswerForm').addEventListener('submit',async e=>{
-  e.preventDefault();if(!adminToken)return;
-  $('adminSaveButton').disabled=true;$('adminMessage').textContent='Сохраняем…';
-  try{await apiCall('adminSaveAnswer',{token:adminToken,row:$('adminRow').value,date:$('adminDate').value,title:$('adminTitle').value,text:$('adminText').value,images:$('adminImages').value,published:$('adminPublished').checked});$('adminMessage').textContent='Ответ сохранён.';$('adminMessage').className='status-line success';adminResetForm();await adminLoadAnswers();if(currentUser)await loadPortal();}
-  catch(err){$('adminMessage').textContent=err.message||'Не удалось сохранить ответ.';$('adminMessage').className='status-line error';}
-  finally{$('adminSaveButton').disabled=false;}
-});
-async function adminLoadParticipants(){
-  if(!adminToken)return;
-  const select=$('manualParticipant');
-  try{
-    const people=await apiCall('adminParticipants',{token:adminToken});
-    select.replaceChildren();
-    const first=document.createElement('option');first.value='';first.textContent='Выберите участника';select.append(first);
-    (people||[]).forEach(person=>{const option=document.createElement('option');option.value=person.id;option.textContent=person.name;select.append(option);});
-  }catch(err){select.innerHTML='<option value="">Не удалось загрузить список</option>';}
+
+function syncAnswerDateFromSelectors(){
+  const monday = $('adminAnswerWeek').value;
+  if (!monday) return;
+  const d = new Date(monday + 'T12:00:00');
+  d.setDate(d.getDate() + Number($('adminAnswerDay').value || 0));
+  $('adminDate').value = [
+    String(d.getDate()).padStart(2, '0'),
+    String(d.getMonth() + 1).padStart(2, '0'),
+    d.getFullYear()
+  ].join('.');
 }
-$('adminManualHistoryForm').addEventListener('submit',async e=>{
-  e.preventDefault();if(!adminToken)return;
-  const button=$('manualHistorySave');button.disabled=true;button.textContent='Сохраняем…';
-  try{
-    const weekStart=$('manualWeekStart').value;
-    if(!weekStart)throw new Error('Выберите понедельник нужной недели.');
-    await apiCall('adminManualHistory',{token:adminToken,id:$('manualParticipant').value,weekStart,day:$('manualDay').value,result:$('manualResult').value});
-    $('adminMessage').textContent='Отметка добавлена. Она появится в истории участника и недельной статистике.';$('adminMessage').className='status-line success';
-    if(currentUser && currentUser.id===$('manualParticipant').value)await loadHistory();
-  }catch(err){$('adminMessage').textContent=err.message||'Не удалось добавить отметку.';$('adminMessage').className='status-line error';}
-  finally{button.disabled=false;button.textContent='Добавить отметку';}
-});
 
-window.addEventListener('load',()=>{fillWeekSelectors();syncAnswerDateFromSelectors();if(adminToken){$('adminPanel').hidden=false;openPortalModal($('adminPanel'),'Панель администратора');adminLoadAnswers();adminLoadParticipants();}if(wezyToken){$('wezyAdminPanel').hidden=false;openPortalModal($('wezyAdminPanel'),'Панель Wezy Allinvain');wezyLoadEvents();wezyLoadNotifications();}initParticipantStatusView();});
+$('adminAnswerWeek').addEventListener('change', syncAnswerDateFromSelectors);
+$('adminAnswerDay').addEventListener('change', syncAnswerDateFromSelectors);
 
-
-// ---------------- ПАНЕЛЬ WEZY ALLINVAIN ----------------
-let wezyToken=sessionStorage.getItem('perforator_wezy_token')||'';
-function openWezyLogin(){
-  if (wezyToken) {
-    $('wezyAdminPanel').hidden=false;
-    openPortalModal($('wezyAdminPanel'),'Панель Wezy Allinvain');
-    wezyLoadEvents();
-    wezyLoadNotifications();
-    return;
+function adminResetForm(){
+  $('adminRow').value = '';
+  $('adminDate').value = '';
+  $('adminTitle').value = '';
+  $('adminText').value = '';
+  $('adminImages').value = '';
+  $('adminPublished').checked = true;
+  $('adminSaveButton').textContent = 'Сохранить ответ';
+  if ($('adminAnswerWeek').options.length) {
+    $('adminAnswerDay').value = '0';
+    syncAnswerDateFromSelectors();
   }
-  $('wezyLoginBox').hidden=false;
-  openPortalModal($('wezyLoginBox'),'Вход в панель Wezy');
-  $('wezyPassword').focus();
-}
-function closeWezyLogin(){
-  if (portalModalNode === $('wezyLoginBox')) closePortalModal();
-  $('wezyLoginBox').hidden=true;
-  $('wezyLoginMessage').textContent='';
-}
-async function wezyLogin(){
-  const password=$('wezyPassword').value;
-  if(!password){$('wezyLoginMessage').textContent='Введите пароль.';return;}
-  $('wezyLoginMessage').textContent='Проверяем доступ…';
-  try{
-    const data=await apiCall('wezyLogin',{password});
-    wezyToken=data.token;
-    sessionStorage.setItem('perforator_wezy_token',wezyToken);
-    $('wezyPassword').value='';
-    closeWezyLogin();
-    $('wezyAdminPanel').hidden=false;
-    openPortalModal($('wezyAdminPanel'),'Панель Wezy Allinvain');
-    await Promise.all([wezyLoadEvents(),wezyLoadNotifications()]);
-  }catch(e){$('wezyLoginMessage').textContent=e.message||'Ошибка входа.';}
-}
-function wezyLogout(){
-  if (portalModalNode === $('wezyAdminPanel')) closePortalModal();
-  wezyToken='';
-  sessionStorage.removeItem('perforator_wezy_token');
-  $('wezyAdminPanel').hidden=true;
-  wezyResetEventForm();
-  wezyResetNotificationForm();
-}
-function wezyMessage(text,error=false){$('wezyAdminMessage').textContent=text;$('wezyAdminMessage').className='status-line '+(error?'error':'success');}
-function wezyResetEventForm(){['wezyEventId','wezyEventTitle','wezyEventInfo','wezyEventEnd','wezyEventLinks'].forEach(id=>$(id).value='');$('wezyEventPublished').checked=true;$('wezyEventTelegram').checked=false;$('wezyEventSave').textContent='Сохранить ивент';}
-function wezyResetNotificationForm(){['wezyNotificationId','wezyNotificationTitle','wezyNotificationText','wezyNotificationLinks'].forEach(id=>$(id).value='');$('wezyNotificationPublished').checked=true;$('wezyNotificationTelegram').checked=false;$('wezyNotificationSave').textContent='Сохранить уведомление';}
-async function wezyCreateImmunityNotice(){
-  if(!wezyToken)return;
-  const button=$('wezyImmunitySend');button.disabled=true;button.textContent='Формируем уведомление…';
-  try{
-    const result=await apiCall('wezyImmunityNotice',{token:wezyToken,week:$('wezyImmunityWeek').value,day:$('wezyImmunityDay').value,publish:$('wezyImmunityPublish').checked,notifyTelegram:$('wezyImmunityTelegram').checked});
-    wezyMessage('Уведомление сформировано. Ответили: '+result.answered+'; не ответили: '+result.missing+'.');
-    if(currentUser)await loadPortal();
-    if($('wezyImmunityPublish').checked)await wezyLoadNotifications();
-  }catch(e){wezyMessage(e.message||'Не удалось сформировать уведомление.',true);}
-  finally{button.disabled=false;button.textContent='📨 Сформировать уведомление об иммунитете';}
 }
 
-async function wezyLoadEvents(){if(!wezyToken)return;try{const items=await apiCall('wezyEvents',{token:wezyToken});const box=$('wezyEventsAdminList');box.replaceChildren();if(!items.length){box.textContent='Ивентов пока нет.';return;}items.forEach(item=>{const row=document.createElement('div');row.className='admin-row';const info=document.createElement('div');const title=document.createElement('strong');title.textContent=item.title;const small=document.createElement('small');small.textContent=(item.published?'Опубликован':'Черновик')+' · до '+item.endDate;info.append(title,small);const actions=document.createElement('div');actions.className='admin-row-actions';const edit=document.createElement('button');edit.textContent='Изменить';edit.onclick=()=>{ $('wezyEventId').value=item.id;$('wezyEventTitle').value=item.title;$('wezyEventInfo').value=item.info;$('wezyEventEnd').value=(item.endDate||'').split('.').reverse().join('-');$('wezyEventLinks').value=item.links;$('wezyEventPublished').checked=item.published;$('wezyEventTelegram').checked=false;$('wezyEventSave').textContent='Сохранить изменения';$('wezyEventForm').scrollIntoView({behavior:'auto',block:'start'});};const del=document.createElement('button');del.textContent='Удалить';del.onclick=async()=>{if(!confirm('Удалить ивент «'+item.title+'»?'))return;try{await apiCall('wezyDeleteEvent',{token:wezyToken,id:item.id});wezyMessage('Ивент удалён.');await wezyLoadEvents();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}};actions.append(edit,del);row.append(info,actions);box.append(row);});}catch(e){wezyMessage(e.message,true);}}
-$('wezyEventForm').addEventListener('submit',async e=>{e.preventDefault();if(!wezyToken)return;const b=$('wezyEventSave');b.disabled=true;try{await apiCall('wezySaveEvent',{token:wezyToken,id:$('wezyEventId').value,title:$('wezyEventTitle').value,info:$('wezyEventInfo').value,endDate:$('wezyEventEnd').value,links:$('wezyEventLinks').value,published:$('wezyEventPublished').checked,notifyTelegram:$('wezyEventTelegram').checked});wezyMessage('Ивент сохранён.');wezyResetEventForm();await wezyLoadEvents();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}finally{b.disabled=false;}});
-async function wezyLoadNotifications(){if(!wezyToken)return;try{const items=await apiCall('wezyNotifications',{token:wezyToken});const box=$('wezyNotificationsAdminList');box.replaceChildren();if(!items.length){box.textContent='Уведомлений пока нет.';return;}items.forEach(item=>{const row=document.createElement('div');row.className='admin-row';const info=document.createElement('div');const title=document.createElement('strong');title.textContent=item.title;const small=document.createElement('small');small.textContent=(item.published?'На портале':'Черновик')+' · Telegram: '+(item.telegramSent?'отправлено':'не отправлено');info.append(title,small);const actions=document.createElement('div');actions.className='admin-row-actions';const edit=document.createElement('button');edit.textContent='Изменить';edit.onclick=()=>{$('wezyNotificationId').value=item.id;$('wezyNotificationTitle').value=item.title;$('wezyNotificationText').value=item.text;$('wezyNotificationLinks').value=item.links;$('wezyNotificationPublished').checked=item.published;$('wezyNotificationTelegram').checked=false;$('wezyNotificationSave').textContent='Сохранить изменения';$('wezyNotificationForm').scrollIntoView({behavior:'auto',block:'start'});};const del=document.createElement('button');del.textContent='Удалить';del.onclick=async()=>{if(!confirm('Удалить уведомление «'+item.title+'»?'))return;try{await apiCall('wezyDeleteNotification',{token:wezyToken,id:item.id});wezyMessage('Уведомление удалено.');await wezyLoadNotifications();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}};actions.append(edit,del);row.append(info,actions);box.append(row);});}catch(e){wezyMessage(e.message,true);}}
-$('wezyNotificationForm').addEventListener('submit',async e=>{e.preventDefault();if(!wezyToken)return;const b=$('wezyNotificationSave');b.disabled=true;try{await apiCall('wezySaveNotification',{token:wezyToken,id:$('wezyNotificationId').value,title:$('wezyNotificationTitle').value,text:$('wezyNotificationText').value,links:$('wezyNotificationLinks').value,published:$('wezyNotificationPublished').checked,notifyTelegram:$('wezyNotificationTelegram').checked});wezyMessage('Уведомление сохранено.');wezyResetNotificationForm();await wezyLoadNotifications();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}finally{b.disabled=false;}});
-
-
-
-// ===== ОБЩИЙ СПИСОК ОТВЕТИВШИХ И НЕ ОТВЕТИВШИХ =====
-function initParticipantStatusView() {
-  const weekInput = $('participantStatusWeek');
-  const daySelect = $('participantStatusDay');
-  const loadButton = $('participantStatusLoad');
-  if (!weekInput || !daySelect || !loadButton || loadButton.dataset.ready) return;
-  loadButton.dataset.ready = '1';
-
-  const now = new Date();
-  const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
-  weekInput.value = localIsoDate(monday);
-  daySelect.value = '1';
-  loadButton.addEventListener('click', loadParticipantStatus);
-}
-
-async function loadParticipantStatus() {
-  const output = $('participantStatusResult');
-  const button = $('participantStatusLoad');
-  if (!currentUser || !output || !button) return;
-  const week = $('participantStatusWeek').value;
-  const day = $('participantStatusDay').value;
-  if (!week) { output.textContent = 'Выберите неделю.'; return; }
-
-  button.disabled = true;
-  output.textContent = 'Загружаем список участников…';
+async function adminLoadAnswers(){
+  if (!adminToken) return;
+  $('adminAnswersList').textContent = 'Загружаем…';
   try {
-    const data = await apiCall('participantImmunityStatus', {
-      id: currentUser.id,
-      week: week,
-      day: day
+    const items = await apiCall('adminAnswers', { token: adminToken });
+    const box = $('adminAnswersList');
+    box.replaceChildren();
+    if (!items.length) { box.textContent = 'Ответов пока нет.'; return; }
+    items.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'admin-row';
+      row.innerHTML = `<div><strong>${item.title || 'Без названия'} · ${item.date}</strong><small>${item.published ? 'Опубликован' : 'Черновик'}</small></div>`;
+      box.appendChild(row);
     });
-    output.replaceChildren();
-
-    const makeGroup = (heading, names, className, emptyText) => {
-      const group = document.createElement('div');
-      group.className = 'admin-row';
-      const inner = document.createElement('div');
-      const title = document.createElement('strong');
-      title.textContent = heading + ' (' + names.length + ')';
-      const list = document.createElement('div');
-      list.style.marginTop = '8px';
-      list.style.whiteSpace = 'pre-wrap';
-      list.textContent = names.length
-        ? names.map((name, index) => (index + 1) + '. ' + name).join('\n')
-        : emptyText;
-      inner.append(title, list);
-      group.append(inner);
-      return group;
-    };
-
-    output.append(
-      makeGroup('✅ Ответили', data.answered || [], 'good', 'Пока нет отметок.'),
-      makeGroup('❌ Не ответили', data.missing || [], 'bad', 'Все участники ответили.')
-    );
-    const total = document.createElement('p');
-    total.className = 'muted';
-    total.textContent = 'Всего участников: ' + data.total + '. Ответили: ' + data.answered.length + '.';
-    output.appendChild(total);
-  } catch (error) {
-    output.textContent = error.message || 'Не удалось загрузить список.';
-  } finally {
-    button.disabled = false;
+  } catch(err) {
+    $('adminAnswersList').textContent = err.message || 'Ошибка загрузки.';
   }
 }
 
-// Визуальные анимации отключены для быстрой работы портала.
+async function adminLoadParticipants(){
+  if (!adminToken) return;
+  const select = $('manualParticipant');
+  try {
+    const people = await apiCall('adminParticipants', { token: adminToken });
+    select.replaceChildren();
+    const first = document.createElement('option');
+    first.value = '';
+    first.textContent = 'Выберите участника';
+    select.append(first);
+    (people || []).forEach(p => {
+      const o = document.createElement('option');
+      o.value = p.id;
+      o.textContent = p.name;
+      select.append(o);
+    });
+  } catch (e) {
+    select.innerHTML = '<option value="">Ошибка загрузки</option>';
+  }
+}
 
+$('adminAnswerForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!adminToken) return;
+  $('adminSaveButton').disabled = true;
+  $('adminMessage').textContent = 'Сохраняем…';
+  try {
+    await apiCall('adminSaveAnswer', {
+      token: adminToken,
+      row: $('adminRow').value,
+      date: $('adminDate').value,
+      title: $('adminTitle').value,
+      text: $('adminText').value,
+      images: $('adminImages').value,
+      published: $('adminPublished').checked
+    });
+    $('adminMessage').textContent = 'Ответ успешно сохранён!';
+    $('adminMessage').className = 'status-line success';
+    adminResetForm();
+    await adminLoadAnswers();
+  } catch (err) {
+    $('adminMessage').textContent = err.message || 'Ошибка сохранения.';
+    $('adminMessage').className = 'status-line error';
+  } finally {
+    $('adminSaveButton').disabled = false;
+  }
+});
+
+window.addEventListener('load', () => {
+  fillWeekSelectors();
+  syncAnswerDateFromSelectors();
+  const saved = sessionStorage.getItem('perforator_user');
+  if (saved) {
+    try {
+      const u = JSON.parse(saved);
+      if (u && u.id) { currentUser = u; showPortal(u); }
+    } catch(e){}
+  }
+});
 </script>
 </body>
 </html>
