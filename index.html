@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Перфораторы - личный кабинет</title>
+  <title>ПЕРФОРАТОРЫ</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwOTE2MzAiLz48cGF0aCBkPSJNMzIgNWw0LjIgOC41IDkuNCAxLjQtNi44IDYuNiAxLjYgOS40LTguNC00LjQtOC40IDQuNCAxLjYtOS40LTYuOC02LjYgOS40LTEuNHoiIGZpbGw9IiNmZmQzNmUiIHN0cm9rZT0iI2ZmZjBiNSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMyIDE3TDEzIDQwaDExTDExIDUzaDQyTDQwIDQwaDExeiIgZmlsbD0iIzEzODM0YyIgc3Ryb2tlPSIjNzJkNmEwIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yOCA1M2g4djdoLTh6IiBmaWxsPSIjOWI2MzNkIi8+PGNpcmNsZSBjeD0iMjMiIGN5PSIzOSIgcj0iMyIgZmlsbD0iI2ZmNTI2NyIvPjxjaXJjbGUgY3g9IjM5IiBjeT0iMzUiIHI9IjMiIGZpbGw9IiNmZmQzNmUiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjQ3IiByPSIzIiBmaWxsPSIjNmJiY2ZmIi8+PGNpcmNsZSBjeD0iNDUiIGN5PSI0OCIgcj0iMi41IiBmaWxsPSIjZmY1MjY3Ii8+PHBhdGggZD0iTTE5IDMxbC00LTNtMzAgNCA0LTQiIHN0cm9rZT0iI2U5ZjRmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTIiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjU0IiBjeT0iMTgiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI0OSIgcj0iMS4yIiBmaWxsPSIjZThmMmZmIi8+PC9zdmc+">
   <meta name="theme-color" content="#07132f">
   <style>
@@ -676,7 +676,9 @@ body::before { animation: none !important; opacity: .3; filter: blur(10px); }
         <div class="section-heading"><span class="section-emoji small">⚙️</span><div><h2>Панель администратора</h2><p>Управление ответами иммунитета и архивом.</p></div></div>
         <form id="adminAnswerForm" class="admin-form">
           <input type="hidden" id="adminRow" value="">
-          <label class="admin-field">Дата ответа<input id="adminDate" type="text" placeholder="ДД.ММ.ГГГГ" required></label>
+          <label class="admin-field">Неделя ответа<select id="adminAnswerWeek" required></select></label>
+          <label class="admin-field">День недели<select id="adminAnswerDay" required><option value="0">Понедельник</option><option value="1">Вторник</option><option value="2">Среда</option><option value="3">Четверг</option><option value="4">Пятница</option><option value="5">Суббота</option><option value="6">Воскресенье</option></select></label>
+          <input type="hidden" id="adminDate" value="">
           <label class="admin-field">Заголовок<input id="adminTitle" type="text" placeholder="Например: Ответ на 21.11 (можно оставить пустым)"></label>
           <label class="admin-field full">Текст ответа<textarea id="adminText" placeholder="Полный текст ответа…" required></textarea></label>
           <label class="admin-field full">Ссылки на изображения<input id="adminImages" type="text" placeholder="Ссылки через точку с запятой ;"></label>
@@ -691,11 +693,19 @@ body::before { animation: none !important; opacity: .3; filter: blur(10px); }
         <p class="muted">Добавленная здесь отметка появится в личной истории участника и в общей недельной статистике.</p>
         <form id="adminManualHistoryForm" class="admin-form">
           <label class="admin-field">Участник<select id="manualParticipant" required><option value="">Загрузка участников…</option></select></label>
-          <label class="admin-field">Понедельник недели<input id="manualWeekStart" type="date" required></label>
+          <label class="admin-field">Неделя<select id="manualWeekStart" required></select></label>
           <label class="admin-field">День иммунитета<select id="manualDay"><option value="1">День 1</option><option value="2">День 2</option><option value="3">День 3</option><option value="4">День 4</option></select></label>
           <label class="admin-field">Результат<select id="manualResult"><option value="Ответил">Ответил</option><option value="Не ответил">Не ответил</option></select></label>
           <div class="full"><button class="button button-primary" type="submit" id="manualHistorySave">Добавить отметку</button></div>
         </form>
+        <hr style="border:0;border-top:1px solid var(--panel-border);margin:22px 0">
+        <h3>Telegram · отчёт по иммунитету</h3>
+        <p class="muted">Отдельная кнопка для Wezy Allinvain: в любое время отправляет в Telegram полный список тех, кто ответил и кто не ответил за выбранный день.</p>
+        <div class="admin-form">
+          <label class="admin-field">Неделя отчёта<select id="telegramReportWeek"></select></label>
+          <label class="admin-field">День иммунитета<select id="telegramReportDay"><option value="1">День 1 · Пн–Вт</option><option value="2">День 2 · Вт–Ср</option><option value="3">День 3 · Ср–Чт</option><option value="4">День 4 · Чт–Пт</option></select></label>
+          <div class="full"><button class="button button-primary" type="button" id="telegramReportButton" onclick="adminSendWezyReport()">📨 Отправить отчёт Wezy Allinvain в Telegram</button></div>
+        </div>
         <hr style="border:0;border-top:1px solid var(--panel-border);margin:22px 0">
         <h3>Архив устаревших ответов</h3>
         <p class="muted">Ответы с датой раньше сегодняшней (по московскому времени) переносятся в лист «Архив». Автоматический перенос выполняется ежедневно.</p>
@@ -1239,7 +1249,18 @@ async function adminLogin(){
   }catch(err){$('adminLoginMessage').textContent=err.message||'Ошибка входа.';}
 }
 function adminLogout(){adminToken='';sessionStorage.removeItem('perforator_admin_token');$('adminPanel').hidden=true;adminResetForm();$('adminMessage').textContent='Сессия администратора завершена.';}
-function adminResetForm(){ $('adminRow').value='';$('adminDate').value='';$('adminTitle').value='';$('adminText').value='';$('adminImages').value='';$('adminPublished').checked=true;$('adminSaveButton').textContent='Сохранить ответ'; }
+function adminResetForm(){ $('adminRow').value='';$('adminDate').value='';$('adminTitle').value='';$('adminText').value='';$('adminImages').value='';$('adminPublished').checked=true;$('adminSaveButton').textContent='Сохранить ответ'; if($('adminAnswerWeek').options.length){$('adminAnswerWeek').selectedIndex=0;$('adminAnswerDay').value='0';} }
+function localIsoDate(date){const y=date.getFullYear(),m=String(date.getMonth()+1).padStart(2,'0'),d=String(date.getDate()).padStart(2,'0');return `${y}-${m}-${d}`;}
+function fillWeekSelectors(){
+  const now=new Date(); const monday=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const weekday=(monday.getDay()+6)%7; monday.setDate(monday.getDate()-weekday);
+  const weeks=[];
+  for(let offset=8;offset>=-2;offset--){const d=new Date(monday);d.setDate(d.getDate()-offset*7);const key=localIsoDate(d);const end=new Date(d);end.setDate(end.getDate()+6);const label=`${d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'})} – ${end.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'})}`;weeks.push({key,label});}
+  ['adminAnswerWeek','manualWeekStart','telegramReportWeek'].forEach(id=>{const select=$(id);if(!select)return;const previous=select.value;select.replaceChildren();weeks.forEach(w=>{const o=document.createElement('option');o.value=w.key;o.textContent=w.label;select.append(o);});if(previous&&weeks.some(w=>w.key===previous))select.value=previous;});
+}
+function syncAnswerDateFromSelectors(){const monday=$('adminAnswerWeek').value;if(!monday)return;const d=new Date(monday+'T12:00:00');d.setDate(d.getDate()+Number($('adminAnswerDay').value||0));$('adminDate').value=[String(d.getDate()).padStart(2,'0'),String(d.getMonth()+1).padStart(2,'0'),d.getFullYear()].join('.');}
+function setAnswerSelectorsFromDate(value){const m=String(value||'').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);if(!m)return;const d=new Date(Number(m[3]),Number(m[2])-1,Number(m[1]),12);const monday=new Date(d);monday.setDate(monday.getDate()-((monday.getDay()+6)%7));const weekKey=localIsoDate(monday);if([...$('adminAnswerWeek').options].some(o=>o.value===weekKey))$('adminAnswerWeek').value=weekKey;$('adminAnswerDay').value=String((d.getDay()+6)%7);}
+$('adminAnswerWeek').addEventListener('change',syncAnswerDateFromSelectors);$('adminAnswerDay').addEventListener('change',syncAnswerDateFromSelectors);
 async function adminLoadAnswers(){
   if(!adminToken)return;
   $('adminAnswersList').textContent='Загружаем ответы…';
@@ -1258,7 +1279,7 @@ function renderAdminAnswers(items){
     actions.append(edit);row.append(info,actions);box.append(row);
   });
 }
-function adminEditAnswer(item){$('adminRow').value=item.row;$('adminDate').value=item.date||'';$('adminTitle').value=item.title||'';$('adminText').value=item.text||'';$('adminImages').value=item.images||'';$('adminPublished').checked=!!item.published;$('adminSaveButton').textContent='Сохранить изменения';$('adminPanel').scrollIntoView({behavior:'smooth',block:'start'});}
+function adminEditAnswer(item){$('adminRow').value=item.row;$('adminDate').value=item.date||'';setAnswerSelectorsFromDate(item.date||'');$('adminTitle').value=item.title||'';$('adminText').value=item.text||'';$('adminImages').value=item.images||'';$('adminPublished').checked=!!item.published;$('adminSaveButton').textContent='Сохранить изменения';$('adminPanel').scrollIntoView({behavior:'smooth',block:'start'});}
 $('adminAnswerForm').addEventListener('submit',async e=>{
   e.preventDefault();if(!adminToken)return;
   $('adminSaveButton').disabled=true;$('adminMessage').textContent='Сохраняем…';
@@ -1289,13 +1310,20 @@ $('adminManualHistoryForm').addEventListener('submit',async e=>{
   finally{button.disabled=false;button.textContent='Добавить отметку';}
 });
 
+async function adminSendWezyReport(){
+  if(!adminToken)return;const button=$('telegramReportButton');button.disabled=true;button.textContent='Отправляем отчёт…';
+  try{const result=await apiCall('adminTelegramReport',{token:adminToken,week:$('telegramReportWeek').value,day:$('telegramReportDay').value,requestedBy:'Wezy Allinvain'});$('adminMessage').textContent=`Отчёт отправлен в Telegram. Ответили: ${result.answered}; не ответили: ${result.missing}.`;$('adminMessage').className='status-line success';}
+  catch(err){$('adminMessage').textContent=err.message||'Не удалось отправить отчёт в Telegram.';$('adminMessage').className='status-line error';}
+  finally{button.disabled=false;button.textContent='📨 Отправить отчёт Wezy Allinvain в Telegram';}
+}
+
 async function adminArchiveNow(){
   if(!adminToken)return;const button=$('adminArchiveButton');button.disabled=true;button.textContent='Переносим…';
   try{const result=await apiCall('adminArchive',{token:adminToken});$('adminMessage').textContent='В архив перенесено записей: '+(result.moved||0)+'.';$('adminMessage').className='status-line success';await adminLoadAnswers();if(currentUser)await loadPortal();}
   catch(err){$('adminMessage').textContent=err.message||'Ошибка архивации.';$('adminMessage').className='status-line error';}
   finally{button.disabled=false;button.textContent='Перенести старые ответы в архив';}
 }
-window.addEventListener('load',()=>{if(adminToken){$('adminPanel').hidden=false;adminLoadAnswers();adminLoadParticipants();}});
+window.addEventListener('load',()=>{fillWeekSelectors();syncAnswerDateFromSelectors();if(adminToken){$('adminPanel').hidden=false;adminLoadAnswers();adminLoadParticipants();}});
 
 // Визуальные анимации отключены для быстрой работы портала.
 
