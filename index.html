@@ -618,6 +618,10 @@ body::before { animation: none !important; opacity: .3; filter: blur(10px); }
         <div class="welcome-bottom">Рады видеть тебя снова <span>🐿️</span></div>
       </section>
 
+      <section class="panel content-section" id="notificationsPanel" hidden>
+        <div id="notificationsList" class="publication-list"></div>
+      </section>
+
       <nav class="section-grid" aria-label="Разделы портала">
         <button class="section-card" data-target="immunitySection"><span class="section-emoji">🛡️</span><strong>Иммунитет</strong><small>Ответ дня и четыре дня</small></button>
         <button class="section-card" data-target="articlesSection"><span class="section-emoji">📚</span><strong>Аватарская удача</strong><small>Статьи по датам</small></button>
@@ -672,7 +676,7 @@ body::before { animation: none !important; opacity: .3; filter: blur(10px); }
 
       <section class="panel content-section" id="eventsSection">
         <div class="section-heading"><span class="section-emoji small">🎉</span><div><h2>Ивенты</h2><p>События и объявления.</p></div></div>
-        <div id="notificationsList" class="publication-list"></div><div id="eventsList" class="publication-list"></div>
+        <div id="eventsList" class="publication-list"></div>
       </section>
 
       <div class="logout-row"><button class="button button-quiet" onclick="logout()">Выйти из личного кабинета</button></div>
@@ -705,18 +709,6 @@ body::before { animation: none !important; opacity: .3; filter: blur(10px); }
           <label class="admin-field">Результат<select id="manualResult"><option value="Ответил">Ответил</option><option value="Не ответил">Не ответил</option></select></label>
           <div class="full"><button class="button button-primary" type="submit" id="manualHistorySave">Добавить отметку</button></div>
         </form>
-        <hr style="border:0;border-top:1px solid var(--panel-border);margin:22px 0">
-        <h3>Telegram · отчёт по иммунитету</h3>
-        <p class="muted">Отдельная кнопка для Wezy Allinvain: в любое время отправляет в Telegram полный список тех, кто ответил и кто не ответил за выбранный день.</p>
-        <div class="admin-form">
-          <label class="admin-field">Неделя отчёта<select id="telegramReportWeek"></select></label>
-          <label class="admin-field">День иммунитета<select id="telegramReportDay"><option value="1">День 1 · Пн–Вт</option><option value="2">День 2 · Вт–Ср</option><option value="3">День 3 · Ср–Чт</option><option value="4">День 4 · Чт–Пт</option></select></label>
-          <div class="full"><button class="button button-primary" type="button" id="telegramReportButton" onclick="adminSendWezyReport()">📨 Отправить отчёт Wezy Allinvain в Telegram</button></div>
-        </div>
-        <hr style="border:0;border-top:1px solid var(--panel-border);margin:22px 0">
-        <h3>Архив устаревших ответов</h3>
-        <p class="muted">Ответы с датой раньше сегодняшней (по московскому времени) переносятся в лист «Архив». Автоматический перенос выполняется ежедневно.</p>
-        <button class="button button-secondary" type="button" id="adminArchiveButton" onclick="adminArchiveNow()">Перенести старые ответы в архив</button>
         <button class="button button-quiet" type="button" onclick="adminLogout()">Выйти из админ-панели</button>
       </section>
   </main>
@@ -744,6 +736,16 @@ body::before { animation: none !important; opacity: .3; filter: blur(10px); }
       </form>
       <div class="admin-list-heading"><h3>Список ивентов</h3><button class="button button-quiet" type="button" onclick="wezyLoadEvents()">Обновить</button></div>
       <div class="admin-list" id="wezyEventsAdminList"></div>
+      <hr style="border:0;border-top:1px solid var(--panel-border);margin:24px 0">
+      <h3>🛡️ Уведомление об отметках иммунитета</h3>
+      <p class="muted">Сформировать список участников, которые отметились и не отметились за выбранную неделю и день. Уведомление можно одновременно показать на портале и отправить в Telegram.</p>
+      <div class="admin-form">
+        <label class="admin-field">Неделя<select id="wezyImmunityWeek"></select></label>
+        <label class="admin-field">День иммунитета<select id="wezyImmunityDay"><option value="1">День 1 · Пн–Вт</option><option value="2">День 2 · Вт–Ср</option><option value="3">День 3 · Ср–Чт</option><option value="4">День 4 · Чт–Пт</option></select></label>
+        <label class="admin-check"><input id="wezyImmunityPublish" type="checkbox" checked> Опубликовать уведомление на портале</label>
+        <label class="admin-check"><input id="wezyImmunityTelegram" type="checkbox" checked> Отправить уведомление в Telegram</label>
+        <div class="full"><button class="button button-primary" type="button" id="wezyImmunitySend" onclick="wezyCreateImmunityNotice()">📨 Сформировать уведомление об иммунитете</button></div>
+      </div>
       <hr style="border:0;border-top:1px solid var(--panel-border);margin:24px 0">
       <h3>🔔 Создание уведомления</h3>
       <form id="wezyNotificationForm" class="admin-form">
@@ -1010,8 +1012,9 @@ $('backToArticleDates').addEventListener('click', () => {
 });
 
 function renderWezyNotifications(items) {
-  const target=$('notificationsList'); if(!target)return; target.replaceChildren();
-  if(!items.length)return;
+  const target=$('notificationsList'); const panel=$('notificationsPanel'); if(!target||!panel)return; target.replaceChildren();
+  if(!items || !items.length){panel.hidden=true;return;}
+  panel.hidden=false;
   const heading=document.createElement('h3');heading.textContent='🔔 Важные уведомления';target.appendChild(heading);
   items.forEach(item=>{const card=document.createElement('article');card.className='publication notification-publication';const title=document.createElement('h3');title.textContent=item.title||'Уведомление';const body=document.createElement('p');body.className='publication-text';body.textContent=item.text||'';card.append(title,body);String(item.links||'').split(/\n|;/).map(v=>v.trim()).filter(Boolean).forEach((raw,i)=>{const m=raw.match(/https?:\/\/[^\s]+/i);if(!m)return;const a=document.createElement('a');a.className='publication-link';a.href=m[0].replace(/[),.;]+$/,'');a.target='_blank';a.rel='noopener';a.textContent='Открыть ссылку '+(i+1)+' ↗';card.appendChild(a);});target.appendChild(card);});
 }
@@ -1313,7 +1316,7 @@ function fillWeekSelectors(){
   const weekday=(monday.getDay()+6)%7; monday.setDate(monday.getDate()-weekday);
   const weeks=[];
   for(let offset=8;offset>=-2;offset--){const d=new Date(monday);d.setDate(d.getDate()-offset*7);const key=localIsoDate(d);const end=new Date(d);end.setDate(end.getDate()+6);const label=`${d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'})} – ${end.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'})}`;weeks.push({key,label});}
-  ['adminAnswerWeek','manualWeekStart','telegramReportWeek'].forEach(id=>{const select=$(id);if(!select)return;const previous=select.value;select.replaceChildren();weeks.forEach(w=>{const o=document.createElement('option');o.value=w.key;o.textContent=w.label;select.append(o);});if(previous&&weeks.some(w=>w.key===previous))select.value=previous;});
+  ['adminAnswerWeek','manualWeekStart','wezyImmunityWeek'].forEach(id=>{const select=$(id);if(!select)return;const previous=select.value;select.replaceChildren();weeks.forEach(w=>{const o=document.createElement('option');o.value=w.key;o.textContent=w.label;select.append(o);});if(previous&&weeks.some(w=>w.key===previous))select.value=previous;});
 }
 function syncAnswerDateFromSelectors(){const monday=$('adminAnswerWeek').value;if(!monday)return;const d=new Date(monday+'T12:00:00');d.setDate(d.getDate()+Number($('adminAnswerDay').value||0));$('adminDate').value=[String(d.getDate()).padStart(2,'0'),String(d.getMonth()+1).padStart(2,'0'),d.getFullYear()].join('.');}
 function setAnswerSelectorsFromDate(value){const m=String(value||'').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);if(!m)return;const d=new Date(Number(m[3]),Number(m[2])-1,Number(m[1]),12);const monday=new Date(d);monday.setDate(monday.getDate()-((monday.getDay()+6)%7));const weekKey=localIsoDate(monday);if([...$('adminAnswerWeek').options].some(o=>o.value===weekKey))$('adminAnswerWeek').value=weekKey;$('adminAnswerDay').value=String((d.getDay()+6)%7);}
@@ -1367,19 +1370,6 @@ $('adminManualHistoryForm').addEventListener('submit',async e=>{
   finally{button.disabled=false;button.textContent='Добавить отметку';}
 });
 
-async function adminSendWezyReport(){
-  if(!adminToken)return;const button=$('telegramReportButton');button.disabled=true;button.textContent='Отправляем отчёт…';
-  try{const result=await apiCall('adminTelegramReport',{token:adminToken,week:$('telegramReportWeek').value,day:$('telegramReportDay').value,requestedBy:'Wezy Allinvain'});$('adminMessage').textContent=`Отчёт отправлен в Telegram. Ответили: ${result.answered}; не ответили: ${result.missing}.`;$('adminMessage').className='status-line success';}
-  catch(err){$('adminMessage').textContent=err.message||'Не удалось отправить отчёт в Telegram.';$('adminMessage').className='status-line error';}
-  finally{button.disabled=false;button.textContent='📨 Отправить отчёт Wezy Allinvain в Telegram';}
-}
-
-async function adminArchiveNow(){
-  if(!adminToken)return;const button=$('adminArchiveButton');button.disabled=true;button.textContent='Переносим…';
-  try{const result=await apiCall('adminArchive',{token:adminToken});$('adminMessage').textContent='В архив перенесено записей: '+(result.moved||0)+'.';$('adminMessage').className='status-line success';await adminLoadAnswers();if(currentUser)await loadPortal();}
-  catch(err){$('adminMessage').textContent=err.message||'Ошибка архивации.';$('adminMessage').className='status-line error';}
-  finally{button.disabled=false;button.textContent='Перенести старые ответы в архив';}
-}
 window.addEventListener('load',()=>{fillWeekSelectors();syncAnswerDateFromSelectors();if(adminToken){$('adminPanel').hidden=false;adminLoadAnswers();adminLoadParticipants();}if(wezyToken){$('wezyAdminPanel').hidden=false;wezyLoadEvents();wezyLoadNotifications();}});
 
 
@@ -1392,6 +1382,18 @@ function wezyLogout(){wezyToken='';sessionStorage.removeItem('perforator_wezy_to
 function wezyMessage(text,error=false){$('wezyAdminMessage').textContent=text;$('wezyAdminMessage').className='status-line '+(error?'error':'success');}
 function wezyResetEventForm(){['wezyEventId','wezyEventTitle','wezyEventInfo','wezyEventEnd','wezyEventLinks'].forEach(id=>$(id).value='');$('wezyEventPublished').checked=true;$('wezyEventTelegram').checked=false;$('wezyEventSave').textContent='Сохранить ивент';}
 function wezyResetNotificationForm(){['wezyNotificationId','wezyNotificationTitle','wezyNotificationText','wezyNotificationLinks'].forEach(id=>$(id).value='');$('wezyNotificationPublished').checked=true;$('wezyNotificationTelegram').checked=false;$('wezyNotificationSave').textContent='Сохранить уведомление';}
+async function wezyCreateImmunityNotice(){
+  if(!wezyToken)return;
+  const button=$('wezyImmunitySend');button.disabled=true;button.textContent='Формируем уведомление…';
+  try{
+    const result=await apiCall('wezyImmunityNotice',{token:wezyToken,week:$('wezyImmunityWeek').value,day:$('wezyImmunityDay').value,publish:$('wezyImmunityPublish').checked,notifyTelegram:$('wezyImmunityTelegram').checked});
+    wezyMessage('Уведомление сформировано. Ответили: '+result.answered+'; не ответили: '+result.missing+'.');
+    if(currentUser)await loadPortal();
+    if($('wezyImmunityPublish').checked)await wezyLoadNotifications();
+  }catch(e){wezyMessage(e.message||'Не удалось сформировать уведомление.',true);}
+  finally{button.disabled=false;button.textContent='📨 Сформировать уведомление об иммунитете';}
+}
+
 async function wezyLoadEvents(){if(!wezyToken)return;try{const items=await apiCall('wezyEvents',{token:wezyToken});const box=$('wezyEventsAdminList');box.replaceChildren();if(!items.length){box.textContent='Ивентов пока нет.';return;}items.forEach(item=>{const row=document.createElement('div');row.className='admin-row';const info=document.createElement('div');const title=document.createElement('strong');title.textContent=item.title;const small=document.createElement('small');small.textContent=(item.published?'Опубликован':'Черновик')+' · до '+item.endDate;info.append(title,small);const actions=document.createElement('div');actions.className='admin-row-actions';const edit=document.createElement('button');edit.textContent='Изменить';edit.onclick=()=>{ $('wezyEventId').value=item.id;$('wezyEventTitle').value=item.title;$('wezyEventInfo').value=item.info;$('wezyEventEnd').value=(item.endDate||'').split('.').reverse().join('-');$('wezyEventLinks').value=item.links;$('wezyEventPublished').checked=item.published;$('wezyEventTelegram').checked=false;$('wezyEventSave').textContent='Сохранить изменения';$('wezyAdminPanel').scrollIntoView({behavior:'smooth'});};const del=document.createElement('button');del.textContent='Удалить';del.onclick=async()=>{if(!confirm('Удалить ивент «'+item.title+'»?'))return;try{await apiCall('wezyDeleteEvent',{token:wezyToken,id:item.id});wezyMessage('Ивент удалён.');await wezyLoadEvents();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}};actions.append(edit,del);row.append(info,actions);box.append(row);});}catch(e){wezyMessage(e.message,true);}}
 $('wezyEventForm').addEventListener('submit',async e=>{e.preventDefault();if(!wezyToken)return;const b=$('wezyEventSave');b.disabled=true;try{await apiCall('wezySaveEvent',{token:wezyToken,id:$('wezyEventId').value,title:$('wezyEventTitle').value,info:$('wezyEventInfo').value,endDate:$('wezyEventEnd').value,links:$('wezyEventLinks').value,published:$('wezyEventPublished').checked,notifyTelegram:$('wezyEventTelegram').checked});wezyMessage('Ивент сохранён.');wezyResetEventForm();await wezyLoadEvents();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}finally{b.disabled=false;}});
 async function wezyLoadNotifications(){if(!wezyToken)return;try{const items=await apiCall('wezyNotifications',{token:wezyToken});const box=$('wezyNotificationsAdminList');box.replaceChildren();if(!items.length){box.textContent='Уведомлений пока нет.';return;}items.forEach(item=>{const row=document.createElement('div');row.className='admin-row';const info=document.createElement('div');const title=document.createElement('strong');title.textContent=item.title;const small=document.createElement('small');small.textContent=(item.published?'На портале':'Черновик')+' · Telegram: '+(item.telegramSent?'отправлено':'не отправлено');info.append(title,small);const actions=document.createElement('div');actions.className='admin-row-actions';const edit=document.createElement('button');edit.textContent='Изменить';edit.onclick=()=>{$('wezyNotificationId').value=item.id;$('wezyNotificationTitle').value=item.title;$('wezyNotificationText').value=item.text;$('wezyNotificationLinks').value=item.links;$('wezyNotificationPublished').checked=item.published;$('wezyNotificationTelegram').checked=false;$('wezyNotificationSave').textContent='Сохранить изменения';$('wezyAdminPanel').scrollIntoView({behavior:'smooth'});};const del=document.createElement('button');del.textContent='Удалить';del.onclick=async()=>{if(!confirm('Удалить уведомление «'+item.title+'»?'))return;try{await apiCall('wezyDeleteNotification',{token:wezyToken,id:item.id});wezyMessage('Уведомление удалено.');await wezyLoadNotifications();if(currentUser)await loadPortal();}catch(e){wezyMessage(e.message,true);}};actions.append(edit,del);row.append(info,actions);box.append(row);});}catch(e){wezyMessage(e.message,true);}}
