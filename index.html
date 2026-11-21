@@ -5,74 +5,150 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>перфораторы - личный кабинет</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwOTE2MzAiLz48cGF0aCBkPSJNMzIgNWw0LjIgOC41IDkuNCAxLjQtNi44IDYuNiAxLjYgOS40LTguNC00LjQtOC40IDQuNCAxLjYtOS40LTYuOC02LjYgOS40LTEuNHoiIGZpbGw9IiNmZmQzNmUiIHN0cm9rZT0iI2ZmZjBiNSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMyIDE3TDEzIDQwaDExTDExIDUzaDQyTDQwIDQwaDExeiIgZmlsbD0iIzEzODM0YyIgc3Ryb2tlPSIjNzJkNmEwIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yOCA1M2g4djdoLTh6IiBmaWxsPSIjOWI2MzNkIi8+PGNpcmNsZSBjeD0iMjMiIGN5PSIzOSIgcj0iMyIgZmlsbD0iI2ZmNTI2NyIvPjxjaXJjbGUgY3g9IjM5IiBjeT0iMzUiIHI9IjMiIGZpbGw9IiNmZmQzNmUiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjQ3IiByPSIzIiBmaWxsPSIjNmJiY2ZmIi8+PGNpcmNsZSBjeD0iNDUiIGN5PSI0OCIgcj0iMi41IiBmaWxsPSIjZmY1MjY3Ii8+PHBhdGggZD0iTTE5IDMxbC00LTNtMzAgNCA0LTQiIHN0cm9rZT0iI2U5ZjRmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTIiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjU0IiBjeT0iMTgiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI0OSIgcj0iMS4yIiBmaWxsPSIjZThmMmZmIi8+PC9zdmc+">
-  <meta name="theme-color" content="#07132f">
+  <meta name="theme-color" content="#030718">
   <style>
 :root {
-  --navy: #07132f;
-  --navy-2: #101f49;
-  --panel: rgba(15, 29, 66, .84);
-  --panel-border: rgba(174, 196, 255, .19);
-  --text: #f4f6ff;
-  --muted: #b9c5e3;
-  --gold: #f4c979;
-  --blue: #7da8ff;
-  --green: #9ce5bd;
-  --red: #ff9aab;
+  --navy: #030718;
+  --navy-2: #0b1536;
+  --panel: rgba(12, 19, 46, 0.82);
+  --panel-border: rgba(186, 174, 255, 0.22);
+  --text: #f5f6ff;
+  --muted: #b8c2e6;
+  --gold: #f5cb78;
+  --blue: #82aaff;
+  --green: #9be5bd;
+  --red: #ff94aa;
+  --purple-glow: rgba(142, 68, 235, 0.28);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: auto; }
+
+/* ТЁМНЫЙ ФОН С НОЧНЫМ ПЕРЕЛИВОМ В ГЛУБОКИЙ ФИОЛЕТОВЫЙ */
 body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
   color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
-  background:
-    radial-gradient(ellipse at 50% -10%, rgba(56, 76, 157, .55), transparent 52%),
-    radial-gradient(ellipse at 8% 55%, rgba(71, 48, 135, .27), transparent 38%),
-    linear-gradient(145deg, #050d23 0%, #0b1940 52%, #090f2b 100%);
+  background-color: #020512;
+  background-image:
+    radial-gradient(ellipse at 50% -10%, rgba(76, 52, 160, 0.58), transparent 55%),
+    radial-gradient(ellipse at 88% 30%, rgba(135, 38, 173, 0.25), transparent 45%),
+    radial-gradient(ellipse at 10% 70%, rgba(53, 31, 130, 0.32), transparent 50%),
+    linear-gradient(155deg, #020512 0%, #060e29 32%, #180c33 65%, #050617 100%);
+  background-attachment: fixed;
 }
-#scene {
+
+/* БОЛЬШАЯ СТАТИЧНАЯ ГИРЛЯНДА СВЕРХУ (БЕЗ АНИМАЦИИ) */
+.winter-lights-big {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  z-index: 2;
+  pointer-events: none !important;
+  background-image:
+    /* Огни гирлянды: золото, синий, рубиновый, изумруд */
+    radial-gradient(circle, #ffe08a 0 5px, rgba(255,200,80,0.5) 7px, transparent 18px),
+    radial-gradient(circle, #8bc2ff 0 5px, rgba(90,160,255,0.45) 7px, transparent 18px),
+    radial-gradient(circle, #ff7597 0 5px, rgba(255,80,120,0.45) 7px, transparent 18px),
+    radial-gradient(circle, #85f0c8 0 5px, rgba(70,225,170,0.45) 7px, transparent 18px);
+  background-size: 160px 58px, 190px 68px, 230px 62px, 175px 72px;
+  background-position: 15px 12px, 60px 24px, 115px 14px, 145px 28px;
+  background-repeat: repeat-x;
+  filter: drop-shadow(0 4px 12px rgba(255, 215, 120, 0.35));
+}
+/* Провод гирлянды */
+.winter-lights-big::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 35px;
+  background: radial-gradient(ellipse at 50% 0%, transparent 62%, rgba(130, 160, 240, 0.28) 64%, transparent 68%);
+  background-size: 80px 30px;
+  background-repeat: repeat-x;
+}
+
+/* ПАДАЮЩИЙ СНЕГ */
+.winter-snow {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none !important;
+  opacity: .72;
+  background-image:
+    radial-gradient(3px 3px at 35px 45px, rgba(255,255,255,.95) 98%, transparent),
+    radial-gradient(2px 2px at 120px 180px, rgba(225,235,255,.9) 98%, transparent),
+    radial-gradient(4.5px 4.5px at 240px 90px, rgba(255,255,255,.95) 98%, transparent),
+    radial-gradient(2.5px 2.5px at 360px 240px, rgba(255,255,255,.85) 98%, transparent),
+    radial-gradient(3.5px 3.5px at 470px 120px, rgba(230,240,255,.9) 98%, transparent),
+    radial-gradient(2px 2px at 530px 310px, rgba(255,255,255,.85) 98%, transparent);
+  background-size: 560px 480px;
+  animation: snowfall 18s linear infinite !important;
+  will-change: background-position;
 }
-.ambient {
+@keyframes snowfall {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px 480px; }
+}
+
+/* САЛЮТЫ В НЕБЕ */
+.winter-firework {
   position: fixed;
-  z-index: 0;
-  width: 34vw;
-  height: 34vw;
+  z-index: 1;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
-  filter: blur(85px);
-  opacity: .12;
   pointer-events: none !important;
+  opacity: 0;
+  transform: scale(.2);
+  background: repeating-conic-gradient(from 0deg, rgba(255, 215, 120, 0.95) 0 1.2deg, transparent 1.2deg 16deg);
+  mask-image: radial-gradient(circle, transparent 0 12%, #000 14% 18%, transparent 22% 100%);
+  -webkit-mask-image: radial-gradient(circle, transparent 0 12%, #000 14% 18%, transparent 22% 100%);
+  filter: drop-shadow(0 0 14px rgba(255, 195, 95, 0.7));
+  animation: fireworkBurst 8.5s ease-out infinite;
 }
-.ambient-one { top: 12%; left: -12%; background: #6e7dff; }
-.ambient-two { right: -12%; bottom: 8%; background: #e6a95b; }
+.winter-firework.one { top: 12%; left: 7%; }
+.winter-firework.two {
+  top: 20%; right: 8%;
+  animation-delay: 4.2s;
+  background: repeating-conic-gradient(from 0deg, rgba(165, 180, 255, 0.95) 0 1.2deg, transparent 1.2deg 16deg);
+  filter: drop-shadow(0 0 14px rgba(180, 140, 255, 0.75));
+}
+@keyframes fireworkBurst {
+  0%, 70%, 100% { opacity: 0; transform: scale(.2) rotate(0deg); }
+  74% { opacity: .75; transform: scale(.85) rotate(18deg); }
+  82% { opacity: .15; transform: scale(1.15) rotate(35deg); }
+}
+
+.winter-snowman {
+  position: fixed; right: 22px; bottom: 18px; z-index: 5; pointer-events: none !important;
+  font-size: 42px; line-height: 1; opacity: .82; filter: drop-shadow(0 4px 10px rgba(0,0,0,.5));
+}
+
 .site-header, .container, footer { position: relative; z-index: 10; }
-.site-header { text-align: center; padding: 28px 16px 20px; }
+.site-header { text-align: center; padding: 36px 16px 20px; }
 .admin-entry { margin: 18px auto 0; text-align: center; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
 .admin-entry button {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   min-height: 48px; padding: 0 25px; border-radius: 15px; cursor: pointer;
   color: #fff4d8; font-size: 15px; font-weight: 800; letter-spacing: .04em;
   border: 1px solid rgba(255,218,145,.58);
-  background: linear-gradient(110deg, #263f80, #4c367f, #235c80, #263f80);
-  background-size: 240% 100%; box-shadow: 0 8px 28px rgba(5,10,35,.38), 0 0 20px rgba(106,135,255,.2);
+  background: linear-gradient(110deg, #23356e, #532d78, #1d466e, #23356e);
+  background-size: 240% 100%; box-shadow: 0 8px 28px rgba(3,6,22,.5), 0 0 20px rgba(135,110,255,.2);
   transition: transform .22s ease, box-shadow .22s ease;
 }
-.admin-entry button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(70,100,190,.34); }
+.admin-entry button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(110,80,210,.38); }
 .brand-mark { font-size: 34px; filter: drop-shadow(0 0 15px rgba(255,213,138,.45)); }
 .brand-name {
   margin-top: 4px;
   font-size: clamp(30px, 6vw, 54px);
   font-weight: 800;
   letter-spacing: .16em;
-  text-shadow: 0 0 28px rgba(121,154,255,.4);
+  text-shadow: 0 0 28px rgba(162,130,255,.45);
 }
 .brand-caption, .eyebrow {
-  color: #c4d1f3;
+  color: #cbd5f8;
   font-size: 10px;
   letter-spacing: .25em;
   font-weight: 700;
@@ -85,7 +161,9 @@ body {
   border-radius: 22px;
   padding: clamp(19px, 3vw, 30px);
   margin-bottom: 20px;
-  box-shadow: 0 18px 55px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.035);
+  box-shadow: 0 20px 60px rgba(0,0,0,.45), inset 0 1px rgba(255,255,255,.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 .login-panel { max-width: 560px; margin: 28px auto 70px; }
 h1 { font-size: clamp(27px, 5vw, 42px); margin: 12px 0; }
@@ -106,10 +184,10 @@ select {
   font-weight: 700; font-size: 14px; text-decoration: none; cursor: pointer;
   transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
 }
-.button:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 8px 22px rgba(0,0,0,.28); }
+.button:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 8px 22px rgba(0,0,0,.35); }
 .button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
 .button-primary { color: #091532; background: linear-gradient(135deg, #f8d990, #e7b65e); }
-.button-secondary { color: #f5f7ff; background: #344e8c; border: 1px solid #708cc8; }
+.button-secondary { color: #f5f7ff; background: #372e6b; border: 1px solid #786ec2; }
 .button-quiet { color: #c4d1f3; background: transparent; border: 1px solid var(--panel-border); }
 .message, .status-line { min-height: 22px; margin-top: 12px; color: var(--gold); font-size: 14px; }
 .error { color: var(--red) !important; }
@@ -120,33 +198,55 @@ select {
 .welcome h1 { margin-top: 16px; }
 .welcome p { max-width: 650px; color: #d5def5; font-size: 17px; }
 .welcome-bottom { color: var(--gold); font-size: 13px; margin-top: 20px; }
-.section-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin: 18px 0 24px; }
+
+/* СЕТКА РАЗДЕЛОВ: 3 В ВЕРХНЕМ РЯДУ, ИВЕНТЫ ПРОЕКТОВ ПО ЦЕНТРУ ВО ВТОРОМ */
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 18px 0 24px;
+}
 .section-card {
   min-height: 142px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
   gap: 7px; padding: 18px; text-align: left; color: var(--text); text-decoration: none;
   border: 1px solid var(--panel-border); border-radius: 18px;
-  background: linear-gradient(145deg, rgba(24,45,91,.96), rgba(10,24,57,.96));
-  box-shadow: 0 9px 24px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.05);
+  background: linear-gradient(145deg, rgba(22, 29, 68, 0.94), rgba(16, 15, 46, 0.95));
+  box-shadow: 0 9px 24px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.05);
   cursor: pointer; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
-.section-card:hover { transform: translateY(-3px); border-color: rgba(244,201,121,.55); box-shadow: 0 14px 30px rgba(0,0,0,.32), 0 0 18px rgba(105,145,255,.12); }
+.section-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(244,201,121,.6);
+  box-shadow: 0 14px 30px rgba(0,0,0,.4), 0 0 20px rgba(160,110,255,.2);
+}
 .section-card strong { font-size: 15px; }
 .section-card small { color: var(--muted); font-size: 12px; line-height: 1.4; }
 .section-emoji { font-size: 34px; line-height: 1.2; }
 .section-emoji.small { font-size: 32px; }
+
+/* КАРТОЧКА ИВЕНТОВ ПРОЕКТОВ: ВЫРАВНИВАНИЕ СТРОГО ПО ЦЕНТРУ ПОД АВАТАРСКОЙ УДАЧЕЙ (2-Я КОЛОНКА) */
+.section-card.events-nav-card {
+  grid-column: 2;
+}
+
+@media (max-width: 720px) {
+  .section-grid { grid-template-columns: 1fr; }
+  .section-card.events-nav-card { grid-column: 1; }
+}
+
 .section-heading { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
 .section-heading p { margin: 5px 0 0; font-size: 13px; }
 .content-section { scroll-margin-top: 20px; }
 .publication-list { display: grid; gap: 12px; }
 .publication {
-  padding: 17px; border: 1px solid rgba(173,196,255,.15);
-  border-radius: 15px; background: rgba(5,14,37,.32);
+  padding: 17px; border: 1px solid rgba(186, 174, 255, 0.18);
+  border-radius: 15px; background: rgba(8, 14, 38, 0.5);
 }
 .publication-date { color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
 .publication h3 { margin: 7px 0; font-size: 18px; }
 .publication-text { margin: 0; color: #dce4fa; white-space: pre-wrap; overflow-wrap: anywhere; }
 .publication-image { display: block; max-width: min(100%, 620px); max-height: 460px; object-fit: contain; margin: 14px 0 0; border-radius: 12px; }
-.publication-link { display: inline-block; margin-top: 12px; color: #a9c6ff; font-weight: 700; text-decoration: none; }
+.publication-link { display: inline-block; margin-top: 12px; color: #b6cbfb; font-weight: 700; text-decoration: none; }
 .empty-state {
   display: flex; flex-direction: column; align-items: center; gap: 7px;
   padding: 28px 14px; color: var(--muted); text-align: center;
@@ -156,21 +256,21 @@ select {
 .period-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 18px 0; }
 .period-card {
   display: flex; flex-direction: column; gap: 7px; padding: 15px;
-  background: rgba(6,15,39,.38); border: 1px solid var(--panel-border); border-radius: 13px;
+  background: rgba(8, 15, 41, 0.45); border: 1px solid var(--panel-border); border-radius: 13px;
 }
 .period-card b { color: #e8edff; }
 .period-card span { color: var(--muted); font-size: 12px; }
-.period-card.active { border-color: var(--gold); background: rgba(130,96,39,.18); }
+.period-card.active { border-color: var(--gold); background: rgba(140, 95, 30, 0.22); }
 .history-title { margin-top: 27px; }
 .history-list { display: grid; gap: 10px; margin-top: 12px; }
 .history-controls { display: grid; gap: 10px; margin-top: 12px; }
 .history-controls[hidden] { display: none; }
-.history-week-select { width: 100%; min-height: 46px; padding: 10px 13px; border-radius: 12px; color: var(--text); background: rgba(5,14,37,.72); border: 1px solid var(--panel-border); font: inherit; }
-.history-week-card { display: grid; gap: 9px; margin-top: 12px; padding: 14px; border: 1px solid var(--panel-border); border-radius: 14px; background: rgba(5,14,37,.35); }
+.history-week-select { width: 100%; min-height: 46px; padding: 10px 13px; border-radius: 12px; color: var(--text); background: rgba(6, 12, 33, 0.85); border: 1px solid var(--panel-border); font: inherit; }
+.history-week-card { display: grid; gap: 9px; margin-top: 12px; padding: 14px; border: 1px solid var(--panel-border); border-radius: 14px; background: rgba(6, 12, 33, 0.45); }
 .history-week-heading { margin: 0 0 2px; font-size: 14px; color: var(--text); }
 .history-row {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 10px 12px; border-radius: 10px; background: rgba(5,14,37,.42);
+  padding: 10px 12px; border-radius: 10px; background: rgba(6, 12, 33, 0.5);
 }
 .history-row strong { display: block; font-size: 13px; }
 .history-row small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
@@ -186,14 +286,14 @@ select {
 .admin-form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin: 16px 0; }
 .admin-field { display: flex; flex-direction: column; gap: 7px; color: #dce5ff; font-size: 12px; }
 .admin-field.full { grid-column: 1 / -1; }
-.admin-field input, .admin-field textarea { width: 100%; border: 1px solid rgba(173,196,255,.3); border-radius: 10px; background: rgba(4,12,32,.8); color: #f4f6ff; padding: 12px; font: inherit; }
+.admin-field input, .admin-field textarea { width: 100%; border: 1px solid rgba(173,196,255,.3); border-radius: 10px; background: rgba(4,10,28,.85); color: #f4f6ff; padding: 12px; font: inherit; }
 .admin-field textarea { min-height: 150px; resize: vertical; line-height: 1.5; }
 .admin-check { display: flex; align-items: center; gap: 9px; color: #dce5ff; font-size: 13px; }
 .admin-list { display: grid; gap: 9px; margin-top: 16px; }
-.admin-row { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:12px; border:1px solid var(--panel-border); border-radius:12px; background:rgba(4,12,32,.45); }
+.admin-row { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:12px; border:1px solid var(--panel-border); border-radius:12px; background:rgba(4,10,28,.55); }
 .admin-row small { display:block; color:var(--muted); margin-top:4px; }
 .admin-row-actions { display:flex; gap:6px; flex-wrap:wrap; }
-.admin-row-actions button { border:1px solid var(--panel-border); border-radius:8px; padding:7px 10px; color:var(--text); background:#263e76; cursor:pointer; }
+.admin-row-actions button { border:1px solid var(--panel-border); border-radius:8px; padding:7px 10px; color:var(--text); background:#282f63; cursor:pointer; }
 .admin-login-box { max-width:440px; margin:20px auto; }
 @media(max-width:600px){.admin-form{grid-template-columns:1fr}.admin-field.full{grid-column:auto}.admin-row{flex-direction:column}}
 footer { text-align: center; padding: 20px 10px 35px; color: #8f9fc8; font-size: 12px; letter-spacing: .08em; }
@@ -201,65 +301,36 @@ footer { text-align: center; padding: 20px 10px 35px; color: #8f9fc8; font-size:
 
 /* Статьи и ответы */
 .article-date-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; max-width: 760px; margin: 18px auto 4px; }
-.article-date-button { min-height: 66px; border: 1px solid rgba(173,196,255,.22); border-radius: 13px; background: rgba(6,15,39,.55); color: var(--gold); font-size: 17px; font-weight: 800; cursor: pointer; }
-.article-date-button:hover { border-color: var(--gold); background: #192f60; }
+.article-date-button { min-height: 66px; border: 1px solid rgba(186, 174, 255, 0.22); border-radius: 13px; background: rgba(7, 13, 36, 0.6); color: var(--gold); font-size: 17px; font-weight: 800; cursor: pointer; }
+.article-date-button:hover { border-color: var(--gold); background: #201a4e; }
 .article-date-button small { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; font-weight: 400; }
 .article-detail { max-width: 850px; margin: 18px auto 0; }
 .article-detail-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 .article-table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
-.article-table td { padding: 0; border: 1px solid rgba(173,196,255,.18); border-radius: 14px; background: rgba(5,14,37,.38); vertical-align: top; }
+.article-table td { padding: 0; border: 1px solid rgba(186, 174, 255, 0.18); border-radius: 14px; background: rgba(6, 12, 33, 0.45); vertical-align: top; }
 .article-reader { max-width: 760px; margin: 0 auto; padding: clamp(16px, 3vw, 28px); }
 .article-reader h3 { margin: 0 0 14px; color: var(--gold); font-size: 21px; }
 .article-reader-text { color: #e0e7fa; font-size: 14px; line-height: 1.62; white-space: pre-wrap; overflow-wrap: anywhere; }
-.today-answer { margin: 20px 0; padding: 22px; border: 1px solid rgba(244,201,121,.4); border-radius: 17px; background: rgba(5,14,37,.45); }
+.today-answer { margin: 20px 0; padding: 22px; border: 1px solid rgba(244,201,121,.4); border-radius: 17px; background: rgba(6, 12, 33, 0.55); }
 .answer-label { color: var(--gold); font-size: 12px; font-weight: 800; letter-spacing: .12em; margin-bottom: 17px; }
 .today-answer-content h3 { font-size: 22px; color: var(--gold); }
 .answer-large-text { font-size: 17px; line-height: 1.8; color: #f4f6ff; white-space: pre-wrap; overflow-wrap: anywhere; }
 
-/* АНИМАЦИЯ ПАДАЮЩЕГО СНЕГА */
-.winter-snow {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none !important;
-  opacity: .7;
-  background-image:
-    radial-gradient(3px 3px at 35px 45px, rgba(255,255,255,.95) 98%, transparent),
-    radial-gradient(2px 2px at 120px 180px, rgba(215,235,255,.9) 98%, transparent),
-    radial-gradient(4.5px 4.5px at 240px 90px, rgba(255,255,255,.95) 98%, transparent),
-    radial-gradient(2.5px 2.5px at 360px 240px, rgba(255,255,255,.85) 98%, transparent),
-    radial-gradient(3.5px 3.5px at 470px 120px, rgba(220,240,255,.9) 98%, transparent),
-    radial-gradient(2px 2px at 530px 310px, rgba(255,255,255,.85) 98%, transparent);
-  background-size: 560px 480px;
-  animation: snowfall 18s linear infinite !important;
-  will-change: background-position;
-}
-@keyframes snowfall {
-  0% { background-position: 0 0; }
-  100% { background-position: 60px 480px; }
-}
-
-.winter-aurora, .winter-lights, .winter-firework, .winter-snowman {
-  pointer-events: none !important;
-  z-index: 0;
-}
-.winter-snowman { position: fixed; right: 22px; bottom: 18px; font-size: 42px; opacity: .82; }
-
 /* Модальные окна */
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
-  padding: 18px; background: rgba(2, 7, 22, .82); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
+  padding: 18px; background: rgba(1, 4, 16, 0.86); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
 .portal-modal[hidden] { display: none !important; }
 .portal-modal-dialog {
   position: relative; width: min(920px, 100%); max-height: 90vh; overflow: auto;
-  padding: clamp(17px, 3vw, 28px); border: 1px solid rgba(174,196,255,.25); border-radius: 20px;
-  background: #0b1940; box-shadow: 0 24px 80px rgba(0,0,0,.58); overscroll-behavior: contain;
+  padding: clamp(17px, 3vw, 28px); border: 1px solid rgba(186, 174, 255, 0.28); border-radius: 20px;
+  background: #090f2b; box-shadow: 0 24px 80px rgba(0,0,0,.65); overscroll-behavior: contain;
 }
 .portal-modal-close {
   position: sticky; top: 0; z-index: 4; float: right; width: 40px; height: 40px;
   margin: -8px -8px 8px 12px; border: 1px solid rgba(255,255,255,.2); border-radius: 11px;
-  color: #fff; background: #263e76; font-size: 24px; line-height: 1; cursor: pointer;
+  color: #fff; background: #2c2957; font-size: 24px; line-height: 1; cursor: pointer;
 }
 .portal-modal-title { margin: 0 48px 18px 0; color: var(--gold); font-size: clamp(20px, 3vw, 25px); }
 .portal-modal-content { clear: both; }
@@ -270,9 +341,11 @@ body.portal-modal-open { overflow: hidden; }
   </style>
 </head>
 <body>
-  <div class="winter-aurora" aria-hidden="true"></div>
-  <div class="winter-lights" aria-hidden="true"></div>
+  <!-- Декоративные слои -->
+  <div class="winter-lights-big" aria-hidden="true"></div>
   <div class="winter-snow" aria-hidden="true"></div>
+  <div class="winter-firework one" aria-hidden="true"></div>
+  <div class="winter-firework two" aria-hidden="true"></div>
   <div class="winter-snowman" aria-hidden="true">⛄</div>
 
   <header class="site-header">
@@ -319,7 +392,7 @@ body.portal-modal-open { overflow: hidden; }
       <section class="welcome panel">
         <div class="welcome-top"><span class="eyebrow">ЛИЧНЫЙ КАБИНЕТ</span><span class="squirrel">🐿️</span></div>
         <h1>Привет, <span id="userName"></span>!</h1>
-        <p>Здесь собраны ответы иммунитета, статьи, печенье судьбы и актуальные ивенты.</p>
+        <p>Здесь собраны ответы иммунитета, статьи, печенье судьбы и актуальные ивенты проектов.</p>
         <div class="welcome-bottom">Рады видеть тебя снова <span>🐿️</span></div>
       </section>
 
@@ -327,11 +400,28 @@ body.portal-modal-open { overflow: hidden; }
         <div id="notificationsList" class="publication-list"></div>
       </section>
 
+      <!-- НАВИГАЦИОННОЕ МЕНЮ: 3 В ВЕРХНЕМ РЯДУ, ИВЕНТЫ ПРОЕКТОВ ПО ЦЕНТРУ ВО 2-М РЯДУ -->
       <nav class="section-grid" aria-label="Разделы портала">
-        <button class="section-card" data-target="immunitySection"><span class="section-emoji">🛡️</span><strong>Иммунитет</strong><small>Ответ дня и четыре дня</small></button>
-        <button class="section-card" data-target="articlesSection"><span class="section-emoji">📚</span><strong>Аватарская удача</strong><small>Статьи по датам</small></button>
-        <a class="section-card" id="cookieCard" href="#" target="_blank" rel="noopener"><span class="section-emoji">🥠</span><strong>Печенье судьбы</strong><small id="cookieCardStatus">Доступно по средам</small></a>
-        <button class="section-card events-nav-card" data-target="eventsSection"><span class="section-emoji">🎉</span><strong>Ивенты</strong><small>События и объявления</small></button>
+        <button class="section-card" data-target="immunitySection">
+          <span class="section-emoji">🛡️</span>
+          <strong>Иммунитет</strong>
+          <small>Ответ дня и четыре дня</small>
+        </button>
+        <button class="section-card" data-target="articlesSection">
+          <span class="section-emoji">📚</span>
+          <strong>Аватарская удача</strong>
+          <small>Статьи по датам</small>
+        </button>
+        <a class="section-card" id="cookieCard" href="#" target="_blank" rel="noopener">
+          <span class="section-emoji">🥠</span>
+          <strong>Печенье судьбы</strong>
+          <small id="cookieCardStatus">Доступно по средам</small>
+        </a>
+        <button class="section-card events-nav-card" data-target="eventsSection">
+          <span class="section-emoji">🏆</span>
+          <strong>Ивенты проектов</strong>
+          <small>События и проекты</small>
+        </button>
       </nav>
 
       <section class="panel content-section" id="immunitySection" hidden>
@@ -387,7 +477,7 @@ body.portal-modal-open { overflow: hidden; }
       </section>
 
       <section class="panel content-section" id="eventsSection" hidden>
-        <div class="section-heading"><span class="section-emoji small">🎉</span><div><h2>Ивенты</h2><p>События и объявления.</p></div></div>
+        <div class="section-heading"><span class="section-emoji small">🏆</span><div><h2>Ивенты проектов</h2><p>События, проекты и объявления.</p></div></div>
         <div id="eventsList" class="publication-list"></div>
       </section>
 
@@ -551,7 +641,7 @@ async function loadPortal() {
     const data = await apiCall('portal', { id: currentUser.id });
     renderImmunity(data.immunity || {});
     renderArticleArchive(data.articles || []);
-    renderPublications('eventsList', data.events || [], 'Пока нет опубликованных ивентов.');
+    renderPublications('eventsList', data.events || [], 'Пока нет опубликованных ивентов проектов.');
     renderHistory(data.history || []);
     renderStatus(data.status || {});
   } catch (err) {
@@ -675,7 +765,7 @@ function renderStatus(status) {
   }
 }
 
-// Перенос в модальное окно и обратно
+// Модальные окна
 let portalModalNode = null;
 let portalModalPlaceholder = null;
 
