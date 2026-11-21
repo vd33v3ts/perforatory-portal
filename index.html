@@ -470,28 +470,67 @@ body::after {
 let currentUser = null;
 const $ = id => document.getElementById(id);
 
+// JSONP connection to Google Apps Script: works from GitHub Pages.
+const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwbGOE4Q2Z6kL4BoAj0r6e0OmCSsgijdU26bWVfYpQC0kV5rkdd4XSPZ_qRSGFqX_kC/exec';
+let apiCounter = 0;
+
+function apiCall(action, params = {}) {
+  return new Promise((resolve, reject) => {
+    const callback = '__perforatoryCallback' + (++apiCounter);
+    const script = document.createElement('script');
+    let finished = false;
+    let timeout;
+    const cleanup = () => {
+      if (finished) return;
+      finished = true;
+      delete window[callback];
+      script.remove();
+      clearTimeout(timeout);
+    };
+    timeout = setTimeout(() => {
+      cleanup();
+      reject(new Error('Сервер не ответил за 20 секунд. Проверьте подключение и попробуйте ещё раз.'));
+    }, 20000);
+    window[callback] = response => {
+      if (finished) return;
+      cleanup();
+      if (!response || response.success !== true) {
+        reject(new Error(response && response.error ? response.error : 'Сервер вернул некорректный ответ.'));
+        return;
+      }
+      resolve(response.data);
+    };
+    const query = new URLSearchParams({ action, callback });
+    Object.entries(params).forEach(([key, value]) => query.set(key, String(value ?? '')));
+    script.onerror = () => {
+      cleanup();
+      reject(new Error('Не удалось загрузить ответ Google Apps Script. Проверьте публикацию веб-приложения и доступ «Все».'));
+    };
+    script.src = GAS_API_URL + '?' + query.toString();
+    document.body.appendChild(script);
+  });
+}
+
 function showMessage(text, isError) {
   $('message').textContent = text || '';
   $('message').classList.toggle('error', !!isError);
 }
 
-function login() {
+async function login() {
   const name = $('name').value;
   if (!name) return showMessage('Выберите своё имя.', true);
   $('loginButton').disabled = true;
   showMessage('Проверяем доступ…', false);
-
-  google.script.run
-    .withSuccessHandler(user => {
-      currentUser = user;
-      sessionStorage.setItem('perforator_user', JSON.stringify(user));
-      showPortal(user);
-    })
-    .withFailureHandler(err => {
-      showMessage(err.message || 'Не удалось войти.', true);
-      $('loginButton').disabled = false;
-    })
-    .loginParticipant(name);
+  try {
+    const user = await apiCall('login', { name });
+    if (!user || !user.id || !user.name) throw new Error('Сервер не вернул данные участника.');
+    currentUser = user;
+    sessionStorage.setItem('perforator_user', JSON.stringify(user));
+    showPortal(user);
+  } catch (err) {
+    showMessage(err.message || 'Не удалось войти.', true);
+    $('loginButton').disabled = false;
+  }
 }
 
 function showPortal(user) {
@@ -511,22 +550,22 @@ function logout() {
   showMessage('');
 }
 
-function loadPortal() {
+async function loadPortal() {
   if (!currentUser) return;
-  google.script.run
-    .withSuccessHandler(data => {
-      renderImmunity(data.immunity || {});
-      renderArticleArchive(data.articles || []);
-      renderPublications('eventsList', data.events || [], 'Пока нет опубликованных ивентов.');
-      renderHistory(data.history || []);
-      renderStatus(data.status || {});
-    })
-    .withFailureHandler(err => {
-      console.error(err);
-      $('todayAnswer').textContent = 'Не удалось загрузить данные: ' + (err.message || err);
-      $('articleDates').textContent = 'Не удалось загрузить статьи.';
-    })
-    .getPortalData(currentUser.id);
+  $('todayAnswer').innerHTML = '<div class=\"loading\">Загружаем данные…</div>';
+  try {
+    const data = await apiCall('portal', { id: currentUser.id });
+    renderImmunity(data.immunity || {});
+    renderArticleArchive(data.articles || []);
+    renderPublications('eventsList', data.events || [], 'Пока нет опубликованных ивентов.');
+    renderHistory(data.history || []);
+    renderStatus(data.status || {});
+  } catch (err) {
+    console.error(err);
+    $('todayAnswer').textContent = 'Не удалось загрузить данные: ' + (err.message || err);
+    $('articleDates').textContent = 'Не удалось загрузить статьи.';
+    $('eventsList').textContent = 'Не удалось загрузить ивенты.';
+  }
 }
 
 function renderImmunity(data) {
@@ -776,41 +815,40 @@ function renderHistory(items) {
   });
 }
 
-function loadHistory() {
+async function loadHistory() {
   if (!currentUser) return;
-  google.script.run
-    .withSuccessHandler(renderHistory)
-    .withFailureHandler(err => console.error(err))
-    .getPersonalHistory(currentUser.id);
+  try {
+    const history = await apiCall('history', { id: currentUser.id });
+    renderHistory(history || []);
+  } catch (err) { console.error(err); }
 }
 
-function markAnswered() {
+async function markAnswered() {
   if (!currentUser) return;
   $('answeredButton').disabled = true;
-  google.script.run
-    .withSuccessHandler(result => {
-      $('immunityStatus').textContent = result.already ? 'Вы уже отметили ответ в этом периоде.' : 'Ваш ответ сохранён!';
-      $('immunityStatus').className = 'status-line success';
-      loadHistory();
-      refreshStatus();
-    })
-    .withFailureHandler(err => {
-      $('immunityStatus').textContent = err.message || 'Не удалось сохранить ответ.';
-      $('immunityStatus').className = 'status-line error';
-      $('answeredButton').disabled = false;
-    })
-    .markImmunityAnswered(currentUser.id);
+  try {
+    const result = await apiCall('markAnswered', { id: currentUser.id });
+    $('immunityStatus').textContent = result && result.already
+      ? 'Вы уже отметили ответ в этом периоде.' : 'Ваш ответ сохранён!';
+    $('immunityStatus').className = 'status-line success';
+    await loadHistory();
+    await refreshStatus();
+  } catch (err) {
+    $('immunityStatus').textContent = err.message || 'Не удалось сохранить ответ.';
+    $('immunityStatus').className = 'status-line error';
+    $('answeredButton').disabled = false;
+  }
 }
 
-function refreshStatus() {
-  google.script.run
-    .withSuccessHandler(renderStatus)
-    .withFailureHandler(err => console.error(err))
-    .getStatus();
+async function refreshStatus() {
+  try {
+    const status = await apiCall('status');
+    renderStatus(status || {});
+  } catch (err) { console.error(err); }
 }
 
 function renderStatus(status) {
-      $('immunityLink').href = status.immunityUrl;
+      $('immunityLink').href = status.immunityUrl || '#';
       $('immunityLink').classList.toggle('is-disabled', !status.immunityOpen);
       $('answeredButton').disabled = !status.immunityOpen;
       $('immunityStatus').textContent = status.immunityOpen
@@ -821,7 +859,7 @@ function renderStatus(status) {
         if (periodCard) periodCard.classList.toggle('active', status.period === i);
       }
 
-      $('cookieCard').href = status.cookieUrl;
+      $('cookieCard').href = status.cookieUrl || '#';
       $('cookieCard').classList.toggle('is-disabled', !status.cookieOpen);
       $('cookieCard').setAttribute('aria-disabled', String(!status.cookieOpen));
       $('cookieCardStatus').textContent = status.cookieOpen ? 'Открыто сегодня' : 'Доступно по средам';
