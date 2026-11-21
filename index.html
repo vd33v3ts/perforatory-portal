@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ПЕРФОРАТОРЫ</title>
+  <title>перфораторы</title>
   <style>
 :root {
   --navy: #07132f;
@@ -49,7 +49,19 @@ body {
 .ambient-one { top: 12%; left: -12%; background: #6e7dff; }
 .ambient-two { right: -12%; bottom: 8%; background: #e6a95b; }
 .site-header, .container, footer { position: relative; z-index: 1; }
-.site-header { text-align: center; padding: 34px 16px 20px; }
+.site-header { text-align: center; padding: 28px 16px 20px; }
+.admin-entry { margin: 18px auto 0; text-align: center; }
+.admin-entry button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 25px; border-radius: 15px; cursor: pointer;
+  color: #fff4d8; font-size: 15px; font-weight: 800; letter-spacing: .04em;
+  border: 1px solid rgba(255,218,145,.58);
+  background: linear-gradient(110deg, #263f80, #4c367f, #235c80, #263f80);
+  background-size: 240% 100%; box-shadow: 0 8px 28px rgba(5,10,35,.38), 0 0 20px rgba(106,135,255,.2);
+  transition: transform .22s ease, box-shadow .22s ease; animation: adminShimmer 8s ease-in-out infinite;
+}
+.admin-entry button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(70,100,190,.34); }
+@keyframes adminShimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 .brand-mark { font-size: 34px; filter: drop-shadow(0 0 15px rgba(255,213,138,.45)); }
 .brand-name {
   margin-top: 4px;
@@ -170,9 +182,21 @@ select {
 .result.bad { color: var(--red); }
 .is-disabled { opacity: .4; pointer-events: none; filter: grayscale(.7); }
 .logout-row { text-align: center; }
-.admin-entry { margin-top: 14px; text-align: center; }
-.admin-entry button { color: #8293bd; background: transparent; border: 0; font-size: 11px; cursor: pointer; opacity: .75; }
-.admin-entry button:hover { color: var(--gold); opacity: 1; }
+.admin-entry { margin: 20px auto 0; text-align: center; }
+.admin-entry button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  min-height: 62px; min-width: 250px; padding: 0 38px; border-radius: 18px;
+  color: #fff4d8; font-size: 19px; font-weight: 800; letter-spacing: .05em;
+  border: 1px solid rgba(255,218,145,.72);
+  background: linear-gradient(110deg, #263f80, #60408f, #236b8b, #263f80);
+  background-size: 240% 100%;
+  box-shadow: 0 10px 32px rgba(5,10,35,.48), 0 0 26px rgba(106,135,255,.28);
+  cursor: pointer; opacity: 1;
+  transition: transform .22s ease, box-shadow .22s ease;
+  animation: adminShimmer 8s ease-in-out infinite;
+}
+.admin-entry button:hover { transform: translateY(-3px) scale(1.025); box-shadow: 0 14px 38px rgba(70,100,190,.42); }
+@media(max-width:600px){ .admin-entry button { min-width: 220px; min-height: 56px; padding: 0 28px; font-size: 17px; } }
 .admin-panel { margin-top: 24px; border-color: rgba(244,201,121,.4); }
 .admin-panel h2 { color: var(--gold); }
 .admin-form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin: 16px 0; }
@@ -288,11 +312,25 @@ footer { text-align: center; padding: 20px 10px 35px; color: #8f9fc8; font-size:
 /* Новогодняя ночь: декоративные эффекты вынесены на отдельные лёгкие слои. */
 body {
   background:
-    radial-gradient(ellipse at 50% -12%, rgba(43, 61, 126, .34), transparent 54%),
-    linear-gradient(145deg, #020817 0%, #071127 52%, #030918 100%);
+    radial-gradient(ellipse at 50% -12%, rgba(58, 76, 165, .42), transparent 54%),
+    linear-gradient(145deg, #020817 0%, #071a3b 38%, #17113d 68%, #030918 100%);
   background-attachment: fixed;
 }
-.ambient { opacity: .10; filter: blur(48px); }
+.ambient { opacity: .16; filter: blur(58px); }
+.ambient-one { background: #496dff; }
+.ambient-two { background: #b56bce; }
+/* Медленное переливание оттенков ночного неба без тяжёлых скриптов. */
+.winter-aurora {
+  position: fixed; inset: -25%; z-index: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 18%, rgba(39,91,190,.15) 38%, rgba(132,67,170,.13) 54%, rgba(32,111,151,.12) 68%, transparent 84%);
+  filter: blur(42px); opacity: .8; transform: translate3d(-3%,0,0) rotate(-5deg);
+  animation: auroraDrift 18s ease-in-out infinite alternate; will-change: transform, opacity;
+}
+@keyframes auroraDrift {
+  0% { transform: translate3d(-3%, -1%, 0) rotate(-5deg) scale(1); opacity: .48; }
+  50% { opacity: .9; }
+  100% { transform: translate3d(3%, 2%, 0) rotate(5deg) scale(1.06); opacity: .62; }
+}
 #scene, #snow, #christmas-background { pointer-events: none; }
 .content-section { content-visibility: auto; contain-intrinsic-size: 520px; }
 .site-header, .panel, .section-card, .article-date-button, .publication {
@@ -327,25 +365,32 @@ body::after {
 }
 @keyframes garlandGlow { 0% { opacity:.24; transform:scale(1); } 50% { opacity:.48; } 100% { opacity:.30; transform:scale(1.025); } }
 
+/* Мерцающая гирлянда: небольшие огни по верхнему краю, без боковых ёлок. */
+.winter-lights {
+  position: fixed; top: 0; left: 0; right: 0; height: 76px; z-index: 1; pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255,224,151,.98) 0 2px, rgba(255,193,95,.28) 3px, transparent 10px),
+    radial-gradient(circle, rgba(126,180,255,.98) 0 2px, rgba(87,143,255,.25) 3px, transparent 10px),
+    radial-gradient(circle, rgba(255,139,163,.95) 0 2px, rgba(255,112,150,.24) 3px, transparent 10px),
+    radial-gradient(circle, rgba(130,236,198,.95) 0 2px, rgba(92,211,171,.22) 3px, transparent 10px);
+  background-size: 173px 48px, 211px 55px, 257px 51px, 193px 58px;
+  background-position: 18px 8px, 74px 20px, 122px 5px, 39px 27px;
+  background-repeat: repeat-x; opacity: .68;
+  animation: lightsTwinkle 3.6s ease-in-out infinite alternate;
+}
+@keyframes lightsTwinkle { 0% { opacity: .42; filter: brightness(.85); } 45% { opacity: .9; filter: brightness(1.2); } 100% { opacity: .58; filter: brightness(1); } }
+
 /* Снег: один CSS-слой без canvas и бесконечных DOM-элементов. */
 .winter-snow {
-  position: fixed; inset: -120px 0 0; z-index: 4; pointer-events: none; opacity: .62;
+  position: fixed; inset: -120px 0 0; z-index: 4; pointer-events: none; opacity: .28;
   background-image:
     radial-gradient(2px 2px at 25px 35px, rgba(255,255,255,.85) 98%, transparent),
     radial-gradient(1.5px 1.5px at 145px 95px, rgba(220,235,255,.75) 98%, transparent),
     radial-gradient(2.5px 2.5px at 235px 155px, rgba(255,255,255,.72) 98%, transparent),
     radial-gradient(1.5px 1.5px at 330px 45px, rgba(255,255,255,.7) 98%, transparent);
-  background-size: 380px 230px; animation: snowfall 19s linear infinite;
+  background-size: 520px 330px; animation: snowfall 26s linear infinite;
 }
 @keyframes snowfall { from { background-position: 0 -230px; } to { background-position: 80px 690px; } }
-
-/* Небольшие ёлочки по краям, не перекрывают содержимое. */
-.winter-tree {
-  position: fixed; z-index: 2; bottom: 12px; pointer-events: none; opacity: .48;
-  font-size: clamp(34px, 5vw, 66px); filter: drop-shadow(0 5px 12px rgba(0,0,0,.55));
-}
-.winter-tree.left { left: 12px; }
-.winter-tree.right { right: 12px; transform: scaleX(-1); }
 
 /* Два редких мягких салюта вдали, без вспышек на весь экран. */
 .winter-firework {
@@ -366,29 +411,99 @@ body::after {
 }
 @media (max-width: 720px) {
   .section-card#cookieCard, .section-card.events-nav-card { grid-column: 1 / -1; max-width: 320px; width: 100%; justify-self: center; }
-  .winter-tree { opacity: .25; font-size: 34px; }
   .winter-firework { width: 90px; height: 90px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .winter-snow, body::before, .winter-firework { animation: none !important; }
+  .winter-snow, .winter-aurora, .winter-lights, body::before, .winter-firework, .admin-entry button { animation: none !important; }
   .panel, .section-card, .article-date-button, .button, .publication { transition: none !important; }
+}
+
+
+/* iOS-inspired glass + vivid flowing aurora. CSS-only, без тяжёлого JS/canvas. */
+.winter-aurora {
+  inset: -18%;
+  background:
+    radial-gradient(ellipse at 18% 28%, rgba(35,112,255,.34), transparent 36%),
+    radial-gradient(ellipse at 76% 22%, rgba(174,74,230,.30), transparent 38%),
+    radial-gradient(ellipse at 58% 78%, rgba(22,190,190,.23), transparent 40%),
+    linear-gradient(125deg, rgba(17,54,128,.10), rgba(112,48,157,.22), rgba(14,133,166,.17), rgba(17,54,128,.10));
+  background-size: 170% 170%, 180% 180%, 160% 160%, 260% 260%;
+  filter: blur(34px) saturate(1.35);
+  opacity: .95;
+  animation: liquidAurora 24s ease-in-out infinite alternate;
+  will-change: background-position, transform;
+}
+@keyframes liquidAurora {
+  0% { background-position: 0% 10%, 100% 0%, 20% 100%, 0% 50%; transform: translate3d(-1.5%,0,0) scale(1); }
+  50% { background-position: 70% 60%, 20% 80%, 90% 10%, 100% 50%; }
+  100% { background-position: 100% 90%, 0% 100%, 40% 0%, 0% 50%; transform: translate3d(1.5%,1%,0) scale(1.05); }
+}
+
+/* Полупрозрачные панели с мягкой кромкой и внутренним бликом — эффект матового стекла. */
+.panel, .section-card, .article-date-button, .publication,
+.period-card, .history-row, .admin-row, .empty-state {
+  background: linear-gradient(145deg, rgba(255,255,255,.105), rgba(255,255,255,.025) 48%, rgba(102,145,255,.055)), rgba(8,18,45,.56);
+  border: 1px solid rgba(220,232,255,.19);
+  box-shadow: 0 18px 48px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.16), inset 0 -1px 0 rgba(255,255,255,.035);
+  -webkit-backdrop-filter: blur(16px) saturate(145%);
+  backdrop-filter: blur(16px) saturate(145%);
+}
+.panel { background-color: rgba(8,18,45,.48); }
+.section-card {
+  background: linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.035) 55%, rgba(83,133,255,.09)), rgba(10,25,59,.48);
+  border-radius: 20px;
+}
+.section-card:hover, .article-date-button:hover {
+  border-color: rgba(192,214,255,.48);
+  box-shadow: 0 18px 42px rgba(0,0,0,.3), 0 0 24px rgba(105,150,255,.17), inset 0 1px 0 rgba(255,255,255,.22);
+}
+.publication, .period-card, .history-row, .admin-row {
+  border-color: rgba(210,226,255,.15);
+  background-color: rgba(7,17,42,.42);
+}
+.article-date-button { background-color: rgba(8,20,49,.48); }
+.admin-entry button {
+  min-height: 68px; min-width: 280px; padding: 0 42px;
+  border: 1px solid rgba(230,239,255,.45);
+  background: linear-gradient(115deg, rgba(40,103,208,.88), rgba(126,65,177,.88), rgba(22,151,169,.88), rgba(40,103,208,.88));
+  background-size: 300% 300%;
+  box-shadow: 0 12px 34px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.34), 0 0 28px rgba(104,142,255,.25);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  animation: adminShimmer 10s ease-in-out infinite;
+}
+.admin-entry button:hover { box-shadow: 0 16px 42px rgba(0,0,0,.38), 0 0 32px rgba(117,158,255,.34), inset 0 1px 0 rgba(255,255,255,.4); }
+.admin-field input, .admin-field textarea, select {
+  border-color: rgba(211,228,255,.24);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+@media (max-width: 600px) {
+  .admin-entry button { min-width: min(260px, 88vw); min-height: 60px; }
+  .panel, .section-card, .article-date-button, .publication, .period-card, .history-row, .admin-row {
+    -webkit-backdrop-filter: blur(12px) saturate(135%);
+    backdrop-filter: blur(12px) saturate(135%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .winter-aurora { animation: none !important; }
 }
 
 </style>
 
 </head>
 <body>
+  <div class="winter-aurora" aria-hidden="true"></div>
+  <div class="winter-lights" aria-hidden="true"></div>
   <div class="winter-snow" aria-hidden="true"></div>
-  <div class="winter-tree left" aria-hidden="true">🎄</div>
-  <div class="winter-tree right" aria-hidden="true">🎄</div>
   <div class="winter-firework one" aria-hidden="true"></div>
   <div class="winter-firework two" aria-hidden="true"></div>
 
   <header class="site-header">
     <div class="brand-mark">🐿️</div>
-    <div class="brand-name">ПЕРФОРАТОРЫ</div>
+    <div class="brand-name">перфораторы</div>
     <div class="brand-caption">ИНФОРМАЦИОННЫЙ ПОРТАЛ</div>
     <div class="header-squirrels">🐿️ ✦ 🐿️</div>
+    <div class="admin-entry"><button type="button" onclick="openAdminLogin()">⚙ Администратор</button></div>
   </header>
 
   <main class="container">
@@ -504,7 +619,7 @@ body::after {
       </section>
   </main>
 
-  <footer>🐿️ ПЕРФОРАТОРЫ · 2026<div class="admin-entry"><button type="button" onclick="openAdminLogin()">⚙ Администратор</button></div></footer>
+  <footer>🐿️ ПЕРФОРАТОРЫ · 2026</footer>
   <section class="panel admin-login-box" id="adminLoginBox" hidden><h2>Вход администратора</h2><label class="admin-field">Пароль администратора<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Введите пароль"></label><button class="button button-primary" type="button" onclick="adminLogin()">Войти</button><button class="button button-quiet" type="button" onclick="closeAdminLogin()">Отмена</button><div class="status-line" id="adminLoginMessage"></div></section>
 
 <script>
