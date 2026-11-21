@@ -499,7 +499,7 @@ body::after {
   <div class="winter-firework two" aria-hidden="true"></div>
 
   <header class="site-header">
-    <div class="brand-mark">🐿️</div>
+    <div class="brand-mark">✦</div>
     <div class="brand-name">перфораторы</div>
     <div class="brand-caption">ИНФОРМАЦИОННЫЙ ПОРТАЛ</div>
     <div class="header-squirrels">🐿️ ✦ 🐿️</div>
@@ -508,7 +508,7 @@ body::after {
 
   <main class="container">
     <section class="panel login-panel" id="registration">
-      <div class="eyebrow">ДОБРО ПОЖАЛОВАТЬ</div>
+      <div class="eyebrow">приветульки красатульки</div>
       <h1>Войти в портал <span>🐿️</span></h1>
       <p class="muted">Выберите своё имя из списка участников.</p>
       <label class="field-label" for="name">Ваше имя</label>
@@ -540,11 +540,11 @@ body::after {
         <div class="welcome-top"><span class="eyebrow">ЛИЧНЫЙ КАБИНЕТ</span><span class="squirrel">🐿️</span></div>
         <h1>Привет, <span id="userName"></span>!</h1>
         <p>Здесь собраны ответы иммунитета, статьи, печенье судьбы и актуальные ивенты.</p>
-        <div class="welcome-bottom">Рады видеть тебя снова <span>🐿️</span></div>
+        <div class="welcome-bottom">Рады видеть тебя снова <span>✦️</span></div>
       </section>
 
       <nav class="section-grid" aria-label="Разделы портала">
-        <button class="section-card" data-target="immunitySection"><span class="section-emoji">🛡️</span><strong>Иммунитет</strong><small>Ответ дня и четыре периода</small></button>
+        <button class="section-card" data-target="immunitySection"><span class="section-emoji">🛡️</span><strong>Иммунитет</strong><small>Ответ дня и четыре дня</small></button>
         <button class="section-card" data-target="articlesSection"><span class="section-emoji">📚</span><strong>Аватарская удача</strong><small>Статьи по датам</small></button>
         <a class="section-card" id="cookieCard" href="#" target="_blank" rel="noopener"><span class="section-emoji">🥠</span><strong>Печенье судьбы</strong><small id="cookieCardStatus">Доступно по средам</small></a>
         <button class="section-card events-nav-card" data-target="eventsSection"><span class="section-emoji">🎉</span><strong>Ивенты</strong><small>События и объявления</small></button>
@@ -561,14 +561,14 @@ body::after {
 
 
       <section class="panel content-section" id="immunitySection">
-        <div class="section-heading"><span class="section-emoji small">🛡️</span><div><h2>Иммунитет</h2><p>Ответ на сегодня и четыре периода иммунитета.</p></div></div>
+        <div class="section-heading"><span class="section-emoji small">🛡️</span><div><h2>Иммунитет</h2><p>Ответ на сегодня и четыре дня иммунитета.</p></div></div>
 
         <div class="today-answer">
           <div class="answer-label">📅 ОТВЕТ НА СЕГОДНЯ</div>
           <div id="todayAnswer"><div class="empty-state compact">Ответ на сегодня ещё не опубликован.</div></div>
         </div>
 
-        <h3 class="history-title">Четыре периода иммунитета</h3>
+        <h3 class="history-title">Четыре дня иммунитета</h3>
         <div class="period-grid" id="immunityDates"><div class="loading">Загружаем даты…</div></div>
 
         <a id="immunityLink" class="button button-primary" href="#" target="_blank" rel="noopener">Открыть иммунитет</a>
@@ -576,6 +576,7 @@ body::after {
         <div class="status-line" id="immunityStatus"></div>
 
         <h3 class="history-title">Моя история участия</h3>
+        <p class="muted">История за текущий месяц. Более старые записи автоматически удаляются, общая статистика сохраняется.</p>
         <div id="historyList" class="history-list"><div class="loading">Загружаем историю…</div></div>
       </section>
 
@@ -612,6 +613,16 @@ body::after {
         <div class="admin-list-heading"><h3>Ответы в базе</h3><button class="button button-quiet" type="button" onclick="adminLoadAnswers()">Обновить список</button></div>
         <div class="admin-list" id="adminAnswersList"><div class="loading">Загрузка списка после входа…</div></div>
         <hr style="border:0;border-top:1px solid var(--panel-border);margin:22px 0">
+        <h3>Ручное добавление участия</h3>
+        <p class="muted">Добавленная здесь отметка появится в личной истории участника и в общей недельной статистике.</p>
+        <form id="adminManualHistoryForm" class="admin-form">
+          <label class="admin-field">Участник<select id="manualParticipant" required><option value="">Загрузка участников…</option></select></label>
+          <label class="admin-field">Понедельник недели<input id="manualWeekStart" type="date" required></label>
+          <label class="admin-field">День иммунитета<select id="manualDay"><option value="1">День 1</option><option value="2">День 2</option><option value="3">День 3</option><option value="4">День 4</option></select></label>
+          <label class="admin-field">Результат<select id="manualResult"><option value="Ответил">Ответил</option><option value="Не ответил">Не ответил</option></select></label>
+          <div class="full"><button class="button button-primary" type="submit" id="manualHistorySave">Добавить отметку</button></div>
+        </form>
+        <hr style="border:0;border-top:1px solid var(--panel-border);margin:22px 0">
         <h3>Архив устаревших ответов</h3>
         <p class="muted">Ответы с датой раньше сегодняшней (по московскому времени) переносятся в лист «Архив». Автоматический перенос выполняется ежедневно.</p>
         <button class="button button-secondary" type="button" id="adminArchiveButton" onclick="adminArchiveNow()">Перенести старые ответы в архив</button>
@@ -619,7 +630,7 @@ body::after {
       </section>
   </main>
 
-  <footer>🐿️ ПЕРФОРАТОРЫ · 2026</footer>
+  <footer>✦ перфораторы · 2026</footer>
   <section class="panel admin-login-box" id="adminLoginBox" hidden><h2>Вход администратора</h2><label class="admin-field">Пароль администратора<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Введите пароль"></label><button class="button button-primary" type="button" onclick="adminLogin()">Войти</button><button class="button button-quiet" type="button" onclick="closeAdminLogin()">Отмена</button><div class="status-line" id="adminLoginMessage"></div></section>
 
 <script>
@@ -768,7 +779,7 @@ function renderImmunity(data) {
     card.className = 'period-card';
     card.id = 'period' + item.number;
     const title = document.createElement('b');
-    title.textContent = 'Период ' + item.number;
+    title.textContent = 'День ' + item.number;
     const span = document.createElement('span');
     span.textContent = item.label + ': ' + item.start + ' 12:00 — ' + item.end + ' 12:00';
     card.append(title, span);
@@ -961,7 +972,7 @@ function renderHistory(items) {
     const strong = document.createElement('strong');
     strong.textContent = item.label + ' · ' + item.start;
     const small = document.createElement('small');
-    small.textContent = 'Неделя от ' + item.week;
+    small.textContent = 'Неделя от ' + item.week + (item.source === 'Вручную администратором' ? ' · Добавлено вручную администратором' : '');
     left.append(strong, small);
     const result = document.createElement('span');
     result.className = item.result === 'Ответил' ? 'result good' : 'result bad';
@@ -985,7 +996,7 @@ async function markAnswered() {
   try {
     const result = await apiCall('markAnswered', { id: currentUser.id });
     $('immunityStatus').textContent = result && result.already
-      ? 'Вы уже отметили ответ в этом периоде.' : 'Ваш ответ сохранён!';
+      ? 'Вы уже отметили ответ в этот день.' : 'Ваш ответ сохранён!';
     $('immunityStatus').className = 'status-line success';
     await loadHistory();
     await refreshStatus();
@@ -1008,8 +1019,8 @@ function renderStatus(status) {
       $('immunityLink').classList.toggle('is-disabled', !status.immunityOpen);
       $('answeredButton').disabled = !status.immunityOpen;
       $('immunityStatus').textContent = status.immunityOpen
-        ? 'Сейчас открыт период ' + status.period + ': ' + status.periodLabel + '.'
-        : 'Сейчас иммунитет закрыт. Следующий период начнётся в понедельник в 12:00.';
+        ? 'Сейчас открыт день ' + status.period + ': ' + status.periodLabel + '.'
+        : 'Сейчас иммунитет закрыт. Следующий день откроется по расписанию иммунитета.';
       for (let i = 1; i <= 4; i++) {
         const periodCard = $('period' + i);
         if (periodCard) periodCard.classList.toggle('active', status.period === i);
@@ -1055,7 +1066,7 @@ async function adminLogin(){
     if(!data || !data.token) throw new Error('Сервер не выдал сессию администратора.');
     adminToken=data.token; sessionStorage.setItem('perforator_admin_token',adminToken);
     $('adminPassword').value=''; closeAdminLogin(); $('adminPanel').hidden=false;
-    $('adminPanel').scrollIntoView({behavior:'smooth',block:'start'}); await adminLoadAnswers();
+    $('adminPanel').scrollIntoView({behavior:'smooth',block:'start'}); await adminLoadAnswers(); await adminLoadParticipants();
   }catch(err){$('adminLoginMessage').textContent=err.message||'Ошибка входа.';}
 }
 function adminLogout(){adminToken='';sessionStorage.removeItem('perforator_admin_token');$('adminPanel').hidden=true;adminResetForm();$('adminMessage').textContent='Сессия администратора завершена.';}
@@ -1086,13 +1097,36 @@ $('adminAnswerForm').addEventListener('submit',async e=>{
   catch(err){$('adminMessage').textContent=err.message||'Не удалось сохранить ответ.';$('adminMessage').className='status-line error';}
   finally{$('adminSaveButton').disabled=false;}
 });
+async function adminLoadParticipants(){
+  if(!adminToken)return;
+  const select=$('manualParticipant');
+  try{
+    const people=await apiCall('adminParticipants',{token:adminToken});
+    select.replaceChildren();
+    const first=document.createElement('option');first.value='';first.textContent='Выберите участника';select.append(first);
+    (people||[]).forEach(person=>{const option=document.createElement('option');option.value=person.id;option.textContent=person.name;select.append(option);});
+  }catch(err){select.innerHTML='<option value="">Не удалось загрузить список</option>';}
+}
+$('adminManualHistoryForm').addEventListener('submit',async e=>{
+  e.preventDefault();if(!adminToken)return;
+  const button=$('manualHistorySave');button.disabled=true;button.textContent='Сохраняем…';
+  try{
+    const weekStart=$('manualWeekStart').value;
+    if(!weekStart)throw new Error('Выберите понедельник нужной недели.');
+    await apiCall('adminManualHistory',{token:adminToken,id:$('manualParticipant').value,weekStart,day:$('manualDay').value,result:$('manualResult').value});
+    $('adminMessage').textContent='Отметка добавлена. Она появится в истории участника и недельной статистике.';$('adminMessage').className='status-line success';
+    if(currentUser && currentUser.id===$('manualParticipant').value)await loadHistory();
+  }catch(err){$('adminMessage').textContent=err.message||'Не удалось добавить отметку.';$('adminMessage').className='status-line error';}
+  finally{button.disabled=false;button.textContent='Добавить отметку';}
+});
+
 async function adminArchiveNow(){
   if(!adminToken)return;const button=$('adminArchiveButton');button.disabled=true;button.textContent='Переносим…';
   try{const result=await apiCall('adminArchive',{token:adminToken});$('adminMessage').textContent='В архив перенесено записей: '+(result.moved||0)+'.';$('adminMessage').className='status-line success';await adminLoadAnswers();if(currentUser)await loadPortal();}
   catch(err){$('adminMessage').textContent=err.message||'Ошибка архивации.';$('adminMessage').className='status-line error';}
   finally{button.disabled=false;button.textContent='Перенести старые ответы в архив';}
 }
-window.addEventListener('load',()=>{if(adminToken){$('adminPanel').hidden=false;adminLoadAnswers();}});
+window.addEventListener('load',()=>{if(adminToken){$('adminPanel').hidden=false;adminLoadAnswers();adminLoadParticipants();}});
 
 // Визуальные анимации отключены для быстрой работы портала.
 
