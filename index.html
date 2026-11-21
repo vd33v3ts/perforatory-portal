@@ -36,7 +36,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 0;
-  pointer-events: none;
+  pointer-events: none !important;
 }
 .ambient {
   position: fixed;
@@ -46,13 +46,13 @@ body {
   border-radius: 50%;
   filter: blur(85px);
   opacity: .12;
-  pointer-events: none;
+  pointer-events: none !important;
 }
 .ambient-one { top: 12%; left: -12%; background: #6e7dff; }
 .ambient-two { right: -12%; bottom: 8%; background: #e6a95b; }
-.site-header, .container, footer { position: relative; z-index: 1; }
+.site-header, .container, footer { position: relative; z-index: 10; }
 .site-header { text-align: center; padding: 28px 16px 20px; }
-.admin-entry { margin: 18px auto 0; text-align: center; }
+.admin-entry { margin: 18px auto 0; text-align: center; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
 .admin-entry button {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   min-height: 48px; padding: 0 25px; border-radius: 15px; cursor: pointer;
@@ -199,22 +199,39 @@ select {
 footer { text-align: center; padding: 20px 10px 35px; color: #8f9fc8; font-size: 12px; letter-spacing: .08em; }
 [hidden] { display: none !important; }
 
+/* Статьи и ответы */
+.article-date-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; max-width: 760px; margin: 18px auto 4px; }
+.article-date-button { min-height: 66px; border: 1px solid rgba(173,196,255,.22); border-radius: 13px; background: rgba(6,15,39,.55); color: var(--gold); font-size: 17px; font-weight: 800; cursor: pointer; }
+.article-date-button:hover { border-color: var(--gold); background: #192f60; }
+.article-date-button small { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; font-weight: 400; }
+.article-detail { max-width: 850px; margin: 18px auto 0; }
+.article-detail-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.article-table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
+.article-table td { padding: 0; border: 1px solid rgba(173,196,255,.18); border-radius: 14px; background: rgba(5,14,37,.38); vertical-align: top; }
+.article-reader { max-width: 760px; margin: 0 auto; padding: clamp(16px, 3vw, 28px); }
+.article-reader h3 { margin: 0 0 14px; color: var(--gold); font-size: 21px; }
+.article-reader-text { color: #e0e7fa; font-size: 14px; line-height: 1.62; white-space: pre-wrap; overflow-wrap: anywhere; }
+.today-answer { margin: 20px 0; padding: 22px; border: 1px solid rgba(244,201,121,.4); border-radius: 17px; background: rgba(5,14,37,.45); }
+.answer-label { color: var(--gold); font-size: 12px; font-weight: 800; letter-spacing: .12em; margin-bottom: 17px; }
+.today-answer-content h3 { font-size: 22px; color: var(--gold); }
+.answer-large-text { font-size: 17px; line-height: 1.8; color: #f4f6ff; white-space: pre-wrap; overflow-wrap: anywhere; }
+
 /* АНИМАЦИЯ ПАДАЮЩЕГО СНЕГА */
 .winter-snow {
   position: fixed;
   inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  opacity: .62;
+  z-index: 1;
+  pointer-events: none !important;
+  opacity: .7;
   background-image:
     radial-gradient(3px 3px at 35px 45px, rgba(255,255,255,.95) 98%, transparent),
     radial-gradient(2px 2px at 120px 180px, rgba(215,235,255,.9) 98%, transparent),
-    radial-gradient(4px 4px at 240px 90px, rgba(255,255,255,.95) 98%, transparent),
+    radial-gradient(4.5px 4.5px at 240px 90px, rgba(255,255,255,.95) 98%, transparent),
     radial-gradient(2.5px 2.5px at 360px 240px, rgba(255,255,255,.85) 98%, transparent),
     radial-gradient(3.5px 3.5px at 470px 120px, rgba(220,240,255,.9) 98%, transparent),
     radial-gradient(2px 2px at 530px 310px, rgba(255,255,255,.85) 98%, transparent);
   background-size: 560px 480px;
-  animation: snowfall 20s linear infinite !important;
+  animation: snowfall 18s linear infinite !important;
   will-change: background-position;
 }
 @keyframes snowfall {
@@ -222,10 +239,11 @@ footer { text-align: center; padding: 20px 10px 35px; color: #8f9fc8; font-size:
   100% { background-position: 60px 480px; }
 }
 
-.winter-snowman {
-  position: fixed; right: 22px; bottom: 18px; z-index: 5; pointer-events: none;
-  font-size: 42px; line-height: 1; opacity: .82;
+.winter-aurora, .winter-lights, .winter-firework, .winter-snowman {
+  pointer-events: none !important;
+  z-index: 0;
 }
+.winter-snowman { position: fixed; right: 22px; bottom: 18px; font-size: 42px; opacity: .82; }
 
 /* Модальные окна */
 .portal-modal {
@@ -247,11 +265,6 @@ footer { text-align: center; padding: 20px 10px 35px; color: #8f9fc8; font-size:
 .portal-modal-content { clear: both; }
 body.portal-modal-open { overflow: hidden; }
 
-/* Отключаем только тяжёлые мерцания, но оставляем снег */
-.winter-aurora, .winter-lights, .winter-firework, .winter-snowman, body::before, body::after, .ambient {
-  animation: none !important;
-}
-.winter-lights, .winter-firework { opacity: .12 !important; }
 .admin-entry .wezy-admin-entry { display: none !important; }
 .wezy-secret-entry { display: inline-block; margin: 8px 0 0 10px; color: #9aa9ca; font-size: 10px; opacity: .28; text-decoration: none; }
   </style>
@@ -260,8 +273,6 @@ body.portal-modal-open { overflow: hidden; }
   <div class="winter-aurora" aria-hidden="true"></div>
   <div class="winter-lights" aria-hidden="true"></div>
   <div class="winter-snow" aria-hidden="true"></div>
-  <div class="winter-firework one" aria-hidden="true"></div>
-  <div class="winter-firework two" aria-hidden="true"></div>
   <div class="winter-snowman" aria-hidden="true">⛄</div>
 
   <header class="site-header">
@@ -431,7 +442,7 @@ body.portal-modal-open { overflow: hidden; }
     </section>
   </main>
 
-  <footer style="text-align:center;padding:20px 10px 35px;color:#8f9fc8;font-size:12px;letter-spacing:.08em;">
+  <footer>
     🐿️ ПЕРФОРАТОРЫ · 2026
     <a class="wezy-secret-entry" href="#wezy-login" onclick="openWezyLogin();return false;">служебный вход</a>
   </footer>
@@ -539,6 +550,9 @@ async function loadPortal() {
   try {
     const data = await apiCall('portal', { id: currentUser.id });
     renderImmunity(data.immunity || {});
+    renderArticleArchive(data.articles || []);
+    renderPublications('eventsList', data.events || [], 'Пока нет опубликованных ивентов.');
+    renderHistory(data.history || []);
     renderStatus(data.status || {});
   } catch (err) {
     console.error(err);
@@ -546,6 +560,25 @@ async function loadPortal() {
 }
 
 function renderImmunity(data) {
+  const today = $('todayAnswer');
+  today.replaceChildren();
+  if (data.todayAnswer) {
+    const card = document.createElement('article');
+    card.className = 'today-answer-content';
+    const date = document.createElement('div');
+    date.className = 'publication-date';
+    date.textContent = data.todayAnswer.date || '';
+    const title = document.createElement('h3');
+    title.textContent = data.todayAnswer.title || 'Ответ на сегодня';
+    const text = document.createElement('div');
+    text.className = 'answer-large-text';
+    text.textContent = data.todayAnswer.text || '';
+    card.append(date, title, text);
+    today.appendChild(card);
+  } else {
+    today.innerHTML = '<div class="empty-state compact">Ответ на сегодня ещё не опубликован.</div>';
+  }
+
   const dates = $('immunityDates');
   dates.replaceChildren();
   (data.dates || []).forEach(item => {
@@ -558,6 +591,74 @@ function renderImmunity(data) {
     span.textContent = (item.dayLabel || item.label) + ': ' + item.start + ' 12:00 — ' + item.end + ' 12:00';
     card.append(title, span);
     dates.appendChild(card);
+  });
+}
+
+let cachedArticles = [];
+function renderArticleArchive(items) {
+  cachedArticles = items || [];
+  const target = $('articleDates');
+  target.replaceChildren();
+  $('articleDetail').hidden = true;
+  target.hidden = false;
+  const dateMap = new Map();
+  cachedArticles.forEach(item => {
+    if (item.dateKey && !dateMap.has(item.dateKey)) {
+      dateMap.set(item.dateKey, { key: item.dateKey, label: item.date || item.dateKey });
+    }
+  });
+  const visibleDates = Array.from(dateMap.values()).sort((a, b) => a.key.localeCompare(b.key));
+  if (!visibleDates.length) {
+    target.innerHTML = '<div class="empty-state compact">Статей пока нет.</div>';
+    return;
+  }
+  visibleDates.forEach(dateInfo => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'article-date-button';
+    button.textContent = dateInfo.label;
+    button.onclick = () => openArticleDate(dateInfo);
+    target.appendChild(button);
+  });
+}
+
+function openArticleDate(dateInfo) {
+  const target = $('articleTableWrap');
+  target.replaceChildren();
+  $('articleSelectedDate').textContent = dateInfo.label;
+  $('articleDates').hidden = true;
+  $('articleDetail').hidden = false;
+  const matches = cachedArticles.filter(item => item.dateKey === dateInfo.key);
+  const table = document.createElement('table');
+  table.className = 'article-table';
+  const tbody = document.createElement('tbody');
+  matches.forEach(item => {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.innerHTML = `<article class="article-reader"><h3>${item.title || ''}</h3><div class="article-reader-text">${item.text || ''}</div></article>`;
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  target.appendChild(table);
+}
+$('backToArticleDates').addEventListener('click', () => {
+  $('articleDetail').hidden = true;
+  $('articleDates').hidden = false;
+});
+
+function renderPublications(targetId, items, emptyText) {
+  const target = $(targetId);
+  target.replaceChildren();
+  if (!items || !items.length) {
+    target.innerHTML = `<div class="empty-state compact">${emptyText}</div>`;
+    return;
+  }
+  items.forEach(item => {
+    const article = document.createElement('article');
+    article.className = 'publication';
+    article.innerHTML = `<div class="publication-date">${item.date || ''}</div><h3>${item.title || ''}</h3><p class="publication-text">${item.text || ''}</p>`;
+    target.appendChild(article);
   });
 }
 
@@ -574,6 +675,7 @@ function renderStatus(status) {
   }
 }
 
+// Перенос в модальное окно и обратно
 let portalModalNode = null;
 let portalModalPlaceholder = null;
 
@@ -607,6 +709,20 @@ function closePortalModal() {
   modal.hidden = true;
   document.body.classList.remove('portal-modal-open');
 }
+
+// КЛИКИ ПО КАРТОЧКАМ ГАРАНТИРОВАННО РАБОТАЮТ
+document.querySelectorAll('.section-card[data-target]').forEach(button => {
+  button.addEventListener('click', () => {
+    const target = $(button.dataset.target);
+    if (!target) return;
+    const title = button.querySelector('strong')?.textContent || 'Информация';
+    openPortalModal(target, title);
+  });
+});
+
+$('portalModal').addEventListener('click', event => {
+  if (event.target === $('portalModal')) closePortalModal();
+});
 
 // ---------------- АДМИНИСТРАТИВНЫЕ ФУНКЦИИ ----------------
 let adminToken = sessionStorage.getItem('perforator_admin_token') || '';
@@ -664,13 +780,10 @@ function localIsoDate(date){
 // РАСЧЁТ НЕДЕЛЬ С 23.11 И КАЖДУЮ НЕДЕЛЮ (КОМПАКТНЫЙ СПИСОК)
 function fillWeekSelectors(){
   const now = new Date();
-  // Если текущий месяц до ноября (0..9), значит старт был в ноябре прошлого года
   const startYear = now.getMonth() < 10 ? now.getFullYear() - 1 : now.getFullYear();
   const startDate = new Date(startYear, 10, 23); // 23 ноября
 
-  // Число полных недель, прошедших с 23.11
   const diffWeeks = Math.max(0, Math.floor((now.getTime() - startDate.getTime()) / (7 * 24 * 3600 * 1000)));
-  // Показываем от 23.11 до текущей недели + 2 вперед (всего не менее 4 недель)
   const totalWeeks = Math.max(diffWeeks + 2, 4);
 
   const weeks = [];
@@ -700,7 +813,6 @@ function fillWeekSelectors(){
     if (previous && weeks.some(w => w.key === previous)) {
       select.value = previous;
     } else {
-      // По умолчанию активная текущая неделя
       const currentMonday = new Date(now);
       currentMonday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
       const currentKey = localIsoDate(currentMonday);
