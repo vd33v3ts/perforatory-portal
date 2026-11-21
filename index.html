@@ -170,6 +170,24 @@ select {
 .result.bad { color: var(--red); }
 .is-disabled { opacity: .4; pointer-events: none; filter: grayscale(.7); }
 .logout-row { text-align: center; }
+.admin-entry { margin-top: 14px; text-align: center; }
+.admin-entry button { color: #8293bd; background: transparent; border: 0; font-size: 11px; cursor: pointer; opacity: .75; }
+.admin-entry button:hover { color: var(--gold); opacity: 1; }
+.admin-panel { margin-top: 24px; border-color: rgba(244,201,121,.4); }
+.admin-panel h2 { color: var(--gold); }
+.admin-form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin: 16px 0; }
+.admin-field { display: flex; flex-direction: column; gap: 7px; color: #dce5ff; font-size: 12px; }
+.admin-field.full { grid-column: 1 / -1; }
+.admin-field input, .admin-field textarea { width: 100%; border: 1px solid rgba(173,196,255,.3); border-radius: 10px; background: rgba(4,12,32,.8); color: #f4f6ff; padding: 12px; font: inherit; }
+.admin-field textarea { min-height: 150px; resize: vertical; line-height: 1.5; }
+.admin-check { display: flex; align-items: center; gap: 9px; color: #dce5ff; font-size: 13px; }
+.admin-list { display: grid; gap: 9px; margin-top: 16px; }
+.admin-row { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:12px; border:1px solid var(--panel-border); border-radius:12px; background:rgba(4,12,32,.45); }
+.admin-row small { display:block; color:var(--muted); margin-top:4px; }
+.admin-row-actions { display:flex; gap:6px; flex-wrap:wrap; }
+.admin-row-actions button { border:1px solid var(--panel-border); border-radius:8px; padding:7px 10px; color:var(--text); background:#263e76; cursor:pointer; }
+.admin-login-box { max-width:440px; margin:20px auto; }
+@media(max-width:600px){.admin-form{grid-template-columns:1fr}.admin-field.full{grid-column:auto}.admin-row{flex-direction:column}}
 footer { text-align: center; padding: 20px 10px 35px; color: #8f9fc8; font-size: 12px; letter-spacing: .08em; }
 [hidden] { display: none !important; }
 @media (max-width: 720px) {
@@ -414,7 +432,7 @@ body::after {
         <button class="section-card" data-target="immunitySection"><span class="section-emoji">🛡️</span><strong>Иммунитет</strong><small>Ответ дня и четыре периода</small></button>
         <button class="section-card" data-target="articlesSection"><span class="section-emoji">📚</span><strong>Аватарская удача</strong><small>Статьи по датам</small></button>
         <a class="section-card" id="cookieCard" href="#" target="_blank" rel="noopener"><span class="section-emoji">🥠</span><strong>Печенье судьбы</strong><small id="cookieCardStatus">Доступно по средам</small></a>
-        <button class="section-card events-nav-card" data-target="eventsSection"><span class="section-emoji">🏆</span><strong>Ивенты</strong><small>События, задания и Кубок эмодзи</small></button>
+        <button class="section-card events-nav-card" data-target="eventsSection"><span class="section-emoji">🎉</span><strong>Ивенты</strong><small>События и объявления</small></button>
       </nav>
 
 
@@ -456,15 +474,38 @@ body::after {
       </section>
 
       <section class="panel content-section" id="eventsSection">
-        <div class="section-heading"><span class="section-emoji small">🐿️</span><div><h2>Ивенты</h2><p>Актуальные мероприятия и объявления.</p></div></div>
+        <div class="section-heading"><span class="section-emoji small">🎉</span><div><h2>Ивенты</h2><p>События и объявления.</p></div></div>
         <div id="eventsList" class="publication-list"></div>
       </section>
 
       <div class="logout-row"><button class="button button-quiet" onclick="logout()">Выйти из личного кабинета</button></div>
+
     </section>
+
+    <section class="panel admin-panel" id="adminPanel" hidden>
+        <div class="section-heading"><span class="section-emoji small">⚙️</span><div><h2>Панель администратора</h2><p>Управление ответами иммунитета и архивом.</p></div></div>
+        <form id="adminAnswerForm" class="admin-form">
+          <input type="hidden" id="adminRow" value="">
+          <label class="admin-field">Дата ответа<input id="adminDate" type="text" placeholder="ДД.ММ.ГГГГ" required></label>
+          <label class="admin-field">Заголовок<input id="adminTitle" type="text" placeholder="Например: Ответ на 21.11 (можно оставить пустым)"></label>
+          <label class="admin-field full">Текст ответа<textarea id="adminText" placeholder="Полный текст ответа…" required></textarea></label>
+          <label class="admin-field full">Ссылки на изображения<input id="adminImages" type="text" placeholder="Ссылки через точку с запятой ;"></label>
+          <label class="admin-check full"><input id="adminPublished" type="checkbox" checked> Опубликовать ответ на портале</label>
+          <div class="full"><button class="button button-primary" type="submit" id="adminSaveButton">Сохранить ответ</button><button class="button button-quiet" type="button" onclick="adminResetForm()">Очистить форму</button></div>
+        </form>
+        <div class="status-line" id="adminMessage" aria-live="polite"></div>
+        <div class="admin-list-heading"><h3>Ответы в базе</h3><button class="button button-quiet" type="button" onclick="adminLoadAnswers()">Обновить список</button></div>
+        <div class="admin-list" id="adminAnswersList"><div class="loading">Загрузка списка после входа…</div></div>
+        <hr style="border:0;border-top:1px solid var(--panel-border);margin:22px 0">
+        <h3>Архив устаревших ответов</h3>
+        <p class="muted">Ответы с датой раньше сегодняшней (по московскому времени) переносятся в лист «Архив». Автоматический перенос выполняется ежедневно.</p>
+        <button class="button button-secondary" type="button" id="adminArchiveButton" onclick="adminArchiveNow()">Перенести старые ответы в архив</button>
+        <button class="button button-quiet" type="button" onclick="adminLogout()">Выйти из админ-панели</button>
+      </section>
   </main>
 
-  <footer>🐿️ ПЕРФОРАТОРЫ · 2026</footer>
+  <footer>🐿️ ПЕРФОРАТОРЫ · 2026<div class="admin-entry"><button type="button" onclick="openAdminLogin()">⚙ Администратор</button></div></footer>
+  <section class="panel admin-login-box" id="adminLoginBox" hidden><h2>Вход администратора</h2><label class="admin-field">Пароль администратора<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Введите пароль"></label><button class="button button-primary" type="button" onclick="adminLogin()">Войти</button><button class="button button-quiet" type="button" onclick="closeAdminLogin()">Отмена</button><div class="status-line" id="adminLoginMessage"></div></section>
 
 <script>
 let currentUser = null;
@@ -885,6 +926,58 @@ window.addEventListener('load', () => {
     sessionStorage.removeItem('perforator_user');
   }
 });
+
+// ---------------- АДМИН-ПАНЕЛЬ ----------------
+let adminToken = sessionStorage.getItem('perforator_admin_token') || '';
+function openAdminLogin(){ $('adminLoginBox').hidden=false; $('adminPassword').focus(); }
+function closeAdminLogin(){ $('adminLoginBox').hidden=true; $('adminLoginMessage').textContent=''; }
+async function adminLogin(){
+  const password=$('adminPassword').value;
+  if(!password){$('adminLoginMessage').textContent='Введите пароль.';return;}
+  $('adminLoginMessage').textContent='Проверяем пароль…';
+  try{
+    const data=await apiCall('adminLogin',{password});
+    if(!data || !data.token) throw new Error('Сервер не выдал сессию администратора.');
+    adminToken=data.token; sessionStorage.setItem('perforator_admin_token',adminToken);
+    $('adminPassword').value=''; closeAdminLogin(); $('adminPanel').hidden=false;
+    $('adminPanel').scrollIntoView({behavior:'smooth',block:'start'}); await adminLoadAnswers();
+  }catch(err){$('adminLoginMessage').textContent=err.message||'Ошибка входа.';}
+}
+function adminLogout(){adminToken='';sessionStorage.removeItem('perforator_admin_token');$('adminPanel').hidden=true;adminResetForm();$('adminMessage').textContent='Сессия администратора завершена.';}
+function adminResetForm(){ $('adminRow').value='';$('adminDate').value='';$('adminTitle').value='';$('adminText').value='';$('adminImages').value='';$('adminPublished').checked=true;$('adminSaveButton').textContent='Сохранить ответ'; }
+async function adminLoadAnswers(){
+  if(!adminToken)return;
+  $('adminAnswersList').textContent='Загружаем ответы…';
+  try{const items=await apiCall('adminAnswers',{token:adminToken});renderAdminAnswers(items||[]);}
+  catch(err){$('adminAnswersList').textContent=err.message||'Не удалось загрузить список.';if(/сессия администратора истекла/i.test(err.message||''))adminLogout();}
+}
+function renderAdminAnswers(items){
+  const box=$('adminAnswersList');box.replaceChildren();
+  if(!items.length){box.textContent='Ответов пока нет.';return;}
+  items.forEach(item=>{
+    const row=document.createElement('div');row.className='admin-row';
+    const info=document.createElement('div');const title=document.createElement('strong');title.textContent=(item.title||'Без заголовка')+' · '+(item.date||'без даты');
+    const small=document.createElement('small');small.textContent=item.published?'Опубликован':'Черновик';info.append(title,small);
+    const actions=document.createElement('div');actions.className='admin-row-actions';
+    const edit=document.createElement('button');edit.type='button';edit.textContent='Изменить';edit.addEventListener('click',()=>adminEditAnswer(item));
+    actions.append(edit);row.append(info,actions);box.append(row);
+  });
+}
+function adminEditAnswer(item){$('adminRow').value=item.row;$('adminDate').value=item.date||'';$('adminTitle').value=item.title||'';$('adminText').value=item.text||'';$('adminImages').value=item.images||'';$('adminPublished').checked=!!item.published;$('adminSaveButton').textContent='Сохранить изменения';$('adminPanel').scrollIntoView({behavior:'smooth',block:'start'});}
+$('adminAnswerForm').addEventListener('submit',async e=>{
+  e.preventDefault();if(!adminToken)return;
+  $('adminSaveButton').disabled=true;$('adminMessage').textContent='Сохраняем…';
+  try{await apiCall('adminSaveAnswer',{token:adminToken,row:$('adminRow').value,date:$('adminDate').value,title:$('adminTitle').value,text:$('adminText').value,images:$('adminImages').value,published:$('adminPublished').checked});$('adminMessage').textContent='Ответ сохранён.';$('adminMessage').className='status-line success';adminResetForm();await adminLoadAnswers();if(currentUser)await loadPortal();}
+  catch(err){$('adminMessage').textContent=err.message||'Не удалось сохранить ответ.';$('adminMessage').className='status-line error';}
+  finally{$('adminSaveButton').disabled=false;}
+});
+async function adminArchiveNow(){
+  if(!adminToken)return;const button=$('adminArchiveButton');button.disabled=true;button.textContent='Переносим…';
+  try{const result=await apiCall('adminArchive',{token:adminToken});$('adminMessage').textContent='В архив перенесено записей: '+(result.moved||0)+'.';$('adminMessage').className='status-line success';await adminLoadAnswers();if(currentUser)await loadPortal();}
+  catch(err){$('adminMessage').textContent=err.message||'Ошибка архивации.';$('adminMessage').className='status-line error';}
+  finally{button.disabled=false;button.textContent='Перенести старые ответы в архив';}
+}
+window.addEventListener('load',()=>{if(adminToken){$('adminPanel').hidden=false;adminLoadAnswers();}});
 
 // Визуальные анимации отключены для быстрой работы портала.
 
