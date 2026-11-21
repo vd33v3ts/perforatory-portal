@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>перфораторы</title>
+  <title>Перфораторы - личный кабинет</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwOTE2MzAiLz48cGF0aCBkPSJNMzIgNWw0LjIgOC41IDkuNCAxLjQtNi44IDYuNiAxLjYgOS40LTguNC00LjQtOC40IDQuNCAxLjYtOS40LTYuOC02LjYgOS40LTEuNHoiIGZpbGw9IiNmZmQzNmUiIHN0cm9rZT0iI2ZmZjBiNSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMyIDE3TDEzIDQwaDExTDExIDUzaDQyTDQwIDQwaDExeiIgZmlsbD0iIzEzODM0YyIgc3Ryb2tlPSIjNzJkNmEwIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yOCA1M2g4djdoLTh6IiBmaWxsPSIjOWI2MzNkIi8+PGNpcmNsZSBjeD0iMjMiIGN5PSIzOSIgcj0iMyIgZmlsbD0iI2ZmNTI2NyIvPjxjaXJjbGUgY3g9IjM5IiBjeT0iMzUiIHI9IjMiIGZpbGw9IiNmZmQzNmUiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjQ3IiByPSIzIiBmaWxsPSIjNmJiY2ZmIi8+PGNpcmNsZSBjeD0iNDUiIGN5PSI0OCIgcj0iMi41IiBmaWxsPSIjZmY1MjY3Ii8+PHBhdGggZD0iTTE5IDMxbC00LTNtMzAgNCA0LTQiIHN0cm9rZT0iI2U5ZjRmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTIiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjU0IiBjeT0iMTgiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI0OSIgcj0iMS4yIiBmaWxsPSIjZThmMmZmIi8+PC9zdmc+">
   <meta name="theme-color" content="#07132f">
   <style>
@@ -496,6 +496,65 @@ body::after {
   .winter-aurora { animation: none !important; }
 }
 
+
+/* Финальная оптимизация зимних эффектов: меньше нагрузки, мягче движение. */
+.winter-aurora {
+  inset: -18%;
+  filter: blur(25px) saturate(1.08);
+  opacity: .55;
+  animation: auroraSoft 35s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+@keyframes auroraSoft {
+  from { transform: translate3d(-1%,0,0) scale(1); opacity: .42; }
+  to   { transform: translate3d(1%,.5%,0) scale(1.025); opacity: .58; }
+}
+body::before { animation: none !important; opacity: .3; filter: blur(10px); }
+.winter-lights { animation: lightsTwinkle 6s ease-in-out infinite alternate; }
+@keyframes lightsTwinkle {
+  from { opacity: .48; }
+  to   { opacity: .72; }
+}
+.winter-snow {
+  opacity: .34;
+  background-image:
+    radial-gradient(3px 3px at 25px 35px, rgba(255,255,255,.9) 98%, transparent),
+    radial-gradient(2.5px 2.5px at 145px 95px, rgba(220,235,255,.8) 98%, transparent),
+    radial-gradient(4px 4px at 235px 155px, rgba(255,255,255,.78) 98%, transparent),
+    radial-gradient(2.5px 2.5px at 330px 45px, rgba(255,255,255,.75) 98%, transparent);
+  background-size: 520px 330px;
+  animation: snowfall 38s linear infinite;
+}
+.panel, .section-card, .article-date-button, .button, .publication {
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
+}
+.section-card:hover, .article-date-button:hover, .button:hover { transform: translateY(-2px); }
+/* Оставляем белку в логотипе, убираем повторяющиеся декоративные белки. */
+.header-squirrels, .welcome .squirrel, .welcome::after { display: none !important; }
+.winter-snowman {
+  position: fixed;
+  right: 22px;
+  bottom: 18px;
+  z-index: 5;
+  pointer-events: none;
+  font-size: 42px;
+  line-height: 1;
+  opacity: .82;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
+  animation: snowmanFloat 5s ease-in-out infinite;
+}
+@keyframes snowmanFloat {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-5px) rotate(3deg); }
+}
+@media (max-width: 600px) {
+  .winter-snowman { right: 12px; bottom: 12px; font-size: 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .winter-snow, .winter-aurora, .winter-lights, .winter-firework,
+  .winter-snowman, .admin-entry button { animation: none !important; }
+}
+
 </style>
 
 </head>
@@ -505,10 +564,11 @@ body::after {
   <div class="winter-snow" aria-hidden="true"></div>
   <div class="winter-firework one" aria-hidden="true"></div>
   <div class="winter-firework two" aria-hidden="true"></div>
+  <div class="winter-snowman" aria-hidden="true">⛄</div>
 
   <header class="site-header">
     <div class="brand-mark">🐿️</div>
-    <div class="brand-name">перфораторы</div>
+    <div class="brand-name">ПЕРФОРАТОРЫ</div>
     <div class="brand-caption">ИНФОРМАЦИОННЫЙ ПОРТАЛ</div>
     <div class="header-squirrels">🐿️ ✦ 🐿️</div>
     <div class="admin-entry"><button type="button" onclick="openAdminLogin()">⚙ Администратор</button></div>
@@ -516,7 +576,7 @@ body::after {
 
   <main class="container">
     <section class="panel login-panel" id="registration">
-      <div class="eyebrow">привитульки красатульки</div>
+      <div class="eyebrow">ДОБРО ПОЖАЛОВАТЬ</div>
       <h1>Войти в портал <span>🐿️</span></h1>
       <p class="muted">Выберите своё имя из списка участников.</p>
       <label class="field-label" for="name">Ваше имя</label>
@@ -548,7 +608,7 @@ body::after {
         <div class="welcome-top"><span class="eyebrow">ЛИЧНЫЙ КАБИНЕТ</span><span class="squirrel">🐿️</span></div>
         <h1>Привет, <span id="userName"></span>!</h1>
         <p>Здесь собраны ответы иммунитета, статьи, печенье судьбы и актуальные ивенты.</p>
-        <div class="welcome-bottom">привитульки красатульки <span>✦</span></div>
+        <div class="welcome-bottom">Рады видеть тебя снова <span>🐿️</span></div>
       </section>
 
       <nav class="section-grid" aria-label="Разделы портала">
@@ -1242,4 +1302,3 @@ window.addEventListener('load',()=>{if(adminToken){$('adminPanel').hidden=false;
 </script>
 </body>
 </html>
-
