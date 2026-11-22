@@ -10,8 +10,8 @@
 :root {
   --navy: #030718;
   --navy-2: #0b1536;
-  --panel: rgba(12, 19, 46, .84);
-  --panel-border: rgba(186, 174, 255, .22);
+  --panel: rgba(12, 19, 46, .85);
+  --panel-border: rgba(186, 174, 255, .24);
   --text: #f5f6ff;
   --muted: #b8c2e6;
   --gold: #f5cb78;
@@ -25,14 +25,14 @@ body {
   margin: 0; min-height: 100vh; overflow-x: hidden; color: var(--text);
   font-family: Arial, Helvetica, sans-serif; background-color: #020512;
   background-image:
-    radial-gradient(ellipse at 50% -10%, rgba(76, 52, 160, .58), transparent 55%),
-    radial-gradient(ellipse at 88% 30%, rgba(135, 38, 173, .25), transparent 45%),
-    radial-gradient(ellipse at 10% 70%, rgba(53, 31, 130, .32), transparent 50%),
+    radial-gradient(ellipse at 50% -10%, rgba(76, 52, 160, .65), transparent 55%),
+    radial-gradient(ellipse at 88% 30%, rgba(135, 38, 173, .28), transparent 45%),
+    radial-gradient(ellipse at 10% 70%, rgba(53, 31, 130, .35), transparent 50%),
     linear-gradient(155deg, #020512 0%, #060e29 32%, #180c33 65%, #050617 100%);
   background-attachment: fixed;
 }
 .winter-snow {
-  position: fixed; inset: 0; z-index: 1; pointer-events: none !important; opacity: .45;
+  position: fixed; inset: 0; z-index: 1; pointer-events: none !important; opacity: .42;
   background-image:
     radial-gradient(2px 2px at 40px 60px, rgba(255,255,255,.9) 98%, transparent),
     radial-gradient(3px 3px at 180px 140px, rgba(230,240,255,.85) 98%, transparent),
@@ -41,7 +41,7 @@ body {
 }
 @keyframes snowfall { 0% { background-position: 0 0; } 100% { background-position: 40px 380px; } }
 .winter-lights-big {
-  position: fixed; top: 0; left: 0; right: 0; height: 70px; z-index: 2; pointer-events: none !important;
+  position: fixed; top: 0; left: 0; right: 0; height: 65px; z-index: 2; pointer-events: none !important;
   background-image:
     radial-gradient(circle, #ffe08a 0 4px, transparent 14px),
     radial-gradient(circle, #8bc2ff 0 4px, transparent 14px),
@@ -51,27 +51,53 @@ body {
   filter: drop-shadow(0 3px 8px rgba(255, 215, 120, .3));
 }
 .winter-snowman { position: fixed; right: 18px; bottom: 14px; z-index: 5; pointer-events: none !important; font-size: 36px; opacity: .7; }
+
 .site-header, .container, footer { position: relative; z-index: 10; }
-.site-header { text-align: center; padding: 28px 16px 16px; }
-.admin-entry { margin: 14px auto 0; text-align: center; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+.site-header { text-align: center; padding: 26px 16px 14px; }
+.brand-mark { font-size: 26px; }
+
+/* ЯРКОЕ СВЕЧЕНИЕ НАДПИСИ «ПЕРФОРАТОРЫ» */
+.brand-name {
+  margin-top: 2px;
+  font-size: clamp(30px, 6vw, 56px);
+  font-weight: 900;
+  letter-spacing: .18em;
+  color: #ffffff;
+  text-shadow:
+    0 0 10px #c4b5fd,
+    0 0 25px #818cf8,
+    0 0 50px #6366f1,
+    0 0 90px rgba(99, 102, 241, .85);
+  animation: neonPulse 3.5s ease-in-out infinite alternate;
+}
+@keyframes neonPulse {
+  0% { text-shadow: 0 0 10px #c4b5fd, 0 0 25px #818cf8, 0 0 50px #6366f1, 0 0 90px rgba(99, 102, 241, .85); }
+  100% { text-shadow: 0 0 14px #e0e7ff, 0 0 35px #a5b4fc, 0 0 70px #818cf8, 0 0 110px rgba(129, 140, 248, .95); }
+}
+
+.brand-caption, .eyebrow {
+  color: #e0e7ff;
+  font-size: 11px;
+  letter-spacing: .28em;
+  font-weight: 800;
+  text-shadow: 0 0 12px rgba(165, 180, 252, .6);
+}
+.header-squirrels { margin-top: 6px; font-size: 15px; letter-spacing: 6px; opacity: .85; }
+
+/* КНОПКА АДМИНИСТРАТОРА СВЕРХУ (БЕЗ WEZY) */
+.admin-entry { margin: 16px auto 0; text-align: center; }
 .admin-entry button {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 44px; padding: 0 22px; border-radius: 14px; cursor: pointer;
-  color: #fff4d8; font-size: 14px; font-weight: 800; letter-spacing: .03em;
+  min-height: 48px; padding: 0 26px; border-radius: 15px; cursor: pointer;
+  color: #fff4d8; font-size: 15px; font-weight: 800; letter-spacing: .03em;
   border: 1px solid rgba(255,218,145,.55);
   background: linear-gradient(110deg, #23356e, #532d78, #1d466e);
   background-size: 200% 100%; box-shadow: 0 6px 22px rgba(3,6,22,.45);
-  transition: transform .2s ease;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-.admin-entry button:hover { transform: translateY(-2px); }
-.brand-mark { font-size: 30px; }
-.brand-name {
-  margin-top: 2px; font-size: clamp(26px, 5.5vw, 48px); font-weight: 800;
-  letter-spacing: .14em; text-shadow: 0 0 22px rgba(162,130,255,.4);
-}
-.brand-caption, .eyebrow { color: #cbd5f8; font-size: 10px; letter-spacing: .22em; font-weight: 700; }
-.header-squirrels { margin-top: 10px; font-size: 18px; letter-spacing: 10px; }
-.container { width: min(1000px, 94%); margin: 12px auto 60px; }
+.admin-entry button:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(110,80,210,.4); }
+
+.container { width: min(1040px, 94%); margin: 12px auto 60px; }
 .panel {
   background: var(--panel); border: 1px solid var(--panel-border); border-radius: 20px;
   padding: clamp(16px, 2.8vw, 26px); margin-bottom: 16px;
@@ -86,17 +112,19 @@ p { line-height: 1.6; }
 .muted, .login-note { color: var(--muted); }
 .field-label { display: block; margin: 16px 0 6px; color: #dce5ff; font-size: 13px; }
 select, input[type="text"], input[type="password"], input[type="date"], input[type="url"], textarea {
-  width: 100%; padding: 12px 13px; border-radius: 11px;
+  width: 100%; padding: 13px 14px; border-radius: 12px;
   border: 1px solid rgba(173,196,255,.32); color: #142044; background: #f5f7ff; font-size: 15px;
 }
 textarea { min-height: 100px; resize: vertical; line-height: 1.45; color: #f4f6ff; background: rgba(4,10,28,.85); }
+
+/* КНОПКИ СТАЛИ БОЛЬШЕ И ЗАМЕТНЕЕ */
 .button {
   display: inline-flex; align-items: center; justify-content: center;
-  border: 0; border-radius: 11px; padding: 11px 16px; margin: 8px 6px 0 0;
-  font-weight: 700; font-size: 13px; text-decoration: none; cursor: pointer;
-  transition: transform .18s ease, filter .18s ease;
+  border: 0; border-radius: 13px; padding: 13px 22px; margin: 8px 6px 0 0;
+  font-weight: 800; font-size: 14px; text-decoration: none; cursor: pointer;
+  transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
 }
-.button:hover { transform: translateY(-1px); filter: brightness(1.05); }
+.button:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
 .button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
 .button-primary { color: #091532; background: linear-gradient(135deg, #f8d990, #e7b65e); }
 .button-secondary { color: #f5f7ff; background: #372e6b; border: 1px solid #786ec2; }
@@ -112,44 +140,70 @@ textarea { min-height: 100px; resize: vertical; line-height: 1.45; color: #f4f6f
 .welcome p { max-width: 620px; margin: 0 auto; color: #d5def5; font-size: 16px; }
 .welcome-bottom { color: var(--gold); font-size: 13px; margin-top: 16px; }
 
-/* ТАЙМЕРЫ В ПРИВЕТСТВИИ */
-.welcome-timers { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin:16px auto 0; }
-.timer-chip { padding:10px 14px; border:1px solid rgba(186,174,255,.2); border-radius:12px; background:rgba(4,10,28,.55); color:#f4f6ff; font-size:13px; }
-.timer-chip strong { color:var(--gold); display:block; margin-bottom:4px; }
+/* ТАЙМЕРЫ НА ГЛАВНОЙ */
+.welcome-timers { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin:18px auto 0; }
+.timer-chip { padding:12px 18px; border:1px solid rgba(186,174,255,.2); border-radius:14px; background:rgba(4,10,28,.6); color:#f4f6ff; font-size:14px; }
+.timer-chip strong { color:var(--gold); display:block; margin-bottom:4px; font-size:13px; }
 
-/* 3 В РЯДУ, ИВЕНТЫ ПРОЕКТОВ ПО ЦЕНТРУ ВО 2-М РЯДУ */
-.section-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0 20px; }
+/* КАРТОЧКИ РАЗДЕЛОВ ПОРТАЛА (ВКЛЮЧАЯ АРХИВ) */
+.section-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 18px 0 22px; }
 .section-card {
-  min-height: 130px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
-  gap: 6px; padding: 16px; text-align: left; color: var(--text); text-decoration: none;
-  border: 1px solid var(--panel-border); border-radius: 16px;
+  min-height: 140px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+  gap: 6px; padding: 18px; text-align: left; color: var(--text); text-decoration: none;
+  border: 1px solid var(--panel-border); border-radius: 17px;
   background: linear-gradient(145deg, rgba(22, 29, 68, .94), rgba(16, 15, 46, .95));
-  box-shadow: 0 8px 20px rgba(0,0,0,.28); cursor: pointer; transition: transform .2s ease, border-color .2s ease;
+  box-shadow: 0 8px 22px rgba(0,0,0,.3); cursor: pointer; transition: transform .2s ease, border-color .2s ease;
 }
-.section-card:hover { transform: translateY(-2px); border-color: rgba(244,201,121,.55); }
-.section-card strong { font-size: 14px; }
+.section-card:hover { transform: translateY(-3px); border-color: rgba(244,201,121,.6); }
+.section-card strong { font-size: 15px; }
 .section-card small { color: var(--muted); font-size: 12px; line-height: 1.35; }
-.section-emoji { font-size: 30px; line-height: 1.15; }
-.section-card.events-nav-card { grid-column: 2; }
-@media (max-width: 720px) {
+.section-emoji { font-size: 32px; line-height: 1.15; }
+.section-card.events-nav-card { grid-column: 1; }
+.section-card.archive-nav-card { grid-column: 2; }
+@media (max-width: 760px) {
   .section-grid { grid-template-columns: 1fr; }
-  .section-card.events-nav-card { grid-column: 1; }
+  .section-card.events-nav-card, .section-card.archive-nav-card { grid-column: 1; }
 }
 
-/* ЗАГОЛОВКИ ДИАЛОГОВЫХ ОКОН: СТРОГО ПО ЦЕНТРУ */
+/* ЗАГОЛОВКИ МОДАЛЬНЫХ ОКОН: СТРОГО ПО ЦЕНТРУ */
 .section-heading {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; gap: 6px; margin-bottom: 18px;
 }
-.section-heading h2 { font-size: clamp(20px, 3.2vw, 26px); color: var(--gold); }
+.section-heading h2 { font-size: clamp(21px, 3.4vw, 27px); color: var(--gold); }
 .section-heading p { margin: 0; font-size: 13px; color: var(--muted); }
 
-/* ДНИ ИММУНИТЕТА */
+/* МОДАЛЬНОЕ ОКНО */
+.portal-modal {
+  position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
+  padding: 14px; background: rgba(1, 4, 16, .88); backdrop-filter: blur(8px);
+}
+.portal-modal[hidden] { display: none !important; }
+.portal-modal-dialog {
+  position: relative; width: min(960px, 100%); max-height: 92vh; overflow: auto;
+  padding: clamp(18px, 3.2vw, 30px); border: 1px solid rgba(186, 174, 255, .28); border-radius: 20px;
+  background: #090f2b; box-shadow: 0 20px 80px rgba(0,0,0,.65); overscroll-behavior: contain;
+}
+.portal-modal-close {
+  position: absolute; top: 14px; right: 14px; z-index: 10; width: 38px; height: 38px;
+  border: 1px solid rgba(255,255,255,.2); border-radius: 11px;
+  color: #fff; background: #2c2957; font-size: 22px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.portal-modal-close:hover { background: #3d3978; }
+.portal-modal-title {
+  margin: 0 0 16px 0; text-align: center; color: var(--gold);
+  font-size: clamp(21px, 3.4vw, 27px); width: 100%;
+}
+.portal-modal-content { clear: both; width: 100%; }
+body.portal-modal-open { overflow: hidden; }
+
+/* ИММУНИТЕТ */
 .period-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0; }
 @media (max-width: 600px) { .period-grid { grid-template-columns: 1fr; } }
 .period-card {
   display: flex; flex-direction: column; gap: 6px; padding: 14px;
-  background: rgba(8, 15, 41, .45); border: 1px solid var(--panel-border); border-radius: 12px;
+  background: rgba(8, 15, 41, .45); border: 1px solid var(--panel-border); border-radius: 13px;
 }
 .period-card.active { border-color: var(--gold); background: rgba(140, 95, 30, .2); }
 .period-card-header { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
@@ -157,22 +211,22 @@ textarea { min-height: 100px; resize: vertical; line-height: 1.45; color: #f4f6f
 .period-card span { color: var(--muted); font-size: 11px; line-height: 1.35; }
 .period-badge {
   display: inline-flex; align-items: center; gap: 4px;
-  padding: 3px 8px; border-radius: 7px; font-size: 11px; font-weight: 800; white-space: nowrap;
+  padding: 4px 9px; border-radius: 8px; font-size: 11px; font-weight: 800; white-space: nowrap;
 }
-.badge-answered { background: rgba(56, 142, 60, .25); color: #9be5bd; border: 1px solid rgba(155, 229, 189, .3); }
-.badge-missed { background: rgba(198, 40, 40, .22); color: #ff94aa; border: 1px solid rgba(255, 148, 170, .3); }
-.badge-waiting { background: rgba(244, 201, 121, .22); color: #f5cb78; border: 1px solid rgba(245, 203, 120, .35); }
-.badge-locked { background: rgba(255, 255, 255, .07); color: var(--muted); border: 1px solid rgba(255, 255, 255, .12); }
-.history-title { margin-top: 22px; text-align: center; }
+.badge-answered { background: rgba(56, 142, 60, .28); color: #9be5bd; border: 1px solid rgba(155, 229, 189, .3); }
+.badge-missed { background: rgba(198, 40, 40, .25); color: #ff94aa; border: 1px solid rgba(255, 148, 170, .3); }
+.badge-waiting { background: rgba(244, 201, 121, .25); color: #f5cb78; border: 1px solid rgba(245, 203, 120, .35); }
+.badge-locked { background: rgba(255, 255, 255, .08); color: var(--muted); border: 1px solid rgba(255, 255, 255, .12); }
+.history-title { margin-top: 24px; text-align: center; }
 .history-list { display: grid; gap: 8px; margin-top: 10px; }
 .history-controls { display: grid; gap: 8px; margin-top: 10px; }
 .history-controls[hidden] { display: none; }
-.history-week-select { width: 100%; min-height: 42px; padding: 9px 12px; border-radius: 11px; color: var(--text); background: rgba(6, 12, 33, .85); border: 1px solid var(--panel-border); font: inherit; }
-.history-week-card { display: grid; gap: 8px; margin-top: 10px; padding: 12px; border: 1px solid var(--panel-border); border-radius: 12px; background: rgba(6, 12, 33, .45); }
-.history-week-heading { margin: 0 0 2px; font-size: 13px; color: var(--text); text-align: center; }
+.history-week-select { width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 12px; color: var(--text); background: rgba(6, 12, 33, .85); border: 1px solid var(--panel-border); font: inherit; }
+.history-week-card { display: grid; gap: 8px; margin-top: 10px; padding: 14px; border: 1px solid var(--panel-border); border-radius: 13px; background: rgba(6, 12, 33, .45); }
+.history-week-heading { margin: 0 0 2px; font-size: 14px; color: var(--text); text-align: center; }
 .history-row {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  padding: 8px 10px; border-radius: 9px; background: rgba(6, 12, 33, .5);
+  padding: 9px 12px; border-radius: 10px; background: rgba(6, 12, 33, .5);
 }
 .history-row strong { display: block; font-size: 13px; }
 .history-row small { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
@@ -181,18 +235,18 @@ textarea { min-height: 100px; resize: vertical; line-height: 1.45; color: #f4f6f
 .result.bad { color: var(--red); }
 .result.neutral { color: var(--muted); }
 .is-disabled { opacity: .4; pointer-events: none; filter: grayscale(.7); }
-.logout-row { text-align: center; margin-top: 20px; }
+.logout-row { text-align: center; margin-top: 24px; }
 
-/* АВААТАРСКАЯ УДАЧА */
+/* АВАТАРСКАЯ УДАЧА */
 .article-top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .article-date-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin: 14px 0; }
-.article-date-button { min-height: 58px; padding: 9px; border: 1px solid rgba(186, 174, 255, .2); border-radius: 12px; background: rgba(7, 13, 36, .55); color: var(--gold); font-size: 14px; font-weight: 800; cursor: pointer; text-align: center; }
+.article-date-button { min-height: 60px; padding: 10px; border: 1px solid rgba(186, 174, 255, .2); border-radius: 13px; background: rgba(7, 13, 36, .55); color: var(--gold); font-size: 14px; font-weight: 800; cursor: pointer; text-align: center; }
 .article-date-button:hover { border-color: var(--gold); background: #201a4e; }
 .article-date-button small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; font-weight: 400; }
 .article-items-grid { display: grid; gap: 8px; margin: 12px 0; }
 .article-select-card {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  padding: 13px 15px; border: 1px solid rgba(186, 174, 255, .22); border-radius: 12px;
+  padding: 14px 16px; border: 1px solid rgba(186, 174, 255, .22); border-radius: 13px;
   background: rgba(10, 18, 48, .7); color: #f4f6ff; cursor: pointer; text-align: left;
 }
 .article-select-card:hover { border-color: var(--gold); background: #1c2454; }
@@ -200,7 +254,7 @@ textarea { min-height: 100px; resize: vertical; line-height: 1.45; color: #f4f6f
 .article-select-card span { font-size: 12px; color: var(--muted); }
 .article-detail-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
 .article-reader { padding: clamp(14px, 2.8vw, 24px); border: 1px solid rgba(186, 174, 255, .18); border-radius: 14px; background: rgba(6, 12, 33, .5); }
-.article-reader h3 { margin: 0 0 12px; color: var(--gold); font-size: 20px; text-align: center; }
+.article-reader h3 { margin: 0 0 12px; color: var(--gold); font-size: 21px; text-align: center; }
 .article-reader-text { color: #e0e7fa; font-size: 14px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
 .article-reader-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--panel-border); }
 .article-edit-box { margin-top: 14px; padding: 15px; border: 1px solid var(--gold); border-radius: 14px; background: rgba(8, 14, 38, .8); }
@@ -210,83 +264,57 @@ textarea { min-height: 100px; resize: vertical; line-height: 1.45; color: #f4f6f
 .today-answer-content h3 { font-size: 20px; color: var(--gold); }
 .answer-large-text { font-size: 15px; line-height: 1.7; color: #f4f6ff; white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; }
 
-/* МОДАЛЬНЫЕ ОКНА: ЦЕНТР */
-.portal-modal {
-  position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
-  padding: 14px; background: rgba(1, 4, 16, .88); backdrop-filter: blur(7px);
-}
-.portal-modal[hidden] { display: none !important; }
-.portal-modal-dialog {
-  position: relative; width: min(940px, 100%); max-height: 90vh; overflow: auto;
-  padding: clamp(16px, 3vw, 26px); border: 1px solid rgba(186, 174, 255, .25); border-radius: 18px;
-  background: #090f2b; box-shadow: 0 20px 70px rgba(0,0,0,.6); overscroll-behavior: contain;
-}
-.portal-modal-close {
-  position: absolute; top: 12px; right: 12px; z-index: 10; width: 36px; height: 36px;
-  border: 1px solid rgba(255,255,255,.18); border-radius: 10px;
-  color: #fff; background: #2c2957; font-size: 22px; line-height: 1; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-}
-.portal-modal-close:hover { background: #3d3978; }
-.portal-modal-title {
-  margin: 0 0 16px 0; text-align: center; color: var(--gold);
-  font-size: clamp(20px, 3.2vw, 26px); width: 100%;
-}
-.portal-modal-content { clear: both; width: 100%; }
-body.portal-modal-open { overflow: hidden; }
-
 /* ==============================================================
-   СОВРЕМЕННЫЙ ТРЁХПАНЕЛЬНЫЙ ДИЗАЙН «ИВЕНТОВ ПРОЕКТОВ» (ПО РИСУНКУ)
+   СОВРЕМЕННЫЙ ДИЗАЙН ИВЕНТОВ ПРОЕКТОВ (ВЫДЕЛЕННЫЕ КАРТОЧКИ)
    ============================================================== */
 .event-layout-container {
   display: grid;
-  grid-template-columns: 280px 1fr 220px;
+  grid-template-columns: 290px 1fr 220px;
   gap: 14px;
-  min-height: 440px;
+  min-height: 460px;
   margin-top: 12px;
-  animation: fadeInModal .3s ease-out;
 }
 @media (max-width: 860px) {
   .event-layout-container { grid-template-columns: 1fr; }
 }
 
-@keyframes fadeInModal {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 /* 1. Левая колонка: Карточки заданий */
 .event-col-tasks {
   display: flex; flex-direction: column; gap: 8px;
-  background: rgba(6, 11, 31, .65); border: 1px solid rgba(186, 174, 255, .15);
-  border-radius: 14px; padding: 12px; max-height: 520px; overflow-y: auto;
+  background: rgba(6, 11, 31, .75); border: 1px solid rgba(186, 174, 255, .2);
+  border-radius: 15px; padding: 12px; max-height: 540px; overflow-y: auto;
 }
 .event-task-card {
-  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
-  border-radius: 11px; background: rgba(14, 22, 54, .7); border: 1px solid rgba(186, 174, 255, .15);
+  display: flex; align-items: center; gap: 11px; padding: 13px 15px;
+  border-radius: 12px; background: rgba(14, 22, 54, .85);
+  border: 1px solid rgba(186, 174, 255, .22);
   color: var(--text); cursor: pointer; transition: all .2s ease; text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
 }
-.event-task-card:hover { transform: translateX(3px); border-color: var(--gold); background: #1c2658; }
-.event-task-card.active { border-color: var(--gold); background: #262963; box-shadow: 0 0 14px rgba(245, 203, 120, .25); }
+.event-task-card:hover { transform: translateX(4px); border-color: var(--gold); background: #1c2658; }
+.event-task-card.active {
+  border-color: var(--gold); background: #262963;
+  box-shadow: 0 0 16px rgba(245, 203, 120, .3);
+}
 .event-task-dot {
   width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
   box-shadow: 0 0 8px currentColor;
 }
 .event-task-dot.done { background: #55d88a; color: #55d88a; }
 .event-task-dot.todo { background: #ff5267; color: #ff5267; }
-.event-task-card-name { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.event-task-card-name { font-size: 14px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* 2. Центральная колонка: Подробный текст задания */
+/* 2. Центральная колонка */
 .event-col-content {
   display: flex; flex-direction: column; gap: 12px;
-  background: rgba(8, 14, 38, .85); border: 1px solid rgba(186, 174, 255, .2);
-  border-radius: 14px; padding: 18px; min-height: 380px;
+  background: rgba(8, 14, 38, .88); border: 1px solid rgba(186, 174, 255, .22);
+  border-radius: 15px; padding: 18px; min-height: 380px;
 }
-.event-col-content h3 { margin: 0; color: var(--gold); font-size: 20px; text-align: center; }
+.event-col-content h3 { margin: 0; color: var(--gold); font-size: 21px; text-align: center; }
 .event-task-fulltext {
   color: #e5ebff; font-size: 14px; line-height: 1.65; white-space: pre-wrap;
-  background: rgba(5, 9, 26, .5); border: 1px solid rgba(186, 174, 255, .1);
-  padding: 14px; border-radius: 12px; min-height: 120px; overflow-wrap: anywhere;
+  background: rgba(5, 9, 26, .55); border: 1px solid rgba(186, 174, 255, .15);
+  padding: 14px; border-radius: 12px; min-height: 140px; overflow-wrap: anywhere;
 }
 .progress-bar-wrap { height: 10px; background: rgba(255,255,255,.08); border-radius: 6px; overflow: hidden; margin-top: 8px; }
 .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #6bbcff, #9be5bd); border-radius: 6px; transition: width .3s ease; }
@@ -295,26 +323,39 @@ body.portal-modal-open { overflow: hidden; }
 /* 3. Правая колонка: Ссылки */
 .event-col-links {
   display: flex; flex-direction: column; gap: 8px;
-  background: rgba(6, 11, 31, .65); border: 1px solid rgba(186, 174, 255, .15);
-  border-radius: 14px; padding: 12px;
+  background: rgba(6, 11, 31, .75); border: 1px solid rgba(186, 174, 255, .2);
+  border-radius: 15px; padding: 12px;
 }
 .event-col-links h4 { margin: 0 0 6px; font-size: 14px; color: var(--gold); text-align: center; }
 .event-link-pill {
-  display: block; padding: 10px 12px; border-radius: 10px; text-decoration: none;
+  display: block; padding: 11px 12px; border-radius: 11px; text-decoration: none;
   background: #192759; border: 1px solid rgba(130, 170, 255, .35); color: #82aaff;
   font-size: 13px; font-weight: 700; word-break: break-all; transition: background .18s;
   text-align: center;
 }
 .event-link-pill:hover { background: #263c8a; color: #fff; }
 
-/* ОКНО ПЕЧЕНЬЯ СУДЬБЫ */
+/* СЕЗОННЫЙ АРХИВ */
+.archive-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.archive-badge { display: inline-block; padding: 4px 10px; border-radius: 8px; background: rgba(245, 203, 120, .15); color: var(--gold); font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+
+/* ПЕЧЕНЬЕ */
 .cookie-modal-card { text-align: center; padding: 10px; }
 .cookie-countdown-box {
   margin: 14px 0; padding: 18px; border-radius: 16px;
   background: rgba(245, 203, 120, .1); border: 1px solid rgba(245, 203, 120, .4);
 }
-.cookie-countdown-val { font-size: clamp(22px, 4vw, 32px); font-weight: 800; color: var(--gold); margin: 6px 0; }
-.cookie-status-block { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--panel-border); }
+.cookie-countdown-val { font-size: clamp(24px, 4.5vw, 34px); font-weight: 900; color: var(--gold); margin: 6px 0; }
+
+/* ФУТЕР БЕЗ СЪЕЗЖАНИЯ */
+footer {
+  text-align: center; padding: 22px 10px 32px; color: #8f9fc8; font-size: 12px; letter-spacing: .08em;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.wezy-secret-entry {
+  color: #9aa9ca; font-size: 11px; opacity: .45; text-decoration: underline; cursor: pointer;
+}
+.wezy-secret-entry:hover { opacity: 1; color: var(--gold); }
   </style>
 </head>
 <body>
@@ -327,9 +368,9 @@ body.portal-modal-open { overflow: hidden; }
     <div class="brand-name">ПЕРФОРАТОРЫ</div>
     <div class="brand-caption">ИНФОРМАЦИОННЫЙ ПОРТАЛ</div>
     <div class="header-squirrels">🐿️ ✦ 🐿️</div>
+    <!-- Кнопка админа (без Wezy) -->
     <div class="admin-entry">
       <button type="button" onclick="openAdminLogin()">⚙ Администратор</button>
-      <button type="button" class="wezy-admin-entry" onclick="openWezyLogin()">🎄 Wezy Allinvain</button>
     </div>
   </header>
 
@@ -369,14 +410,13 @@ body.portal-modal-open { overflow: hidden; }
         <p>Здесь собраны ответы иммунитета, статьи, печенье судьбы и актуальные ивенты проектов.</p>
         <div class="welcome-bottom">Рады видеть тебя снова <span>🐿️</span></div>
 
-        <!-- ТАЙМЕРЫ НА ГЛАВНОЙ (БЕЗ КНОПКИ КТО ОТМЕТИЛ) -->
         <div class="welcome-timers">
           <div class="timer-chip"><strong>🛡️ Иммунитет</strong><span id="immunityCountdown">Загружаем…</span></div>
           <div class="timer-chip"><strong>🥠 Печенье судьбы</strong><span id="cookieCountdown">Загружаем…</span></div>
         </div>
       </section>
 
-      <!-- НАВИГАЦИОННАЯ СЕТКА: 3 В РЯДУ, ИВЕНТЫ ПО ЦЕНТРУ -->
+      <!-- НАВИГАЦИЯ -->
       <nav class="section-grid" aria-label="Разделы портала">
         <button class="section-card" data-target="immunitySection">
           <span class="section-emoji">🛡️</span>
@@ -386,9 +426,8 @@ body.portal-modal-open { overflow: hidden; }
         <button class="section-card" data-target="articlesSection">
           <span class="section-emoji">📚</span>
           <strong>Аватарская удача</strong>
-          <small>Статьи и фотоальбомы</small>
+          <small>Статьи текущего сезона</small>
         </button>
-        <!-- КАРТОЧКА ПЕЧЕНЬЯ ТЕПЕРЬ ОТКРЫВАЕТ ДИАЛОГОВОЕ ОКНО -->
         <button class="section-card" type="button" onclick="openCookieModal()">
           <span class="section-emoji">🥠</span>
           <strong>Печенье судьбы</strong>
@@ -398,6 +437,11 @@ body.portal-modal-open { overflow: hidden; }
           <span class="section-emoji">🏆</span>
           <strong>Ивенты проектов</strong>
           <small>Линейка заданий и ссылки</small>
+        </button>
+        <button class="section-card archive-nav-card" type="button" onclick="openSeasonalArchiveModal()">
+          <span class="section-emoji">🗄️</span>
+          <strong>Сезонный архив</strong>
+          <small>Архив прошлых сезонов</small>
         </button>
       </nav>
 
@@ -417,28 +461,9 @@ body.portal-modal-open { overflow: hidden; }
         <div style="text-align:center;">
           <a id="immunityLink" class="button button-primary" href="#" target="_blank" rel="noopener">Открыть иммунитет</a>
           <button class="button button-secondary" id="answeredButton" onclick="markAnswered()">Я ответил на иммунитет</button>
+          <button class="button button-quiet" type="button" onclick="openImmunityStatusModal()">👥 Кто ответил на иммунитет</button>
         </div>
         <div class="status-line" id="immunityStatus"></div>
-
-        <div class="participant-status-panel" style="margin-top:20px;">
-          <h3 style="text-align:center;">👥 Кто ответил на иммунитет</h3>
-          <p class="muted" style="text-align:center;">Список ответивших и тех, кто ещё не отметил ответ.</p>
-          <div class="admin-form">
-            <label class="admin-field">Неделя начала<input type="date" id="participantStatusWeek"></label>
-            <label class="admin-field">День иммунитета
-              <select id="participantStatusDay">
-                <option value="1">День 1 · Пн–Вт</option>
-                <option value="2">День 2 · Вт–Ср</option>
-                <option value="3">День 3 · Ср–Чт</option>
-                <option value="4">День 4 · Чт–Пт</option>
-              </select>
-            </label>
-          </div>
-          <div style="text-align:center;">
-            <button class="button button-secondary" id="participantStatusLoad" type="button">Показать список</button>
-          </div>
-          <div class="admin-list" id="participantStatusResult" aria-live="polite"></div>
-        </div>
 
         <h3 class="history-title">Моя история участия</h3>
         <div style="text-align:center;">
@@ -451,12 +476,12 @@ body.portal-modal-open { overflow: hidden; }
         </div>
       </section>
 
-      <!-- РАЗДЕЛ: АВАТАРСКАЯ УДАЧА (АРХИВ ЗА ВСЕ ДАТЫ) -->
+      <!-- РАЗДЕЛ: АВАТАРСКАЯ УДАЧА -->
       <section class="panel content-section" id="articlesSection" hidden>
         <div class="section-heading">
           <span class="section-emoji small">📚</span>
           <h2>Аватарская удача</h2>
-          <p>Архив за все даты. Выберите дату и кликните на название нужной публикации.</p>
+          <p>Статьи текущего сезона. Выберите дату и кликните на нужную статью.</p>
         </div>
         <div class="article-top-bar">
           <button class="button button-primary" type="button" onclick="openArticleEditor()">➕ Добавить новую статью</button>
@@ -465,7 +490,7 @@ body.portal-modal-open { overflow: hidden; }
         <div id="articleDatesView"><div id="articleDates" class="article-date-grid"></div></div>
         <div id="articleDayView" hidden>
           <div class="article-detail-top">
-            <button class="button button-quiet" type="button" onclick="backToDateGrid()">← Все даты архива</button>
+            <button class="button button-quiet" type="button" onclick="backToDateGrid()">← Все даты</button>
             <strong id="articleDayHeader" class="publication-date" style="font-size:15px;"></strong>
           </div>
           <p class="muted" style="text-align:center;">Нажмите на название статьи, чтобы открыть её текст:</p>
@@ -506,20 +531,20 @@ body.portal-modal-open { overflow: hidden; }
         </div>
       </section>
 
-      <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ (СПИСОК) -->
+      <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ -->
       <section class="panel content-section" id="eventsSection" hidden>
         <div class="section-heading">
           <span class="section-emoji small">🏆</span>
           <h2>Ивенты проектов</h2>
-          <p>Выберите нужный ивент, чтобы открыть линейку заданий и ссылки.</p>
+          <p>Выберите нужный проект, чтобы открыть задания и ссылки.</p>
         </div>
-        <div id="eventsList" class="publication-list" style="display:grid;gap:10px;"></div>
+        <div id="eventsList" style="display:grid;gap:12px;"></div>
       </section>
 
       <div class="logout-row"><button class="button button-quiet" onclick="logout()">Выйти из личного кабинета</button></div>
     </section>
 
-    <!-- ПАНЕЛЬ АДМИНИСТРАТОРА -->
+    <!-- ПАНЕЛЬ АДМИНИСТРАТОРА (БЕЗ ССЫЛОК НА ИЗОБРАЖЕНИЯ) -->
     <section class="panel admin-panel" id="adminPanel" hidden>
       <div class="section-heading">
         <span class="section-emoji small">⚙️</span>
@@ -540,7 +565,6 @@ body.portal-modal-open { overflow: hidden; }
         <input type="hidden" id="adminDate" value="">
         <label class="admin-field">Заголовок<input id="adminTitle" type="text" placeholder="Например: Ответ на 23.11"></label>
         <label class="admin-field full">Текст ответа<textarea id="adminText" placeholder="Полный текст ответа…" required></textarea></label>
-        <label class="admin-field full">Ссылки на изображения<input id="adminImages" type="text" placeholder="Ссылки через ;"></label>
         <div class="full" style="text-align:center;">
           <button class="button button-primary" type="submit" id="adminSaveButton">Сохранить ответ</button>
           <button class="button button-quiet" type="button" onclick="adminResetForm()">Очистить форму</button>
@@ -576,10 +600,11 @@ body.portal-modal-open { overflow: hidden; }
   </main>
 
   <footer>
-    🐿️ ПЕРФОРАТОРЫ · 2026
-    <a class="wezy-secret-entry" href="#wezy-login" onclick="openWezyLogin();return false;">служебный вход</a>
+    <div>🐿️ ПЕРФОРАТОРЫ · 2026</div>
+    <div><a class="wezy-secret-entry" href="#wezy-login" onclick="openWezyLogin();return false;">служебный вход</a></div>
   </footer>
 
+  <!-- ОКНО ВХОДА АДМИНИСТРАТОРА -->
   <section class="panel admin-login-box" id="adminLoginBox" hidden>
     <h2>Вход администратора</h2>
     <label class="admin-field">Пароль администратора<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Введите пароль"></label>
@@ -588,7 +613,7 @@ body.portal-modal-open { overflow: hidden; }
     <div class="status-line" id="adminLoginMessage"></div>
   </section>
 
-  <!-- СЛУЖЕБНЫЙ ВХОД WEZY -->
+  <!-- ОКНО СЛУЖЕБНОГО ВХОДА WEZY -->
   <section class="panel admin-login-box" id="wezyLoginBox" hidden>
     <h2>🎄 Служебный вход Wezy</h2>
     <label class="admin-field">Пароль Wezy<input id="wezyPassword" type="password" placeholder="Введите пароль"></label>
@@ -601,9 +626,8 @@ body.portal-modal-open { overflow: hidden; }
     <div class="section-heading">
       <span class="section-emoji small">🎄</span>
       <h2>Панель Wezy</h2>
-      <p>Управление ивентами и заданиями участников</p>
+      <p>Управление заданиями участников</p>
     </div>
-    <h3 style="text-align:center;">Выбор участника для заданий</h3>
     <div class="admin-form">
       <label class="admin-field full">Участник
         <select id="wezyParticipantSelect"><option value="">Выберите участника</option></select>
@@ -632,6 +656,7 @@ let currentEventData = null;
 let personalTasks = [];
 let activeTaskIndex = 0;
 let wezyToken = sessionStorage.getItem('perforator_wezy_token') || '';
+let latestPortalData = null;
 
 const $ = id => document.getElementById(id);
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwbGOE4Q2Z6kL4BoAj0r6e0OmCSsgijdU26bWVfYpQC0kV5rkdd4XSPZ_qRSGFqX_kC/exec';
@@ -696,7 +721,6 @@ function logout() {
   showMessage('');
 }
 
-let latestPortalData = null;
 async function loadPortal() {
   if (!currentUser) return;
   $('todayAnswer').innerHTML = '<div class="loading">Загружаем данные…</div>';
@@ -754,11 +778,11 @@ let cachedArticles = []; let currentSelectedDateKey = null;
 function renderArticleArchive(items) {
   cachedArticles = items || [];
   const target = $('articleDates'); target.replaceChildren();
-  $('articlesTotalCount').textContent = cachedArticles.length ? `Всего статей в базе: ${cachedArticles.length}` : '';
+  $('articlesTotalCount').textContent = cachedArticles.length ? `Статей в текущем сезоне: ${cachedArticles.length}` : '';
   const dateMap = new Map();
   cachedArticles.forEach(item => { if (item.dateKey && !dateMap.has(item.dateKey)) dateMap.set(item.dateKey, { key: item.dateKey, label: item.date || item.dateKey }); });
   const visibleDates = Array.from(dateMap.values()).sort((a, b) => b.key.localeCompare(a.key));
-  if (!visibleDates.length) { target.innerHTML = '<div class="empty-state compact">Статей пока нет.</div>'; return; }
+  if (!visibleDates.length) { target.innerHTML = '<div class="empty-state compact">В текущем сезоне статей пока нет.</div>'; return; }
   visibleDates.forEach(dateInfo => {
     const button = document.createElement('button'); button.type = 'button'; button.className = 'article-date-button'; button.textContent = dateInfo.label;
     const count = cachedArticles.filter(item => item.dateKey === dateInfo.key).length;
@@ -862,15 +886,24 @@ function appendTextWithLinks(container, value) {
 }
 
 // ==============================================================
-// НОВЫЙ СОВРЕМЕННЫЙ ТРЁХПАНЕЛЬНЫЙ ДИЗАЙН «ИВЕНТОВ ПРОЕКТОВ»
+// ИВЕНТЫ ПРОЕКТОВ (ВЫДЕЛЕННЫЕ КАРТОЧКИ)
 // ==============================================================
 function renderEvents(items) {
   const target = $('eventsList'); target.replaceChildren();
   if (!items || !items.length) { target.innerHTML = '<div class="empty-state compact">Пока нет опубликованных ивентов.</div>'; return; }
   items.forEach(item => {
-    const card = document.createElement('div'); card.className = 'publication';
-    card.style.cursor = 'pointer';
-    card.innerHTML = `<div class="publication-date">${item.date || ''}</div><h3>${item.title || 'Без названия'}</h3><p class="publication-text">${(item.text || '').slice(0, 110)}…</p>`;
+    const card = document.createElement('div');
+    card.className = 'event-task-card';
+    card.style.display = 'flex';
+    card.style.justifyContent = 'space-between';
+    card.innerHTML = `
+      <div>
+        <div class="publication-date">${item.date || ''}</div>
+        <strong style="font-size:16px;color:var(--gold);display:block;margin-top:2px;">${item.title || 'Без названия'}</strong>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;">${(item.text || '').slice(0, 95)}…</div>
+      </div>
+      <div style="font-size:22px;color:var(--gold);">➔</div>
+    `;
     card.onclick = () => openModernEventView(item);
     target.appendChild(card);
   });
@@ -889,45 +922,44 @@ async function openModernEventView(event) {
     </div>
     
     <div class="event-layout-container">
-      <!-- 1. ЛЕВАЯ КОЛОНКА: ЗАДАНИЯ (1, 2, 3...) -->
+      <!-- 1. ЛЕВАЯ КОЛОНКА -->
       <div class="event-col-tasks">
-        <strong style="color:var(--gold);font-size:13px;text-align:center;margin-bottom:4px;">📋 Линейка заданий</strong>
-        <div id="eventTaskCardsContainer" style="display:flex;flex-direction:column;gap:7px;"></div>
-        <div style="margin-top:auto;padding-top:8px;">
-          <input type="text" id="modernNewTaskName" placeholder="+ Новое задание" style="padding:8px 10px;font-size:12px;">
-          <button class="button button-primary" type="button" id="modernAddTaskBtn" style="width:100%;margin:6px 0 0;padding:8px;font-size:12px;">Добавить задание</button>
+        <strong style="color:var(--gold);font-size:13px;text-align:center;margin-bottom:6px;">📋 Выберите задание:</strong>
+        <div id="eventTaskCardsContainer" style="display:flex;flex-direction:column;gap:8px;"></div>
+        <div style="margin-top:auto;padding-top:10px;">
+          <input type="text" id="modernNewTaskName" placeholder="+ Новое задание" style="padding:10px;font-size:13px;">
+          <button class="button button-primary" type="button" id="modernAddTaskBtn" style="width:100%;margin:8px 0 0;padding:10px;font-size:13px;">Добавить задание</button>
         </div>
       </div>
 
-      <!-- 2. ЦЕНТРАЛЬНАЯ КОЛОНКА: ПОДРОБНЫЙ ТЕКСТ И ПРОГРЕСС -->
+      <!-- 2. ЦЕНТРАЛЬНАЯ КОЛОНКА -->
       <div class="event-col-content">
         <h3 id="currentTaskTitle">Загрузка задания…</h3>
         <div class="progress-bar-wrap"><div class="progress-bar-fill" id="eventProgressFill" style="width:0%"></div></div>
         <div class="progress-label" id="eventProgressLabel">0 / 0 выполнено</div>
         
         <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
-          <strong style="font-size:13px;color:var(--muted);">Подробное описание:</strong>
-          <button class="button button-quiet" type="button" id="toggleTaskDoneBtn" style="padding:5px 10px;font-size:11px;margin:0;">Отметить выполненным</button>
+          <strong style="font-size:13px;color:var(--muted);">Подробное описание задания:</strong>
+          <button class="button button-quiet" type="button" id="toggleTaskDoneBtn" style="padding:6px 12px;font-size:12px;margin:0;">Отметить выполненным</button>
         </div>
         <div class="event-task-fulltext" id="currentTaskDescription"></div>
 
         <div style="margin-top:auto;display:flex;gap:8px;justify-content:flex-end;">
-          <button class="button button-secondary" type="button" id="editTaskModalBtn" style="padding:7px 12px;font-size:12px;">✏️ Редактировать текст</button>
-          <button class="button button-danger" type="button" id="delTaskModalBtn" style="padding:7px 12px;font-size:12px;">🗑️ Удалить</button>
+          <button class="button button-secondary" type="button" id="editTaskModalBtn" style="padding:8px 14px;font-size:12px;">✏️ Редактировать текст</button>
+          <button class="button button-danger" type="button" id="delTaskModalBtn" style="padding:8px 14px;font-size:12px;">🗑️ Удалить</button>
         </div>
       </div>
 
-      <!-- 3. ПРАВАЯ КОЛОНКА: ССЫЛКИ -->
+      <!-- 3. ПРАВАЯ КОЛОНКА -->
       <div class="event-col-links">
         <h4>🔗 Ссылки</h4>
-        <div id="modernEventLinks" style="display:flex;flex-direction:column;gap:7px;"></div>
+        <div id="modernEventLinks" style="display:flex;flex-direction:column;gap:8px;"></div>
       </div>
     </div>
   `;
 
   openPortalModal(box, event.title || 'Ивент проектов');
 
-  // Загружаем личные задания участника
   try {
     const data = await apiCall('getPersonalTasks', { id: currentUser.id, eventKey: currentEventKey });
     personalTasks = data.tasks || [];
@@ -935,7 +967,6 @@ async function openModernEventView(event) {
     personalTasks = [];
   }
 
-  // Если заданий нет, подставим исходный текст ивента как базовое задание
   if (!personalTasks.length && event.text) {
     personalTasks.push({
       text: 'Задание 1: ' + (event.title || 'Основное'),
@@ -971,7 +1002,7 @@ function renderModernTaskLayout(box, event) {
 
   if (!personalTasks.length) {
     box.querySelector('#currentTaskTitle').textContent = 'Нет заданий';
-    box.querySelector('#currentTaskDescription').textContent = 'Нажмите «Добавить задание» слева, чтобы создать первое задание!';
+    box.querySelector('#currentTaskDescription').textContent = 'Нажмите «Добавить задание» слева!';
     box.querySelector('#modernEventLinks').innerHTML = '<span class="muted" style="text-align:center;font-size:12px;">Ссылок нет</span>';
     return;
   }
@@ -1007,7 +1038,6 @@ function renderModernTaskLayout(box, event) {
     renderModernTaskLayout(box, event);
   };
 
-  // Ссылки: собираем из задания и самого ивента
   const linksBox = box.querySelector('#modernEventLinks');
   linksBox.replaceChildren();
   const allLinks = Array.from(new Set([
@@ -1030,12 +1060,10 @@ function renderModernTaskLayout(box, event) {
     linksBox.innerHTML = '<span class="muted" style="text-align:center;font-size:12px;">Ссылок пока нет</span>';
   }
 
-  // Редактирование текста задания
   box.querySelector('#editTaskModalBtn').onclick = () => {
     openTaskDetail(activeTaskIndex, () => renderModernTaskLayout(box, event));
   };
 
-  // Удаление задания
   box.querySelector('#delTaskModalBtn').onclick = async () => {
     if (!confirm('Удалить это задание?')) return;
     personalTasks.splice(activeTaskIndex, 1);
@@ -1111,7 +1139,7 @@ async function savePersonalTasks() {
 }
 
 // ==============================================================
-// ОКНО «ПЕЧЕНЬЕ СУДЬБЫ» + ТАЙМЕР + «👥 КТО ОТМЕТИЛ ПЕЧЕНЬЕ»
+// ПЕЧЕНЬЕ СУДЬБЫ + ОТДЕЛЬНАЯ КНОПКА СТАТУСА КТО ОТМЕТИЛСЯ
 // ==============================================================
 async function openCookieModal() {
   const box = document.createElement('div');
@@ -1124,18 +1152,14 @@ async function openCookieModal() {
     <div class="cookie-countdown-box">
       <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;" id="cookieBoxTimerTitle">До открытия печенья:</div>
       <div class="cookie-countdown-val" id="cookieBoxTimerVal">--:--:--</div>
-      <a id="cookieActionBtn" class="button button-primary" href="#" target="_blank" rel="noopener" style="font-size:15px;padding:12px 24px;margin-top:10px;">🥠 Открыть печенье судьбы ↗</a>
-    </div>
-
-    <div class="cookie-status-block">
-      <h3 style="margin-bottom:6px;">👥 Кто отметил печенье</h3>
-      <p class="muted" id="cookieStatusSubtitle" style="font-size:13px;">Загружаем отметки участников за сегодня…</p>
-      
-      <div style="margin:12px 0;">
+      <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px;">
+        <a id="cookieActionBtn" class="button button-primary" href="#" target="_blank" rel="noopener">🥠 Открыть печенье судьбы ↗</a>
         <button class="button button-secondary" type="button" id="markCookieMeBtn">✨ Я взял печенье / Отметиться</button>
       </div>
+    </div>
 
-      <div class="admin-list" id="cookieParticipantsList" style="margin-top:12px;text-align:left;"></div>
+    <div style="text-align:center;margin-top:18px;">
+      <button class="button button-quiet" type="button" id="openCookieMarksModalBtn">👥 Посмотреть, кто отметился / кто нет</button>
     </div>
   `;
 
@@ -1150,7 +1174,6 @@ async function openCookieModal() {
     btn.onclick = e => { e.preventDefault(); alert('Печенье судьбы доступно только по средам!'); };
   }
 
-  // Обновление таймера внутри модалки
   const timerTitle = box.querySelector('#cookieBoxTimerTitle');
   const timerVal = box.querySelector('#cookieBoxTimerVal');
 
@@ -1171,49 +1194,187 @@ async function openCookieModal() {
   const modalClock = setInterval(updateCookieModalClock, 1000);
   box.dataset.clockId = modalClock;
 
-  // Загрузка участников, отметивших печенье
-  const loadCookieParticipants = async () => {
-    try {
-      const data = await apiCall('cookieStatus');
-      box.querySelector('#cookieStatusSubtitle').textContent = `Отметки за ${escapeHtml(data.date || 'сегодня')}: ${data.marked.length} из ${data.total}`;
-      const list = box.querySelector('#cookieParticipantsList');
-      list.replaceChildren();
-
-      const makeRow = (title, items, isGood) => {
-        const row = document.createElement('div');
-        row.className = 'admin-row';
-        row.innerHTML = `
-          <div>
-            <strong>${title} (${items.length})</strong>
-            <div style="margin-top:6px;font-size:13px;color:${isGood ? 'var(--green)' : 'var(--red)'};">
-              ${items.length ? items.map(escapeHtml).join(', ') : (isGood ? 'Пока никто не отметил' : 'Все участники отметились!')}
-            </div>
-          </div>
-        `;
-        return row;
-      };
-
-      list.append(
-        makeRow('✅ Отметились', data.marked || [], true),
-        makeRow('❌ Не отметились', data.missing || [], false)
-      );
-    } catch (e) {
-      box.querySelector('#cookieStatusSubtitle').textContent = 'Не удалось загрузить статус отметок.';
-    }
-  };
-
-  await loadCookieParticipants();
-
   box.querySelector('#markCookieMeBtn').onclick = async () => {
     if (!currentUser) return;
     try {
       await apiCall('markCookie', { id: currentUser.id });
       alert('Ваша отметка сохранена!');
-      loadCookieParticipants();
     } catch (e) {
       alert(e.message || 'Ошибка');
     }
   };
+
+  box.querySelector('#openCookieMarksModalBtn').onclick = () => {
+    openSeparateCookieMarksModal();
+  };
+}
+
+// ОТДЕЛЬНОЕ ОКНО: КТО ОТМЕТИЛ ПЕЧЕНЬЕ
+async function openSeparateCookieMarksModal() {
+  const box = document.createElement('div');
+  box.innerHTML = `
+    <h3 style="text-align:center;color:var(--gold);margin-top:0;">👥 Отметки печенья судьбы</h3>
+    <p class="muted" id="cookieSeparateSubtitle" style="text-align:center;">Загружаем список отметок…</p>
+    <div class="admin-list" id="cookieSeparateList" style="margin-top:14px;"></div>
+  `;
+  openPortalModal(box, 'Кто отметил печенье');
+
+  try {
+    const data = await apiCall('cookieStatus');
+    box.querySelector('#cookieSeparateSubtitle').textContent = `Отметки за ${escapeHtml(data.date || 'сегодня')}: ${data.marked.length} из ${data.total}`;
+    const list = box.querySelector('#cookieSeparateList');
+    list.replaceChildren();
+
+    const makeRow = (title, items, isGood) => {
+      const row = document.createElement('div');
+      row.className = 'admin-row';
+      row.innerHTML = `
+        <div>
+          <strong>${title} (${items.length})</strong>
+          <div style="margin-top:6px;font-size:13px;color:${isGood ? 'var(--green)' : 'var(--red)'};">
+            ${items.length ? items.map(escapeHtml).join(', ') : (isGood ? 'Пока никто не отметил' : 'Все участники отметились!')}
+          </div>
+        </div>
+      `;
+      return row;
+    };
+
+    list.append(
+      makeRow('✅ Отметились', data.marked || [], true),
+      makeRow('❌ Не отметились', data.missing || [], false)
+    );
+  } catch (e) {
+    box.querySelector('#cookieSeparateSubtitle').textContent = 'Не удалось загрузить список.';
+  }
+}
+
+// ОТДЕЛЬНОЕ ОКНО: КТО ОТВЕТИЛ НА ИММУНИТЕТ
+function openImmunityStatusModal() {
+  const box = document.createElement('div');
+  box.innerHTML = `
+    <h3 style="text-align:center;color:var(--gold);margin-top:0;">👥 Кто ответил на иммунитет</h3>
+    <p class="muted" style="text-align:center;">Выберите неделю и день иммунитета для проверки:</p>
+    <div class="admin-form">
+      <label class="admin-field">Неделя начала
+        <input type="date" id="immunityModalWeek">
+      </label>
+      <label class="admin-field">День иммунитета
+        <select id="immunityModalDay">
+          <option value="1">День 1 · Пн–Вт</option>
+          <option value="2">День 2 · Вт–Ср</option>
+          <option value="3">День 3 · Ср–Чт</option>
+          <option value="4">День 4 · Чт–Пт</option>
+        </select>
+      </label>
+    </div>
+    <div style="text-align:center;margin:10px 0;">
+      <button class="button button-primary" type="button" id="loadImmunityStatusBtn">Показать список</button>
+    </div>
+    <div class="admin-list" id="immunityModalResult" style="margin-top:14px;"></div>
+  `;
+
+  openPortalModal(box, 'Отметки иммунитета');
+
+  const now = new Date();
+  const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
+  box.querySelector('#immunityModalWeek').value = localIsoDate(monday);
+
+  box.querySelector('#loadImmunityStatusBtn').onclick = async () => {
+    const week = box.querySelector('#immunityModalWeek').value;
+    const day = box.querySelector('#immunityModalDay').value;
+    const resBox = box.querySelector('#immunityModalResult');
+    resBox.innerHTML = '<div class="loading">Загружаем список…</div>';
+
+    try {
+      const data = await apiCall('participantImmunityStatus', { id: currentUser.id, week, day });
+      resBox.replaceChildren();
+
+      const makeRow = (heading, names, emptyText) => {
+        const row = document.createElement('div'); row.className = 'admin-row';
+        const inner = document.createElement('div'); const title = document.createElement('strong');
+        title.textContent = heading + ' (' + names.length + ')';
+        const list = document.createElement('div'); list.style.marginTop = '6px'; list.style.whiteSpace = 'pre-wrap';
+        list.textContent = names.length ? names.map((name, index) => (index + 1) + '. ' + name).join('\n') : emptyText;
+        inner.append(title, list); row.append(inner); return row;
+      };
+
+      resBox.append(
+        makeRow('✅ Ответили', data.answered || [], 'Пока нет отметок.'),
+        makeRow('❌ Не ответили', data.missing || [], 'Все участники ответили.')
+      );
+    } catch (e) {
+      resBox.textContent = e.message || 'Ошибка загрузки.';
+    }
+  };
+}
+
+// ==============================================================
+// СЕЗОННЫЙ АРХИВ (ОСЕНЬ / ЗИМА / ВЕСНА / ЛЕТО)
+// ==============================================================
+async function openSeasonalArchiveModal() {
+  const box = document.createElement('div');
+  box.innerHTML = `
+    <div style="text-align:center;margin-bottom:12px;">
+      <span class="archive-badge" id="archiveCurrentSeasonBadge">Текущий сезон: загрузка…</span>
+      <p class="muted" style="margin:4px 0 0;">В архиве хранятся статьи и ответы иммунитета за прошлые сезоны года.</p>
+    </div>
+    
+    <div class="archive-tabs">
+      <button class="button button-primary" type="button" id="archTabArticles">📚 Архив статей</button>
+      <button class="button button-secondary" type="button" id="archTabImmunity">🛡️ Архив иммунитета</button>
+    </div>
+
+    <div id="seasonalArchiveContent" style="display:grid;gap:10px;margin-top:12px;">
+      <div class="loading">Загружаем сезонный архив…</div>
+    </div>
+  `;
+
+  openPortalModal(box, 'Сезонный архив');
+
+  try {
+    const data = await apiCall('archiveData');
+    box.querySelector('#archiveCurrentSeasonBadge').textContent = `Текущий активный сезон: ${data.season || 'Сезон'}`;
+
+    const renderTab = kind => {
+      const cont = box.querySelector('#seasonalArchiveContent');
+      cont.replaceChildren();
+      const items = kind === 'articles' ? data.articles : data.immunity;
+
+      if (!items || !items.length) {
+        cont.innerHTML = `<div class="empty-state compact">В архиве ${kind === 'articles' ? 'статей' : 'иммунитета'} пока нет записей.</div>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement('article');
+        card.className = 'publication';
+        card.innerHTML = `
+          <div class="publication-date">${item.date || ''}</div>
+          <h3>${escapeHtml(item.title || 'Без названия')}</h3>
+          <p class="publication-text">${escapeHtml(item.text || '')}</p>
+          ${item.link ? `<a class="button button-quiet" href="${item.link}" target="_blank" rel="noopener" style="margin-top:8px;">🔗 Открыть ссылку</a>` : ''}
+        `;
+        cont.appendChild(card);
+      });
+    };
+
+    box.querySelector('#archTabArticles').onclick = () => {
+      box.querySelector('#archTabArticles').className = 'button button-primary';
+      box.querySelector('#archTabImmunity').className = 'button button-secondary';
+      renderTab('articles');
+    };
+
+    box.querySelector('#archTabImmunity').onclick = () => {
+      box.querySelector('#archTabImmunity').className = 'button button-primary';
+      box.querySelector('#archTabArticles').className = 'button button-secondary';
+      renderTab('immunity');
+    };
+
+    renderTab('articles');
+  } catch (e) {
+    box.querySelector('#seasonalArchiveContent').innerHTML = '<div class="empty-state compact">Не удалось загрузить архив.</div>';
+  }
 }
 
 // ТАЙМЕРЫ
@@ -1221,8 +1382,6 @@ let portalClockTimer = null;
 function updatePortalTimers(status) {
   const tick = () => {
     const now = Date.now();
-    
-    // Иммунитет
     const immEl = $('immunityCountdown');
     if (immEl) {
       if (status.immunityOpen && status.immunityEndsAt > now) immEl.textContent = 'Активен · до конца: ' + formatRemaining(status.immunityEndsAt - now);
@@ -1230,10 +1389,9 @@ function updatePortalTimers(status) {
       else immEl.textContent = 'Неактивен';
     }
 
-    // Печенье
     const cookEl = $('cookieCountdown');
     if (cookEl) {
-      if (status.cookieOpen && status.cookieEndsAt > now) cookEl.textContent = 'Открыто! До конца: ' + formatRemaining(status.cookieEndsAt - now);
+      if (status.cookieOpen && status.cookieEndsAt > now) cookEl.textContent = 'Открыто! До закрытия: ' + formatRemaining(status.cookieEndsAt - now);
       else if (status.cookieStartsAt > now) cookEl.textContent = 'До среды: ' + formatRemaining(status.cookieStartsAt - now);
       else cookEl.textContent = 'По средам (00:00 - 23:59)';
     }
@@ -1361,37 +1519,6 @@ document.querySelectorAll('.section-card[data-target]').forEach(button => {
 });
 $('portalModal').addEventListener('click', event => { if (event.target === $('portalModal')) closePortalModal(); });
 
-// КТО ОТВЕТИЛ НА ИММУНИТЕТ
-function initParticipantStatusView() {
-  const weekInput = $('participantStatusWeek'); const loadButton = $('participantStatusLoad');
-  if (!weekInput || !loadButton || loadButton.dataset.ready) return; loadButton.dataset.ready = '1';
-  const now = new Date(); const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7)); weekInput.value = localIsoDate(monday);
-  loadButton.addEventListener('click', loadParticipantStatus);
-}
-
-async function loadParticipantStatus() {
-  const output = $('participantStatusResult'); const button = $('participantStatusLoad');
-  if (!currentUser || !output || !button) return;
-  const week = $('participantStatusWeek').value; const day = $('participantStatusDay').value;
-  if (!week) { output.textContent = 'Выберите неделю.'; return; }
-  button.disabled = true; output.textContent = 'Загружаем список…';
-  try {
-    const data = await apiCall('participantImmunityStatus', { id: currentUser.id, week, day });
-    output.replaceChildren();
-    const makeGroup = (heading, names, emptyText) => {
-      const group = document.createElement('div'); group.className = 'admin-row';
-      const inner = document.createElement('div'); const title = document.createElement('strong');
-      title.textContent = heading + ' (' + names.length + ')';
-      const list = document.createElement('div'); list.style.marginTop = '6px'; list.style.whiteSpace = 'pre-wrap';
-      list.textContent = names.length ? names.map((name, index) => (index + 1) + '. ' + name).join('\n') : emptyText;
-      inner.append(title, list); group.append(inner); return group;
-    };
-    output.append(makeGroup('✅ Ответили', data.answered || [], 'Пока нет отметок.'), makeGroup('❌ Не ответили', data.missing || [], 'Все участники ответили.'));
-  } catch (error) { output.textContent = error.message || 'Ошибка загрузки.'; }
-  finally { button.disabled = false; }
-}
-
 // АДМИНКА
 let adminToken = sessionStorage.getItem('perforator_admin_token') || '';
 function openAdminLogin(){
@@ -1443,7 +1570,7 @@ $('adminAnswerWeek').addEventListener('change', syncAnswerDateFromSelectors);
 $('adminAnswerDay').addEventListener('change', syncAnswerDateFromSelectors);
 
 function adminResetForm(){
-  $('adminRow').value = ''; $('adminDate').value = ''; $('adminTitle').value = ''; $('adminText').value = ''; $('adminImages').value = '';
+  $('adminRow').value = ''; $('adminDate').value = ''; $('adminTitle').value = ''; $('adminText').value = '';
   $('adminSaveButton').textContent = 'Сохранить ответ';
   if ($('adminAnswerWeek').options.length) { $('adminAnswerDay').value = '0'; syncAnswerDateFromSelectors(); }
 }
@@ -1458,7 +1585,7 @@ async function adminLoadAnswers(){
       const info = document.createElement('div'); info.innerHTML = `<strong>${item.title || 'Без названия'} · ${item.date}</strong><small>Опубликован</small>`;
       const actions = document.createElement('div'); actions.className = 'admin-row-actions';
       const edit = document.createElement('button'); edit.type = 'button'; edit.textContent = 'Изменить';
-      edit.onclick = () => { $('adminRow').value = item.row; $('adminDate').value = item.date || ''; $('adminTitle').value = item.title || ''; $('adminText').value = item.text || ''; $('adminImages').value = item.images || ''; $('adminSaveButton').textContent = 'Сохранить изменения'; $('adminAnswerForm').scrollIntoView({ behavior: 'auto', block: 'start' }); };
+      edit.onclick = () => { $('adminRow').value = item.row; $('adminDate').value = item.date || ''; $('adminTitle').value = item.title || ''; $('adminText').value = item.text || ''; $('adminSaveButton').textContent = 'Сохранить изменения'; $('adminAnswerForm').scrollIntoView({ behavior: 'auto', block: 'start' }); };
       const del = document.createElement('button'); del.type = 'button'; del.className = 'btn-del'; del.textContent = 'Удалить';
       del.onclick = async () => {
         if (!confirm(`Удалить ответ «${item.title}» (${item.date})?`)) return; $('adminMessage').textContent = 'Удаляем…';
@@ -1488,7 +1615,7 @@ async function adminLoadParticipants(){
 $('adminAnswerForm').addEventListener('submit', async e => {
   e.preventDefault(); if (!adminToken) return; $('adminSaveButton').disabled = true; $('adminMessage').textContent = 'Сохраняем…';
   try {
-    await apiCall('adminSaveAnswer', { token: adminToken, row: $('adminRow').value, date: $('adminDate').value, title: $('adminTitle').value, text: $('adminText').value, images: $('adminImages').value });
+    await apiCall('adminSaveAnswer', { token: adminToken, row: $('adminRow').value, date: $('adminDate').value, title: $('adminTitle').value, text: $('adminText').value });
     $('adminMessage').textContent = 'Ответ успешно сохранён!'; $('adminMessage').className = 'status-line success'; adminResetForm(); await adminLoadAnswers(); if (currentUser) await loadPortal();
   } catch (err) { $('adminMessage').textContent = err.message || 'Ошибка сохранения.'; $('adminMessage').className = 'status-line error'; }
   finally { $('adminSaveButton').disabled = false; }
@@ -1578,7 +1705,7 @@ async function openWezyEventTasks(event) {
 }
 
 window.addEventListener('load', () => {
-  fillWeekSelectors(); syncAnswerDateFromSelectors(); initParticipantStatusView();
+  fillWeekSelectors(); syncAnswerDateFromSelectors();
   const saved = sessionStorage.getItem('perforator_user');
   if (saved) { try { const u = JSON.parse(saved); if (u && u.id) { currentUser = u; showPortal(u); } } catch(e){} }
 });
