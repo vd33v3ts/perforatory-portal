@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>перфораторы - база знаний</title>
+  <title>база знаний перфораторы</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwOTE2MzAiLz48cGF0aCBkPSJNMzIgNWw0LjIgOC41IDkuNCAxLjQtNi44IDYuNiAxLjYgOS40LTguNC00LjQtOC40IDQuNCAxLjYtOS40LTYuOC02LjYgOS40LTEuNHoiIGZpbGw9IiNmZmQzNmUiIHN0cm9rZT0iI2ZmZjBiNSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMyIDE3TDEzIDQwaDExTDExIDUzaDQyTDQwIDQwaDExeiIgZmlsbD0iIzEzODM0YyIgc3Ryb2tlPSIjNzJkNmEwIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yOCA1M2g4djdoLTh6IiBmaWxsPSIjOWI2MzNkIi8+PGNpcmNsZSBjeD0iMjMiIGN5PSIzOSIgcj0iMyIgZmlsbD0iI2ZmNTI2NyIvPjxjaXJjbGUgY3g9IjM5IiBjeT0iMzUiIHI9IjMiIGZpbGw9IiNmZmQzNmUiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjQ3IiByPSIzIiBmaWxsPSIjNmJiY2ZmIi8+PGNpcmNsZSBjeD0iNDUiIGN5PSI0OCIgcj0iMi41IiBmaWxsPSIjZmY1MjY3Ii8+PHBhdGggZD0iTTE5IDMxbC00LTNtMzAgNCA0LTQiIHN0cm9rZT0iI2U5ZjRmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTIiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjU0IiBjeT0iMTgiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI0OSIgcj0iMS4yIiBmaWxsPSIjZThmMmZmIi8+PC9zdmc+">
   <meta name="theme-color" content="#030718">
   <style>
@@ -189,10 +189,7 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
 .timer-chip { padding:12px 18px; border:1px solid rgba(186,174,255,.2); border-radius:14px; background:rgba(4,10,28,.6); color:#f4f6ff; font-size:14px; }
 .timer-chip strong { color:var(--gold); display:block; margin-bottom:4px; font-size:13px; }
 
-/* ==============================================================
-   КАРТОЧКИ РАЗДЕЛОВ: ИКОНКИ В 2 РАЗА БОЛЬШЕ, 
-   ИВЕНТЫ И АРХИВ ПОСЕРЕДИНЕ (ВО 2-М РЯДУ)
-   ============================================================== */
+/* КАРТОЧКИ РАЗДЕЛОВ */
 .section-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -250,9 +247,7 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
   .section-card.archive-nav-card { grid-column: 1 / -1; }
 }
 
-/* ==============================================================
-   ПЛАВНАЯ АНИМАЦИЯ ОТКРЫТИЯ МОДАЛЬНЫХ ОКОН
-   ============================================================== */
+/* МОДАЛЬНЫЕ ОКНА */
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
   padding: 14px; background: rgba(1, 4, 16, .85); backdrop-filter: blur(10px);
@@ -338,9 +333,9 @@ body.portal-modal-open { overflow: hidden; }
 
 /* АВАТАРСКАЯ УДАЧА */
 .article-top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-.article-date-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin: 14px 0; }
-.article-date-button { min-height: 60px; padding: 10px; border: 1px solid rgba(186, 174, 255, .2); border-radius: 13px; background: rgba(7, 13, 36, .55); color: var(--gold); font-size: 14px; font-weight: 800; cursor: pointer; text-align: center; }
-.article-date-button:hover { border-color: var(--gold); background: #201a4e; }
+.article-date-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin: 14px 0; }
+.article-date-button { min-height: 64px; padding: 10px; border: 1px solid rgba(186, 174, 255, .25); border-radius: 13px; background: rgba(7, 13, 36, .65); color: var(--gold); font-size: 14px; font-weight: 800; cursor: pointer; text-align: center; transition: all .2s; }
+.article-date-button:hover { border-color: var(--gold); background: #201a4e; transform: translateY(-2px); }
 .article-date-button small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; font-weight: 400; }
 .article-items-grid { display: grid; gap: 8px; margin: 12px 0; }
 .article-select-card {
@@ -363,9 +358,7 @@ body.portal-modal-open { overflow: hidden; }
 .today-answer-content h3 { font-size: 20px; color: var(--gold); }
 .answer-large-text { font-size: 15px; line-height: 1.7; color: #f4f6ff; white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; }
 
-/* ==============================================================
-   ИВЕНТЫ ПРОЕКТОВ (БОЛЬШОЕ ОКНО И КРУПНЫЙ ТЕКСТ)
-   ============================================================== */
+/* ИВЕНТЫ ПРОЕКТОВ */
 .event-layout-container {
   display: grid;
   grid-template-columns: 310px 1fr 240px;
@@ -376,7 +369,6 @@ body.portal-modal-open { overflow: hidden; }
 @media (max-width: 920px) {
   .event-layout-container { grid-template-columns: 1fr; }
 }
-
 .event-col-tasks {
   display: flex; flex-direction: column; gap: 9px;
   background: rgba(6, 11, 31, .75); border: 1px solid rgba(186, 174, 255, .2);
@@ -439,9 +431,170 @@ body.portal-modal-open { overflow: hidden; }
 }
 .event-link-pill:hover { background: #263c8a; color: #fff; }
 
-/* СЕЗОННЫЙ АРХИВ */
-.archive-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-.archive-badge { display: inline-block; padding: 5px 12px; border-radius: 8px; background: rgba(245, 203, 120, .15); color: var(--gold); font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+/* ==============================================================
+   НОВАЯ СТИЛЬНАЯ СТРУКТУРА СЕЗОННОГО АРХИВА С РАМКАМИ И КНОПКАМИ
+   ============================================================== */
+.archive-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+.archive-badge { display: inline-block; padding: 6px 14px; border-radius: 9px; background: rgba(245, 203, 120, .15); color: var(--gold); font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+/* КАРТОЧКА НЕДЕЛИ В АРХИВЕ ИММУНИТЕТА */
+.archive-week-card {
+  background: rgba(14, 22, 54, .85);
+  border: 1px solid rgba(186, 174, 255, .28);
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  transition: border-color .2s;
+}
+.archive-week-card:hover {
+  border-color: rgba(245, 203, 120, .5);
+}
+.archive-week-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: 0;
+  color: var(--gold);
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 4px 0 10px;
+  border-bottom: 1px solid rgba(186, 174, 255, .15);
+  margin-bottom: 12px;
+  text-align: left;
+}
+.archive-week-btn:hover {
+  color: #fff;
+}
+.archive-days-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+@media (max-width: 700px) {
+  .archive-days-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.archive-day-btn {
+  padding: 12px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(186, 174, 255, .2);
+  background: rgba(6, 12, 33, .7);
+  color: #e0e7fa;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+}
+.archive-day-btn:hover {
+  background: #25225a;
+  border-color: var(--gold);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.archive-day-btn.has-answer {
+  border-color: rgba(155, 229, 189, .35);
+}
+
+/* КАРТОЧКА ОТВЕТА В РАМКЕ */
+.answer-box-framed {
+  background: rgba(6, 12, 33, .85);
+  border: 1px solid rgba(245, 203, 120, .35);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-top: 14px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.4);
+  animation: fadeInDown .25s ease;
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.answer-box-framed h4 {
+  margin: 0 0 10px;
+  color: var(--gold);
+  font-size: 18px;
+}
+.answer-box-framed p {
+  color: #f1f4ff;
+  font-size: 15px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* КАРТОЧКА СТАТЬИ В РАМКЕ (ДЛЯ АРХИВА СТАТЕЙ) */
+.article-box-framed {
+  background: rgba(14, 22, 54, .85);
+  border: 1px solid rgba(186, 174, 255, .28);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
+  transition: border-color .2s;
+}
+.article-box-framed:hover {
+  border-color: rgba(245, 203, 120, .5);
+}
+.article-box-framed .pub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.article-box-framed h3 {
+  margin: 4px 0 10px;
+  color: var(--gold);
+  font-size: 19px;
+}
+.article-box-framed .pub-text {
+  color: #e0e7fa;
+  font-size: 15px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+/* ПАГИНАЦИЯ (СТРАНИЧКИ 1 2 3 4 5...) */
+.pagination-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 20px 0 10px;
+  padding: 12px 0 0;
+  border-top: 1px solid rgba(186, 174, 255, .15);
+}
+.page-btn {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(186, 174, 255, .25);
+  background: rgba(12, 19, 46, .8);
+  color: #e0e7fa;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .18s;
+}
+.page-btn:hover {
+  background: #282163;
+  border-color: var(--gold);
+  color: #fff;
+}
+.page-btn.active {
+  background: linear-gradient(135deg, #f8d990, #e7b65e);
+  color: #091532;
+  border-color: #f8d990;
+  box-shadow: 0 0 14px rgba(248, 217, 144, .4);
+}
 
 /* ПЕЧЕНЬЕ */
 .cookie-modal-card { text-align: center; padding: 10px; }
@@ -581,7 +734,7 @@ footer {
         </div>
       </section>
 
-      <!-- РАЗДЕЛ: АВАТАРСКАЯ УДАЧА -->
+      <!-- РАЗДЕЛ: АВАТАРСКАЯ УДАЧА (ТЕКУЩИЙ СЕЗОН С ПАГИНАЦИЕЙ ДАТ) -->
       <section class="panel content-section" id="articlesSection" hidden>
         <div class="section-heading">
           <span class="section-emoji" style="font-size:48px;">📚</span>
@@ -592,7 +745,11 @@ footer {
           <button class="button button-primary" type="button" onclick="openArticleEditor()">➕ Добавить новую статью</button>
           <span class="muted" id="articlesTotalCount"></span>
         </div>
-        <div id="articleDatesView"><div id="articleDates" class="article-date-grid"></div></div>
+        <div id="articleDatesView">
+          <div id="articleDates" class="article-date-grid"></div>
+          <!-- ПАГИНАЦИЯ ДАТ ТЕКУЩЕГО СЕЗОНА -->
+          <div id="articleDatesPagination" class="pagination-nav" hidden></div>
+        </div>
         <div id="articleDayView" hidden>
           <div class="article-detail-top">
             <button class="button button-quiet" type="button" onclick="backToDateGrid()">← Все даты</button>
@@ -899,22 +1056,81 @@ function renderImmunity(data, historyItems, status) {
   });
 }
 
-// СТАТЬИ
-let cachedArticles = []; let currentSelectedDateKey = null;
+// ==============================================================
+// СТАТЬИ ТЕКУЩЕГО СЕЗОНА (С ПАГИНАЦИЕЙ ДАТ)
+// ==============================================================
+let cachedArticles = [];
+let currentSelectedDateKey = null;
+let currentArticlesPage = 1;
+const ARTICLES_DATES_PER_PAGE = 12; // По 12 дат на страницу
+
 function renderArticleArchive(items) {
   cachedArticles = items || [];
-  const target = $('articleDates'); target.replaceChildren();
+  currentArticlesPage = 1;
+  displayCurrentArticlesPage();
+}
+
+function displayCurrentArticlesPage() {
+  const target = $('articleDates');
+  const pagNav = $('articleDatesPagination');
+  target.replaceChildren();
+  
   $('articlesTotalCount').textContent = cachedArticles.length ? `Статей в текущем сезоне: ${cachedArticles.length}` : '';
   const dateMap = new Map();
-  cachedArticles.forEach(item => { if (item.dateKey && !dateMap.has(item.dateKey)) dateMap.set(item.dateKey, { key: item.dateKey, label: item.date || item.dateKey }); });
-  const visibleDates = Array.from(dateMap.values()).sort((a, b) => b.key.localeCompare(a.key));
-  if (!visibleDates.length) { target.innerHTML = '<div class="empty-state compact">В текущем сезоне статей пока нет.</div>'; return; }
-  visibleDates.forEach(dateInfo => {
-    const button = document.createElement('button'); button.type = 'button'; button.className = 'article-date-button'; button.textContent = dateInfo.label;
-    const count = cachedArticles.filter(item => item.dateKey === dateInfo.key).length;
-    const small = document.createElement('small'); small.textContent = count + (count === 1 ? ' статья' : (count >= 2 && count <= 4 ? ' статьи' : ' статей'));
-    button.appendChild(small); button.onclick = () => openDateArticles(dateInfo); target.appendChild(button);
+  cachedArticles.forEach(item => {
+    if (item.dateKey && !dateMap.has(item.dateKey)) {
+      dateMap.set(item.dateKey, { key: item.dateKey, label: item.date || item.dateKey });
+    }
   });
+  const allDates = Array.from(dateMap.values()).sort((a, b) => b.key.localeCompare(a.key));
+
+  if (!allDates.length) {
+    target.innerHTML = '<div class="empty-state compact">В текущем сезоне статей пока нет.</div>';
+    pagNav.hidden = true;
+    return;
+  }
+
+  const totalPages = Math.ceil(allDates.length / ARTICLES_DATES_PER_PAGE);
+  if (currentArticlesPage > totalPages) currentArticlesPage = 1;
+
+  const startIdx = (currentArticlesPage - 1) * ARTICLES_DATES_PER_PAGE;
+  const pageDates = allDates.slice(startIdx, startIdx + ARTICLES_DATES_PER_PAGE);
+
+  pageDates.forEach(dateInfo => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'article-date-button';
+    button.textContent = dateInfo.label;
+    const count = cachedArticles.filter(item => item.dateKey === dateInfo.key).length;
+    const small = document.createElement('small');
+    small.textContent = count + (count === 1 ? ' статья' : (count >= 2 && count <= 4 ? ' статьи' : ' статей'));
+    button.appendChild(small);
+    button.onclick = () => openDateArticles(dateInfo);
+    target.appendChild(button);
+  });
+
+  // Рендер кнопок страниц 1 2 3...
+  if (totalPages > 1) {
+    pagNav.hidden = false;
+    renderPaginationControls(pagNav, totalPages, currentArticlesPage, newPage => {
+      currentArticlesPage = newPage;
+      displayCurrentArticlesPage();
+    });
+  } else {
+    pagNav.hidden = true;
+  }
+}
+
+function renderPaginationControls(container, totalPages, currentPage, onPageSelect) {
+  container.replaceChildren();
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+    btn.textContent = i;
+    btn.onclick = () => onPageSelect(i);
+    container.appendChild(btn);
+  }
 }
 
 function openDateArticles(dateInfo) {
@@ -979,7 +1195,6 @@ function openArticleEditor(article = null) {
 }
 function closeArticleEditor() { $('articleEditorBox').hidden = true; if (currentSelectedDateKey) backToDayList(); else backToDateGrid(); }
 
-// СОХРАНЕНИЕ СТАТЬИ ЧЕРЕЗ apiCallPost
 $('publicArticleForm').addEventListener('submit', async e => {
   e.preventDefault(); if (!currentUser) return;
   const btn = $('articleSaveBtn'); btn.disabled = true; $('articleEditorMessage').textContent = 'Сохраняем…';
@@ -1013,9 +1228,7 @@ function appendTextWithLinks(container, value) {
   });
 }
 
-// ==============================================================
-// ИВЕНТЫ ПРОЕКТОВ (БОЛЬШОЕ ОКНО, КРУПНЫЙ ТЕКСТ)
-// ==============================================================
+// ИВЕНТЫ ПРОЕКТОВ
 function renderEvents(items) {
   const target = $('eventsList'); target.replaceChildren();
   if (!items || !items.length) { target.innerHTML = '<div class="empty-state compact">Пока нет опубликованных ивентов.</div>'; return; }
@@ -1264,8 +1477,234 @@ async function savePersonalTasks() {
 }
 
 // ==============================================================
-// ПЕЧЕНЬЕ СУДЬБЫ (СТРОГО ПО СРЕДАМ 00:00 - 23:59)
+// СЕЗОННЫЙ АРХИВ: СТРУКТУРА ПО НЕДЕЛЯМ, 4 КНОПКИ ДНЕЙ В РАМКАХ, ПАГИНАЦИЯ
 // ==============================================================
+let seasonalArchiveDataCache = null;
+let currentArchiveMode = 'immunity'; // 'immunity' | 'articles'
+let currentArchiveImmunityPage = 1;
+let currentArchiveArticlesPage = 1;
+const ARCHIVE_ITEMS_PER_PAGE = 4; // По 4 недели или 4 статьи на страницу
+
+async function openSeasonalArchiveModal() {
+  const box = document.createElement('div');
+  box.innerHTML = `
+    <div style="text-align:center;margin-bottom:12px;">
+      <span class="archive-badge" id="archiveCurrentSeasonBadge">Текущий активный сезон: загрузка…</span>
+      <p class="muted" style="margin:4px 0 0;">В архиве хранятся статьи и ответы иммунитета за прошлые сезоны года.</p>
+    </div>
+    
+    <div class="archive-tabs">
+      <button class="button button-primary" type="button" id="archTabImmunity">🛡️ Архив иммунитета</button>
+      <button class="button button-secondary" type="button" id="archTabArticles">📚 Архив статей</button>
+    </div>
+
+    <!-- КОНТЕЙНЕР ДЛЯ ВЫВОДА КАРТОЧЕК В РАМКАХ -->
+    <div id="seasonalArchiveContent" style="display:grid;gap:12px;margin-top:14px;">
+      <div class="loading">Загружаем сезонный архив…</div>
+    </div>
+
+    <!-- БЛОК СТРАНИЧЕК 1 2 3 4... -->
+    <div id="seasonalArchivePagination" class="pagination-nav" hidden></div>
+  `;
+
+  openPortalModal(box, 'Сезонный архив');
+
+  try {
+    const data = await apiCall('archiveData');
+    seasonalArchiveDataCache = data;
+    box.querySelector('#archiveCurrentSeasonBadge').textContent = `Текущий активный сезон: ${data.season || 'Сезон'}`;
+
+    currentArchiveMode = 'immunity';
+    currentArchiveImmunityPage = 1;
+    currentArchiveArticlesPage = 1;
+
+    const btnImm = box.querySelector('#archTabImmunity');
+    const btnArt = box.querySelector('#archTabArticles');
+
+    btnImm.onclick = () => {
+      currentArchiveMode = 'immunity';
+      btnImm.className = 'button button-primary';
+      btnArt.className = 'button button-secondary';
+      renderArchiveView(box);
+    };
+
+    btnArt.onclick = () => {
+      currentArchiveMode = 'articles';
+      btnArt.className = 'button button-primary';
+      btnImm.className = 'button button-secondary';
+      renderArchiveView(box);
+    };
+
+    renderArchiveView(box);
+  } catch (e) {
+    box.querySelector('#seasonalArchiveContent').innerHTML = '<div class="empty-state compact">Не удалось загрузить архив.</div>';
+  }
+}
+
+// Парсинг даты в объект
+function parseDateString_(str) {
+  if (!str) return null;
+  const m = String(str).match(/^(\d{1,2})[\.\/\-](\d{1,2})[\.\/\-](\d{2,4})/);
+  if (m) {
+    let yr = m[3]; if (yr.length === 2) yr = '20' + yr;
+    return new Date(Number(yr), Number(m[2]) - 1, Number(m[1]));
+  }
+  const d = new Date(str);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function formatDateDMY_(d) {
+  return String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + d.getFullYear();
+}
+
+function renderArchiveView(modalBox) {
+  const cont = modalBox.querySelector('#seasonalArchiveContent');
+  const pagNav = modalBox.querySelector('#seasonalArchivePagination');
+  cont.replaceChildren();
+
+  if (!seasonalArchiveDataCache) return;
+
+  if (currentArchiveMode === 'immunity') {
+    // 1. АРХИВ ИММУНИТЕТА: ГРУППИРОВКА ПО НЕДЕЛЯМ
+    const rawItems = seasonalArchiveDataCache.immunity || [];
+    if (!rawItems.length) {
+      cont.innerHTML = '<div class="empty-state compact">В архиве иммунитета пока нет записей.</div>';
+      pagNav.hidden = true;
+      return;
+    }
+
+    // Группируем ответы по понедельникам недель
+    const weeksMap = new Map();
+    rawItems.forEach(item => {
+      const d = parseDateString_(item.date);
+      if (!d) return;
+      const dayOfWeek = (d.getDay() + 6) % 7; // 0=Пн .. 6=Вс
+      const monday = new Date(d);
+      monday.setDate(d.getDate() - dayOfWeek);
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
+      
+      const weekKey = formatDateDMY_(monday) + ' — ' + formatDateDMY_(sunday);
+      if (!weeksMap.has(weekKey)) {
+        weeksMap.set(weekKey, {
+          label: `Неделя: с ${formatDateDMY_(monday)} по ${formatDateDMY_(sunday)}`,
+          monday: monday,
+          days: {} // dayNum: item
+        });
+      }
+      
+      const dayNum = Math.min(Math.max(dayOfWeek + 1, 1), 4); // 1, 2, 3, 4
+      weeksMap.get(weekKey).days[dayNum] = item;
+    });
+
+    const sortedWeeks = Array.from(weeksMap.values()).sort((a, b) => b.monday.getTime() - a.monday.getTime());
+    const totalPages = Math.ceil(sortedWeeks.length / ARCHIVE_ITEMS_PER_PAGE);
+    if (currentArchiveImmunityPage > totalPages) currentArchiveImmunityPage = 1;
+
+    const startIdx = (currentArchiveImmunityPage - 1) * ARCHIVE_ITEMS_PER_PAGE;
+    const pageWeeks = sortedWeeks.slice(startIdx, startIdx + ARCHIVE_ITEMS_PER_PAGE);
+
+    pageWeeks.forEach(weekInfo => {
+      const card = document.createElement('div');
+      card.className = 'archive-week-card';
+
+      // Кнопка Неделя с ... по ...
+      const weekBtn = document.createElement('button');
+      weekBtn.type = 'button';
+      weekBtn.className = 'archive-week-btn';
+      weekBtn.innerHTML = `<span>🗓️ ${weekInfo.label}</span><span style="font-size:12px;opacity:.7;">Нажмите на день ▼</span>`;
+
+      // Контейнер 4 кнопок дней
+      const daysGrid = document.createElement('div');
+      daysGrid.className = 'archive-days-grid';
+
+      // Блок для отображения ответа дня в рамке
+      const answerBox = document.createElement('div');
+      answerBox.className = 'answer-box-framed';
+      answerBox.hidden = true;
+
+      const dayLabels = ['День 1 · Пн–Вт', 'День 2 · Вт–Ср', 'День 3 · Ср–Чт', 'День 4 · Чт–Пт'];
+      for (let day = 1; day <= 4; day++) {
+        const item = weekInfo.days[day];
+        const dayBtn = document.createElement('button');
+        dayBtn.type = 'button';
+        dayBtn.className = 'archive-day-btn' + (item ? ' has-answer' : '');
+        dayBtn.innerHTML = `<b>День ${day}</b><br><small style="opacity:.8;">${dayLabels[day - 1].split(' · ')[1]}</small>`;
+
+        dayBtn.onclick = () => {
+          if (!item) {
+            answerBox.hidden = false;
+            answerBox.innerHTML = `<h4>День ${day} (${dayLabels[day - 1].split(' · ')[1]})</h4><p class="muted">Ответ за этот день в архиве не найден.</p>`;
+          } else {
+            answerBox.hidden = false;
+            answerBox.innerHTML = `
+              <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Дата: ${escapeHtml(item.date || '')}</div>
+              <h4>День ${day}: ${escapeHtml(item.title || 'Ответ иммунитета')}</h4>
+              <p>${escapeHtml(item.text || 'Текст отсутствует.')}</p>
+            `;
+          }
+        };
+        daysGrid.appendChild(dayBtn);
+      }
+
+      card.append(weekBtn, daysGrid, answerBox);
+      cont.appendChild(card);
+    });
+
+    // Пагинация страниц 1 2 3...
+    if (totalPages > 1) {
+      pagNav.hidden = false;
+      renderPaginationControls(pagNav, totalPages, currentArchiveImmunityPage, newPage => {
+        currentArchiveImmunityPage = newPage;
+        renderArchiveView(modalBox);
+      });
+    } else {
+      pagNav.hidden = true;
+    }
+
+  } else {
+    // 2. АРХИВ СТАТЕЙ: В РАМКАХ + ПАГИНАЦИЯ СТРАНИЦ
+    const articles = seasonalArchiveDataCache.articles || [];
+    if (!articles.length) {
+      cont.innerHTML = '<div class="empty-state compact">В архиве статей пока нет записей.</div>';
+      pagNav.hidden = true;
+      return;
+    }
+
+    const totalPages = Math.ceil(articles.length / ARCHIVE_ITEMS_PER_PAGE);
+    if (currentArchiveArticlesPage > totalPages) currentArchiveArticlesPage = 1;
+
+    const startIdx = (currentArchiveArticlesPage - 1) * ARCHIVE_ITEMS_PER_PAGE;
+    const pageArticles = articles.slice(startIdx, startIdx + ARCHIVE_ITEMS_PER_PAGE);
+
+    pageArticles.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'article-box-framed';
+      card.innerHTML = `
+        <div class="pub-header">
+          <span class="publication-date">📅 ${escapeHtml(item.date || '')}</span>
+          ${item.albumNumber ? `<span class="archive-badge">Фотоальбом №${escapeHtml(item.albumNumber)}</span>` : ''}
+        </div>
+        <h3>📖 ${escapeHtml(item.title || 'Без названия')}</h3>
+        <p class="pub-text">${escapeHtml(item.text || '')}</p>
+        ${item.link ? `<a class="button button-quiet" href="${item.link}" target="_blank" rel="noopener" style="margin-top:10px;">🔗 Открыть ссылку на статью/альбом ↗</a>` : ''}
+      `;
+      cont.appendChild(card);
+    });
+
+    if (totalPages > 1) {
+      pagNav.hidden = false;
+      renderPaginationControls(pagNav, totalPages, currentArchiveArticlesPage, newPage => {
+        currentArchiveArticlesPage = newPage;
+        renderArchiveView(modalBox);
+      });
+    } else {
+      pagNav.hidden = true;
+    }
+  }
+}
+
+// ПЕЧЕНЬЕ СУДЬБЫ
 async function openCookieModal() {
   const box = document.createElement('div');
   box.className = 'cookie-modal-card';
@@ -1433,71 +1872,6 @@ function openImmunityStatusModal() {
       resBox.textContent = e.message || 'Ошибка загрузки.';
     }
   };
-}
-
-async function openSeasonalArchiveModal() {
-  const box = document.createElement('div');
-  box.innerHTML = `
-    <div style="text-align:center;margin-bottom:12px;">
-      <span class="archive-badge" id="archiveCurrentSeasonBadge">Текущий сезон: загрузка…</span>
-      <p class="muted" style="margin:4px 0 0;">В архиве хранятся статьи и ответы иммунитета за прошлые сезоны года.</p>
-    </div>
-    
-    <div class="archive-tabs">
-      <button class="button button-primary" type="button" id="archTabArticles">📚 Архив статей</button>
-      <button class="button button-secondary" type="button" id="archTabImmunity">🛡️ Архив иммунитета</button>
-    </div>
-
-    <div id="seasonalArchiveContent" style="display:grid;gap:10px;margin-top:12px;">
-      <div class="loading">Загружаем сезонный архив…</div>
-    </div>
-  `;
-
-  openPortalModal(box, 'Сезонный архив');
-
-  try {
-    const data = await apiCall('archiveData');
-    box.querySelector('#archiveCurrentSeasonBadge').textContent = `Текущий активный сезон: ${data.season || 'Сезон'}`;
-
-    const renderTab = kind => {
-      const cont = box.querySelector('#seasonalArchiveContent');
-      cont.replaceChildren();
-      const items = kind === 'articles' ? data.articles : data.immunity;
-
-      if (!items || !items.length) {
-        cont.innerHTML = `<div class="empty-state compact">В архиве ${kind === 'articles' ? 'статей' : 'иммунитета'} пока нет записей.</div>`;
-        return;
-      }
-
-      items.forEach(item => {
-        const card = document.createElement('article');
-        card.className = 'publication';
-        card.innerHTML = `
-          <div class="publication-date">${item.date || ''}</div>
-          <h3>${escapeHtml(item.title || 'Без названия')}</h3>
-          <p class="publication-text">${escapeHtml(item.text || '')}</p>
-          ${item.link ? `<a class="button button-quiet" href="${item.link}" target="_blank" rel="noopener" style="margin-top:8px;">🔗 Открыть ссылку</a>` : ''}
-        `;
-        cont.appendChild(card);
-      });
-    };
-
-    box.querySelector('#archTabArticles').onclick = () => {
-      box.querySelector('#archTabArticles').className = 'button button-primary';
-      box.querySelector('#archTabImmunity').className = 'button button-secondary';
-      renderTab('articles');
-    };
-
-    box.querySelector('#archTabImmunity').onclick = () => {
-      box.querySelector('#archTabImmunity').className = 'button button-primary';
-      box.querySelector('#archTabArticles').className = 'button button-secondary';
-      renderTab('immunity');
-    };
-
-    renderTab('articles');
-  } catch (e) {
-    box.querySelector('#seasonalArchiveContent').innerHTML = '<div class="empty-state compact">Не удалось загрузить архив.</div>';
-  }
 }
 
 // ТАЙМЕРЫ
