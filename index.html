@@ -22,7 +22,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: auto; }
 
-/* КАСТОМНЫЙ ТЁМНЫЙ НЕОНОВЫЙ СКРОЛЛБАР */
+/* КАСТОМНЫЙ НЕОНОВЫЙ СКРОЛЛБАР */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -55,7 +55,7 @@ body {
   background-attachment: fixed;
 }
 
-/* КЛАСС ДЛЯ ОТКЛЮЧЕНИЯ ВСЕХ АНИМАЦИЙ В НАСТРОЙКАХ */
+/* ОТКЛЮЧЕНИЕ АНИМАЦИИ В НАСТРОЙКАХ */
 body.no-animations *,
 body.no-animations *::before,
 body.no-animations *::after {
@@ -86,9 +86,8 @@ body.no-animations *::after {
 
 .site-header, .container, footer { position: relative; z-index: 10; }
 .site-header { text-align: center; padding: 26px 16px 14px; }
-.brand-mark { font-size: 26px; }
 
-/* НЕОНОВАЯ ВОЛНА ПО БУКВАМ */
+/* НЕОНОВОЕ НАЗВАНИЕ */
 .brand-name {
   margin: 4px 0 2px;
   font-size: clamp(34px, 7vw, 68px);
@@ -151,20 +150,17 @@ body.no-animations *::after {
   font-weight: 800;
   text-shadow: 0 0 12px rgba(165, 180, 252, .6);
 }
-.header-squirrels { margin-top: 6px; font-size: 15px; letter-spacing: 6px; opacity: .85; }
 
-/* КНОПКИ В ШАПКЕ: АДМИН И НАСТРОЙКИ (ШЕСТЕРЕНКА) */
+/* КНОПКА НАСТРОЕК В ШАПКЕ */
 .header-buttons {
   margin: 16px auto 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
 }
 .header-pill-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 46px; padding: 0 22px; border-radius: 15px; cursor: pointer;
+  min-height: 44px; padding: 0 22px; border-radius: 14px; cursor: pointer;
   color: #fff4d8; font-size: 14px; font-weight: 800; letter-spacing: .03em;
   border: 1px solid rgba(255,218,145,.55);
   background: linear-gradient(110deg, #23356e, #532d78, #1d466e);
@@ -215,7 +211,7 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
 .welcome p { max-width: 620px; margin: 0 auto; color: #d5def5; font-size: 16px; }
 .welcome-bottom { color: var(--gold); font-size: 13px; margin-top: 16px; }
 
-/* КРУПНЫЕ ТАЙМЕРЫ */
+/* ТАЙМЕРЫ */
 .welcome-timers {
   display: flex; justify-content: center; flex-wrap: wrap; gap: 18px;
   margin: 24px auto 8px; max-width: 900px;
@@ -236,7 +232,7 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
   text-shadow: 0 0 16px rgba(245, 203, 120, .45);
 }
 
-/* КАРТОЧКИ РАЗДЕЛОВ (ИКОНКИ 64px) */
+/* КАРТОЧКИ РАЗДЕЛОВ */
 .section-grid {
   display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin: 22px 0 26px;
 }
@@ -270,7 +266,7 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
   .section-card.events-nav-card, .section-card.archive-nav-card { grid-column: 1 / -1; }
 }
 
-/* УВЕЛИЧЕННЫЕ МОДАЛЬНЫЕ ОКНА БЕЗ ЛИШНЕГО СКРОЛЛА */
+/* МОДАЛЬНЫЕ ОКНА */
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
   padding: 14px; background: rgba(1, 4, 16, .88); backdrop-filter: blur(12px);
@@ -343,7 +339,23 @@ body.portal-modal-open { overflow: hidden; }
 .is-disabled { opacity: .4; pointer-events: none; filter: grayscale(.7); }
 .logout-row { text-align: center; margin-top: 24px; }
 
-/* ОБЪЕДИНЁННЫЕ ДАТЫ СТАТЕЙ (КАРТОЧКА ДАТЫ С ВЫБОРОМ СТАТЬИ 1, 2, 3...) */
+/* КАРТОЧКА УПРАВЛЕНИЯ ОТВЕТАМИ В ОКНЕ ИММУНИТЕТА (БЕЗ АДМИНКИ) */
+.immunity-admin-card {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(245, 203, 120, .35);
+  background: rgba(14, 22, 54, .85);
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+}
+.immunity-admin-card h3 {
+  color: var(--gold);
+  text-align: center;
+  margin: 0 0 14px;
+  font-size: 19px;
+}
+
+/* ОБЪЕДИНЕННЫЕ ДАТЫ СТАТЕЙ (СТАТЬЯ 1, 2, 3...) */
 .date-group-card {
   background: rgba(14, 22, 54, .85);
   border: 1px solid rgba(186, 174, 255, .25);
@@ -554,15 +566,12 @@ footer {
   <div class="winter-snowman" aria-hidden="true">⛄</div>
 
   <header class="site-header">
-    <div class="brand-mark">🐿️</div>
     <div class="brand-name" aria-label="ПЕРФОРАТОРЫ">
       <span>П</span><span>Е</span><span>Р</span><span>Ф</span><span>О</span><span>Р</span><span>А</span><span>Т</span><span>О</span><span>Р</span><span>Ы</span>
     </div>
     <div class="brand-caption">ИНФОРМАЦИОННЫЙ ПОРТАЛ</div>
-    <div class="header-squirrels">🐿️ ✦ 🐿️</div>
     
     <div class="header-buttons">
-      <button class="header-pill-btn" type="button" onclick="openAdminLogin()">⚙ Администратор</button>
       <button class="header-pill-btn" type="button" onclick="openSettingsModal()">⚙ Настройки</button>
     </div>
   </header>
@@ -570,7 +579,7 @@ footer {
   <main class="container">
     <section class="panel login-panel" id="registration">
       <div class="eyebrow">ДОБРО ПОЖАЛОВАТЬ</div>
-      <h1>Войти в портал <span>🐿️</span></h1>
+      <h1>Войти в портал</h1>
       <p class="muted">Выберите своё имя из списка участников.</p>
       <label class="field-label" for="name">Ваше имя</label>
       <select id="name" autocomplete="off">
@@ -598,12 +607,12 @@ footer {
 
     <section id="portal" hidden>
       <section class="welcome panel">
-        <div class="welcome-top"><span class="eyebrow">ЛИЧНЫЙ КАБИНЕТ</span><span class="squirrel">🐿️</span></div>
+        <div class="welcome-top"><span class="eyebrow">ЛИЧНЫЙ КАБИНЕТ</span></div>
         <h1>Привет, <span id="userName"></span>!</h1>
         <p>Здесь собраны ответы иммунитета, статьи, печенье судьбы и актуальные ивенты проектов.</p>
-        <div class="welcome-bottom">Рады видеть тебя снова <span>🐿️</span></div>
+        <div class="welcome-bottom">Рады видеть тебя снова</div>
 
-        <!-- КРУПНЫЕ ТАЙМЕРЫ -->
+        <!-- ТАЙМЕРЫ -->
         <div class="welcome-timers">
           <div class="timer-chip">
             <span class="timer-chip-icon">🛡️</span>
@@ -677,9 +686,70 @@ footer {
           <select id="historyWeekSelect" class="history-week-select"><option value="">Загружаем недели…</option></select>
           <div id="historyList" class="history-list"><div class="loading">Загружаем историю…</div></div>
         </div>
+
+        <!-- УПРАВЛЕНИЕ ОТВЕТАМИ И ЗАЧИСЛЕНИЕМ ДЛЯ ВСЕХ УЧАСТНИКОВ -->
+        <div class="immunity-admin-card">
+          <h3>📝 Добавить или изменить ответ иммунитета</h3>
+          <form id="publicAnswerForm" class="admin-form">
+            <input type="hidden" id="immAnswerRow" value="">
+            <label class="admin-field">Неделя ответа
+              <select id="immAnswerWeek" required></select>
+            </label>
+            <label class="admin-field">День недели
+              <select id="immAnswerDay" required>
+                <option value="0">День 1 · Пн–Вт</option>
+                <option value="1">День 2 · Вт–Ср</option>
+                <option value="2">День 3 · Ср–Чт</option>
+                <option value="3">День 4 · Чт–Пт</option>
+              </select>
+            </label>
+            <input type="hidden" id="immAnswerDate" value="">
+            <label class="admin-field full">Заголовок ответа
+              <input id="immAnswerTitle" type="text" placeholder="Например: Ответ на вопрос викторины">
+            </label>
+            <label class="admin-field full">Текст ответа
+              <textarea id="immAnswerText" placeholder="Полный текст ответа иммунитета…" required></textarea>
+            </label>
+            <div class="full" style="text-align:center;">
+              <button class="button button-primary" type="submit" id="immAnswerSaveBtn">Опубликовать ответ</button>
+              <button class="button button-quiet" type="button" onclick="resetImmunityAnswerForm()">Очистить форму</button>
+            </div>
+          </form>
+          <div class="status-line" id="immAnswerMsg"></div>
+
+          <hr style="border:0;border-top:1px solid rgba(186,174,255,.2);margin:20px 0;">
+
+          <h3>➕ Ручное зачисление участия</h3>
+          <form id="publicManualHistoryForm" class="admin-form">
+            <label class="admin-field">Участник
+              <select id="manualUserSelect" required><option value="">Загружаем список…</option></select>
+            </label>
+            <label class="admin-field">Неделя
+              <select id="manualWeekSelect" required></select>
+            </label>
+            <label class="admin-field">День иммунитета
+              <select id="manualDaySelect">
+                <option value="1">День 1 · Пн–Вт</option>
+                <option value="2">День 2 · Вт–Ср</option>
+                <option value="3">День 3 · Ср–Чт</option>
+                <option value="4">День 4 · Чт–Пт</option>
+              </select>
+            </label>
+            <label class="admin-field">Результат
+              <select id="manualResultSelect">
+                <option value="Ответил">Ответил</option>
+                <option value="Не ответил">Не ответил</option>
+              </select>
+            </label>
+            <div class="full" style="text-align:center;">
+              <button class="button button-primary" type="submit" id="manualHistorySaveBtn">Сохранить отметку участия</button>
+            </div>
+          </form>
+          <div class="status-line" id="manualHistoryMsg"></div>
+        </div>
       </section>
 
-      <!-- РАЗДЕЛ: АВАТАРСКАЯ УДАЧА (СТАТЬИ ОБЪЕДИНЕНЫ ПО ДАТАМ: СТАТЬЯ 1, 2, 3...) -->
+      <!-- РАЗДЕЛ: АВАТАРСКАЯ УДАЧА -->
       <section class="panel content-section" id="articlesSection" hidden>
         <div class="section-heading">
           <span class="section-emoji" style="font-size:48px;">📚</span>
@@ -732,7 +802,7 @@ footer {
         </div>
       </section>
 
-      <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ (С КНОПКАМИ СОЗДАНИЯ ИВЕНТА) -->
+      <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ -->
       <section class="panel content-section" id="eventsSection" hidden>
         <div class="section-heading">
           <span class="section-emoji" style="font-size:48px;">🏆</span>
@@ -750,79 +820,16 @@ footer {
 
       <div class="logout-row"><button class="button button-quiet" onclick="logout()">Выйти из личного кабинета</button></div>
     </section>
-
-    <!-- ПАНЕЛЬ АДМИНИСТРАТОРА -->
-    <section class="panel admin-panel" id="adminPanel" hidden>
-      <div class="section-heading">
-        <span class="section-emoji" style="font-size:48px;">⚙️</span>
-        <h2>Панель администратора</h2>
-        <p>Управление ответами иммунитета и архивом.</p>
-      </div>
-      <form id="adminAnswerForm" class="admin-form">
-        <input type="hidden" id="adminRow" value="">
-        <label class="admin-field">Неделя ответа<select id="adminAnswerWeek" required></select></label>
-        <label class="admin-field">День недели
-          <select id="adminAnswerDay" required>
-            <option value="0">День 1 · Пн–Вт</option>
-            <option value="1">День 2 · Вт–Ср</option>
-            <option value="2">День 3 · Ср–Чт</option>
-            <option value="3">День 4 · Чт–Пт</option>
-          </select>
-        </label>
-        <input type="hidden" id="adminDate" value="">
-        <label class="admin-field">Заголовок<input id="adminTitle" type="text" placeholder="Например: Как называется новый костюм АУ?"></label>
-        <label class="admin-field full">Текст ответа<textarea id="adminText" placeholder="Полный текст ответа…" required></textarea></label>
-        <div class="full" style="text-align:center;">
-          <button class="button button-primary" type="submit" id="adminSaveButton">Сохранить ответ</button>
-          <button class="button button-quiet" type="button" onclick="adminResetForm()">Очистить форму</button>
-        </div>
-      </form>
-      <div class="status-line" id="adminMessage" aria-live="polite"></div>
-      <div class="admin-list-heading" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:18px;">
-        <h3>Ответы в базе</h3>
-        <div style="display:flex;gap:6px;">
-          <button class="button button-quiet" type="button" onclick="triggerManualArchive()">📦 В архив сейчас</button>
-          <button class="button button-quiet" type="button" onclick="adminLoadAnswers()">Обновить</button>
-        </div>
-      </div>
-      <div class="admin-list" id="adminAnswersList"><div class="loading">Загрузка списка…</div></div>
-      <hr style="border:0;border-top:1px solid var(--panel-border);margin:18px 0">
-      <h3 style="text-align:center;">Ручное добавление участия</h3>
-      <form id="adminManualHistoryForm" class="admin-form">
-        <label class="admin-field">Участник<select id="manualParticipant" required><option value="">Загрузка…</option></select></label>
-        <label class="admin-field">Неделя<select id="manualWeekStart" required></select></label>
-        <label class="admin-field">День иммунитета
-          <select id="manualDay">
-            <option value="1">День 1 · Пн–Вт</option>
-            <option value="2">День 2 · Вт–Ср</option>
-            <option value="3">День 3 · Ср–Чт</option>
-            <option value="4">День 4 · Чт–Пт</option>
-          </select>
-        </label>
-        <label class="admin-field">Результат<select id="manualResult"><option value="Ответил">Ответил</option><option value="Не ответил">Не ответил</option></select></label>
-        <div class="full" style="text-align:center;"><button class="button button-primary" type="submit" id="manualHistorySave">Добавить отметку</button></div>
-      </form>
-      <div style="text-align:center;margin-top:12px;"><button class="button button-quiet" type="button" onclick="adminLogout()">Выйти из админ-панели</button></div>
-    </section>
   </main>
 
   <footer>
-    <div>🐿️ ПЕРФОРАТОРЫ · 2026</div>
+    <div>ПЕРФОРАТОРЫ · 2026</div>
   </footer>
-
-  <!-- ОКНО ВХОДА АДМИНИСТРАТОРА -->
-  <section class="panel admin-login-box" id="adminLoginBox" hidden>
-    <h2>Вход администратора</h2>
-    <label class="admin-field">Пароль администратора<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Введите пароль"></label>
-    <button class="button button-primary" type="button" onclick="adminLogin()">Войти</button>
-    <button class="button button-quiet" type="button" onclick="closeAdminLogin()">Отмена</button>
-    <div class="status-line" id="adminLoginMessage"></div>
-  </section>
 
   <!-- ОКНО НАСТРОЕК (ШЕСТЕРЕНКА) -->
   <section class="panel" id="settingsBox" hidden style="max-width:540px;margin:0 auto;text-align:center;">
     <h3 style="color:var(--gold);margin-top:0;">⚙ Настройки интерфейса</h3>
-    <p class="muted">Вы можете включить или отключить визуальные эффекты и анимации на портале для более плавной работы.</p>
+    <p class="muted">Вы можете включить или отключить визуальные эффекты и анимации на портале для более быстрой работы.</p>
     <div style="margin:20px 0;padding:16px;background:rgba(6,12,33,.6);border:1px solid rgba(186,174,255,.2);border-radius:14px;text-align:left;display:flex;align-items:center;justify-content:space-between;">
       <div>
         <strong style="color:#fff;font-size:15px;display:block;">Отключить анимации</strong>
@@ -835,7 +842,7 @@ footer {
     </div>
   </section>
 
-  <!-- БОЛЬШОЕ МОДАЛЬНОЕ ОКНО -->
+  <!-- МОДАЛЬНОЕ ОКНО -->
   <div class="portal-modal" id="portalModal" hidden>
     <div class="portal-modal-dialog" id="portalModalDialog" role="dialog" aria-modal="true" aria-labelledby="portalModalTitle">
       <button class="portal-modal-close" type="button" aria-label="Закрыть" onclick="closePortalModal()">×</button>
@@ -894,7 +901,7 @@ async function apiCallPost(action, payload = {}) {
   }
 }
 
-// НАСТРОЙКИ (ОТКЛЮЧЕНИЕ АНИМАЦИИ)
+// НАСТРОЙКИ
 function initSettings() {
   const noAnim = localStorage.getItem('perforator_no_anim') === 'true';
   $('disableAnimationsCheckbox').checked = noAnim;
@@ -945,6 +952,7 @@ function showPortal(user) {
   $('userName').textContent = user.name;
   $('loginButton').disabled = false;
   loadPortal();
+  loadParticipantsList();
 }
 
 function logout() {
@@ -968,7 +976,20 @@ async function loadPortal() {
     renderEvents(data.events || []);
     renderHistory(data.history || []);
     renderStatus(data.status || {});
+
+    // Автоматический перенос устаревших ответов в архив при каждой загрузке недели
+    checkAutoArchiveImmunity();
   } catch (err) { console.error(err); }
+}
+
+// Автоматический перенос неактуальных ответов за прошлые недели в архив
+let autoArchiveChecked = false;
+async function checkAutoArchiveImmunity() {
+  if (autoArchiveChecked) return;
+  autoArchiveChecked = true;
+  try {
+    await apiCallPost('autoArchiveImmunity', { id: currentUser.id });
+  } catch(e) { /* тихий перенос */ }
 }
 
 function renderImmunity(data, historyItems, status) {
@@ -1009,12 +1030,111 @@ function renderImmunity(data, historyItems, status) {
   });
 }
 
+// ДОБАВЛЕНИЕ И УПРАВЛЕНИЕ ОТВЕТАМИ ИММУНИТЕТА ВНУТРИ ОКНА
+function localIsoDate(date){
+  const y = date.getFullYear(); const m = String(date.getMonth() + 1).padStart(2, '0'); const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function fillWeekSelectors(){
+  const now = new Date(); const startYear = now.getMonth() < 10 ? now.getFullYear() - 1 : now.getFullYear();
+  const startDate = new Date(startYear, 10, 23);
+  const diffWeeks = Math.max(0, Math.floor((now.getTime() - startDate.getTime()) / (7 * 24 * 3600 * 1000)));
+  const totalWeeks = Math.max(diffWeeks + 2, 4); const weeks = [];
+  for (let i = 0; i < totalWeeks; i++) {
+    const d = new Date(startDate); d.setDate(d.getDate() + i * 7); const key = localIsoDate(d);
+    const end = new Date(d); end.setDate(end.getDate() + 6);
+    const fmt = date => String(date.getDate()).padStart(2, '0') + '.' + String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
+    weeks.push({ key, label: `Неделя ${i + 1} (${fmt(d)} – ${fmt(end)})` });
+  }
+  ['immAnswerWeek','manualWeekSelect'].forEach(id => {
+    const select = $(id); if (!select) return; const previous = select.value; select.replaceChildren();
+    weeks.forEach(w => { const o = document.createElement('option'); o.value = w.key; o.textContent = w.label; select.append(o); });
+    if (previous && weeks.some(w => w.key === previous)) select.value = previous;
+    else {
+      const currentMonday = new Date(now); currentMonday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+      const currentKey = localIsoDate(currentMonday);
+      if (weeks.some(w => w.key === currentKey)) select.value = currentKey; else select.value = weeks[0].key;
+    }
+  });
+}
+
+function syncAnswerDateFromSelectors(){
+  const monday = $('immAnswerWeek').value; if (!monday) return;
+  const d = new Date(monday + 'T12:00:00'); d.setDate(d.getDate() + Number($('immAnswerDay').value || 0));
+  $('immAnswerDate').value = [String(d.getDate()).padStart(2, '0'), String(d.getMonth() + 1).padStart(2, '0'), d.getFullYear()].join('.');
+}
+$('immAnswerWeek').addEventListener('change', syncAnswerDateFromSelectors);
+$('immAnswerDay').addEventListener('change', syncAnswerDateFromSelectors);
+
+function resetImmunityAnswerForm(){
+  $('immAnswerRow').value = ''; $('immAnswerTitle').value = ''; $('immAnswerText').value = '';
+  $('immAnswerSaveBtn').textContent = 'Опубликовать ответ';
+  if ($('immAnswerWeek').options.length) { $('immAnswerDay').value = '0'; syncAnswerDateFromSelectors(); }
+}
+
+$('publicAnswerForm').addEventListener('submit', async e => {
+  e.preventDefault(); if (!currentUser) return;
+  const btn = $('immAnswerSaveBtn'); btn.disabled = true; $('immAnswerMsg').textContent = 'Сохраняем ответ…';
+  try {
+    await apiCallPost('saveImmunityAnswer', {
+      id: currentUser.id,
+      row: $('immAnswerRow').value,
+      date: $('immAnswerDate').value,
+      title: $('immAnswerTitle').value,
+      text: $('immAnswerText').value
+    });
+    $('immAnswerMsg').textContent = 'Ответ успешно опубликован!';
+    $('immAnswerMsg').className = 'status-line success';
+    resetImmunityAnswerForm();
+    await loadPortal();
+  } catch (err) {
+    $('immAnswerMsg').textContent = err.message || 'Ошибка сохранения.';
+    $('immAnswerMsg').className = 'status-line error';
+  } finally { btn.disabled = false; }
+});
+
+// Загрузка участников в селект ручного зачисления
+async function loadParticipantsList() {
+  const select = $('manualUserSelect');
+  try {
+    const list = await apiCall('participantsList');
+    select.replaceChildren();
+    const first = document.createElement('option'); first.value = ''; first.textContent = 'Выберите участника'; select.append(first);
+    (list || []).forEach(p => { const o = document.createElement('option'); o.value = p.id; o.textContent = p.name; select.append(o); });
+  } catch(e) {
+    select.innerHTML = '<option value="">Ошибка загрузки списка</option>';
+  }
+}
+
+$('publicManualHistoryForm').addEventListener('submit', async e => {
+  e.preventDefault(); if (!currentUser) return;
+  const userId = $('manualUserSelect').value;
+  if (!userId) return alert('Выберите участника!');
+  const btn = $('manualHistorySaveBtn'); btn.disabled = true;
+  $('manualHistoryMsg').textContent = 'Сохраняем отметку…';
+  try {
+    await apiCallPost('manualAddHistory', {
+      id: userId,
+      weekStart: $('manualWeekSelect').value,
+      day: $('manualDaySelect').value,
+      result: $('manualResultSelect').value
+    });
+    $('manualHistoryMsg').textContent = 'Отметка участия успешно добавлена!';
+    $('manualHistoryMsg').className = 'status-line success';
+    await loadHistory();
+  } catch(err) {
+    $('manualHistoryMsg').textContent = err.message || 'Ошибка добавления.';
+    $('manualHistoryMsg').className = 'status-line error';
+  } finally { btn.disabled = false; }
+});
+
 // ==============================================================
 // СТАТЬИ ТЕКУЩЕГО СЕЗОНА: ОБЪЕДИНЕНЫ ПО ДАТАМ (СТАТЬЯ 1, 2, 3...)
 // ==============================================================
 let cachedArticles = [];
 let currentArticlesDatePage = 1;
-const DATES_PER_PAGE = 5; // По 5 дат на страницу
+const DATES_PER_PAGE = 5;
 
 function renderArticleArchive(items) {
   cachedArticles = items || [];
@@ -1035,7 +1155,6 @@ function displayGroupedArticlesList() {
     return;
   }
 
-  // Группировка статей по дате
   const dateMap = new Map();
   cachedArticles.forEach(item => {
     const dKey = item.dateKey || item.date || 'Без даты';
@@ -1228,7 +1347,7 @@ function appendTextWithLinks(container, value) {
 }
 
 // ==============================================================
-// ИВЕНТЫ ПРОЕКТОВ (ОТКРЫВАЮТСЯ В ОТДЕЛЬНОМ ОКНЕ, СОЗДАНИЕ СЕБЕ / ВСЕМ)
+// ИВЕНТЫ ПРОЕКТОВ (ИСПРАВЛЕНО ЗАКРЫТИЕ ПРИ ВХОДЕ В СТАРЫЙ ИВЕНТ)
 // ==============================================================
 function renderEvents(items) {
   const target = $('eventsList'); target.replaceChildren();
@@ -1251,7 +1370,6 @@ function renderEvents(items) {
   });
 }
 
-// Создание ивента себе или всем
 function openCreateEventModal(isForEveryone) {
   const box = document.createElement('div');
   box.innerHTML = `
@@ -1286,30 +1404,23 @@ function openCreateEventModal(isForEveryone) {
   box.querySelector('#createEventForm').onsubmit = async e => {
     e.preventDefault();
     const btn = box.querySelector('#evSubmitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Создаём…';
-
-    const title = box.querySelector('#evNewTitle').value.trim();
-    const date = box.querySelector('#evNewDate').value.trim();
-    const text = box.querySelector('#evNewText').value.trim();
-    const links = box.querySelector('#evNewLinks').value.trim();
+    btn.disabled = true; btn.textContent = 'Создаём…';
 
     try {
       await apiCallPost('createCustomEvent', {
         id: currentUser.id,
         isForEveryone: isForEveryone ? 'true' : 'false',
-        title,
-        date,
-        text,
-        links
+        title: box.querySelector('#evNewTitle').value.trim(),
+        date: box.querySelector('#evNewDate').value.trim(),
+        text: box.querySelector('#evNewText').value.trim(),
+        links: box.querySelector('#evNewLinks').value.trim()
       });
       closePortalModal();
       await loadPortal();
       alert('Ивент успешно создан!');
     } catch(err) {
       alert(err.message || 'Ошибка создания ивента.');
-      btn.disabled = false;
-      btn.textContent = 'Создать ивент';
+      btn.disabled = false; btn.textContent = 'Создать ивент';
     }
   };
 }
@@ -1320,6 +1431,7 @@ async function openModernEventView(event) {
   activeTaskIndex = 0;
 
   const box = document.createElement('div');
+  box.id = 'modernEventViewBox';
   box.innerHTML = `
     <div style="text-align:center;margin-bottom:12px;">
       <span class="publication-date" style="font-size:14px;">${escapeHtml(event.date || '')}</span>
@@ -1360,7 +1472,7 @@ async function openModernEventView(event) {
     </div>
   `;
 
-  // Открывается в отдельном модальном окне
+  // Открываем модальное окно с ивентом без автозакрытия
   openPortalModal(box, event.title || 'Ивент проектов', true);
 
   try {
@@ -1370,7 +1482,8 @@ async function openModernEventView(event) {
     personalTasks = [];
   }
 
-  if (!personalTasks.length && event.text) {
+  // Если заданий еще нет, берем первое из текста ивента
+  if (!personalTasks.length && (event.text || event.title)) {
     personalTasks.push({
       text: 'Задание 1: ' + (event.title || 'Основное'),
       description: event.text || '',
@@ -1395,6 +1508,7 @@ async function openModernEventView(event) {
 
 function renderModernTaskLayout(box, event) {
   const cardsBox = box.querySelector('#eventTaskCardsContainer');
+  if (!cardsBox) return;
   cardsBox.replaceChildren();
 
   const total = personalTasks.length;
@@ -1464,7 +1578,7 @@ function renderModernTaskLayout(box, event) {
   }
 
   box.querySelector('#editTaskModalBtn').onclick = () => {
-    openTaskDetail(activeTaskIndex, () => renderModernTaskLayout(box, event));
+    openInlineTaskEditor(activeTaskIndex, () => renderModernTaskLayout(box, event));
   };
 
   box.querySelector('#delTaskModalBtn').onclick = async () => {
@@ -1476,48 +1590,43 @@ function renderModernTaskLayout(box, event) {
   };
 }
 
-function openTaskDetail(index, onSavedCallback) {
+// РЕДАКТИРОВАНИЕ ЗАДАНИЯ БЕЗ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА
+function openInlineTaskEditor(index, onComplete) {
   const task = personalTasks[index];
   if (!task) return;
-  const box = document.createElement('div');
-  box.className = 'task-detail';
-  box.innerHTML = `
-    <label class="admin-field">Название задания
-      <input id="taskEditTitle" type="text">
-    </label>
-    <label class="admin-field">Описание задания
-      <textarea id="taskEditDescription" placeholder="Подробности, условия и пояснения…" style="min-height:140px;font-size:15px;"></textarea>
-    </label>
-    <label class="admin-field">Ссылки (каждую с новой строки)
-      <textarea id="taskEditLinks" placeholder="https://…"></textarea>
-    </label>
-    <div style="text-align:center;margin-top:14px;">
-      <button class="button button-primary" id="taskEditSave">Сохранить</button>
-      <button class="button button-quiet" id="taskEditClose">Отмена</button>
-    </div>`;
+  const contentArea = $('currentTaskDescription');
+  if (!contentArea) return;
 
-  box.querySelector('#taskEditTitle').value = task.text || '';
-  box.querySelector('#taskEditDescription').value = task.description || '';
-  box.querySelector('#taskEditLinks').value = (task.links || []).join('\n');
+  contentArea.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <label class="admin-field" style="margin:0;">Название задания:
+        <input type="text" id="taskInlineName" value="${escapeHtml(task.text || '')}">
+      </label>
+      <label class="admin-field" style="margin:0;">Описание задания:
+        <textarea id="taskInlineDesc" style="min-height:120px;">${escapeHtml(task.description || '')}</textarea>
+      </label>
+      <label class="admin-field" style="margin:0;">Ссылки (через новую строку):
+        <textarea id="taskInlineLinks">${escapeHtml((task.links || []).join('\n'))}</textarea>
+      </label>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:4px;">
+        <button class="button button-primary" type="button" id="taskInlineSave">Сохранить</button>
+        <button class="button button-quiet" type="button" id="taskInlineCancel">Отмена</button>
+      </div>
+    </div>
+  `;
 
-  openPortalModal(box, 'Редактировать: ' + (task.text || 'Задание'));
-
-  box.querySelector('#taskEditSave').onclick = async () => {
-    const title = box.querySelector('#taskEditTitle').value.trim();
-    if (!title) return alert('Введите название задания.');
-    personalTasks[index] = {
-      ...task,
-      text: title,
-      description: box.querySelector('#taskEditDescription').value.trim(),
-      links: box.querySelector('#taskEditLinks').value.split(/\n|;/).map(x => x.trim()).filter(x => /^https?:\/\//i.test(x))
-    };
-    closePortalModal();
+  contentArea.querySelector('#taskInlineSave').onclick = async () => {
+    const title = contentArea.querySelector('#taskInlineName').value.trim();
+    if (!title) return alert('Введите название!');
+    task.text = title;
+    task.description = contentArea.querySelector('#taskInlineDesc').value.trim();
+    task.links = contentArea.querySelector('#taskInlineLinks').value.split(/\n|;/).map(x => x.trim()).filter(x => /^https?:\/\//i.test(x));
     await savePersonalTasks();
-    if (currentEventData) openModernEventView(currentEventData);
+    onComplete();
   };
-  box.querySelector('#taskEditClose').onclick = () => {
-    closePortalModal();
-    if (currentEventData) openModernEventView(currentEventData);
+
+  contentArea.querySelector('#taskInlineCancel').onclick = () => {
+    onComplete();
   };
 }
 
@@ -1626,7 +1735,6 @@ function renderArchiveView(modalBox) {
   if (!seasonalArchiveDataCache) return;
 
   if (currentArchiveMode === 'immunity') {
-    // 1. АРХИВ ИММУНИТЕТА В РАМКАХ ПО НЕДЕЛЯМ
     const rawItems = seasonalArchiveDataCache.immunity || [];
     if (!rawItems.length) {
       cont.innerHTML = '<div class="empty-state compact">В архиве иммунитета пока нет записей.</div>';
@@ -1718,7 +1826,6 @@ function renderArchiveView(modalBox) {
     }
 
   } else {
-    // 2. АРХИВ СТАТЕЙ: ОБЪЕДИНЕНЫ ПО ДАТАМ (СТАТЬЯ 1, СТАТЬЯ 2...)
     const articles = seasonalArchiveDataCache.articles || [];
     if (!articles.length) {
       cont.innerHTML = '<div class="empty-state compact">В архиве статей пока нет записей.</div>';
@@ -1833,7 +1940,6 @@ async function openCookieModal() {
     btn.classList.add('is-disabled');
     btn.onclick = e => { e.preventDefault(); alert('Печенье судьбы доступно только по средам с 00:00 до 23:59!'); };
     markBtn.disabled = true;
-    markBtn.title = 'Отметка возможна только по средам';
   }
 
   const timerTitle = box.querySelector('#cookieBoxTimerTitle');
@@ -2088,7 +2194,17 @@ async function markAnswered() {
 let portalModalNode = null; let portalModalPlaceholder = null;
 function openPortalModal(element, title, isWide = false) {
   if (!element) return;
-  if (portalModalNode) closePortalModal();
+  
+  // Если уже открыт модал и пытаемся открыть дочерний элемент, корректно возвращаем предыдущий на место
+  if (portalModalNode && portalModalNode !== element) {
+    if (portalModalPlaceholder && portalModalPlaceholder.parentNode) {
+      portalModalPlaceholder.parentNode.insertBefore(portalModalNode, portalModalPlaceholder);
+      portalModalPlaceholder.remove();
+      portalModalPlaceholder = null;
+      portalModalNode.hidden = true;
+    }
+  }
+
   const modal = $('portalModal');
   const dialog = $('portalModalDialog');
   const content = $('portalModalContent');
@@ -2100,7 +2216,7 @@ function openPortalModal(element, title, isWide = false) {
     portalModalPlaceholder = document.createComment('portal-modal-placeholder');
     element.parentNode.insertBefore(portalModalPlaceholder, element);
   }
-  content.appendChild(element);
+  content.replaceChildren(element);
   element.hidden = false;
   $('portalModalTitle').textContent = title || 'Информация';
 
@@ -2124,6 +2240,7 @@ function closePortalModal() {
     if (portalModalNode && portalModalPlaceholder && portalModalPlaceholder.parentNode) {
       portalModalPlaceholder.parentNode.insertBefore(portalModalNode, portalModalPlaceholder);
       portalModalPlaceholder.remove();
+      portalModalPlaceholder = null;
       portalModalNode.hidden = true;
     }
     $('portalModalContent').replaceChildren();
@@ -2142,117 +2259,6 @@ document.querySelectorAll('.section-card[data-target]').forEach(button => {
 });
 $('portalModal').addEventListener('click', event => {
   if (event.target === $('portalModal')) closePortalModal();
-});
-
-// АДМИНКА
-let adminToken = sessionStorage.getItem('perforator_admin_token') || '';
-function openAdminLogin(){
-  if (adminToken) { $('adminPanel').hidden = false; openPortalModal($('adminPanel'), 'Панель администратора'); adminLoadAnswers(); adminLoadParticipants(); return; }
-  $('adminLoginBox').hidden = false; openPortalModal($('adminLoginBox'), 'Вход администратора'); $('adminPassword').focus();
-}
-function closeAdminLogin(){ if (portalModalNode === $('adminLoginBox')) closePortalModal(); $('adminLoginBox').hidden = true; $('adminLoginMessage').textContent = ''; }
-async function adminLogin(){
-  const password=$('adminPassword').value; if(!password){$('adminLoginMessage').textContent='Введите пароль.';return;}
-  $('adminLoginMessage').textContent='Проверяем…';
-  try{
-    const data=await apiCall('adminLogin',{password}); adminToken=data.token; sessionStorage.setItem('perforator_admin_token',adminToken);
-    $('adminPassword').value=''; closeAdminLogin(); $('adminPanel').hidden=false; openPortalModal($('adminPanel'), 'Панель администратора');
-    await adminLoadAnswers(); await adminLoadParticipants();
-  }catch(err){$('adminLoginMessage').textContent=err.message||'Ошибка входа.';}
-}
-function adminLogout(){ if (portalModalNode === $('adminPanel')) closePortalModal(); adminToken=''; sessionStorage.removeItem('perforator_admin_token'); $('adminPanel').hidden=true; }
-function localIsoDate(date){ const y = date.getFullYear(); const m = String(date.getMonth() + 1).padStart(2, '0'); const d = String(date.getDate()).padStart(2, '0'); return `${y}-${m}-${d}`; }
-
-function fillWeekSelectors(){
-  const now = new Date(); const startYear = now.getMonth() < 10 ? now.getFullYear() - 1 : now.getFullYear();
-  const startDate = new Date(startYear, 10, 23);
-  const diffWeeks = Math.max(0, Math.floor((now.getTime() - startDate.getTime()) / (7 * 24 * 3600 * 1000)));
-  const totalWeeks = Math.max(diffWeeks + 2, 4); const weeks = [];
-  for (let i = 0; i < totalWeeks; i++) {
-    const d = new Date(startDate); d.setDate(d.getDate() + i * 7); const key = localIsoDate(d);
-    const end = new Date(d); end.setDate(end.getDate() + 6);
-    const fmt = date => String(date.getDate()).padStart(2, '0') + '.' + String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
-    weeks.push({ key, label: `Неделя ${i + 1} (${fmt(d)} – ${fmt(end)})` });
-  }
-  ['adminAnswerWeek','manualWeekStart'].forEach(id => {
-    const select = $(id); if (!select) return; const previous = select.value; select.replaceChildren();
-    weeks.forEach(w => { const o = document.createElement('option'); o.value = w.key; o.textContent = w.label; select.append(o); });
-    if (previous && weeks.some(w => w.key === previous)) select.value = previous;
-    else {
-      const currentMonday = new Date(now); currentMonday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
-      const currentKey = localIsoDate(currentMonday);
-      if (weeks.some(w => w.key === currentKey)) select.value = currentKey; else select.value = weeks[0].key;
-    }
-  });
-}
-
-function syncAnswerDateFromSelectors(){
-  const monday = $('adminAnswerWeek').value; if (!monday) return;
-  const d = new Date(monday + 'T12:00:00'); d.setDate(d.getDate() + Number($('adminAnswerDay').value || 0));
-  $('adminDate').value = [String(d.getDate()).padStart(2, '0'), String(d.getMonth() + 1).padStart(2, '0'), d.getFullYear()].join('.');
-}
-$('adminAnswerWeek').addEventListener('change', syncAnswerDateFromSelectors);
-$('adminAnswerDay').addEventListener('change', syncAnswerDateFromSelectors);
-
-function adminResetForm(){
-  $('adminRow').value = ''; $('adminDate').value = ''; $('adminTitle').value = ''; $('adminText').value = '';
-  $('adminSaveButton').textContent = 'Сохранить ответ';
-  if ($('adminAnswerWeek').options.length) { $('adminAnswerDay').value = '0'; syncAnswerDateFromSelectors(); }
-}
-
-async function adminLoadAnswers(){
-  if (!adminToken) return; $('adminAnswersList').textContent = 'Загружаем…';
-  try {
-    const items = await apiCall('adminAnswers', { token: adminToken }); const box = $('adminAnswersList'); box.replaceChildren();
-    if (!items.length) { box.textContent = 'Ответов в базе пока нет.'; return; }
-    items.forEach(item => {
-      const row = document.createElement('div'); row.className = 'admin-row';
-      const info = document.createElement('div'); info.innerHTML = `<strong>${item.title || 'Без названия'} · ${item.date}</strong><small>Опубликован</small>`;
-      const actions = document.createElement('div'); actions.className = 'admin-row-actions';
-      const edit = document.createElement('button'); edit.type = 'button'; edit.textContent = 'Изменить';
-      edit.onclick = () => { $('adminRow').value = item.row; $('adminDate').value = item.date || ''; $('adminTitle').value = item.title || ''; $('adminText').value = item.text || ''; $('adminSaveButton').textContent = 'Сохранить изменения'; $('adminAnswerForm').scrollIntoView({ behavior: 'auto', block: 'start' }); };
-      const del = document.createElement('button'); del.type = 'button'; del.className = 'btn-del'; del.textContent = 'Удалить';
-      del.onclick = async () => {
-        if (!confirm(`Удалить ответ «${item.title}» (${item.date})?`)) return; $('adminMessage').textContent = 'Удаляем…';
-        try { await apiCallPost('adminDeleteAnswer', { token: adminToken, row: item.row }); $('adminMessage').textContent = 'Ответ удалён!'; $('adminMessage').className = 'status-line success'; adminResetForm(); await adminLoadAnswers(); if (currentUser) await loadPortal(); }
-        catch(e) { $('adminMessage').textContent = e.message || 'Ошибка удаления.'; $('adminMessage').className = 'status-line error'; }
-      };
-      actions.append(edit, del); row.append(info, actions); box.appendChild(row);
-    });
-  } catch(err) { $('adminAnswersList').textContent = err.message || 'Ошибка загрузки.'; }
-}
-
-async function triggerManualArchive() {
-  if (!adminToken) return; $('adminMessage').textContent = 'Переносим устаревшие ответы в архив…';
-  try { const res = await apiCallPost('adminArchive', { token: adminToken }); $('adminMessage').textContent = `Перенос выполнен! Перенесено: ${res.moved || 0}`; $('adminMessage').className = 'status-line success'; await adminLoadAnswers(); if (currentUser) await loadPortal(); }
-  catch(e) { $('adminMessage').textContent = e.message || 'Ошибка архивации.'; $('adminMessage').className = 'status-line error'; }
-}
-
-async function adminLoadParticipants(){
-  if (!adminToken) return; const select = $('manualParticipant');
-  try {
-    const people = await apiCall('adminParticipants', { token: adminToken }); select.replaceChildren();
-    const first = document.createElement('option'); first.value = ''; first.textContent = 'Выберите участника'; select.append(first);
-    (people || []).forEach(p => { const o = document.createElement('option'); o.value = p.id; o.textContent = p.name; select.append(o); });
-  } catch (e) { select.innerHTML = '<option value="">Ошибка загрузки</option>'; }
-}
-
-$('adminAnswerForm').addEventListener('submit', async e => {
-  e.preventDefault(); if (!adminToken) return; $('adminSaveButton').disabled = true; $('adminMessage').textContent = 'Сохраняем…';
-  try {
-    await apiCallPost('adminSaveAnswer', { token: adminToken, row: $('adminRow').value, date: $('adminDate').value, title: $('adminTitle').value, text: $('adminText').value });
-    $('adminMessage').textContent = 'Ответ успешно сохранён!'; $('adminMessage').className = 'status-line success'; adminResetForm(); await adminLoadAnswers(); if (currentUser) await loadPortal();
-  } catch (err) { $('adminMessage').textContent = err.message || 'Ошибка сохранения.'; $('adminMessage').className = 'status-line error'; }
-  finally { $('adminSaveButton').disabled = false; }
-});
-
-$('adminManualHistoryForm').addEventListener('submit', async e => {
-  e.preventDefault(); if (!adminToken) return; const btn = $('manualHistorySave'); btn.disabled = true;
-  try {
-    await apiCallPost('adminManualHistory', { token: adminToken, id: $('manualParticipant').value, weekStart: $('manualWeekStart').value, day: $('manualDay').value, result: $('manualResult').value });
-    $('adminMessage').textContent = 'Отметка участия сохранена!'; $('adminMessage').className = 'status-line success';
-  } catch(err) { $('adminMessage').textContent = err.message || 'Ошибка добавления.'; $('adminMessage').className = 'status-line error'; }
-  finally { btn.disabled = false; }
 });
 
 window.addEventListener('load', () => {
