@@ -35,365 +35,278 @@ body {
     linear-gradient(155deg, #020512 0%, #060e29 32%, #180c33 65%, #050617 100%);
   background-attachment: fixed;
 }
-
-/* БОЛЬШАЯ ГИРЛЯНДА СВЕРХУ (БЕЗ АНИМАЦИИ) */
-.winter-lights-big {
-  position: fixed;
-  top: 0; left: 0; right: 0; height: 90px;
-  z-index: 2; pointer-events: none !important;
-  background-image:
-    radial-gradient(circle, #ffe08a 0 5px, rgba(255,200,80,.5) 7px, transparent 18px),
-    radial-gradient(circle, #8bc2ff 0 5px, rgba(90,160,255,.45) 7px, transparent 18px),
-    radial-gradient(circle, #ff7597 0 5px, rgba(255,80,120,.45) 7px, transparent 18px),
-    radial-gradient(circle, #85f0c8 0 5px, rgba(70,225,170,.45) 7px, transparent 18px);
-  background-size: 160px 58px, 190px 68px, 230px 62px, 175px 72px;
-  background-position: 15px 12px, 60px 24px, 115px 14px, 145px 28px;
-  background-repeat: repeat-x;
-  filter: drop-shadow(0 4px 12px rgba(255, 215, 120, .35));
-}
-.winter-lights-big::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 35px;
-  background: radial-gradient(ellipse at 50% 0%, transparent 62%, rgba(130, 160, 240, .28) 64%, transparent 68%);
-  background-size: 80px 30px;
-  background-repeat: repeat-x;
-}
-
-/* ПАДАЮЩИЙ СНЕГ */
 .winter-snow {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none !important;
-  opacity: .72;
+  position: fixed; inset: 0; z-index: 1; pointer-events: none !important; opacity: .45;
   background-image:
-    radial-gradient(3px 3px at 35px 45px, rgba(255,255,255,.95) 98%, transparent),
-    radial-gradient(2px 2px at 120px 180px, rgba(225,235,255,.9) 98%, transparent),
-    radial-gradient(4.5px 4.5px at 240px 90px, rgba(255,255,255,.95) 98%, transparent),
-    radial-gradient(2.5px 2.5px at 360px 240px, rgba(255,255,255,.85) 98%, transparent),
-    radial-gradient(3.5px 3.5px at 470px 120px, rgba(230,240,255,.9) 98%, transparent),
-    radial-gradient(2px 2px at 530px 310px, rgba(255,255,255,.85) 98%, transparent);
-  background-size: 560px 480px;
-  animation: snowfall 18s linear infinite !important;
-  will-change: background-position;
+    radial-gradient(2px 2px at 40px 60px, rgba(255,255,255,.9) 98%, transparent),
+    radial-gradient(3px 3px at 180px 140px, rgba(230,240,255,.85) 98%, transparent),
+    radial-gradient(2px 2px at 320px 90px, rgba(255,255,255,.8) 98%, transparent);
+  background-size: 420px 380px;
+  animation: snowfall 22s linear infinite;
 }
 @keyframes snowfall {
   0% { background-position: 0 0; }
-  100% { background-position: 60px 480px; }
+  100% { background-position: 40px 380px; }
 }
-
-/* САЛЮТЫ */
-.winter-firework {
-  position: fixed;
-  z-index: 1;
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  pointer-events: none !important;
-  opacity: 0;
-  transform: scale(.2);
-  background: repeating-conic-gradient(from 0deg, rgba(255, 215, 120, .95) 0 1.2deg, transparent 1.2deg 16deg);
-  mask-image: radial-gradient(circle, transparent 0 12%, #000 14% 18%, transparent 22% 100%);
-  -webkit-mask-image: radial-gradient(circle, transparent 0 12%, #000 14% 18%, transparent 22% 100%);
-  filter: drop-shadow(0 0 14px rgba(255, 195, 95, .7));
-  animation: fireworkBurst 8.5s ease-out infinite;
+.winter-lights-big {
+  position: fixed; top: 0; left: 0; right: 0; height: 70px; z-index: 2; pointer-events: none !important;
+  background-image:
+    radial-gradient(circle, #ffe08a 0 4px, transparent 14px),
+    radial-gradient(circle, #8bc2ff 0 4px, transparent 14px),
+    radial-gradient(circle, #ff7597 0 4px, transparent 14px);
+  background-size: 140px 50px, 170px 55px, 200px 48px;
+  background-position: 10px 10px, 50px 18px, 100px 12px;
+  background-repeat: repeat-x;
+  filter: drop-shadow(0 3px 8px rgba(255, 215, 120, .3));
 }
-.winter-firework.one { top: 12%; left: 7%; }
-.winter-firework.two {
-  top: 20%; right: 8%;
-  animation-delay: 4.2s;
-  background: repeating-conic-gradient(from 0deg, rgba(165, 180, 255, .95) 0 1.2deg, transparent 1.2deg 16deg);
-  filter: drop-shadow(0 0 14px rgba(180, 140, 255, .75));
-}
-@keyframes fireworkBurst {
-  0%, 70%, 100% { opacity: 0; transform: scale(.2) rotate(0deg); }
-  74% { opacity: .75; transform: scale(.85) rotate(18deg); }
-  82% { opacity: .15; transform: scale(1.15) rotate(35deg); }
-}
-
 .winter-snowman {
-  position: fixed; right: 22px; bottom: 18px; z-index: 5; pointer-events: none !important;
-  font-size: 42px; line-height: 1; opacity: .82; filter: drop-shadow(0 4px 10px rgba(0,0,0,.5));
+  position: fixed; right: 18px; bottom: 14px; z-index: 5;
+  pointer-events: none !important; font-size: 36px; opacity: .7;
 }
-
 .site-header, .container, footer { position: relative; z-index: 10; }
-.site-header { text-align: center; padding: 36px 16px 20px; }
-.admin-entry { margin: 18px auto 0; text-align: center; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+.site-header { text-align: center; padding: 28px 16px 16px; }
+.admin-entry { margin: 14px auto 0; text-align: center; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
 .admin-entry button {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 48px; padding: 0 25px; border-radius: 15px; cursor: pointer;
-  color: #fff4d8; font-size: 15px; font-weight: 800; letter-spacing: .04em;
-  border: 1px solid rgba(255,218,145,.58);
-  background: linear-gradient(110deg, #23356e, #532d78, #1d466e, #23356e);
-  background-size: 240% 100%; box-shadow: 0 8px 28px rgba(3,6,22,.5), 0 0 20px rgba(135,110,255,.2);
-  transition: transform .22s ease, box-shadow .22s ease;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 22px; border-radius: 14px; cursor: pointer;
+  color: #fff4d8; font-size: 14px; font-weight: 800; letter-spacing: .03em;
+  border: 1px solid rgba(255,218,145,.55);
+  background: linear-gradient(110deg, #23356e, #532d78, #1d466e);
+  background-size: 200% 100%;
+  box-shadow: 0 6px 22px rgba(3,6,22,.45);
+  transition: transform .2s ease;
 }
-.admin-entry button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(110,80,210,.38); }
-.brand-mark { font-size: 34px; filter: drop-shadow(0 0 15px rgba(255,213,138,.45)); }
+.admin-entry button:hover { transform: translateY(-2px); }
+.brand-mark { font-size: 30px; }
 .brand-name {
-  margin-top: 4px;
-  font-size: clamp(30px, 6vw, 54px);
-  font-weight: 800;
-  letter-spacing: .16em;
-  text-shadow: 0 0 28px rgba(162,130,255,.45);
+  margin-top: 2px; font-size: clamp(26px, 5.5vw, 48px); font-weight: 800;
+  letter-spacing: .14em; text-shadow: 0 0 22px rgba(162,130,255,.4);
 }
-.brand-caption, .eyebrow {
-  color: #cbd5f8;
-  font-size: 10px;
-  letter-spacing: .25em;
-  font-weight: 700;
-}
-.header-squirrels { margin-top: 13px; font-size: 20px; letter-spacing: 12px; }
-.container { width: min(1000px, 92%); margin: 16px auto 70px; }
+.brand-caption, .eyebrow { color: #cbd5f8; font-size: 10px; letter-spacing: .22em; font-weight: 700; }
+.header-squirrels { margin-top: 10px; font-size: 18px; letter-spacing: 10px; }
+.container { width: min(980px, 94%); margin: 12px auto 60px; }
 .panel {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: 22px;
-  padding: clamp(19px, 3vw, 30px);
-  margin-bottom: 20px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.45), inset 0 1px rgba(255,255,255,.05);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: var(--panel); border: 1px solid var(--panel-border); border-radius: 20px;
+  padding: clamp(16px, 2.8vw, 26px); margin-bottom: 16px;
+  box-shadow: 0 16px 48px rgba(0,0,0,.4), inset 0 1px rgba(255,255,255,.04);
+  backdrop-filter: blur(12px);
 }
-.login-panel { max-width: 560px; margin: 28px auto 70px; text-align: center; }
-h1 { font-size: clamp(27px, 5vw, 42px); margin: 12px 0; }
-h1 span { font-size: .85em; }
-h2 { margin: 0; font-size: 23px; }
-h3 { margin: 14px 0 8px; }
-p { line-height: 1.65; }
+.login-panel { max-width: 520px; margin: 24px auto 60px; text-align: center; }
+h1 { font-size: clamp(24px, 4.5vw, 38px); margin: 10px 0; }
+h2 { margin: 0; font-size: 21px; }
+h3 { margin: 12px 0 6px; }
+p { line-height: 1.6; }
 .muted, .login-note { color: var(--muted); }
-.field-label { display: block; margin: 20px 0 8px; color: #dce5ff; font-size: 13px; }
-select {
-  width: 100%; padding: 15px 14px; border-radius: 12px;
-  border: 1px solid rgba(173,196,255,.35);
-  color: #142044; background: #f5f7ff; font-size: 16px;
+.field-label { display: block; margin: 16px 0 6px; color: #dce5ff; font-size: 13px; }
+select, input[type="text"], input[type="password"], input[type="date"], input[type="url"], textarea {
+  width: 100%; padding: 12px 13px; border-radius: 11px;
+  border: 1px solid rgba(173,196,255,.32); color: #142044; background: #f5f7ff; font-size: 15px;
 }
+textarea { min-height: 100px; resize: vertical; line-height: 1.45; color: #f4f6ff; background: rgba(4,10,28,.85); }
 .button {
   display: inline-flex; align-items: center; justify-content: center;
-  border: 0; border-radius: 12px; padding: 13px 19px; margin: 10px 8px 0 0;
-  font-weight: 700; font-size: 14px; text-decoration: none; cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+  border: 0; border-radius: 11px; padding: 11px 16px; margin: 8px 6px 0 0;
+  font-weight: 700; font-size: 13px; text-decoration: none; cursor: pointer;
+  transition: transform .18s ease, filter .18s ease;
 }
-.button:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 8px 22px rgba(0,0,0,.35); }
+.button:hover { transform: translateY(-1px); filter: brightness(1.05); }
 .button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
 .button-primary { color: #091532; background: linear-gradient(135deg, #f8d990, #e7b65e); }
 .button-secondary { color: #f5f7ff; background: #372e6b; border: 1px solid #786ec2; }
 .button-quiet { color: #c4d1f3; background: transparent; border: 1px solid var(--panel-border); }
 .button-danger { color: #fff; background: #882236; border: 1px solid #c2465e; }
-.message, .status-line { min-height: 22px; margin-top: 12px; color: var(--gold); font-size: 14px; text-align: center; }
+.message, .status-line { min-height: 20px; margin-top: 10px; color: var(--gold); font-size: 13px; text-align: center; }
 .error { color: var(--red) !important; }
 .success { color: var(--green) !important; }
 .login-note { font-size: 12px; margin-bottom: 0; }
 .welcome { position: relative; overflow: hidden; text-align: center; }
 .welcome-top { display: flex; align-items: center; justify-content: center; gap: 8px; }
-.welcome h1 { margin-top: 16px; }
-.welcome p { max-width: 650px; margin: 0 auto; color: #d5def5; font-size: 17px; }
-.welcome-bottom { color: var(--gold); font-size: 13px; margin-top: 20px; }
-
-/* 3 В РЯДУ, ИВЕНТЫ ПРОЕКТОВ ПО ЦЕНТРУ */
-.section-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin: 18px 0 24px;
-}
+.welcome h1 { margin-top: 12px; }
+.welcome p { max-width: 620px; margin: 0 auto; color: #d5def5; font-size: 16px; }
+.welcome-bottom { color: var(--gold); font-size: 13px; margin-top: 16px; }
+.section-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0 20px; }
 .section-card {
-  min-height: 142px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
-  gap: 7px; padding: 18px; text-align: left; color: var(--text); text-decoration: none;
-  border: 1px solid var(--panel-border); border-radius: 18px;
+  min-height: 130px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+  gap: 6px; padding: 16px; text-align: left; color: var(--text); text-decoration: none;
+  border: 1px solid var(--panel-border); border-radius: 16px;
   background: linear-gradient(145deg, rgba(22, 29, 68, .94), rgba(16, 15, 46, .95));
-  box-shadow: 0 9px 24px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.05);
-  cursor: pointer; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,.28); cursor: pointer; transition: transform .2s ease, border-color .2s ease;
 }
-.section-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(244,201,121,.6);
-  box-shadow: 0 14px 30px rgba(0,0,0,.4), 0 0 20px rgba(160,110,255,.2);
-}
-.section-card strong { font-size: 15px; }
-.section-card small { color: var(--muted); font-size: 12px; line-height: 1.4; }
-.section-emoji { font-size: 34px; line-height: 1.2; }
-.section-emoji.small { font-size: 32px; }
-
-.section-card.events-nav-card {
-  grid-column: 2;
-}
+.section-card:hover { transform: translateY(-2px); border-color: rgba(244,201,121,.55); }
+.section-card strong { font-size: 14px; }
+.section-card small { color: var(--muted); font-size: 12px; line-height: 1.35; }
+.section-emoji { font-size: 30px; line-height: 1.15; }
+.section-card.events-nav-card { grid-column: 2; }
 @media (max-width: 720px) {
   .section-grid { grid-template-columns: 1fr; }
   .section-card.events-nav-card { grid-column: 1; }
 }
-
-/* ЗАГОЛОВКИ РАЗДЕЛОВ И МОДАЛЬНЫХ ОКОН: СТРОГО ПО ЦЕНТРУ */
 .section-heading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 8px;
-  margin-bottom: 22px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 6px; margin-bottom: 18px;
 }
-.section-heading h2 {
-  font-size: clamp(22px, 3.5vw, 28px);
-  color: var(--gold);
-}
-.section-heading p {
-  margin: 0;
-  font-size: 14px;
-  color: var(--muted);
-}
-.content-section { scroll-margin-top: 20px; }
-.publication-list { display: grid; gap: 12px; }
+.section-heading h2 { font-size: clamp(20px, 3.2vw, 26px); color: var(--gold); }
+.section-heading p { margin: 0; font-size: 13px; color: var(--muted); }
+.content-section { scroll-margin-top: 16px; }
+.publication-list { display: grid; gap: 10px; }
 .publication {
-  padding: 17px; border: 1px solid rgba(186, 174, 255, .18);
-  border-radius: 15px; background: rgba(8, 14, 38, .5);
+  padding: 14px; border: 1px solid rgba(186, 174, 255, .16);
+  border-radius: 13px; background: rgba(8, 14, 38, .5);
+  cursor: pointer; transition: border-color .18s ease;
 }
-.publication-date { color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
-.publication h3 { margin: 7px 0; font-size: 18px; }
-.publication-text { margin: 0; color: #dce4fa; white-space: pre-wrap; overflow-wrap: anywhere; }
+.publication:hover { border-color: rgba(244,201,121,.45); }
+.publication-date { color: var(--gold); font-size: 11px; font-weight: 700; }
+.publication h3 { margin: 5px 0; font-size: 16px; }
+.publication-text { margin: 0; color: #dce4fa; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
 .empty-state {
-  display: flex; flex-direction: column; align-items: center; gap: 7px;
-  padding: 28px 14px; color: var(--muted); text-align: center;
-  border: 1px dashed rgba(173,196,255,.2); border-radius: 15px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 24px 12px; color: var(--muted); text-align: center;
+  border: 1px dashed rgba(173,196,255,.18); border-radius: 13px;
 }
-.empty-state.compact { padding: 18px; font-size: 13px; }
-
-/* ЧЕТЫРЕ ДНЯ ИММУНИТЕТА СО СТАТУСАМИ */
-.period-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 18px 0; }
+.empty-state.compact { padding: 16px; font-size: 13px; }
+.period-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0; }
 @media (max-width: 600px) { .period-grid { grid-template-columns: 1fr; } }
 .period-card {
-  display: flex; flex-direction: column; gap: 8px; padding: 16px;
-  background: rgba(8, 15, 41, .45); border: 1px solid var(--panel-border); border-radius: 14px;
+  display: flex; flex-direction: column; gap: 6px; padding: 14px;
+  background: rgba(8, 15, 41, .45); border: 1px solid var(--panel-border); border-radius: 12px;
 }
-.period-card.active { border-color: var(--gold); background: rgba(140, 95, 30, .22); }
-.period-card-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.period-card b { color: #f4f6ff; font-size: 15px; }
-.period-card span { color: var(--muted); font-size: 12px; line-height: 1.4; }
+.period-card.active { border-color: var(--gold); background: rgba(140, 95, 30, .2); }
+.period-card-header { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.period-card b { color: #f4f6ff; font-size: 14px; }
+.period-card span { color: var(--muted); font-size: 11px; line-height: 1.35; }
 .period-badge {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 800; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 7px; font-size: 11px; font-weight: 800; white-space: nowrap;
 }
-.badge-answered { background: rgba(56, 142, 60, .28); color: #9be5bd; border: 1px solid rgba(155, 229, 189, .35); }
-.badge-missed { background: rgba(198, 40, 40, .25); color: #ff94aa; border: 1px solid rgba(255, 148, 170, .35); }
-.badge-waiting { background: rgba(244, 201, 121, .25); color: #f5cb78; border: 1px solid rgba(245, 203, 120, .4); }
-.badge-locked { background: rgba(255, 255, 255, .08); color: var(--muted); border: 1px solid rgba(255, 255, 255, .15); }
-
-.history-title { margin-top: 27px; text-align: center; }
-.history-list { display: grid; gap: 10px; margin-top: 12px; }
-.history-controls { display: grid; gap: 10px; margin-top: 12px; }
+.badge-answered { background: rgba(56, 142, 60, .25); color: #9be5bd; border: 1px solid rgba(155, 229, 189, .3); }
+.badge-missed { background: rgba(198, 40, 40, .22); color: #ff94aa; border: 1px solid rgba(255, 148, 170, .3); }
+.badge-waiting { background: rgba(244, 201, 121, .22); color: #f5cb78; border: 1px solid rgba(245, 203, 120, .35); }
+.badge-locked { background: rgba(255, 255, 255, .07); color: var(--muted); border: 1px solid rgba(255, 255, 255, .12); }
+.history-title { margin-top: 22px; text-align: center; }
+.history-list { display: grid; gap: 8px; margin-top: 10px; }
+.history-controls { display: grid; gap: 8px; margin-top: 10px; }
 .history-controls[hidden] { display: none; }
-.history-week-select { width: 100%; min-height: 46px; padding: 10px 13px; border-radius: 12px; color: var(--text); background: rgba(6, 12, 33, .85); border: 1px solid var(--panel-border); font: inherit; }
-.history-week-card { display: grid; gap: 9px; margin-top: 12px; padding: 14px; border: 1px solid var(--panel-border); border-radius: 14px; background: rgba(6, 12, 33, .45); }
-.history-week-heading { margin: 0 0 2px; font-size: 14px; color: var(--text); text-align: center; }
+.history-week-select { width: 100%; min-height: 42px; padding: 9px 12px; border-radius: 11px; color: var(--text); background: rgba(6, 12, 33, .85); border: 1px solid var(--panel-border); font: inherit; }
+.history-week-card { display: grid; gap: 8px; margin-top: 10px; padding: 12px; border: 1px solid var(--panel-border); border-radius: 12px; background: rgba(6, 12, 33, .45); }
+.history-week-heading { margin: 0 0 2px; font-size: 13px; color: var(--text); text-align: center; }
 .history-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 10px 12px; border-radius: 10px; background: rgba(6, 12, 33, .5);
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 8px 10px; border-radius: 9px; background: rgba(6, 12, 33, .5);
 }
 .history-row strong { display: block; font-size: 13px; }
-.history-row small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
+.history-row small { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
 .result { white-space: nowrap; font-size: 12px; font-weight: 700; }
 .result.good { color: var(--green); }
 .result.bad { color: var(--red); }
 .result.neutral { color: var(--muted); }
 .is-disabled { opacity: .4; pointer-events: none; filter: grayscale(.7); }
-.logout-row { text-align: center; margin-top: 25px; }
-
-/* АДМИНКА */
-.admin-panel { margin-top: 24px; border-color: rgba(244,201,121,.4); }
-.admin-form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin: 16px 0; }
-.admin-field { display: flex; flex-direction: column; gap: 7px; color: #dce5ff; font-size: 12px; }
+.logout-row { text-align: center; margin-top: 20px; }
+.admin-panel { margin-top: 20px; border-color: rgba(244,201,121,.35); }
+.admin-form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin: 14px 0; }
+.admin-field { display: flex; flex-direction: column; gap: 5px; color: #dce5ff; font-size: 12px; }
 .admin-field.full { grid-column: 1 / -1; }
-.admin-field input, .admin-field textarea { width: 100%; border: 1px solid rgba(173,196,255,.3); border-radius: 10px; background: rgba(4,10,28,.85); color: #f4f6ff; padding: 12px; font: inherit; }
-.admin-field textarea { min-height: 120px; resize: vertical; line-height: 1.5; }
-.admin-list { display: grid; gap: 9px; margin-top: 16px; }
-.admin-row { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:12px; border:1px solid var(--panel-border); border-radius:12px; background:rgba(4,10,28,.55); }
-.admin-row small { display:block; color:var(--muted); margin-top:4px; }
-.admin-row-actions { display:flex; gap:6px; flex-wrap:wrap; }
-.admin-row-actions button { border:1px solid var(--panel-border); border-radius:8px; padding:7px 12px; color:var(--text); background:#282f63; cursor:pointer; font-weight:700; }
+.admin-field input, .admin-field textarea { width: 100%; border: 1px solid rgba(173,196,255,.28); border-radius: 9px; background: rgba(4,10,28,.85); color: #f4f6ff; padding: 10px; font: inherit; }
+.admin-list { display: grid; gap: 8px; margin-top: 12px; }
+.admin-row { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding:11px; border:1px solid var(--panel-border); border-radius:11px; background:rgba(4,10,28,.5); }
+.admin-row small { display:block; color:var(--muted); margin-top:3px; }
+.admin-row-actions { display:flex; gap:5px; flex-wrap:wrap; }
+.admin-row-actions button { border:1px solid var(--panel-border); border-radius:7px; padding:6px 10px; color:var(--text); background:#282f63; cursor:pointer; font-weight:700; font-size:12px; }
 .admin-row-actions button.btn-del { background:#7c1a2f; border-color:#b4334c; color:#fff; }
-.admin-row-actions button.btn-del:hover { background:#a1223e; }
-.admin-login-box { max-width:440px; margin:20px auto; text-align: center; }
+.admin-login-box { max-width:420px; margin:18px auto; text-align: center; }
 @media(max-width:600px){.admin-form{grid-template-columns:1fr}.admin-field.full{grid-column:auto}.admin-row{flex-direction:column}}
-footer { text-align: center; padding: 20px 10px 35px; color: #8f9fc8; font-size: 12px; letter-spacing: .08em; }
+footer { text-align: center; padding: 16px 10px 28px; color: #8f9fc8; font-size: 12px; letter-spacing: .06em; }
 [hidden] { display: none !important; }
-
-/* СТАТЬИ «АВАТАРСКОЙ УДАЧИ»: ВЫБОР И РЕДАКТИРОВАНИЕ */
-.article-top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-.article-date-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin: 18px 0; }
-.article-date-button { min-height: 64px; padding: 10px; border: 1px solid rgba(186, 174, 255, .22); border-radius: 13px; background: rgba(7, 13, 36, .6); color: var(--gold); font-size: 16px; font-weight: 800; cursor: pointer; text-align: center; }
+.article-top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.article-date-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin: 14px 0; }
+.article-date-button { min-height: 58px; padding: 9px; border: 1px solid rgba(186, 174, 255, .2); border-radius: 12px; background: rgba(7, 13, 36, .55); color: var(--gold); font-size: 14px; font-weight: 800; cursor: pointer; text-align: center; }
 .article-date-button:hover { border-color: var(--gold); background: #201a4e; }
-.article-date-button small { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; font-weight: 400; }
-
-.article-items-grid { display: grid; gap: 10px; margin: 14px 0; }
+.article-date-button small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; font-weight: 400; }
+.article-items-grid { display: grid; gap: 8px; margin: 12px 0; }
 .article-select-card {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 16px 18px; border: 1px solid rgba(186, 174, 255, .25); border-radius: 14px;
-  background: rgba(10, 18, 48, .75); color: #f4f6ff; cursor: pointer; text-align: left;
-  transition: transform .18s ease, border-color .18s ease;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 13px 15px; border: 1px solid rgba(186, 174, 255, .22); border-radius: 12px;
+  background: rgba(10, 18, 48, .7); color: #f4f6ff; cursor: pointer; text-align: left;
 }
-.article-select-card:hover { transform: translateY(-2px); border-color: var(--gold); background: #1c2454; }
-.article-select-card strong { font-size: 16px; color: var(--gold); }
-.article-select-card span { font-size: 13px; color: var(--muted); }
-
-.article-detail { max-width: 850px; margin: 14px auto 0; }
-.article-detail-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
-.article-reader { padding: clamp(16px, 3vw, 28px); border: 1px solid rgba(186, 174, 255, .2); border-radius: 16px; background: rgba(6, 12, 33, .55); }
-.article-reader h3 { margin: 0 0 14px; color: var(--gold); font-size: 23px; text-align: center; }
-.article-reader-text { color: #e0e7fa; font-size: 15px; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
-.article-reader-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--panel-border); }
-.article-edit-box { margin-top: 18px; padding: 18px; border: 1px solid var(--gold); border-radius: 16px; background: rgba(8, 14, 38, .85); }
+.article-select-card:hover { border-color: var(--gold); background: #1c2454; }
+.article-select-card strong { font-size: 15px; color: var(--gold); }
+.article-select-card span { font-size: 12px; color: var(--muted); }
+.article-detail-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+.article-reader { padding: clamp(14px, 2.8vw, 24px); border: 1px solid rgba(186, 174, 255, .18); border-radius: 14px; background: rgba(6, 12, 33, .5); }
+.article-reader h3 { margin: 0 0 12px; color: var(--gold); font-size: 20px; text-align: center; }
+.article-reader-text { color: #e0e7fa; font-size: 14px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.article-reader-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--panel-border); }
+.article-edit-box { margin-top: 14px; padding: 15px; border: 1px solid var(--gold); border-radius: 14px; background: rgba(8, 14, 38, .8); }
 .article-edit-box h3 { text-align: center; color: var(--gold); margin-top: 0; }
-
-/* ОТВЕТ ДНЯ */
-.today-answer { margin: 20px 0; padding: 22px; border: 1px solid rgba(244,201,121,.4); border-radius: 17px; background: rgba(6, 12, 33, .55); text-align: center; }
-.answer-label { color: var(--gold); font-size: 12px; font-weight: 800; letter-spacing: .12em; margin-bottom: 17px; text-align: center; }
-.today-answer-content h3 { font-size: 22px; color: var(--gold); }
-.answer-large-text { font-size: 17px; line-height: 1.8; color: #f4f6ff; white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; }
-
-/* МОДАЛЬНЫЕ (ДИАЛОГОВЫЕ) ОКНА: ЗАГОЛОВОК СТРОГО ПО ЦЕНТРУ */
+.today-answer { margin: 16px 0; padding: 18px; border: 1px solid rgba(244,201,121,.35); border-radius: 15px; background: rgba(6, 12, 33, .5); text-align: center; }
+.answer-label { color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: .1em; margin-bottom: 14px; text-align: center; }
+.today-answer-content h3 { font-size: 20px; color: var(--gold); }
+.answer-large-text { font-size: 15px; line-height: 1.7; color: #f4f6ff; white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; }
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
-  padding: 18px; background: rgba(1, 4, 16, .86); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  padding: 14px; background: rgba(1, 4, 16, .88); backdrop-filter: blur(7px);
 }
 .portal-modal[hidden] { display: none !important; }
 .portal-modal-dialog {
-  position: relative; width: min(920px, 100%); max-height: 90vh; overflow: auto;
-  padding: clamp(20px, 3.5vw, 32px); border: 1px solid rgba(186, 174, 255, .28); border-radius: 20px;
-  background: #090f2b; box-shadow: 0 24px 80px rgba(0,0,0,.65); overscroll-behavior: contain;
+  position: relative; width: min(900px, 100%); max-height: 90vh; overflow: auto;
+  padding: clamp(16px, 3vw, 26px); border: 1px solid rgba(186, 174, 255, .25); border-radius: 18px;
+  background: #090f2b; box-shadow: 0 20px 70px rgba(0,0,0,.6); overscroll-behavior: contain;
 }
-
-/* КНОПКА ЗАКРЫТИЯ В ВЕРХНЕМ ПРАВОМ УГЛУ */
 .portal-modal-close {
-  position: absolute; top: 16px; right: 16px; z-index: 10; width: 40px; height: 40px;
-  border: 1px solid rgba(255,255,255,.2); border-radius: 11px;
-  color: #fff; background: #2c2957; font-size: 24px; line-height: 1; cursor: pointer;
+  position: absolute; top: 12px; right: 12px; z-index: 10; width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,.18); border-radius: 10px;
+  color: #fff; background: #2c2957; font-size: 22px; line-height: 1; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
 }
 .portal-modal-close:hover { background: #3d3978; }
-
-/* НАЗВАНИЕ ДИАЛОГОВОГО ОКНА: СТРОГО ПО ЦЕНТРУ */
 .portal-modal-title {
-  margin: 0 0 20px 0;
-  text-align: center;
-  color: var(--gold);
-  font-size: clamp(22px, 3.5vw, 28px);
-  width: 100%;
+  margin: 0 0 16px 0; text-align: center; color: var(--gold);
+  font-size: clamp(20px, 3.2vw, 26px); width: 100%;
 }
 .portal-modal-content { clear: both; width: 100%; }
 body.portal-modal-open { overflow: hidden; }
-
-/* СЛУЖЕБНЫЙ ВХОД WEZY */
 .admin-entry .wezy-admin-entry { display: none !important; }
-.wezy-secret-entry { display: inline-block; margin: 8px 0 0 10px; color: #9aa9ca; font-size: 11px; opacity: .45; text-decoration: underline; cursor: pointer; }
+.wezy-secret-entry { display: inline-block; margin: 6px 0 0 8px; color: #9aa9ca; font-size: 11px; opacity: .4; text-decoration: underline; cursor: pointer; }
 .wezy-secret-entry:hover { opacity: 1; color: var(--gold); }
+.event-card {
+  padding: 14px 16px; border: 1px solid rgba(186,174,255,.18); border-radius: 13px;
+  background: rgba(8,14,38,.5); cursor: pointer; transition: border-color .18s;
+}
+.event-card:hover { border-color: rgba(244,201,121,.5); }
+.event-card h3 { margin: 4px 0 6px; font-size: 16px; color: var(--gold); }
+.event-card .event-meta { font-size: 12px; color: var(--muted); }
+.event-detail-links a {
+  display: inline-block; margin: 4px 8px 4px 0; color: #82aaff; font-size: 13px; word-break: break-all;
+}
+.task-list { display: grid; gap: 8px; margin: 14px 0; }
+.task-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 12px; border-radius: 10px; background: rgba(6,12,33,.55);
+  border: 1px solid rgba(186,174,255,.12);
+}
+.task-item.done { opacity: .75; }
+.task-item input[type="checkbox"] { margin-top: 3px; width: 18px; height: 18px; accent-color: #9be5bd; }
+.task-item .task-text { flex: 1; font-size: 14px; line-height: 1.4; }
+.task-item .task-actions { display: flex; gap: 4px; }
+.task-item .task-actions button {
+  border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 14px; padding: 2px 5px;
+}
+.task-item .task-actions button:hover { color: var(--red); }
+.progress-bar-wrap {
+  margin: 12px 0 6px; height: 10px; background: rgba(255,255,255,.08);
+  border-radius: 6px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; background: linear-gradient(90deg, #6bbcff, #9be5bd);
+  border-radius: 6px; transition: width .3s ease;
+}
+.progress-label { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 10px; }
+.add-task-row { display: flex; gap: 8px; margin-top: 10px; }
+.add-task-row input { flex: 1; }
   </style>
 </head>
 <body>
   <div class="winter-lights-big" aria-hidden="true"></div>
   <div class="winter-snow" aria-hidden="true"></div>
-  <div class="winter-firework one" aria-hidden="true"></div>
-  <div class="winter-firework two" aria-hidden="true"></div>
   <div class="winter-snowman" aria-hidden="true">⛄</div>
 
   <header class="site-header">
@@ -444,7 +357,6 @@ body.portal-modal-open { overflow: hidden; }
         <div class="welcome-bottom">Рады видеть тебя снова <span>🐿️</span></div>
       </section>
 
-      <!-- 3 В ВЕРХНЕМ РЯДУ, ИВЕНТЫ ПРОЕКТОВ ПО ЦЕНТРУ ВО 2-М РЯДУ -->
       <nav class="section-grid" aria-label="Разделы портала">
         <button class="section-card" data-target="immunitySection">
           <span class="section-emoji">🛡️</span>
@@ -464,11 +376,10 @@ body.portal-modal-open { overflow: hidden; }
         <button class="section-card events-nav-card" data-target="eventsSection">
           <span class="section-emoji">🏆</span>
           <strong>Ивенты проектов</strong>
-          <small>События и проекты</small>
+          <small>События и задания</small>
         </button>
       </nav>
 
-      <!-- РАЗДЕЛ: ИММУНИТЕТ -->
       <section class="panel content-section" id="immunitySection" hidden>
         <div class="section-heading">
           <span class="section-emoji small">🛡️</span>
@@ -486,14 +397,11 @@ body.portal-modal-open { overflow: hidden; }
           <button class="button button-secondary" id="answeredButton" onclick="markAnswered()">Я ответил на иммунитет</button>
         </div>
         <div class="status-line" id="immunityStatus"></div>
-
-        <div class="participant-status-panel" style="margin-top:24px;">
+        <div class="participant-status-panel" style="margin-top:20px;">
           <h3 style="text-align:center;">👥 Кто ответил на иммунитет</h3>
           <p class="muted" style="text-align:center;">Список ответивших и тех, кто ещё не отметил ответ.</p>
           <div class="admin-form">
-            <label class="admin-field">Неделя начала
-              <input type="date" id="participantStatusWeek">
-            </label>
+            <label class="admin-field">Неделя начала<input type="date" id="participantStatusWeek"></label>
             <label class="admin-field">День иммунитета
               <select id="participantStatusDay">
                 <option value="1">День 1 · Пн–Вт</option>
@@ -508,49 +416,36 @@ body.portal-modal-open { overflow: hidden; }
           </div>
           <div class="admin-list" id="participantStatusResult" aria-live="polite"></div>
         </div>
-
         <h3 class="history-title">Моя история участия</h3>
         <div style="text-align:center;">
           <button class="button button-secondary" id="historyToggle" type="button" aria-expanded="false">📖 История участия</button>
         </div>
         <div id="historyPanel" class="history-controls" hidden>
           <label class="muted" for="historyWeekSelect" style="text-align:center;display:block;">Выберите неделю:</label>
-          <select id="historyWeekSelect" class="history-week-select">
-            <option value="">Загружаем недели…</option>
-          </select>
+          <select id="historyWeekSelect" class="history-week-select"><option value="">Загружаем недели…</option></select>
           <div id="historyList" class="history-list"><div class="loading">Загружаем историю…</div></div>
         </div>
       </section>
 
-      <!-- РАЗДЕЛ: АВАТАРСКАЯ УДАЧА -->
       <section class="panel content-section" id="articlesSection" hidden>
         <div class="section-heading">
           <span class="section-emoji small">📚</span>
           <h2>Аватарская удача</h2>
           <p>Архив за все даты. Выберите дату и кликните на название нужной публикации.</p>
         </div>
-
         <div class="article-top-bar">
           <button class="button button-primary" type="button" onclick="openArticleEditor()">➕ Добавить новую статью</button>
           <span class="muted" id="articlesTotalCount"></span>
         </div>
-
-        <!-- 1. СЕТКА ДАТ (АРХИВ ЗА ВСЕ ДАТЫ) -->
-        <div id="articleDatesView">
-          <div id="articleDates" class="article-date-grid"></div>
-        </div>
-
-        <!-- 2. СПИСОК СТАТЕЙ ЗА ВЫБРАННУЮ ДАТУ -->
+        <div id="articleDatesView"><div id="articleDates" class="article-date-grid"></div></div>
         <div id="articleDayView" hidden>
           <div class="article-detail-top">
             <button class="button button-quiet" type="button" onclick="backToDateGrid()">← Все даты архива</button>
-            <strong id="articleDayHeader" class="publication-date" style="font-size:16px;"></strong>
+            <strong id="articleDayHeader" class="publication-date" style="font-size:15px;"></strong>
           </div>
           <p class="muted" style="text-align:center;">Нажмите на название статьи, чтобы открыть её текст:</p>
           <div id="articleDayList" class="article-items-grid"></div>
         </div>
-
-        <!-- 3. ПРОСМОТР КОНКРЕТНОЙ СТАТЬИ -->
         <div id="articleReaderView" hidden>
           <div class="article-detail-top">
             <button class="button button-quiet" type="button" onclick="backToDayList()">← К списку статей за эту дату</button>
@@ -558,8 +453,6 @@ body.portal-modal-open { overflow: hidden; }
           </div>
           <div id="articleReaderContent"></div>
         </div>
-
-        <!-- 4. ФОРМА ДОБАВЛЕНИЯ / РЕДАКТИРОВАНИЯ СТАТЬИ -->
         <div id="articleEditorBox" class="article-edit-box" hidden>
           <h3 id="articleEditorTitle">Добавить статью</h3>
           <form id="publicArticleForm" class="admin-form">
@@ -571,12 +464,12 @@ body.portal-modal-open { overflow: hidden; }
               <input type="text" id="articleAlbumNumber" placeholder="Например: 12">
             </label>
             <label class="admin-field full">Заголовок статьи
-              <input type="text" id="articleTitleInput" placeholder="Например: Билеты для мини-игр или Статьи Аватарской удачи" required>
+              <input type="text" id="articleTitleInput" placeholder="Заголовок" required>
             </label>
             <label class="admin-field full">Текст статьи
-              <textarea id="articleTextInput" placeholder="Полный текст публикации…" required></textarea>
+              <textarea id="articleTextInput" placeholder="Полный текст…" required></textarea>
             </label>
-            <label class="admin-field full">Ссылка на фотоальбом или статью (необязательно)
+            <label class="admin-field full">Ссылка на фотоальбом или статью
               <input type="url" id="articleLinkInput" placeholder="https://vk.com/album...">
             </label>
             <div class="full" style="text-align:center;">
@@ -588,12 +481,11 @@ body.portal-modal-open { overflow: hidden; }
         </div>
       </section>
 
-      <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ -->
       <section class="panel content-section" id="eventsSection" hidden>
         <div class="section-heading">
           <span class="section-emoji small">🏆</span>
           <h2>Ивенты проектов</h2>
-          <p>События, проекты и объявления.</p>
+          <p>Выберите ивент, чтобы посмотреть детали, ссылки и свои задания.</p>
         </div>
         <div id="eventsList" class="publication-list"></div>
       </section>
@@ -601,7 +493,6 @@ body.portal-modal-open { overflow: hidden; }
       <div class="logout-row"><button class="button button-quiet" onclick="logout()">Выйти из личного кабинета</button></div>
     </section>
 
-    <!-- ПАНЕЛЬ АДМИНИСТРАТОРА -->
     <section class="panel admin-panel" id="adminPanel" hidden>
       <div class="section-heading">
         <span class="section-emoji small">⚙️</span>
@@ -610,9 +501,7 @@ body.portal-modal-open { overflow: hidden; }
       </div>
       <form id="adminAnswerForm" class="admin-form">
         <input type="hidden" id="adminRow" value="">
-        <label class="admin-field">Неделя ответа
-          <select id="adminAnswerWeek" required></select>
-        </label>
+        <label class="admin-field">Неделя ответа<select id="adminAnswerWeek" required></select></label>
         <label class="admin-field">День недели
           <select id="adminAnswerDay" required>
             <option value="0">День 1 · Пн–Вт</option>
@@ -621,19 +510,17 @@ body.portal-modal-open { overflow: hidden; }
             <option value="3">День 4 · Чт–Пт</option>
           </select>
         </label>
-
         <input type="hidden" id="adminDate" value="">
         <label class="admin-field">Заголовок<input id="adminTitle" type="text" placeholder="Например: Ответ на 23.11"></label>
         <label class="admin-field full">Текст ответа<textarea id="adminText" placeholder="Полный текст ответа…" required></textarea></label>
-        <label class="admin-field full">Ссылки на изображения<input id="adminImages" type="text" placeholder="Ссылки через точку с запятой ;"></label>
+        <label class="admin-field full">Ссылки на изображения<input id="adminImages" type="text" placeholder="Ссылки через ;"></label>
         <div class="full" style="text-align:center;">
           <button class="button button-primary" type="submit" id="adminSaveButton">Сохранить ответ</button>
           <button class="button button-quiet" type="button" onclick="adminResetForm()">Очистить форму</button>
         </div>
       </form>
       <div class="status-line" id="adminMessage" aria-live="polite"></div>
-
-      <div class="admin-list-heading" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:20px;">
+      <div class="admin-list-heading" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:18px;">
         <h3>Ответы в базе</h3>
         <div style="display:flex;gap:6px;">
           <button class="button button-quiet" type="button" onclick="triggerManualArchive()">📦 В архив сейчас</button>
@@ -641,8 +528,7 @@ body.portal-modal-open { overflow: hidden; }
         </div>
       </div>
       <div class="admin-list" id="adminAnswersList"><div class="loading">Загрузка списка…</div></div>
-      <hr style="border:0;border-top:1px solid var(--panel-border);margin:22px 0">
-
+      <hr style="border:0;border-top:1px solid var(--panel-border);margin:18px 0">
       <h3 style="text-align:center;">Ручное добавление участия</h3>
       <form id="adminManualHistoryForm" class="admin-form">
         <label class="admin-field">Участник<select id="manualParticipant" required><option value="">Загрузка…</option></select></label>
@@ -658,7 +544,7 @@ body.portal-modal-open { overflow: hidden; }
         <label class="admin-field">Результат<select id="manualResult"><option value="Ответил">Ответил</option><option value="Не ответил">Не ответил</option></select></label>
         <div class="full" style="text-align:center;"><button class="button button-primary" type="submit" id="manualHistorySave">Добавить отметку</button></div>
       </form>
-      <div style="text-align:center;margin-top:15px;"><button class="button button-quiet" type="button" onclick="adminLogout()">Выйти из админ-панели</button></div>
+      <div style="text-align:center;margin-top:12px;"><button class="button button-quiet" type="button" onclick="adminLogout()">Выйти из админ-панели</button></div>
     </section>
   </main>
 
@@ -675,10 +561,36 @@ body.portal-modal-open { overflow: hidden; }
     <div class="status-line" id="adminLoginMessage"></div>
   </section>
 
-  <!-- МОДАЛЬНОЕ ДИАЛОГОВОЕ ОКНО С ВЫРАВНИВАНИЕМ ПО ЦЕНТРУ -->
+  <section class="panel admin-login-box" id="wezyLoginBox" hidden>
+    <h2>🎄 Служебный вход Wezy</h2>
+    <label class="admin-field">Пароль Wezy<input id="wezyPassword" type="password" placeholder="Введите пароль"></label>
+    <button class="button button-primary" type="button" onclick="wezyLogin()">Войти</button>
+    <button class="button button-quiet" type="button" onclick="closeWezyLogin()">Отмена</button>
+    <div class="status-line" id="wezyLoginMessage"></div>
+  </section>
+
+  <section class="panel admin-panel" id="wezyPanel" hidden>
+    <div class="section-heading">
+      <span class="section-emoji small">🎄</span>
+      <h2>Панель Wezy</h2>
+      <p>Управление ивентами и заданиями участников</p>
+    </div>
+    <h3 style="text-align:center;">Выбор участника для просмотра/редактирования</h3>
+    <div class="admin-form">
+      <label class="admin-field full">Участник
+        <select id="wezyParticipantSelect"><option value="">Выберите участника</option></select>
+      </label>
+    </div>
+    <h3 style="text-align:center;margin-top:18px;">Ивенты</h3>
+    <div id="wezyEventsList" class="admin-list"></div>
+    <div style="text-align:center;margin-top:16px;">
+      <button class="button button-quiet" type="button" onclick="wezyLogout()">Выйти из панели Wezy</button>
+    </div>
+  </section>
+
   <div class="portal-modal" id="portalModal" hidden>
     <div class="portal-modal-dialog" id="portalModalDialog" role="dialog" aria-modal="true" aria-labelledby="portalModalTitle">
-      <button class="portal-modal-close" type="button" aria-label="Закрыть окно" onclick="closePortalModal()">×</button>
+      <button class="portal-modal-close" type="button" aria-label="Закрыть" onclick="closePortalModal()">×</button>
       <h2 class="portal-modal-title" id="portalModalTitle">Информация</h2>
       <div class="portal-modal-content" id="portalModalContent"></div>
     </div>
@@ -686,6 +598,10 @@ body.portal-modal-open { overflow: hidden; }
 
 <script>
 let currentUser = null;
+let wezyToken = sessionStorage.getItem('perforator_wezy_token') || '';
+let currentEventKey = null;
+let currentEventData = null;
+let personalTasks = [];
 const $ = id => document.getElementById(id);
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwbGOE4Q2Z6kL4BoAj0r6e0OmCSsgijdU26bWVfYpQC0kV5rkdd4XSPZ_qRSGFqX_kC/exec';
 let apiCounter = 0;
@@ -695,32 +611,16 @@ function apiCall(action, params = {}) {
     const callback = '__perforatoryCallback' + (++apiCounter);
     const script = document.createElement('script');
     let finished = false;
-    let timeout = setTimeout(() => {
-      cleanup();
-      reject(new Error('Сервер не ответил за 20 секунд. Проверьте подключение.'));
-    }, 20000);
-    const cleanup = () => {
-      if (finished) return;
-      finished = true;
-      delete window[callback];
-      script.remove();
-      clearTimeout(timeout);
-    };
+    let timeout = setTimeout(() => { cleanup(); reject(new Error('Сервер не ответил за 20 секунд.')); }, 20000);
+    const cleanup = () => { if (finished) return; finished = true; delete window[callback]; script.remove(); clearTimeout(timeout); };
     window[callback] = response => {
-      if (finished) return;
-      cleanup();
-      if (!response || response.success !== true) {
-        reject(new Error(response && response.error ? response.error : 'Ошибка сервера.'));
-        return;
-      }
+      if (finished) return; cleanup();
+      if (!response || response.success !== true) { reject(new Error(response && response.error ? response.error : 'Ошибка сервера.')); return; }
       resolve(response.data);
     };
     const query = new URLSearchParams({ action, callback });
     Object.entries(params).forEach(([key, value]) => query.set(key, String(value ?? '')));
-    script.onerror = () => {
-      cleanup();
-      reject(new Error('Не удалось подключиться к Google Apps Script.'));
-    };
+    script.onerror = () => { cleanup(); reject(new Error('Не удалось подключиться к Google Apps Script.')); };
     script.src = GAS_API_URL + '?' + query.toString();
     document.body.appendChild(script);
   });
@@ -772,12 +672,10 @@ async function loadPortal() {
     const data = await apiCall('portal', { id: currentUser.id });
     renderImmunity(data.immunity || {}, data.history || [], data.status || {});
     renderArticleArchive(data.articles || []);
-    renderPublications('eventsList', data.events || [], 'Пока нет опубликованных ивентов проектов.');
+    renderEvents(data.events || []);
     renderHistory(data.history || []);
     renderStatus(data.status || {});
-  } catch (err) {
-    console.error(err);
-  }
+  } catch (err) { console.error(err); }
 }
 
 function renderImmunity(data, historyItems, status) {
@@ -786,481 +684,303 @@ function renderImmunity(data, historyItems, status) {
   if (data.todayAnswer) {
     const card = document.createElement('article');
     card.className = 'today-answer-content';
-    const date = document.createElement('div');
-    date.className = 'publication-date';
-    date.textContent = data.todayAnswer.date || '';
-    const title = document.createElement('h3');
-    title.textContent = data.todayAnswer.title || 'Ответ на сегодня';
-    const text = document.createElement('div');
-    text.className = 'answer-large-text';
+    const date = document.createElement('div'); date.className = 'publication-date'; date.textContent = data.todayAnswer.date || '';
+    const title = document.createElement('h3'); title.textContent = data.todayAnswer.title || 'Ответ на сегодня';
+    const text = document.createElement('div'); text.className = 'answer-large-text';
     appendTextWithLinks(text, data.todayAnswer.text || '');
-    card.append(date, title, text);
-    today.appendChild(card);
+    card.append(date, title, text); today.appendChild(card);
   } else {
     today.innerHTML = '<div class="empty-state compact">Ответ на сегодня ещё не опубликован.</div>';
   }
-
-  const dates = $('immunityDates');
-  dates.replaceChildren();
-
-  const now = Date.now();
-  const currentWeek = status.week || '';
+  const dates = $('immunityDates'); dates.replaceChildren();
+  const now = Date.now(); const currentWeek = status.week || '';
   const answeredDays = new Set();
-  (historyItems || []).forEach(item => {
-    if (item.week === currentWeek && item.result === 'Ответил') {
-      answeredDays.add(Number(item.period));
-    }
-  });
-
+  (historyItems || []).forEach(item => { if (item.week === currentWeek && item.result === 'Ответил') answeredDays.add(Number(item.period)); });
   (data.dates || []).forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'period-card';
-    card.id = 'period' + item.number;
-
-    const isActive = (status.period === item.number);
-    card.classList.toggle('active', isActive);
-
+    const card = document.createElement('div'); card.className = 'period-card'; card.id = 'period' + item.number;
+    const isActive = (status.period === item.number); card.classList.toggle('active', isActive);
     const isAnswered = answeredDays.has(item.number);
     const isPast = (item.endTimestamp && now > item.endTimestamp);
     const isFuture = (item.startTimestamp && now < item.startTimestamp);
-
-    let badgeClass = 'badge-locked';
-    let badgeText = '🔒 День не наступил';
-
-    if (isAnswered) {
-      badgeClass = 'badge-answered';
-      badgeText = '✅ Ответил';
-    } else if (isActive) {
-      badgeClass = 'badge-waiting';
-      badgeText = '⏳ Ожидание ответа';
-    } else if (isPast) {
-      badgeClass = 'badge-missed';
-      badgeText = '❌ Не ответил';
-    } else if (isFuture) {
-      badgeClass = 'badge-locked';
-      badgeText = '🔒 День не наступил';
-    }
-
-    const header = document.createElement('div');
-    header.className = 'period-card-header';
-
-    const title = document.createElement('b');
-    title.textContent = 'День ' + item.number + ' · ' + (item.label || '');
-
-    const badge = document.createElement('div');
-    badge.className = 'period-badge ' + badgeClass;
-    badge.textContent = badgeText;
-
+    let badgeClass = 'badge-locked', badgeText = '🔒 День не наступил';
+    if (isAnswered) { badgeClass = 'badge-answered'; badgeText = '✅ Ответил'; }
+    else if (isActive) { badgeClass = 'badge-waiting'; badgeText = '⏳ Ожидание ответа'; }
+    else if (isPast) { badgeClass = 'badge-missed'; badgeText = '❌ Не ответил'; }
+    else if (isFuture) { badgeClass = 'badge-locked'; badgeText = '🔒 День не наступил'; }
+    const header = document.createElement('div'); header.className = 'period-card-header';
+    const title = document.createElement('b'); title.textContent = 'День ' + item.number + ' · ' + (item.label || '');
+    const badge = document.createElement('div'); badge.className = 'period-badge ' + badgeClass; badge.textContent = badgeText;
     header.append(title, badge);
-
-    const span = document.createElement('span');
-    span.textContent = item.start + ' 12:00 — ' + item.end + ' 12:00';
-
-    card.append(header, span);
-    dates.appendChild(card);
+    const span = document.createElement('span'); span.textContent = item.start + ' 12:00 — ' + item.end + ' 12:00';
+    card.append(header, span); dates.appendChild(card);
   });
 }
 
-// ---------------- АВАТАРСКАЯ УДАЧА: ПОЛНЫЙ АРХИВ ЗА ВСЕ ДАТЫ И ВЫБОР СТАТЬИ ----------------
-let cachedArticles = [];
-let currentSelectedDateKey = null;
+let cachedArticles = []; let currentSelectedDateKey = null;
 
 function renderArticleArchive(items) {
   cachedArticles = items || [];
-  const target = $('articleDates');
-  target.replaceChildren();
-
+  const target = $('articleDates'); target.replaceChildren();
   $('articlesTotalCount').textContent = cachedArticles.length ? `Всего статей в базе: ${cachedArticles.length}` : '';
-
-  // Сбор всех уникальных дат (и 13.11, и старых, и новых)
   const dateMap = new Map();
-  cachedArticles.forEach(item => {
-    if (item.dateKey && !dateMap.has(item.dateKey)) {
-      dateMap.set(item.dateKey, { key: item.dateKey, label: item.date || item.dateKey });
-    }
-  });
-
+  cachedArticles.forEach(item => { if (item.dateKey && !dateMap.has(item.dateKey)) dateMap.set(item.dateKey, { key: item.dateKey, label: item.date || item.dateKey }); });
   const visibleDates = Array.from(dateMap.values()).sort((a, b) => b.key.localeCompare(a.key));
-  if (!visibleDates.length) {
-    target.innerHTML = '<div class="empty-state compact">Статей пока нет. Нажмите «➕ Добавить новую статью», чтобы добавить первую!</div>';
-    return;
-  }
-
+  if (!visibleDates.length) { target.innerHTML = '<div class="empty-state compact">Статей пока нет.</div>'; return; }
   visibleDates.forEach(dateInfo => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'article-date-button';
-    button.textContent = dateInfo.label;
-
+    const button = document.createElement('button'); button.type = 'button'; button.className = 'article-date-button'; button.textContent = dateInfo.label;
     const count = cachedArticles.filter(item => item.dateKey === dateInfo.key).length;
-    const small = document.createElement('small');
-    small.textContent = count + (count === 1 ? ' статья' : (count >= 2 && count <= 4 ? ' статьи' : ' статей'));
-    button.appendChild(small);
-
-    button.onclick = () => openDateArticles(dateInfo);
-    target.appendChild(button);
+    const small = document.createElement('small'); small.textContent = count + (count === 1 ? ' статья' : (count >= 2 && count <= 4 ? ' статьи' : ' статей'));
+    button.appendChild(small); button.onclick = () => openDateArticles(dateInfo); target.appendChild(button);
   });
 }
 
 function openDateArticles(dateInfo) {
   currentSelectedDateKey = dateInfo.key;
-  $('articleDatesView').hidden = true;
-  $('articleReaderView').hidden = true;
-  $('articleEditorBox').hidden = true;
-  $('articleDayView').hidden = false;
-
+  $('articleDatesView').hidden = true; $('articleReaderView').hidden = true; $('articleEditorBox').hidden = true; $('articleDayView').hidden = false;
   $('articleDayHeader').textContent = 'Публикации за ' + dateInfo.label;
-  const list = $('articleDayList');
-  list.replaceChildren();
-
+  const list = $('articleDayList'); list.replaceChildren();
   const dayArticles = cachedArticles.filter(item => item.dateKey === dateInfo.key);
-  if (!dayArticles.length) {
-    list.innerHTML = '<div class="empty-state compact">За эту дату статей не найдено.</div>';
-    return;
-  }
-
+  if (!dayArticles.length) { list.innerHTML = '<div class="empty-state compact">За эту дату статей не найдено.</div>'; return; }
   dayArticles.forEach(article => {
-    const card = document.createElement('div');
-    card.className = 'article-select-card';
-    card.innerHTML = `
-      <div>
-        <strong>📖 ${article.title}</strong>
-        ${article.albumNumber ? `<span> · Фотоальбом №${article.albumNumber}</span>` : ''}
-        <div style="margin-top:4px;color:#a9b8e8;font-size:12px;">${(article.text || '').slice(0, 95)}…</div>
-      </div>
-      <div style="font-size:20px;color:var(--gold);">➔</div>
-    `;
-    card.onclick = () => openSingleArticle(article);
-    list.appendChild(card);
+    const card = document.createElement('div'); card.className = 'article-select-card';
+    card.innerHTML = `<div><strong>📖 ${article.title}</strong>${article.albumNumber ? `<span> · Фотоальбом №${article.albumNumber}</span>` : ''}<div style="margin-top:3px;color:#a9b8e8;font-size:12px;">${(article.text || '').slice(0, 90)}…</div></div><div style="font-size:18px;color:var(--gold);">➔</div>`;
+    card.onclick = () => openSingleArticle(article); list.appendChild(card);
   });
 }
 
 function openSingleArticle(article) {
-  $('articleDayView').hidden = true;
-  $('articleEditorBox').hidden = true;
-  $('articleReaderView').hidden = false;
-
+  $('articleDayView').hidden = true; $('articleEditorBox').hidden = true; $('articleReaderView').hidden = false;
   $('articleReaderDate').textContent = article.date || '';
-  const content = $('articleReaderContent');
-  content.replaceChildren();
-
-  const wrap = document.createElement('article');
-  wrap.className = 'article-reader';
-
-  const title = document.createElement('h3');
-  title.textContent = article.title || 'Без названия';
-
-  const text = document.createElement('div');
-  text.className = 'article-reader-text';
-  appendTextWithLinks(text, article.text || '');
-
+  const content = $('articleReaderContent'); content.replaceChildren();
+  const wrap = document.createElement('article'); wrap.className = 'article-reader';
+  const title = document.createElement('h3'); title.textContent = article.title || 'Без названия';
+  const text = document.createElement('div'); text.className = 'article-reader-text'; appendTextWithLinks(text, article.text || '');
   wrap.append(title, text);
-
   if (article.link) {
-    const linkBtn = document.createElement('a');
-    linkBtn.href = article.link;
-    linkBtn.target = '_blank';
-    linkBtn.rel = 'noopener';
-    linkBtn.className = 'button button-primary';
-    linkBtn.style.marginTop = '18px';
+    const linkBtn = document.createElement('a'); linkBtn.href = article.link; linkBtn.target = '_blank'; linkBtn.rel = 'noopener';
+    linkBtn.className = 'button button-primary'; linkBtn.style.marginTop = '14px';
     linkBtn.textContent = article.albumNumber ? `📷 Открыть фотоальбом №${article.albumNumber} ↗` : '🔗 Открыть ссылку ↗';
     wrap.appendChild(linkBtn);
   }
-
-  const actions = document.createElement('div');
-  actions.className = 'article-reader-actions';
-
-  const editBtn = document.createElement('button');
-  editBtn.className = 'button button-secondary';
-  editBtn.type = 'button';
-  editBtn.textContent = '✏️ Редактировать статью';
+  const actions = document.createElement('div'); actions.className = 'article-reader-actions';
+  const editBtn = document.createElement('button'); editBtn.className = 'button button-secondary'; editBtn.type = 'button'; editBtn.textContent = '✏️ Редактировать';
   editBtn.onclick = () => openArticleEditor(article);
-
-  const delBtn = document.createElement('button');
-  delBtn.className = 'button button-danger';
-  delBtn.type = 'button';
-  delBtn.textContent = '🗑️ Удалить';
+  const delBtn = document.createElement('button'); delBtn.className = 'button button-danger'; delBtn.type = 'button'; delBtn.textContent = '🗑️ Удалить';
   delBtn.onclick = () => deleteArticle(article);
-
-  actions.append(editBtn, delBtn);
-  wrap.appendChild(actions);
-
-  content.appendChild(wrap);
+  actions.append(editBtn, delBtn); wrap.appendChild(actions); content.appendChild(wrap);
 }
 
-function backToDateGrid() {
-  $('articleDayView').hidden = true;
-  $('articleReaderView').hidden = true;
-  $('articleEditorBox').hidden = true;
-  $('articleDatesView').hidden = false;
-}
-
+function backToDateGrid() { $('articleDayView').hidden = true; $('articleReaderView').hidden = true; $('articleEditorBox').hidden = true; $('articleDatesView').hidden = false; }
 function backToDayList() {
-  $('articleReaderView').hidden = true;
-  $('articleEditorBox').hidden = true;
-  if (currentSelectedDateKey) {
-    const item = cachedArticles.find(a => a.dateKey === currentSelectedDateKey);
-    openDateArticles({ key: currentSelectedDateKey, label: item ? item.date : '' });
-  } else {
-    backToDateGrid();
-  }
+  $('articleReaderView').hidden = true; $('articleEditorBox').hidden = true;
+  if (currentSelectedDateKey) { const item = cachedArticles.find(a => a.dateKey === currentSelectedDateKey); openDateArticles({ key: currentSelectedDateKey, label: item ? item.date : '' }); }
+  else backToDateGrid();
 }
 
 function openArticleEditor(article = null) {
-  $('articleDatesView').hidden = true;
-  $('articleDayView').hidden = true;
-  $('articleReaderView').hidden = true;
-  $('articleEditorBox').hidden = false;
-
+  $('articleDatesView').hidden = true; $('articleDayView').hidden = true; $('articleReaderView').hidden = true; $('articleEditorBox').hidden = false;
   $('articleEditorMessage').textContent = '';
   if (article) {
-    $('articleEditorTitle').textContent = 'Редактировать статью: ' + article.title;
-    $('articleRow').value = article.row || '';
-    $('articleDateInput').value = article.date || '';
-    $('articleAlbumNumber').value = article.albumNumber || '';
-    $('articleTitleInput').value = article.title || '';
-    $('articleTextInput').value = article.text || '';
-    $('articleLinkInput').value = article.link || '';
+    $('articleEditorTitle').textContent = 'Редактировать: ' + article.title;
+    $('articleRow').value = article.row || ''; $('articleDateInput').value = article.date || '';
+    $('articleAlbumNumber').value = article.albumNumber || ''; $('articleTitleInput').value = article.title || '';
+    $('articleTextInput').value = article.text || ''; $('articleLinkInput').value = article.link || '';
     $('articleSaveBtn').textContent = 'Сохранить изменения';
   } else {
-    $('articleEditorTitle').textContent = 'Новая статья «Аватарской удачи»';
-    $('articleRow').value = '';
-    const now = new Date();
+    $('articleEditorTitle').textContent = 'Новая статья';
+    $('articleRow').value = ''; const now = new Date();
     const todayStr = String(now.getDate()).padStart(2, '0') + '.' + String(now.getMonth() + 1).padStart(2, '0') + '.' + now.getFullYear();
-    $('articleDateInput').value = todayStr;
-    $('articleAlbumNumber').value = '';
-    $('articleTitleInput').value = '';
-    $('articleTextInput').value = '';
-    $('articleLinkInput').value = '';
-    $('articleSaveBtn').textContent = 'Опубликовать статью';
+    $('articleDateInput').value = todayStr; $('articleAlbumNumber').value = ''; $('articleTitleInput').value = '';
+    $('articleTextInput').value = ''; $('articleLinkInput').value = ''; $('articleSaveBtn').textContent = 'Опубликовать';
   }
 }
 
-function closeArticleEditor() {
-  $('articleEditorBox').hidden = true;
-  if (currentSelectedDateKey) {
-    backToDayList();
-  } else {
-    backToDateGrid();
-  }
-}
+function closeArticleEditor() { $('articleEditorBox').hidden = true; if (currentSelectedDateKey) backToDayList(); else backToDateGrid(); }
 
 $('publicArticleForm').addEventListener('submit', async e => {
-  e.preventDefault();
-  if (!currentUser) return;
-  const btn = $('articleSaveBtn');
-  btn.disabled = true;
-  $('articleEditorMessage').textContent = 'Сохраняем…';
-
+  e.preventDefault(); if (!currentUser) return;
+  const btn = $('articleSaveBtn'); btn.disabled = true; $('articleEditorMessage').textContent = 'Сохраняем…';
   try {
     const res = await apiCall('saveArticle', {
-      id: currentUser.id,
-      row: $('articleRow').value,
-      date: $('articleDateInput').value,
-      title: $('articleTitleInput').value,
-      text: $('articleTextInput').value,
-      link: $('articleLinkInput').value,
-      albumNumber: $('articleAlbumNumber').value
+      id: currentUser.id, row: $('articleRow').value, date: $('articleDateInput').value,
+      title: $('articleTitleInput').value, text: $('articleTextInput').value,
+      link: $('articleLinkInput').value, albumNumber: $('articleAlbumNumber').value
     });
-
-    $('articleEditorMessage').textContent = res.message || 'Статья сохранена!';
-    $('articleEditorMessage').className = 'status-line success';
-    cachedArticles = res.articles || [];
-    renderArticleArchive(cachedArticles);
-
-    setTimeout(() => {
-      closeArticleEditor();
-    }, 800);
-  } catch (err) {
-    $('articleEditorMessage').textContent = err.message || 'Ошибка сохранения.';
-    $('articleEditorMessage').className = 'status-line error';
-  } finally {
-    btn.disabled = false;
-  }
+    $('articleEditorMessage').textContent = res.message || 'Сохранено!'; $('articleEditorMessage').className = 'status-line success';
+    cachedArticles = res.articles || []; renderArticleArchive(cachedArticles);
+    setTimeout(() => closeArticleEditor(), 700);
+  } catch (err) { $('articleEditorMessage').textContent = err.message || 'Ошибка.'; $('articleEditorMessage').className = 'status-line error'; }
+  finally { btn.disabled = false; }
 });
 
 async function deleteArticle(article) {
   if (!confirm(`Удалить статью «${article.title}»?`)) return;
-  try {
-    const res = await apiCall('deleteArticle', {
-      id: currentUser.id,
-      row: article.row
-    });
-    cachedArticles = res.articles || [];
-    renderArticleArchive(cachedArticles);
-    backToDateGrid();
-  } catch (e) {
-    alert(e.message || 'Ошибка удаления.');
-  }
-}
-
-function renderPublications(targetId, items, emptyText) {
-  const target = $(targetId);
-  target.replaceChildren();
-  if (!items || !items.length) {
-    target.innerHTML = `<div class="empty-state compact">${emptyText}</div>`;
-    return;
-  }
-  items.forEach(item => {
-    const article = document.createElement('article');
-    article.className = 'publication';
-    const date = document.createElement('div');
-    date.className = 'publication-date';
-    date.textContent = item.date || '';
-    const title = document.createElement('h3');
-    title.textContent = item.title || '';
-    const text = document.createElement('p');
-    text.className = 'publication-text';
-    text.textContent = item.text || '';
-    article.append(date, title, text);
-    target.appendChild(article);
-  });
+  try { const res = await apiCall('deleteArticle', { id: currentUser.id, row: article.row }); cachedArticles = res.articles || []; renderArticleArchive(cachedArticles); backToDateGrid(); }
+  catch (e) { alert(e.message || 'Ошибка удаления.'); }
 }
 
 function appendTextWithLinks(container, value) {
   const parts = String(value || '').split(/(https?:\/\/[^\s]+)/g);
   parts.forEach(part => {
     if (/^https?:\/\//i.test(part)) {
-      const link = document.createElement('a');
-      link.href = part;
-      link.target = '_blank';
-      link.rel = 'noopener';
-      link.textContent = part;
-      link.style.color = '#82aaff';
-      link.style.textDecoration = 'underline';
-      container.appendChild(link);
-    } else {
-      container.appendChild(document.createTextNode(part));
-    }
+      const link = document.createElement('a'); link.href = part; link.target = '_blank'; link.rel = 'noopener';
+      link.textContent = part; link.style.color = '#82aaff'; link.style.textDecoration = 'underline'; container.appendChild(link);
+    } else container.appendChild(document.createTextNode(part));
   });
 }
 
+function renderEvents(items) {
+  const target = $('eventsList'); target.replaceChildren();
+  if (!items || !items.length) { target.innerHTML = '<div class="empty-state compact">Пока нет опубликованных ивентов.</div>'; return; }
+  items.forEach(item => {
+    const card = document.createElement('div'); card.className = 'event-card';
+    card.innerHTML = `<div class="publication-date">${item.date || ''}</div><h3>${item.title || 'Без названия'}</h3><div class="event-meta">${(item.text || '').slice(0, 110)}${(item.text || '').length > 110 ? '…' : ''}</div>`;
+    card.onclick = () => openEventDetail(item); target.appendChild(card);
+  });
+}
+
+async function openEventDetail(event) {
+  currentEventKey = event.key || ('event_' + (event.row || event.title || Date.now()));
+  currentEventData = event;
+  const content = document.createElement('div');
+  content.innerHTML = `
+    <div class="publication-date">${event.date || ''}</div>
+    <h3 style="color:var(--gold);margin:8px 0 12px;">${event.title || ''}</h3>
+    <div class="answer-large-text" style="margin-bottom:14px;"></div>
+    <div class="event-detail-links" id="eventLinks"></div>
+    <h3 style="text-align:center;margin-top:18px;">Мои задания</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="eventProgressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="eventProgressLabel">0 / 0</div>
+    <div class="task-list" id="eventTaskList"></div>
+    <div class="add-task-row">
+      <input type="text" id="newTaskInput" placeholder="Новое задание…">
+      <button class="button button-primary" type="button" id="addTaskBtn">Добавить</button>
+    </div>
+    <div class="status-line" id="eventTaskStatus"></div>`;
+  const textNode = content.querySelector('.answer-large-text');
+  appendTextWithLinks(textNode, event.text || '');
+  const linksBox = content.querySelector('#eventLinks');
+  const links = extractLinks(event.text || '', event.links || event.link || '');
+  if (links.length) links.forEach(url => { const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = url; linksBox.appendChild(a); });
+  else linksBox.innerHTML = '<span class="muted">Ссылок пока нет</span>';
+  openPortalModal(content, event.title || 'Ивент');
+  try {
+    const data = await apiCall('getPersonalTasks', { id: currentUser.id, eventKey: currentEventKey });
+    personalTasks = data.tasks || []; renderPersonalTasks();
+  } catch (e) { personalTasks = []; renderPersonalTasks(); }
+  content.querySelector('#addTaskBtn').onclick = addPersonalTask;
+  content.querySelector('#newTaskInput').addEventListener('keydown', e => { if (e.key === 'Enter') addPersonalTask(); });
+}
+
+function extractLinks(text, extra) {
+  const set = new Set(); const re = /https?:\/\/[^\s<>"']+/gi; let m;
+  while ((m = re.exec(text || '')) !== null) set.add(m[0].replace(/[\])},.;]+$/, ''));
+  String(extra || '').split(/[\s;]+/).forEach(u => { if (/^https?:\/\//i.test(u)) set.add(u); });
+  return Array.from(set);
+}
+
+function renderPersonalTasks() {
+  const list = document.getElementById('eventTaskList'); if (!list) return; list.replaceChildren();
+  const total = personalTasks.length; const done = personalTasks.filter(t => t.done).length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  const fill = document.getElementById('eventProgressFill'); const label = document.getElementById('eventProgressLabel');
+  if (fill) fill.style.width = pct + '%'; if (label) label.textContent = `${done} / ${total} выполнено`;
+  if (!personalTasks.length) { list.innerHTML = '<div class="empty-state compact">Пока нет заданий. Добавьте первое!</div>'; return; }
+  personalTasks.forEach((task, index) => {
+    const row = document.createElement('div'); row.className = 'task-item' + (task.done ? ' done' : '');
+    row.innerHTML = `<input type="checkbox" ${task.done ? 'checked' : ''}><div class="task-text">${escapeHtml(task.text)}</div><div class="task-actions"><button type="button" title="Удалить">🗑️</button></div>`;
+    const checkbox = row.querySelector('input');
+    checkbox.onchange = () => { personalTasks[index].done = checkbox.checked; savePersonalTasks(); renderPersonalTasks(); };
+    row.querySelector('button').onclick = () => { if (!confirm('Удалить это задание?')) return; personalTasks.splice(index, 1); savePersonalTasks(); renderPersonalTasks(); };
+    list.appendChild(row);
+  });
+}
+
+function escapeHtml(str) {
+  return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+async function addPersonalTask() {
+  const input = document.getElementById('newTaskInput'); if (!input) return;
+  const text = input.value.trim(); if (!text) return;
+  personalTasks.push({ text, done: false }); input.value = '';
+  await savePersonalTasks(); renderPersonalTasks();
+}
+
+async function savePersonalTasks() {
+  if (!currentUser || !currentEventKey) return;
+  const status = document.getElementById('eventTaskStatus');
+  try {
+    await apiCall('savePersonalTasks', { id: currentUser.id, eventKey: currentEventKey, tasks: JSON.stringify(personalTasks) });
+    if (status) { status.textContent = 'Сохранено'; status.className = 'status-line success'; setTimeout(() => { if (status) status.textContent = ''; }, 1500); }
+  } catch (e) { if (status) { status.textContent = e.message || 'Ошибка сохранения'; status.className = 'status-line error'; } }
+}
+
 function historyWeekLabel(weekKey) {
-  const match = String(weekKey || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (!match) return weekKey;
+  const match = String(weekKey || '').match(/^(\d{4})-(\d{2})-(\d{2})$/); if (!match) return weekKey;
   const monday = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
-  const sunday = new Date(monday);
-  sunday.setDate(sunday.getDate() + 6);
-  const fmt = date => String(date.getDate()).padStart(2, '0') + '.' +
-    String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
+  const sunday = new Date(monday); sunday.setDate(sunday.getDate() + 6);
+  const fmt = date => String(date.getDate()).padStart(2, '0') + '.' + String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
   return fmt(monday) + ' — ' + fmt(sunday);
 }
 
 function renderHistory(items) {
-  const target = $('historyList');
-  const select = $('historyWeekSelect');
-  target.replaceChildren();
-
+  const target = $('historyList'); const select = $('historyWeekSelect'); target.replaceChildren();
   const grouped = new Map();
   (items || []).forEach(item => {
     if (!item || !item.week) return;
     if (!grouped.has(item.week)) grouped.set(item.week, new Map());
-    const days = grouped.get(item.week);
-    const day = Number(item.period);
+    const days = grouped.get(item.week); const day = Number(item.period);
     if (day >= 1 && day <= 4) days.set(day, item);
   });
-
+  window.personalHistoryByWeek = grouped;
   const weeks = Array.from(grouped.keys()).sort((a, b) => b.localeCompare(a));
-  const previous = select.value;
-  select.replaceChildren();
-
-  if (!weeks.length) {
-    select.innerHTML = '<option value="">История пуста</option>';
-    target.innerHTML = '<div class="empty-state compact">Отметок участия пока нет.</div>';
-    return;
-  }
-
-  weeks.forEach(week => {
-    const option = document.createElement('option');
-    option.value = week;
-    option.textContent = historyWeekLabel(week);
-    select.appendChild(option);
-  });
-
-  select.value = weeks.includes(previous) ? previous : weeks[0];
-  renderSelectedHistoryWeek();
+  const previous = select.value; select.replaceChildren();
+  if (!weeks.length) { select.innerHTML = '<option value="">История пуста</option>'; target.innerHTML = '<div class="empty-state compact">Отметок участия пока нет.</div>'; return; }
+  weeks.forEach(week => { const option = document.createElement('option'); option.value = week; option.textContent = historyWeekLabel(week); select.appendChild(option); });
+  select.value = weeks.includes(previous) ? previous : weeks[0]; renderSelectedHistoryWeek();
 }
 
 function renderSelectedHistoryWeek() {
-  const target = $('historyList');
-  const select = $('historyWeekSelect');
-  const week = select.value;
-  target.replaceChildren();
-
-  if (!week || !window.personalHistoryByWeek || !window.personalHistoryByWeek.has(week)) {
-    target.innerHTML = '<div class="empty-state compact">За эту неделю отметок нет.</div>';
-    return;
-  }
-
+  const target = $('historyList'); const select = $('historyWeekSelect'); const week = select.value; target.replaceChildren();
+  if (!week || !window.personalHistoryByWeek || !window.personalHistoryByWeek.has(week)) { target.innerHTML = '<div class="empty-state compact">За эту неделю отметок нет.</div>'; return; }
   const days = window.personalHistoryByWeek.get(week);
-  const card = document.createElement('div');
-  card.className = 'history-week-card';
+  const card = document.createElement('div'); card.className = 'history-week-card';
   card.innerHTML = `<h4 class="history-week-heading">Статистика за ${historyWeekLabel(week)}</h4>`;
-
   for (let day = 1; day <= 4; day++) {
-    const item = days.get(day);
-    const row = document.createElement('div');
-    row.className = 'history-row';
-    const left = document.createElement('div');
-    const strong = document.createElement('strong');
+    const item = days.get(day); const row = document.createElement('div'); row.className = 'history-row';
+    const left = document.createElement('div'); const strong = document.createElement('strong');
     strong.textContent = 'День ' + day + (item && item.start ? ' · ' + item.start : '');
-    const small = document.createElement('small');
-    small.textContent = item && item.source ? item.source : 'Неделя от ' + week;
-    left.append(strong, small);
-    const result = document.createElement('span');
-    if (!item) {
-      result.className = 'result neutral';
-      result.textContent = 'Нет отметки';
-    } else {
-      result.className = item.result === 'Ответил' ? 'result good' : 'result bad';
-      result.textContent = item.result === 'Ответил' ? 'Ответил' : 'Не ответил';
-    }
-    row.append(left, result);
-    card.appendChild(row);
+    const small = document.createElement('small'); small.textContent = item && item.source ? item.source : 'Неделя от ' + week;
+    left.append(strong, small); const result = document.createElement('span');
+    if (!item) { result.className = 'result neutral'; result.textContent = 'Нет отметки'; }
+    else { result.className = item.result === 'Ответил' ? 'result good' : 'result bad'; result.textContent = item.result === 'Ответил' ? 'Ответил' : 'Не ответил'; }
+    row.append(left, result); card.appendChild(row);
   }
   target.appendChild(card);
 }
 
 async function loadHistory() {
   if (!currentUser) return;
-  try {
-    const history = await apiCall('history', { id: currentUser.id });
-    window.personalHistoryByWeek = new Map();
-    (history || []).forEach(item => {
-      if (!item || !item.week) return;
-      if (!window.personalHistoryByWeek.has(item.week)) {
-        window.personalHistoryByWeek.set(item.week, new Map());
-      }
-      const day = Number(item.period);
-      if (day >= 1 && day <= 4) window.personalHistoryByWeek.get(item.week).set(day, item);
-    });
-    renderHistory(history || []);
-  } catch (err) {
-    $('historyList').textContent = 'Не удалось загрузить историю.';
-  }
+  try { const history = await apiCall('history', { id: currentUser.id }); renderHistory(history || []); }
+  catch (err) { $('historyList').textContent = 'Не удалось загрузить историю.'; }
 }
 
 $('historyToggle').addEventListener('click', () => {
-  const panel = $('historyPanel');
-  panel.hidden = !panel.hidden;
+  const panel = $('historyPanel'); panel.hidden = !panel.hidden;
   $('historyToggle').setAttribute('aria-expanded', String(!panel.hidden));
   if (!panel.hidden && currentUser) loadHistory();
 });
 $('historyWeekSelect').addEventListener('change', renderSelectedHistoryWeek);
 
 async function markAnswered() {
-  if (!currentUser) return;
-  $('answeredButton').disabled = true;
+  if (!currentUser) return; $('answeredButton').disabled = true;
   try {
     const result = await apiCall('markAnswered', { id: currentUser.id });
-    $('immunityStatus').textContent = result && result.already
-      ? 'Вы уже отметили ответ за этот день!' : 'Ваш ответ сохранён!';
-    $('immunityStatus').className = 'status-line success';
-    await loadHistory();
-    await loadPortal();
+    $('immunityStatus').textContent = result && result.already ? 'Вы уже отметили ответ за этот день!' : 'Ваш ответ сохранён!';
+    $('immunityStatus').className = 'status-line success'; await loadHistory(); await loadPortal();
   } catch (err) {
-    $('immunityStatus').textContent = err.message || 'Ошибка сохранения.';
-    $('immunityStatus').className = 'status-line error';
+    $('immunityStatus').textContent = err.message || 'Ошибка сохранения.'; $('immunityStatus').className = 'status-line error';
     $('answeredButton').disabled = false;
   }
 }
@@ -1269,401 +989,247 @@ function renderStatus(status) {
   $('immunityLink').href = status.immunityUrl || '#';
   $('immunityLink').classList.toggle('is-disabled', !status.immunityOpen);
   $('answeredButton').disabled = !status.immunityOpen;
-  $('immunityStatus').textContent = status.immunityOpen
-    ? 'Сейчас открыт ' + status.periodLabel + '.'
-    : 'Сейчас иммунитет закрыт. Отвечать можно только в активный день.';
-
+  $('immunityStatus').textContent = status.immunityOpen ? 'Сейчас открыт ' + status.periodLabel + '.' : 'Сейчас иммунитет закрыт. Отвечать можно только в активный день.';
   $('cookieCard').href = status.cookieUrl || '#';
   $('cookieCard').classList.toggle('is-disabled', !status.cookieOpen);
   $('cookieCard').setAttribute('aria-disabled', String(!status.cookieOpen));
   $('cookieCardStatus').textContent = status.cookieOpen ? 'Открыто сегодня (до 23:59)' : 'Доступно по средам';
 }
 
-// МОДАЛЬНЫЕ ОКНА: ОТКРЫТИЕ С ВЫРАВНИВАНИЕМ ПО ЦЕНТРУ
-let portalModalNode = null;
-let portalModalPlaceholder = null;
+let portalModalNode = null; let portalModalPlaceholder = null;
 
 function openPortalModal(element, title) {
-  if (!element) return;
-  if (portalModalNode) closePortalModal();
-  const modal = $('portalModal');
-  const content = $('portalModalContent');
-  if (!modal || !content) return;
-
+  if (!element) return; if (portalModalNode) closePortalModal();
+  const modal = $('portalModal'); const content = $('portalModalContent'); if (!modal || !content) return;
   portalModalNode = element;
-  portalModalPlaceholder = document.createComment('portal-modal-placeholder');
-  element.parentNode.insertBefore(portalModalPlaceholder, element);
-  content.appendChild(element);
-  element.hidden = false;
-
-  // Заголовок модалки строго по центру
-  $('portalModalTitle').textContent = title || 'Информация';
-  modal.hidden = false;
-  document.body.classList.add('portal-modal-open');
+  if (element.parentNode) { portalModalPlaceholder = document.createComment('portal-modal-placeholder'); element.parentNode.insertBefore(portalModalPlaceholder, element); }
+  content.appendChild(element); element.hidden = false;
+  $('portalModalTitle').textContent = title || 'Информация'; modal.hidden = false; document.body.classList.add('portal-modal-open');
 }
 
 function closePortalModal() {
-  const modal = $('portalModal');
-  if (!modal) return;
+  const modal = $('portalModal'); if (!modal) return;
   if (portalModalNode && portalModalPlaceholder && portalModalPlaceholder.parentNode) {
-    portalModalPlaceholder.parentNode.insertBefore(portalModalNode, portalModalPlaceholder);
-    portalModalPlaceholder.remove();
-    portalModalNode.hidden = true;
+    portalModalPlaceholder.parentNode.insertBefore(portalModalNode, portalModalPlaceholder); portalModalPlaceholder.remove(); portalModalNode.hidden = true;
   }
-  portalModalNode = null;
-  modal.hidden = true;
-  document.body.classList.remove('portal-modal-open');
+  $('portalModalContent').replaceChildren(); portalModalNode = null; modal.hidden = true; document.body.classList.remove('portal-modal-open');
 }
 
 document.querySelectorAll('.section-card[data-target]').forEach(button => {
   button.addEventListener('click', () => {
-    const target = $(button.dataset.target);
-    if (!target) return;
-    const title = button.querySelector('strong')?.textContent || 'Информация';
-    openPortalModal(target, title);
+    const target = $(button.dataset.target); if (!target) return;
+    const title = button.querySelector('strong')?.textContent || 'Информация'; openPortalModal(target, title);
   });
 });
+$('portalModal').addEventListener('click', event => { if (event.target === $('portalModal')) closePortalModal(); });
 
-$('portalModal').addEventListener('click', event => {
-  if (event.target === $('portalModal')) closePortalModal();
-});
-
-// КТО ОТВЕТИЛ
 function initParticipantStatusView() {
-  const weekInput = $('participantStatusWeek');
-  const loadButton = $('participantStatusLoad');
-  if (!weekInput || !loadButton || loadButton.dataset.ready) return;
-  loadButton.dataset.ready = '1';
-  const now = new Date();
-  const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
-  weekInput.value = localIsoDate(monday);
+  const weekInput = $('participantStatusWeek'); const loadButton = $('participantStatusLoad');
+  if (!weekInput || !loadButton || loadButton.dataset.ready) return; loadButton.dataset.ready = '1';
+  const now = new Date(); const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7)); weekInput.value = localIsoDate(monday);
   loadButton.addEventListener('click', loadParticipantStatus);
 }
 
 async function loadParticipantStatus() {
-  const output = $('participantStatusResult');
-  const button = $('participantStatusLoad');
+  const output = $('participantStatusResult'); const button = $('participantStatusLoad');
   if (!currentUser || !output || !button) return;
-  const week = $('participantStatusWeek').value;
-  const day = $('participantStatusDay').value;
+  const week = $('participantStatusWeek').value; const day = $('participantStatusDay').value;
   if (!week) { output.textContent = 'Выберите неделю.'; return; }
-
-  button.disabled = true;
-  output.textContent = 'Загружаем список…';
+  button.disabled = true; output.textContent = 'Загружаем список…';
   try {
     const data = await apiCall('participantImmunityStatus', { id: currentUser.id, week, day });
     output.replaceChildren();
-
-    const makeGroup = (heading, names, className, emptyText) => {
-      const group = document.createElement('div');
-      group.className = 'admin-row';
-      const inner = document.createElement('div');
-      const title = document.createElement('strong');
+    const makeGroup = (heading, names, emptyText) => {
+      const group = document.createElement('div'); group.className = 'admin-row';
+      const inner = document.createElement('div'); const title = document.createElement('strong');
       title.textContent = heading + ' (' + names.length + ')';
-      const list = document.createElement('div');
-      list.style.marginTop = '8px';
-      list.style.whiteSpace = 'pre-wrap';
+      const list = document.createElement('div'); list.style.marginTop = '6px'; list.style.whiteSpace = 'pre-wrap';
       list.textContent = names.length ? names.map((name, index) => (index + 1) + '. ' + name).join('\n') : emptyText;
-      inner.append(title, list);
-      group.append(inner);
-      return group;
+      inner.append(title, list); group.append(inner); return group;
     };
-
-    output.append(
-      makeGroup('✅ Ответили', data.answered || [], 'good', 'Пока нет отметок.'),
-      makeGroup('❌ Не ответили', data.missing || [], 'bad', 'Все участники ответили.')
-    );
-  } catch (error) {
-    output.textContent = error.message || 'Ошибка загрузки.';
-  } finally {
-    button.disabled = false;
-  }
+    output.append(makeGroup('✅ Ответили', data.answered || [], 'Пока нет отметок.'), makeGroup('❌ Не ответили', data.missing || [], 'Все участники ответили.'));
+  } catch (error) { output.textContent = error.message || 'Ошибка загрузки.'; }
+  finally { button.disabled = false; }
 }
 
-// ---------------- АДМИНИСТРАТИВНЫЕ ФУНКЦИИ ----------------
 let adminToken = sessionStorage.getItem('perforator_admin_token') || '';
 
 function openAdminLogin(){
-  if (adminToken) {
-    $('adminPanel').hidden = false;
-    openPortalModal($('adminPanel'), 'Панель администратора');
-    adminLoadAnswers();
-    adminLoadParticipants();
-    return;
-  }
-  $('adminLoginBox').hidden = false;
-  openPortalModal($('adminLoginBox'), 'Вход администратора');
-  $('adminPassword').focus();
+  if (adminToken) { $('adminPanel').hidden = false; openPortalModal($('adminPanel'), 'Панель администратора'); adminLoadAnswers(); adminLoadParticipants(); return; }
+  $('adminLoginBox').hidden = false; openPortalModal($('adminLoginBox'), 'Вход администратора'); $('adminPassword').focus();
 }
-
-function closeAdminLogin(){
-  if (portalModalNode === $('adminLoginBox')) closePortalModal();
-  $('adminLoginBox').hidden = true;
-  $('adminLoginMessage').textContent = '';
-}
-
+function closeAdminLogin(){ if (portalModalNode === $('adminLoginBox')) closePortalModal(); $('adminLoginBox').hidden = true; $('adminLoginMessage').textContent = ''; }
 async function adminLogin(){
-  const password=$('adminPassword').value;
-  if(!password){$('adminLoginMessage').textContent='Введите пароль.';return;}
+  const password=$('adminPassword').value; if(!password){$('adminLoginMessage').textContent='Введите пароль.';return;}
   $('adminLoginMessage').textContent='Проверяем…';
   try{
-    const data=await apiCall('adminLogin',{password});
-    adminToken=data.token;
-    sessionStorage.setItem('perforator_admin_token',adminToken);
-    $('adminPassword').value='';
-    closeAdminLogin();
-    $('adminPanel').hidden=false;
-    openPortalModal($('adminPanel'), 'Панель администратора');
-    await adminLoadAnswers();
-    await adminLoadParticipants();
+    const data=await apiCall('adminLogin',{password}); adminToken=data.token; sessionStorage.setItem('perforator_admin_token',adminToken);
+    $('adminPassword').value=''; closeAdminLogin(); $('adminPanel').hidden=false; openPortalModal($('adminPanel'), 'Панель администратора');
+    await adminLoadAnswers(); await adminLoadParticipants();
   }catch(err){$('adminLoginMessage').textContent=err.message||'Ошибка входа.';}
 }
-
-function adminLogout(){
-  if (portalModalNode === $('adminPanel')) closePortalModal();
-  adminToken='';
-  sessionStorage.removeItem('perforator_admin_token');
-  $('adminPanel').hidden=true;
-}
-
-function localIsoDate(date){
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
+function adminLogout(){ if (portalModalNode === $('adminPanel')) closePortalModal(); adminToken=''; sessionStorage.removeItem('perforator_admin_token'); $('adminPanel').hidden=true; }
+function localIsoDate(date){ const y = date.getFullYear(); const m = String(date.getMonth() + 1).padStart(2, '0'); const d = String(date.getDate()).padStart(2, '0'); return `${y}-${m}-${d}`; }
 
 function fillWeekSelectors(){
-  const now = new Date();
-  const startYear = now.getMonth() < 10 ? now.getFullYear() - 1 : now.getFullYear();
+  const now = new Date(); const startYear = now.getMonth() < 10 ? now.getFullYear() - 1 : now.getFullYear();
   const startDate = new Date(startYear, 10, 23);
-
   const diffWeeks = Math.max(0, Math.floor((now.getTime() - startDate.getTime()) / (7 * 24 * 3600 * 1000)));
-  const totalWeeks = Math.max(diffWeeks + 2, 4);
-
-  const weeks = [];
+  const totalWeeks = Math.max(diffWeeks + 2, 4); const weeks = [];
   for (let i = 0; i < totalWeeks; i++) {
-    const d = new Date(startDate);
-    d.setDate(d.getDate() + i * 7);
-    const key = localIsoDate(d);
-    const end = new Date(d);
-    end.setDate(end.getDate() + 6);
-    const fmt = date => String(date.getDate()).padStart(2, '0') + '.' +
-      String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
-    const label = `Неделя ${i + 1} (${fmt(d)} – ${fmt(end)})`;
-    weeks.push({ key, label });
+    const d = new Date(startDate); d.setDate(d.getDate() + i * 7); const key = localIsoDate(d);
+    const end = new Date(d); end.setDate(end.getDate() + 6);
+    const fmt = date => String(date.getDate()).padStart(2, '0') + '.' + String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
+    weeks.push({ key, label: `Неделя ${i + 1} (${fmt(d)} – ${fmt(end)})` });
   }
-
   ['adminAnswerWeek','manualWeekStart'].forEach(id => {
-    const select = $(id);
-    if (!select) return;
-    const previous = select.value;
-    select.replaceChildren();
-    weeks.forEach(w => {
-      const o = document.createElement('option');
-      o.value = w.key;
-      o.textContent = w.label;
-      select.append(o);
-    });
-    if (previous && weeks.some(w => w.key === previous)) {
-      select.value = previous;
-    } else {
-      const currentMonday = new Date(now);
-      currentMonday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+    const select = $(id); if (!select) return; const previous = select.value; select.replaceChildren();
+    weeks.forEach(w => { const o = document.createElement('option'); o.value = w.key; o.textContent = w.label; select.append(o); });
+    if (previous && weeks.some(w => w.key === previous)) select.value = previous;
+    else {
+      const currentMonday = new Date(now); currentMonday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
       const currentKey = localIsoDate(currentMonday);
-      if (weeks.some(w => w.key === currentKey)) {
-        select.value = currentKey;
-      } else {
-        select.value = weeks[0].key;
-      }
+      if (weeks.some(w => w.key === currentKey)) select.value = currentKey; else select.value = weeks[0].key;
     }
   });
 }
 
 function syncAnswerDateFromSelectors(){
-  const monday = $('adminAnswerWeek').value;
-  if (!monday) return;
-  const d = new Date(monday + 'T12:00:00');
-  d.setDate(d.getDate() + Number($('adminAnswerDay').value || 0));
-  $('adminDate').value = [
-    String(d.getDate()).padStart(2, '0'),
-    String(d.getMonth() + 1).padStart(2, '0'),
-    d.getFullYear()
-  ].join('.');
+  const monday = $('adminAnswerWeek').value; if (!monday) return;
+  const d = new Date(monday + 'T12:00:00'); d.setDate(d.getDate() + Number($('adminAnswerDay').value || 0));
+  $('adminDate').value = [String(d.getDate()).padStart(2, '0'), String(d.getMonth() + 1).padStart(2, '0'), d.getFullYear()].join('.');
 }
-
 $('adminAnswerWeek').addEventListener('change', syncAnswerDateFromSelectors);
 $('adminAnswerDay').addEventListener('change', syncAnswerDateFromSelectors);
 
 function adminResetForm(){
-  $('adminRow').value = '';
-  $('adminDate').value = '';
-  $('adminTitle').value = '';
-  $('adminText').value = '';
-  $('adminImages').value = '';
+  $('adminRow').value = ''; $('adminDate').value = ''; $('adminTitle').value = ''; $('adminText').value = ''; $('adminImages').value = '';
   $('adminSaveButton').textContent = 'Сохранить ответ';
-  if ($('adminAnswerWeek').options.length) {
-    $('adminAnswerDay').value = '0';
-    syncAnswerDateFromSelectors();
-  }
+  if ($('adminAnswerWeek').options.length) { $('adminAnswerDay').value = '0'; syncAnswerDateFromSelectors(); }
 }
 
 async function adminLoadAnswers(){
-  if (!adminToken) return;
-  $('adminAnswersList').textContent = 'Загружаем…';
+  if (!adminToken) return; $('adminAnswersList').textContent = 'Загружаем…';
   try {
-    const items = await apiCall('adminAnswers', { token: adminToken });
-    const box = $('adminAnswersList');
-    box.replaceChildren();
+    const items = await apiCall('adminAnswers', { token: adminToken }); const box = $('adminAnswersList'); box.replaceChildren();
     if (!items.length) { box.textContent = 'Ответов в базе пока нет.'; return; }
     items.forEach(item => {
-      const row = document.createElement('div');
-      row.className = 'admin-row';
-      const info = document.createElement('div');
-      info.innerHTML = `<strong>${item.title || 'Без названия'} · ${item.date}</strong><small>Опубликован</small>`;
-      const actions = document.createElement('div');
-      actions.className = 'admin-row-actions';
-
-      const edit = document.createElement('button');
-      edit.type = 'button';
-      edit.textContent = 'Изменить';
-      edit.onclick = () => {
-        $('adminRow').value = item.row;
-        $('adminDate').value = item.date || '';
-        $('adminTitle').value = item.title || '';
-        $('adminText').value = item.text || '';
-        $('adminImages').value = item.images || '';
-        $('adminSaveButton').textContent = 'Сохранить изменения';
-        $('adminAnswerForm').scrollIntoView({ behavior: 'auto', block: 'start' });
-      };
-
-      const del = document.createElement('button');
-      del.type = 'button';
-      del.className = 'btn-del';
-      del.textContent = 'Удалить';
+      const row = document.createElement('div'); row.className = 'admin-row';
+      const info = document.createElement('div'); info.innerHTML = `<strong>${item.title || 'Без названия'} · ${item.date}</strong><small>Опубликован</small>`;
+      const actions = document.createElement('div'); actions.className = 'admin-row-actions';
+      const edit = document.createElement('button'); edit.type = 'button'; edit.textContent = 'Изменить';
+      edit.onclick = () => { $('adminRow').value = item.row; $('adminDate').value = item.date || ''; $('adminTitle').value = item.title || ''; $('adminText').value = item.text || ''; $('adminImages').value = item.images || ''; $('adminSaveButton').textContent = 'Сохранить изменения'; $('adminAnswerForm').scrollIntoView({ behavior: 'auto', block: 'start' }); };
+      const del = document.createElement('button'); del.type = 'button'; del.className = 'btn-del'; del.textContent = 'Удалить';
       del.onclick = async () => {
-        if (!confirm(`Удалить ответ «${item.title}» (${item.date})?`)) return;
-        $('adminMessage').textContent = 'Удаляем…';
-        try {
-          await apiCall('adminDeleteAnswer', { token: adminToken, row: item.row });
-          $('adminMessage').textContent = 'Ответ удалён!';
-          $('adminMessage').className = 'status-line success';
-          adminResetForm();
-          await adminLoadAnswers();
-          if (currentUser) await loadPortal();
-        } catch(e) {
-          $('adminMessage').textContent = e.message || 'Ошибка удаления.';
-          $('adminMessage').className = 'status-line error';
-        }
+        if (!confirm(`Удалить ответ «${item.title}» (${item.date})?`)) return; $('adminMessage').textContent = 'Удаляем…';
+        try { await apiCall('adminDeleteAnswer', { token: adminToken, row: item.row }); $('adminMessage').textContent = 'Ответ удалён!'; $('adminMessage').className = 'status-line success'; adminResetForm(); await adminLoadAnswers(); if (currentUser) await loadPortal(); }
+        catch(e) { $('adminMessage').textContent = e.message || 'Ошибка удаления.'; $('adminMessage').className = 'status-line error'; }
       };
-
-      actions.append(edit, del);
-      row.append(info, actions);
-      box.appendChild(row);
+      actions.append(edit, del); row.append(info, actions); box.appendChild(row);
     });
-  } catch(err) {
-    $('adminAnswersList').textContent = err.message || 'Ошибка загрузки.';
-  }
+  } catch(err) { $('adminAnswersList').textContent = err.message || 'Ошибка загрузки.'; }
 }
 
 async function triggerManualArchive() {
-  if (!adminToken) return;
-  $('adminMessage').textContent = 'Переносим устаревшие ответы в архив…';
-  try {
-    const res = await apiCall('adminArchive', { token: adminToken });
-    $('adminMessage').textContent = `Перенос выполнен! Перенесено: ${res.moved || 0}`;
-    $('adminMessage').className = 'status-line success';
-    await adminLoadAnswers();
-    if (currentUser) await loadPortal();
-  } catch(e) {
-    $('adminMessage').textContent = e.message || 'Ошибка архивации.';
-    $('adminMessage').className = 'status-line error';
-  }
+  if (!adminToken) return; $('adminMessage').textContent = 'Переносим устаревшие ответы в архив…';
+  try { const res = await apiCall('adminArchive', { token: adminToken }); $('adminMessage').textContent = `Перенос выполнен! Перенесено: ${res.moved || 0}`; $('adminMessage').className = 'status-line success'; await adminLoadAnswers(); if (currentUser) await loadPortal(); }
+  catch(e) { $('adminMessage').textContent = e.message || 'Ошибка архивации.'; $('adminMessage').className = 'status-line error'; }
 }
 
 async function adminLoadParticipants(){
-  if (!adminToken) return;
-  const select = $('manualParticipant');
+  if (!adminToken) return; const select = $('manualParticipant');
   try {
-    const people = await apiCall('adminParticipants', { token: adminToken });
-    select.replaceChildren();
-    const first = document.createElement('option');
-    first.value = '';
-    first.textContent = 'Выберите участника';
-    select.append(first);
-    (people || []).forEach(p => {
-      const o = document.createElement('option');
-      o.value = p.id;
-      o.textContent = p.name;
-      select.append(o);
-    });
-  } catch (e) {
-    select.innerHTML = '<option value="">Ошибка загрузки</option>';
-  }
+    const people = await apiCall('adminParticipants', { token: adminToken }); select.replaceChildren();
+    const first = document.createElement('option'); first.value = ''; first.textContent = 'Выберите участника'; select.append(first);
+    (people || []).forEach(p => { const o = document.createElement('option'); o.value = p.id; o.textContent = p.name; select.append(o); });
+  } catch (e) { select.innerHTML = '<option value="">Ошибка загрузки</option>'; }
 }
 
 $('adminAnswerForm').addEventListener('submit', async e => {
-  e.preventDefault();
-  if (!adminToken) return;
-  $('adminSaveButton').disabled = true;
-  $('adminMessage').textContent = 'Сохраняем…';
+  e.preventDefault(); if (!adminToken) return; $('adminSaveButton').disabled = true; $('adminMessage').textContent = 'Сохраняем…';
   try {
-    await apiCall('adminSaveAnswer', {
-      token: adminToken,
-      row: $('adminRow').value,
-      date: $('adminDate').value,
-      title: $('adminTitle').value,
-      text: $('adminText').value,
-      images: $('adminImages').value
-    });
-    $('adminMessage').textContent = 'Ответ успешно сохранён!';
-    $('adminMessage').className = 'status-line success';
-    adminResetForm();
-    await adminLoadAnswers();
-    if (currentUser) await loadPortal();
-  } catch (err) {
-    $('adminMessage').textContent = err.message || 'Ошибка сохранения.';
-    $('adminMessage').className = 'status-line error';
-  } finally {
-    $('adminSaveButton').disabled = false;
-  }
+    await apiCall('adminSaveAnswer', { token: adminToken, row: $('adminRow').value, date: $('adminDate').value, title: $('adminTitle').value, text: $('adminText').value, images: $('adminImages').value });
+    $('adminMessage').textContent = 'Ответ успешно сохранён!'; $('adminMessage').className = 'status-line success'; adminResetForm(); await adminLoadAnswers(); if (currentUser) await loadPortal();
+  } catch (err) { $('adminMessage').textContent = err.message || 'Ошибка сохранения.'; $('adminMessage').className = 'status-line error'; }
+  finally { $('adminSaveButton').disabled = false; }
 });
 
 $('adminManualHistoryForm').addEventListener('submit', async e => {
-  e.preventDefault();
-  if (!adminToken) return;
-  const btn = $('manualHistorySave');
-  btn.disabled = true;
+  e.preventDefault(); if (!adminToken) return; const btn = $('manualHistorySave'); btn.disabled = true;
   try {
-    await apiCall('adminManualHistory', {
-      token: adminToken,
-      id: $('manualParticipant').value,
-      weekStart: $('manualWeekStart').value,
-      day: $('manualDay').value,
-      result: $('manualResult').value
-    });
-    $('adminMessage').textContent = 'Отметка участия сохранена!';
-    $('adminMessage').className = 'status-line success';
-  } catch(err) {
-    $('adminMessage').textContent = err.message || 'Ошибка добавления.';
-    $('adminMessage').className = 'status-line error';
-  } finally {
-    btn.disabled = false;
-  }
+    await apiCall('adminManualHistory', { token: adminToken, id: $('manualParticipant').value, weekStart: $('manualWeekStart').value, day: $('manualDay').value, result: $('manualResult').value });
+    $('adminMessage').textContent = 'Отметка участия сохранена!'; $('adminMessage').className = 'status-line success';
+  } catch(err) { $('adminMessage').textContent = err.message || 'Ошибка добавления.'; $('adminMessage').className = 'status-line error'; }
+  finally { btn.disabled = false; }
 });
 
+function openWezyLogin() {
+  if (wezyToken) { showWezyPanel(); return; }
+  $('wezyLoginBox').hidden = false; openPortalModal($('wezyLoginBox'), 'Служебный вход Wezy'); $('wezyPassword').focus();
+}
+function closeWezyLogin() { if (portalModalNode === $('wezyLoginBox')) closePortalModal(); $('wezyLoginBox').hidden = true; $('wezyLoginMessage').textContent = ''; }
+async function wezyLogin() {
+  const password = $('wezyPassword').value; if (!password) { $('wezyLoginMessage').textContent = 'Введите пароль.'; return; }
+  $('wezyLoginMessage').textContent = 'Проверяем…';
+  try {
+    const data = await apiCall('wezyLogin', { password }); wezyToken = data.token; sessionStorage.setItem('perforator_wezy_token', wezyToken);
+    $('wezyPassword').value = ''; closeWezyLogin(); showWezyPanel();
+  } catch (err) { $('wezyLoginMessage').textContent = err.message || 'Ошибка входа.'; }
+}
+function wezyLogout() { if (portalModalNode === $('wezyPanel')) closePortalModal(); wezyToken = ''; sessionStorage.removeItem('perforator_wezy_token'); $('wezyPanel').hidden = true; }
+
+async function showWezyPanel() {
+  $('wezyPanel').hidden = false; openPortalModal($('wezyPanel'), 'Панель Wezy');
+  const select = $('wezyParticipantSelect'); select.replaceChildren();
+  const first = document.createElement('option'); first.value = ''; first.textContent = 'Выберите участника'; select.append(first);
+  try {
+    const people = await apiCall('adminParticipants', { token: wezyToken });
+    (people || []).forEach(p => { const o = document.createElement('option'); o.value = p.id; o.textContent = p.name; select.append(o); });
+  } catch (e) {}
+  try {
+    const data = await apiCall('portal', { id: currentUser ? currentUser.id : 'wezy' });
+    const list = $('wezyEventsList'); list.replaceChildren();
+    (data.events || []).forEach(ev => {
+      const row = document.createElement('div'); row.className = 'admin-row';
+      row.innerHTML = `<div><strong>${ev.title}</strong><small>${ev.date || ''}</small></div>`;
+      const btn = document.createElement('button'); btn.textContent = 'Задания участников';
+      btn.onclick = () => openWezyEventTasks(ev); row.appendChild(btn); list.appendChild(row);
+    });
+  } catch (e) { $('wezyEventsList').textContent = 'Не удалось загрузить ивенты.'; }
+}
+
+async function openWezyEventTasks(event) {
+  const participantId = $('wezyParticipantSelect').value;
+  if (!participantId) { alert('Сначала выберите участника'); return; }
+  try {
+    const data = await apiCall('getPersonalTasks', { id: participantId, eventKey: event.key || event.row || event.title });
+    const tasks = data.tasks || [];
+    let html = `<h3 style="text-align:center;color:var(--gold)">${event.title}</h3><p class="muted" style="text-align:center;">Задания выбранного участника</p><div class="task-list">`;
+    if (!tasks.length) html += '<div class="empty-state compact">У участника пока нет заданий</div>';
+    else tasks.forEach((t, i) => { html += `<div class="task-item ${t.done ? 'done' : ''}"><input type="checkbox" ${t.done ? 'checked' : ''} disabled><div class="task-text">${escapeHtml(t.text)}</div><div class="task-actions"><button type="button" data-index="${i}" class="wezy-del-task">🗑️</button></div></div>`; });
+    html += `</div><div class="add-task-row"><input type="text" id="wezyNewTask" placeholder="Добавить задание участнику…"><button class="button button-primary" type="button" id="wezyAddTaskBtn">Добавить</button></div><div class="status-line" id="wezyTaskStatus"></div>`;
+    const box = document.createElement('div'); box.innerHTML = html; openPortalModal(box, 'Задания: ' + event.title);
+    box.querySelectorAll('.wezy-del-task').forEach(btn => {
+      btn.onclick = async () => {
+        const idx = Number(btn.dataset.index); tasks.splice(idx, 1);
+        await apiCall('savePersonalTasks', { id: participantId, eventKey: event.key || event.row || event.title, tasks: JSON.stringify(tasks) });
+        openWezyEventTasks(event);
+      };
+    });
+    box.querySelector('#wezyAddTaskBtn').onclick = async () => {
+      const input = box.querySelector('#wezyNewTask'); const text = input.value.trim(); if (!text) return;
+      tasks.push({ text, done: false });
+      await apiCall('savePersonalTasks', { id: participantId, eventKey: event.key || event.row || event.title, tasks: JSON.stringify(tasks) });
+      openWezyEventTasks(event);
+    };
+  } catch (e) { alert(e.message || 'Ошибка'); }
+}
+
 window.addEventListener('load', () => {
-  fillWeekSelectors();
-  syncAnswerDateFromSelectors();
-  initParticipantStatusView();
+  fillWeekSelectors(); syncAnswerDateFromSelectors(); initParticipantStatusView();
   const saved = sessionStorage.getItem('perforator_user');
-  if (saved) {
-    try {
-      const u = JSON.parse(saved);
-      if (u && u.id) { currentUser = u; showPortal(u); }
-    } catch(e){}
-  }
+  if (saved) { try { const u = JSON.parse(saved); if (u && u.id) { currentUser = u; showPortal(u); } } catch(e){} }
 });
 </script>
 </body>
