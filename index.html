@@ -299,6 +299,19 @@ body.portal-modal-open { overflow: hidden; }
   height: 100%; background: linear-gradient(90deg, #6bbcff, #9be5bd);
   border-radius: 6px; transition: width .3s ease;
 }
+.task-dot { flex:0 0 13px; width:13px; height:13px; border-radius:50%; border:0; cursor:pointer; margin-top:4px; box-shadow:0 0 9px currentColor; }
+.task-dot.todo { background:#ff5267; color:#ff5267; }
+.task-dot.done { background:#55d88a; color:#55d88a; }
+.task-item { cursor:pointer; align-items:center; }
+.task-item .task-text { cursor:pointer; }
+.welcome-timers { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin:16px auto 0; }
+.timer-chip { padding:10px 14px; border:1px solid rgba(186,174,255,.2); border-radius:12px; background:rgba(4,10,28,.55); color:#f4f6ff; font-size:13px; }
+.timer-chip strong { color:var(--gold); display:block; margin-bottom:4px; }
+.archive-nav-card { grid-column:2; }
+@media(max-width:720px){.archive-nav-card{grid-column:1}}
+.task-detail { display:grid; gap:10px; }
+.task-detail textarea { min-height:90px; }
+.task-detail a { color:var(--blue); display:block; overflow-wrap:anywhere; margin:5px 0; }
 .progress-label { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 10px; }
 .add-task-row { display: flex; gap: 8px; margin-top: 10px; }
 .add-task-row input { flex: 1; }
@@ -355,6 +368,11 @@ body.portal-modal-open { overflow: hidden; }
         <h1>Привет, <span id="userName"></span>!</h1>
         <p>Здесь собраны ответы иммунитета, статьи, печенье судьбы и актуальные ивенты проектов.</p>
         <div class="welcome-bottom">Рады видеть тебя снова <span>🐿️</span></div>
+        <div class="welcome-timers">
+          <div class="timer-chip"><strong>🛡️ Иммунитет</strong><span id="immunityCountdown">Загружаем…</span></div>
+          <div class="timer-chip"><strong>🥠 Печенье судьбы</strong><span id="cookieCountdown">Загружаем отметки…</span></div>
+        </div>
+        <div style="text-align:center;margin-top:8px;"><button class="button button-quiet" type="button" onclick="openCookieStatus()">👥 Кто отметил печенье</button></div>
       </section>
 
       <nav class="section-grid" aria-label="Разделы портала">
@@ -373,6 +391,7 @@ body.portal-modal-open { overflow: hidden; }
           <strong>Печенье судьбы</strong>
           <small id="cookieCardStatus">Доступно по средам</small>
         </a>
+        <button class="section-card archive-nav-card" type="button" onclick="openArchive()"> <span class="section-emoji">🗄️</span><strong>Архив</strong><small>Старые статьи и иммунитет</small></button>
         <button class="section-card events-nav-card" data-target="eventsSection">
           <span class="section-emoji">🏆</span>
           <strong>Ивенты проектов</strong>
@@ -844,32 +863,27 @@ async function openEventDetail(event) {
   currentEventData = event;
   const content = document.createElement('div');
   content.innerHTML = `
-    <div class="publication-date">${event.date || ''}</div>
-    <h3 style="color:var(--gold);margin:8px 0 12px;">${event.title || ''}</h3>
+    <div class="publication-date">${escapeHtml(event.date || '')}</div>
+    <h3 style="color:var(--gold);margin:8px 0 12px;">${escapeHtml(event.title || '')}</h3>
     <div class="answer-large-text" style="margin-bottom:14px;"></div>
     <div class="event-detail-links" id="eventLinks"></div>
-    <h3 style="text-align:center;margin-top:18px;">Мои задания</h3>
+    <h3 style="text-align:center;margin-top:18px;">Мой личный прогресс</h3>
     <div class="progress-bar-wrap"><div class="progress-bar-fill" id="eventProgressFill" style="width:0%"></div></div>
     <div class="progress-label" id="eventProgressLabel">0 / 0</div>
     <div class="task-list" id="eventTaskList"></div>
-    <div class="add-task-row">
-      <input type="text" id="newTaskInput" placeholder="Новое задание…">
-      <button class="button button-primary" type="button" id="addTaskBtn">Добавить</button>
-    </div>
+    <div class="add-task-row"><input type="text" id="newTaskInput" placeholder="Новое задание…"><button class="button button-primary" type="button" id="addTaskBtn">Добавить</button></div>
     <div class="status-line" id="eventTaskStatus"></div>`;
-  const textNode = content.querySelector('.answer-large-text');
-  appendTextWithLinks(textNode, event.text || '');
+  appendTextWithLinks(content.querySelector('.answer-large-text'), event.text || '');
   const linksBox = content.querySelector('#eventLinks');
   const links = extractLinks(event.text || '', event.links || event.link || '');
-  if (links.length) links.forEach(url => { const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = url; linksBox.appendChild(a); });
+  if (links.length) links.forEach(url => { const a=document.createElement('a'); a.href=url; a.target='_blank'; a.rel='noopener'; a.textContent=url; linksBox.appendChild(a); });
   else linksBox.innerHTML = '<span class="muted">Ссылок пока нет</span>';
   openPortalModal(content, event.title || 'Ивент');
-  try {
-    const data = await apiCall('getPersonalTasks', { id: currentUser.id, eventKey: currentEventKey });
-    personalTasks = data.tasks || []; renderPersonalTasks();
-  } catch (e) { personalTasks = []; renderPersonalTasks(); }
-  content.querySelector('#addTaskBtn').onclick = addPersonalTask;
-  content.querySelector('#newTaskInput').addEventListener('keydown', e => { if (e.key === 'Enter') addPersonalTask(); });
+  try { const data=await apiCall('getPersonalTasks',{id:currentUser.id,eventKey:currentEventKey}); personalTasks=data.tasks||[]; }
+  catch(e){personalTasks=[];}
+  renderPersonalTasks();
+  content.querySelector('#addTaskBtn').onclick=addPersonalTask;
+  content.querySelector('#newTaskInput').addEventListener('keydown',e=>{if(e.key==='Enter')addPersonalTask();});
 }
 
 function extractLinks(text, extra) {
@@ -880,20 +894,44 @@ function extractLinks(text, extra) {
 }
 
 function renderPersonalTasks() {
-  const list = document.getElementById('eventTaskList'); if (!list) return; list.replaceChildren();
-  const total = personalTasks.length; const done = personalTasks.filter(t => t.done).length;
-  const pct = total ? Math.round((done / total) * 100) : 0;
-  const fill = document.getElementById('eventProgressFill'); const label = document.getElementById('eventProgressLabel');
-  if (fill) fill.style.width = pct + '%'; if (label) label.textContent = `${done} / ${total} выполнено`;
-  if (!personalTasks.length) { list.innerHTML = '<div class="empty-state compact">Пока нет заданий. Добавьте первое!</div>'; return; }
-  personalTasks.forEach((task, index) => {
-    const row = document.createElement('div'); row.className = 'task-item' + (task.done ? ' done' : '');
-    row.innerHTML = `<input type="checkbox" ${task.done ? 'checked' : ''}><div class="task-text">${escapeHtml(task.text)}</div><div class="task-actions"><button type="button" title="Удалить">🗑️</button></div>`;
-    const checkbox = row.querySelector('input');
-    checkbox.onchange = () => { personalTasks[index].done = checkbox.checked; savePersonalTasks(); renderPersonalTasks(); };
-    row.querySelector('button').onclick = () => { if (!confirm('Удалить это задание?')) return; personalTasks.splice(index, 1); savePersonalTasks(); renderPersonalTasks(); };
-    list.appendChild(row);
+  const list=$('eventTaskList'); if(!list)return; list.replaceChildren();
+  const total=personalTasks.length, done=personalTasks.filter(t=>t.done).length, pct=total?Math.round(done/total*100):0;
+  $('eventProgressFill').style.width=pct+'%'; $('eventProgressLabel').textContent=`${done} / ${total} выполнено`;
+  if(!total){list.innerHTML='<div class="empty-state compact">Пока нет заданий. Добавьте первое!</div>';return;}
+  personalTasks.forEach((task,index)=>{
+    const row=document.createElement('div'); row.className='task-item'+(task.done?' done':'');
+    const dot=document.createElement('button'); dot.type='button'; dot.className='task-dot '+(task.done?'done':'todo'); dot.title=task.done?'Выполнено':'Не выполнено'; dot.setAttribute('aria-label',dot.title);
+    dot.onclick=e=>{e.stopPropagation();personalTasks[index].done=!personalTasks[index].done;savePersonalTasks().then(renderPersonalTasks);};
+    const label=document.createElement('div'); label.className='task-text'; label.textContent=task.text;
+    const actions=document.createElement('div'); actions.className='task-actions';
+    const edit=document.createElement('button'); edit.type='button'; edit.title='Открыть задание'; edit.textContent='↗';
+    edit.onclick=e=>{e.stopPropagation();openTaskDetail(index);};
+    const del=document.createElement('button'); del.type='button'; del.title='Удалить'; del.textContent='🗑️';
+    del.onclick=e=>{e.stopPropagation();if(!confirm('Удалить это задание?'))return;personalTasks.splice(index,1);savePersonalTasks().then(renderPersonalTasks);};
+    actions.append(edit,del); row.append(dot,label,actions); row.onclick=()=>openTaskDetail(index); list.appendChild(row);
   });
+}
+function openTaskDetail(index) {
+  const task=personalTasks[index]; if(!task)return;
+  const box=document.createElement('div'); box.className='task-detail';
+  box.innerHTML=`<label class="admin-field">Название задания<input id="taskEditTitle" type="text"></label>
+    <label class="admin-field">Описание задания<textarea id="taskEditDescription" placeholder="Подробности, условия и пояснения…"></textarea></label>
+    <label class="admin-field">Ссылки (каждую с новой строки)<textarea id="taskEditLinks" placeholder="https://…"></textarea></label>
+    <div id="taskSavedLinks"></div><div style="text-align:center"><button class="button button-primary" id="taskEditSave">Сохранить</button><button class="button button-quiet" id="taskEditClose">Закрыть</button></div>`;
+  box.querySelector('#taskEditTitle').value=task.text||'';
+  box.querySelector('#taskEditDescription').value=task.description||'';
+  box.querySelector('#taskEditLinks').value=(task.links||[]).join('\n');
+  const saved=box.querySelector('#taskSavedLinks');
+  (task.links||[]).forEach(url=>{if(/^https?:\/\//i.test(url)){const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';a.textContent='🔗 '+url;saved.appendChild(a);}});
+  openPortalModal(box,'Задание '+(index+1));
+  box.querySelector('#taskEditSave').onclick=async()=>{
+    const title=box.querySelector('#taskEditTitle').value.trim(); if(!title)return alert('Введите название задания.');
+    personalTasks[index]={...task,text:title,description:box.querySelector('#taskEditDescription').value.trim(),links:box.querySelector('#taskEditLinks').value.split(/\n|;/).map(x=>x.trim()).filter(x=>/^https?:\/\//i.test(x))};
+    closePortalModal(); await savePersonalTasks(); renderPersonalTasks();
+    // reopen the event detail to keep the task list visible
+    if(currentEventData) openEventDetail(currentEventData);
+  };
+  box.querySelector('#taskEditClose').onclick=()=>closePortalModal();
 }
 
 function escapeHtml(str) {
@@ -987,6 +1025,7 @@ async function markAnswered() {
 
 function renderStatus(status) {
   $('immunityLink').href = status.immunityUrl || '#';
+  updatePortalTimers(status);
   $('immunityLink').classList.toggle('is-disabled', !status.immunityOpen);
   $('answeredButton').disabled = !status.immunityOpen;
   $('immunityStatus').textContent = status.immunityOpen ? 'Сейчас открыт ' + status.periodLabel + '.' : 'Сейчас иммунитет закрыт. Отвечать можно только в активный день.';
@@ -994,8 +1033,30 @@ function renderStatus(status) {
   $('cookieCard').classList.toggle('is-disabled', !status.cookieOpen);
   $('cookieCard').setAttribute('aria-disabled', String(!status.cookieOpen));
   $('cookieCardStatus').textContent = status.cookieOpen ? 'Открыто сегодня (до 23:59)' : 'Доступно по средам';
+  apiCall('cookieStatus').then(data=>{$('cookieCountdown').textContent=`Отметились: ${data.marked.length} из ${data.total}`;}).catch(()=>{$('cookieCountdown').textContent='Статус недоступен';});
 }
 
+let portalClockTimer=null;
+function updatePortalTimers(status) {
+  const tick=()=>{
+    const now=Date.now(), el=$('immunityCountdown'); if(!el)return;
+    if(status.immunityOpen && status.immunityEndsAt>now) el.textContent='Активен · до следующего дня: '+formatRemaining(status.immunityEndsAt-now);
+    else if(status.immunityStartsAt>now) el.textContent='Неактивен · будет активен через '+formatRemaining(status.immunityStartsAt-now);
+    else el.textContent='Неактивен · следующий период ещё не опубликован';
+  };
+  tick(); if(portalClockTimer)clearInterval(portalClockTimer); portalClockTimer=setInterval(tick,1000);
+}
+function formatRemaining(ms){const s=Math.max(0,Math.floor(ms/1000)),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),sec=s%60;return (d?d+' д. ':'')+[h,m,sec].map(x=>String(x).padStart(2,'0')).join(':');}
+async function openCookieStatus(){
+  try{const data=await apiCall('cookieStatus');const box=document.createElement('div');box.innerHTML=`<p class="muted" style="text-align:center">Отметки за ${escapeHtml(data.date||'сегодня')}</p><h3>🥠 Отметились (${data.marked.length})</h3><p>${data.marked.map(escapeHtml).join(', ')||'Пока никто'}</p><h3>Не отметились (${data.missing.length})</h3><p>${data.missing.map(escapeHtml).join(', ')||'Все отметились'}</p><div style="text-align:center"><button class="button button-primary" id="cookieMarkMe">Отметить, что я отметился</button></div>`;openPortalModal(box,'Отметки печенья');box.querySelector('#cookieMarkMe').onclick=async()=>{try{await apiCall('markCookie',{id:currentUser.id});openCookieStatus();}catch(e){alert(e.message||'Ошибка');}};}
+  catch(e){alert(e.message||'Не удалось загрузить отметки');}
+}
+async function openArchive(){
+  try{const data=await apiCall('archiveData');const box=document.createElement('div');box.innerHTML=`<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px"><button class="button button-secondary" id="archiveArticlesTab">📚 Статьи</button><button class="button button-secondary" id="archiveImmunityTab">🛡️ Иммунитет</button></div><div id="archiveContent"></div>`;
+  const draw=kind=>{const target=box.querySelector('#archiveContent');target.replaceChildren();const items=kind==='articles'?data.articles:data.immunity;if(!items.length){target.textContent='В архиве пока нет записей.';return;}items.forEach(item=>{const card=document.createElement('article');card.className='publication';const date=document.createElement('div');date.className='publication-date';date.textContent=item.date||'';const title=document.createElement('h3');title.textContent=item.title||'Без названия';const text=document.createElement('p');text.className='publication-text';text.textContent=item.text||'';card.append(date,title,text);target.append(card);});};
+  box.querySelector('#archiveArticlesTab').onclick=()=>draw('articles');box.querySelector('#archiveImmunityTab').onclick=()=>draw('immunity');draw('articles');openPortalModal(box,'Архив');}
+  catch(e){alert(e.message||'Не удалось загрузить архив');}
+}
 let portalModalNode = null; let portalModalPlaceholder = null;
 
 function openPortalModal(element, title) {
@@ -1200,30 +1261,43 @@ async function showWezyPanel() {
 }
 
 async function openWezyEventTasks(event) {
-  const participantId = $('wezyParticipantSelect').value;
-  if (!participantId) { alert('Сначала выберите участника'); return; }
-  try {
-    const data = await apiCall('getPersonalTasks', { id: participantId, eventKey: event.key || event.row || event.title });
-    const tasks = data.tasks || [];
-    let html = `<h3 style="text-align:center;color:var(--gold)">${event.title}</h3><p class="muted" style="text-align:center;">Задания выбранного участника</p><div class="task-list">`;
-    if (!tasks.length) html += '<div class="empty-state compact">У участника пока нет заданий</div>';
-    else tasks.forEach((t, i) => { html += `<div class="task-item ${t.done ? 'done' : ''}"><input type="checkbox" ${t.done ? 'checked' : ''} disabled><div class="task-text">${escapeHtml(t.text)}</div><div class="task-actions"><button type="button" data-index="${i}" class="wezy-del-task">🗑️</button></div></div>`; });
-    html += `</div><div class="add-task-row"><input type="text" id="wezyNewTask" placeholder="Добавить задание участнику…"><button class="button button-primary" type="button" id="wezyAddTaskBtn">Добавить</button></div><div class="status-line" id="wezyTaskStatus"></div>`;
-    const box = document.createElement('div'); box.innerHTML = html; openPortalModal(box, 'Задания: ' + event.title);
-    box.querySelectorAll('.wezy-del-task').forEach(btn => {
-      btn.onclick = async () => {
-        const idx = Number(btn.dataset.index); tasks.splice(idx, 1);
-        await apiCall('savePersonalTasks', { id: participantId, eventKey: event.key || event.row || event.title, tasks: JSON.stringify(tasks) });
-        openWezyEventTasks(event);
-      };
+  const participantId=$('wezyParticipantSelect').value;
+  if(!participantId){alert('Сначала выберите участника');return;}
+  const eventKey=event.key||event.row||event.title;
+  try{
+    const data=await apiCall('getPersonalTasks',{id:participantId,eventKey});
+    const tasks=data.tasks||[];
+    const box=document.createElement('div');
+    box.innerHTML=`<h3 style="text-align:center;color:var(--gold)">${escapeHtml(event.title)}</h3>
+      <p class="muted" style="text-align:center;">Индивидуальные задания выбранного участника</p>
+      <div class="task-list" id="wezyTaskRows"></div>
+      <div class="task-detail" style="margin-top:16px">
+        <label class="admin-field">Название задания<input type="text" id="wezyNewTask" placeholder="Например: Задание 1"></label>
+        <label class="admin-field">Описание<textarea id="wezyNewDescription" placeholder="Условия и подробности задания…"></textarea></label>
+        <label class="admin-field">Ссылки (каждую с новой строки)<textarea id="wezyNewLinks" placeholder="https://…"></textarea></label>
+        <div style="text-align:center"><button class="button button-primary" type="button" id="wezyAddTaskBtn">Добавить задание</button></div>
+      </div><div class="status-line" id="wezyTaskStatus"></div>`;
+    const rows=box.querySelector('#wezyTaskRows');
+    if(!tasks.length)rows.innerHTML='<div class="empty-state compact">У участника пока нет заданий</div>';
+    tasks.forEach((t,i)=>{
+      const row=document.createElement('div');row.className='task-item';
+      const dot=document.createElement('span');dot.className='task-dot '+(t.done?'done':'todo');
+      const text=document.createElement('div');text.className='task-text';text.textContent=t.text;
+      const meta=document.createElement('small');meta.className='muted';meta.textContent=(t.description||'Описание не добавлено')+' · '+((t.links||[]).length)+' ссылок';text.appendChild(meta);
+      const del=document.createElement('button');del.type='button';del.className='button button-danger';del.textContent='Удалить';
+      del.onclick=async()=>{tasks.splice(i,1);await apiCall('savePersonalTasks',{id:participantId,eventKey,tasks:JSON.stringify(tasks)});openWezyEventTasks(event);};
+      row.append(dot,text,del);rows.appendChild(row);
     });
-    box.querySelector('#wezyAddTaskBtn').onclick = async () => {
-      const input = box.querySelector('#wezyNewTask'); const text = input.value.trim(); if (!text) return;
-      tasks.push({ text, done: false });
-      await apiCall('savePersonalTasks', { id: participantId, eventKey: event.key || event.row || event.title, tasks: JSON.stringify(tasks) });
+    openPortalModal(box,'Задания: '+event.title);
+    box.querySelector('#wezyAddTaskBtn').onclick=async()=>{
+      const text=box.querySelector('#wezyNewTask').value.trim();if(!text)return alert('Введите название задания.');
+      const description=box.querySelector('#wezyNewDescription').value.trim();
+      const links=box.querySelector('#wezyNewLinks').value.split(/\n|;/).map(x=>x.trim()).filter(x=>/^https?:\/\//i.test(x));
+      tasks.push({text,description,links,done:false});
+      await apiCall('savePersonalTasks',{id:participantId,eventKey,tasks:JSON.stringify(tasks)});
       openWezyEventTasks(event);
     };
-  } catch (e) { alert(e.message || 'Ошибка'); }
+  }catch(e){alert(e.message||'Ошибка');}
 }
 
 window.addEventListener('load', () => {
