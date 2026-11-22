@@ -10,7 +10,7 @@
 :root {
   --navy: #030718;
   --navy-2: #0b1536;
-  --panel: rgba(12, 19, 46, .82);
+  --panel: rgba(12, 19, 46, .84);
   --panel-border: rgba(186, 174, 255, .22);
   --text: #f5f6ff;
   --muted: #b8c2e6;
@@ -22,12 +22,8 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: auto; }
 body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #020512;
+  margin: 0; min-height: 100vh; overflow-x: hidden; color: var(--text);
+  font-family: Arial, Helvetica, sans-serif; background-color: #020512;
   background-image:
     radial-gradient(ellipse at 50% -10%, rgba(76, 52, 160, .58), transparent 55%),
     radial-gradient(ellipse at 88% 30%, rgba(135, 38, 173, .25), transparent 45%),
@@ -41,13 +37,9 @@ body {
     radial-gradient(2px 2px at 40px 60px, rgba(255,255,255,.9) 98%, transparent),
     radial-gradient(3px 3px at 180px 140px, rgba(230,240,255,.85) 98%, transparent),
     radial-gradient(2px 2px at 320px 90px, rgba(255,255,255,.8) 98%, transparent);
-  background-size: 420px 380px;
-  animation: snowfall 22s linear infinite;
+  background-size: 420px 380px; animation: snowfall 22s linear infinite;
 }
-@keyframes snowfall {
-  0% { background-position: 0 0; }
-  100% { background-position: 40px 380px; }
-}
+@keyframes snowfall { 0% { background-position: 0 0; } 100% { background-position: 40px 380px; } }
 .winter-lights-big {
   position: fixed; top: 0; left: 0; right: 0; height: 70px; z-index: 2; pointer-events: none !important;
   background-image:
@@ -55,14 +47,10 @@ body {
     radial-gradient(circle, #8bc2ff 0 4px, transparent 14px),
     radial-gradient(circle, #ff7597 0 4px, transparent 14px);
   background-size: 140px 50px, 170px 55px, 200px 48px;
-  background-position: 10px 10px, 50px 18px, 100px 12px;
-  background-repeat: repeat-x;
+  background-position: 10px 10px, 50px 18px, 100px 12px; background-repeat: repeat-x;
   filter: drop-shadow(0 3px 8px rgba(255, 215, 120, .3));
 }
-.winter-snowman {
-  position: fixed; right: 18px; bottom: 14px; z-index: 5;
-  pointer-events: none !important; font-size: 36px; opacity: .7;
-}
+.winter-snowman { position: fixed; right: 18px; bottom: 14px; z-index: 5; pointer-events: none !important; font-size: 36px; opacity: .7; }
 .site-header, .container, footer { position: relative; z-index: 10; }
 .site-header { text-align: center; padding: 28px 16px 16px; }
 .admin-entry { margin: 14px auto 0; text-align: center; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
@@ -72,8 +60,7 @@ body {
   color: #fff4d8; font-size: 14px; font-weight: 800; letter-spacing: .03em;
   border: 1px solid rgba(255,218,145,.55);
   background: linear-gradient(110deg, #23356e, #532d78, #1d466e);
-  background-size: 200% 100%;
-  box-shadow: 0 6px 22px rgba(3,6,22,.45);
+  background-size: 200% 100%; box-shadow: 0 6px 22px rgba(3,6,22,.45);
   transition: transform .2s ease;
 }
 .admin-entry button:hover { transform: translateY(-2px); }
@@ -84,7 +71,7 @@ body {
 }
 .brand-caption, .eyebrow { color: #cbd5f8; font-size: 10px; letter-spacing: .22em; font-weight: 700; }
 .header-squirrels { margin-top: 10px; font-size: 18px; letter-spacing: 10px; }
-.container { width: min(980px, 94%); margin: 12px auto 60px; }
+.container { width: min(1000px, 94%); margin: 12px auto 60px; }
 .panel {
   background: var(--panel); border: 1px solid var(--panel-border); border-radius: 20px;
   padding: clamp(16px, 2.8vw, 26px); margin-bottom: 16px;
@@ -124,6 +111,13 @@ textarea { min-height: 100px; resize: vertical; line-height: 1.45; color: #f4f6f
 .welcome h1 { margin-top: 12px; }
 .welcome p { max-width: 620px; margin: 0 auto; color: #d5def5; font-size: 16px; }
 .welcome-bottom { color: var(--gold); font-size: 13px; margin-top: 16px; }
+
+/* ТАЙМЕРЫ В ПРИВЕТСТВИИ */
+.welcome-timers { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin:16px auto 0; }
+.timer-chip { padding:10px 14px; border:1px solid rgba(186,174,255,.2); border-radius:12px; background:rgba(4,10,28,.55); color:#f4f6ff; font-size:13px; }
+.timer-chip strong { color:var(--gold); display:block; margin-bottom:4px; }
+
+/* 3 В РЯДУ, ИВЕНТЫ ПРОЕКТОВ ПО ЦЕНТРУ ВО 2-М РЯДУ */
 .section-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0 20px; }
 .section-card {
   min-height: 130px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
@@ -141,29 +135,16 @@ textarea { min-height: 100px; resize: vertical; line-height: 1.45; color: #f4f6f
   .section-grid { grid-template-columns: 1fr; }
   .section-card.events-nav-card { grid-column: 1; }
 }
+
+/* ЗАГОЛОВКИ ДИАЛОГОВЫХ ОКОН: СТРОГО ПО ЦЕНТРУ */
 .section-heading {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; gap: 6px; margin-bottom: 18px;
 }
 .section-heading h2 { font-size: clamp(20px, 3.2vw, 26px); color: var(--gold); }
 .section-heading p { margin: 0; font-size: 13px; color: var(--muted); }
-.content-section { scroll-margin-top: 16px; }
-.publication-list { display: grid; gap: 10px; }
-.publication {
-  padding: 14px; border: 1px solid rgba(186, 174, 255, .16);
-  border-radius: 13px; background: rgba(8, 14, 38, .5);
-  cursor: pointer; transition: border-color .18s ease;
-}
-.publication:hover { border-color: rgba(244,201,121,.45); }
-.publication-date { color: var(--gold); font-size: 11px; font-weight: 700; }
-.publication h3 { margin: 5px 0; font-size: 16px; }
-.publication-text { margin: 0; color: #dce4fa; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
-.empty-state {
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  padding: 24px 12px; color: var(--muted); text-align: center;
-  border: 1px dashed rgba(173,196,255,.18); border-radius: 13px;
-}
-.empty-state.compact { padding: 16px; font-size: 13px; }
+
+/* ДНИ ИММУНИТЕТА */
 .period-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0; }
 @media (max-width: 600px) { .period-grid { grid-template-columns: 1fr; } }
 .period-card {
@@ -201,21 +182,8 @@ textarea { min-height: 100px; resize: vertical; line-height: 1.45; color: #f4f6f
 .result.neutral { color: var(--muted); }
 .is-disabled { opacity: .4; pointer-events: none; filter: grayscale(.7); }
 .logout-row { text-align: center; margin-top: 20px; }
-.admin-panel { margin-top: 20px; border-color: rgba(244,201,121,.35); }
-.admin-form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin: 14px 0; }
-.admin-field { display: flex; flex-direction: column; gap: 5px; color: #dce5ff; font-size: 12px; }
-.admin-field.full { grid-column: 1 / -1; }
-.admin-field input, .admin-field textarea { width: 100%; border: 1px solid rgba(173,196,255,.28); border-radius: 9px; background: rgba(4,10,28,.85); color: #f4f6ff; padding: 10px; font: inherit; }
-.admin-list { display: grid; gap: 8px; margin-top: 12px; }
-.admin-row { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding:11px; border:1px solid var(--panel-border); border-radius:11px; background:rgba(4,10,28,.5); }
-.admin-row small { display:block; color:var(--muted); margin-top:3px; }
-.admin-row-actions { display:flex; gap:5px; flex-wrap:wrap; }
-.admin-row-actions button { border:1px solid var(--panel-border); border-radius:7px; padding:6px 10px; color:var(--text); background:#282f63; cursor:pointer; font-weight:700; font-size:12px; }
-.admin-row-actions button.btn-del { background:#7c1a2f; border-color:#b4334c; color:#fff; }
-.admin-login-box { max-width:420px; margin:18px auto; text-align: center; }
-@media(max-width:600px){.admin-form{grid-template-columns:1fr}.admin-field.full{grid-column:auto}.admin-row{flex-direction:column}}
-footer { text-align: center; padding: 16px 10px 28px; color: #8f9fc8; font-size: 12px; letter-spacing: .06em; }
-[hidden] { display: none !important; }
+
+/* АВААТАРСКАЯ УДАЧА */
 .article-top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .article-date-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin: 14px 0; }
 .article-date-button { min-height: 58px; padding: 9px; border: 1px solid rgba(186, 174, 255, .2); border-radius: 12px; background: rgba(7, 13, 36, .55); color: var(--gold); font-size: 14px; font-weight: 800; cursor: pointer; text-align: center; }
@@ -241,13 +209,15 @@ footer { text-align: center; padding: 16px 10px 28px; color: #8f9fc8; font-size:
 .answer-label { color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: .1em; margin-bottom: 14px; text-align: center; }
 .today-answer-content h3 { font-size: 20px; color: var(--gold); }
 .answer-large-text { font-size: 15px; line-height: 1.7; color: #f4f6ff; white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; }
+
+/* МОДАЛЬНЫЕ ОКНА: ЦЕНТР */
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
   padding: 14px; background: rgba(1, 4, 16, .88); backdrop-filter: blur(7px);
 }
 .portal-modal[hidden] { display: none !important; }
 .portal-modal-dialog {
-  position: relative; width: min(900px, 100%); max-height: 90vh; overflow: auto;
+  position: relative; width: min(940px, 100%); max-height: 90vh; overflow: auto;
   padding: clamp(16px, 3vw, 26px); border: 1px solid rgba(186, 174, 255, .25); border-radius: 18px;
   background: #090f2b; box-shadow: 0 20px 70px rgba(0,0,0,.6); overscroll-behavior: contain;
 }
@@ -264,57 +234,87 @@ footer { text-align: center; padding: 16px 10px 28px; color: #8f9fc8; font-size:
 }
 .portal-modal-content { clear: both; width: 100%; }
 body.portal-modal-open { overflow: hidden; }
-.admin-entry .wezy-admin-entry { display: none !important; }
-.wezy-secret-entry { display: inline-block; margin: 6px 0 0 8px; color: #9aa9ca; font-size: 11px; opacity: .4; text-decoration: underline; cursor: pointer; }
-.wezy-secret-entry:hover { opacity: 1; color: var(--gold); }
-.event-card {
-  padding: 14px 16px; border: 1px solid rgba(186,174,255,.18); border-radius: 13px;
-  background: rgba(8,14,38,.5); cursor: pointer; transition: border-color .18s;
+
+/* ==============================================================
+   СОВРЕМЕННЫЙ ТРЁХПАНЕЛЬНЫЙ ДИЗАЙН «ИВЕНТОВ ПРОЕКТОВ» (ПО РИСУНКУ)
+   ============================================================== */
+.event-layout-container {
+  display: grid;
+  grid-template-columns: 280px 1fr 220px;
+  gap: 14px;
+  min-height: 440px;
+  margin-top: 12px;
+  animation: fadeInModal .3s ease-out;
 }
-.event-card:hover { border-color: rgba(244,201,121,.5); }
-.event-card h3 { margin: 4px 0 6px; font-size: 16px; color: var(--gold); }
-.event-card .event-meta { font-size: 12px; color: var(--muted); }
-.event-detail-links a {
-  display: inline-block; margin: 4px 8px 4px 0; color: #82aaff; font-size: 13px; word-break: break-all;
+@media (max-width: 860px) {
+  .event-layout-container { grid-template-columns: 1fr; }
 }
-.task-list { display: grid; gap: 8px; margin: 14px 0; }
-.task-item {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 10px 12px; border-radius: 10px; background: rgba(6,12,33,.55);
-  border: 1px solid rgba(186,174,255,.12);
+
+@keyframes fadeInModal {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-.task-item.done { opacity: .75; }
-.task-item input[type="checkbox"] { margin-top: 3px; width: 18px; height: 18px; accent-color: #9be5bd; }
-.task-item .task-text { flex: 1; font-size: 14px; line-height: 1.4; }
-.task-item .task-actions { display: flex; gap: 4px; }
-.task-item .task-actions button {
-  border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 14px; padding: 2px 5px;
+
+/* 1. Левая колонка: Карточки заданий */
+.event-col-tasks {
+  display: flex; flex-direction: column; gap: 8px;
+  background: rgba(6, 11, 31, .65); border: 1px solid rgba(186, 174, 255, .15);
+  border-radius: 14px; padding: 12px; max-height: 520px; overflow-y: auto;
 }
-.task-item .task-actions button:hover { color: var(--red); }
-.progress-bar-wrap {
-  margin: 12px 0 6px; height: 10px; background: rgba(255,255,255,.08);
-  border-radius: 6px; overflow: hidden;
+.event-task-card {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  border-radius: 11px; background: rgba(14, 22, 54, .7); border: 1px solid rgba(186, 174, 255, .15);
+  color: var(--text); cursor: pointer; transition: all .2s ease; text-align: left;
 }
-.progress-bar-fill {
-  height: 100%; background: linear-gradient(90deg, #6bbcff, #9be5bd);
-  border-radius: 6px; transition: width .3s ease;
+.event-task-card:hover { transform: translateX(3px); border-color: var(--gold); background: #1c2658; }
+.event-task-card.active { border-color: var(--gold); background: #262963; box-shadow: 0 0 14px rgba(245, 203, 120, .25); }
+.event-task-dot {
+  width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  box-shadow: 0 0 8px currentColor;
 }
-.task-dot { flex:0 0 13px; width:13px; height:13px; border-radius:50%; border:0; cursor:pointer; margin-top:4px; box-shadow:0 0 9px currentColor; }
-.task-dot.todo { background:#ff5267; color:#ff5267; }
-.task-dot.done { background:#55d88a; color:#55d88a; }
-.task-item { cursor:pointer; align-items:center; }
-.task-item .task-text { cursor:pointer; }
-.welcome-timers { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin:16px auto 0; }
-.timer-chip { padding:10px 14px; border:1px solid rgba(186,174,255,.2); border-radius:12px; background:rgba(4,10,28,.55); color:#f4f6ff; font-size:13px; }
-.timer-chip strong { color:var(--gold); display:block; margin-bottom:4px; }
-.archive-nav-card { grid-column:2; }
-@media(max-width:720px){.archive-nav-card{grid-column:1}}
-.task-detail { display:grid; gap:10px; }
-.task-detail textarea { min-height:90px; }
-.task-detail a { color:var(--blue); display:block; overflow-wrap:anywhere; margin:5px 0; }
-.progress-label { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 10px; }
-.add-task-row { display: flex; gap: 8px; margin-top: 10px; }
-.add-task-row input { flex: 1; }
+.event-task-dot.done { background: #55d88a; color: #55d88a; }
+.event-task-dot.todo { background: #ff5267; color: #ff5267; }
+.event-task-card-name { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* 2. Центральная колонка: Подробный текст задания */
+.event-col-content {
+  display: flex; flex-direction: column; gap: 12px;
+  background: rgba(8, 14, 38, .85); border: 1px solid rgba(186, 174, 255, .2);
+  border-radius: 14px; padding: 18px; min-height: 380px;
+}
+.event-col-content h3 { margin: 0; color: var(--gold); font-size: 20px; text-align: center; }
+.event-task-fulltext {
+  color: #e5ebff; font-size: 14px; line-height: 1.65; white-space: pre-wrap;
+  background: rgba(5, 9, 26, .5); border: 1px solid rgba(186, 174, 255, .1);
+  padding: 14px; border-radius: 12px; min-height: 120px; overflow-wrap: anywhere;
+}
+.progress-bar-wrap { height: 10px; background: rgba(255,255,255,.08); border-radius: 6px; overflow: hidden; margin-top: 8px; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, #6bbcff, #9be5bd); border-radius: 6px; transition: width .3s ease; }
+.progress-label { font-size: 12px; color: var(--muted); text-align: center; margin-top: 4px; }
+
+/* 3. Правая колонка: Ссылки */
+.event-col-links {
+  display: flex; flex-direction: column; gap: 8px;
+  background: rgba(6, 11, 31, .65); border: 1px solid rgba(186, 174, 255, .15);
+  border-radius: 14px; padding: 12px;
+}
+.event-col-links h4 { margin: 0 0 6px; font-size: 14px; color: var(--gold); text-align: center; }
+.event-link-pill {
+  display: block; padding: 10px 12px; border-radius: 10px; text-decoration: none;
+  background: #192759; border: 1px solid rgba(130, 170, 255, .35); color: #82aaff;
+  font-size: 13px; font-weight: 700; word-break: break-all; transition: background .18s;
+  text-align: center;
+}
+.event-link-pill:hover { background: #263c8a; color: #fff; }
+
+/* ОКНО ПЕЧЕНЬЯ СУДЬБЫ */
+.cookie-modal-card { text-align: center; padding: 10px; }
+.cookie-countdown-box {
+  margin: 14px 0; padding: 18px; border-radius: 16px;
+  background: rgba(245, 203, 120, .1); border: 1px solid rgba(245, 203, 120, .4);
+}
+.cookie-countdown-val { font-size: clamp(22px, 4vw, 32px); font-weight: 800; color: var(--gold); margin: 6px 0; }
+.cookie-status-block { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--panel-border); }
   </style>
 </head>
 <body>
@@ -368,13 +368,15 @@ body.portal-modal-open { overflow: hidden; }
         <h1>Привет, <span id="userName"></span>!</h1>
         <p>Здесь собраны ответы иммунитета, статьи, печенье судьбы и актуальные ивенты проектов.</p>
         <div class="welcome-bottom">Рады видеть тебя снова <span>🐿️</span></div>
+
+        <!-- ТАЙМЕРЫ НА ГЛАВНОЙ (БЕЗ КНОПКИ КТО ОТМЕТИЛ) -->
         <div class="welcome-timers">
           <div class="timer-chip"><strong>🛡️ Иммунитет</strong><span id="immunityCountdown">Загружаем…</span></div>
-          <div class="timer-chip"><strong>🥠 Печенье судьбы</strong><span id="cookieCountdown">Загружаем отметки…</span></div>
+          <div class="timer-chip"><strong>🥠 Печенье судьбы</strong><span id="cookieCountdown">Загружаем…</span></div>
         </div>
-        <div style="text-align:center;margin-top:8px;"><button class="button button-quiet" type="button" onclick="openCookieStatus()">👥 Кто отметил печенье</button></div>
       </section>
 
+      <!-- НАВИГАЦИОННАЯ СЕТКА: 3 В РЯДУ, ИВЕНТЫ ПО ЦЕНТРУ -->
       <nav class="section-grid" aria-label="Разделы портала">
         <button class="section-card" data-target="immunitySection">
           <span class="section-emoji">🛡️</span>
@@ -386,19 +388,20 @@ body.portal-modal-open { overflow: hidden; }
           <strong>Аватарская удача</strong>
           <small>Статьи и фотоальбомы</small>
         </button>
-        <a class="section-card" id="cookieCard" href="#" target="_blank" rel="noopener">
+        <!-- КАРТОЧКА ПЕЧЕНЬЯ ТЕПЕРЬ ОТКРЫВАЕТ ДИАЛОГОВОЕ ОКНО -->
+        <button class="section-card" type="button" onclick="openCookieModal()">
           <span class="section-emoji">🥠</span>
           <strong>Печенье судьбы</strong>
           <small id="cookieCardStatus">Доступно по средам</small>
-        </a>
-        <button class="section-card archive-nav-card" type="button" onclick="openArchive()"> <span class="section-emoji">🗄️</span><strong>Архив</strong><small>Старые статьи и иммунитет</small></button>
+        </button>
         <button class="section-card events-nav-card" data-target="eventsSection">
           <span class="section-emoji">🏆</span>
           <strong>Ивенты проектов</strong>
-          <small>События и задания</small>
+          <small>Линейка заданий и ссылки</small>
         </button>
       </nav>
 
+      <!-- РАЗДЕЛ: ИММУНИТЕТ -->
       <section class="panel content-section" id="immunitySection" hidden>
         <div class="section-heading">
           <span class="section-emoji small">🛡️</span>
@@ -416,6 +419,7 @@ body.portal-modal-open { overflow: hidden; }
           <button class="button button-secondary" id="answeredButton" onclick="markAnswered()">Я ответил на иммунитет</button>
         </div>
         <div class="status-line" id="immunityStatus"></div>
+
         <div class="participant-status-panel" style="margin-top:20px;">
           <h3 style="text-align:center;">👥 Кто ответил на иммунитет</h3>
           <p class="muted" style="text-align:center;">Список ответивших и тех, кто ещё не отметил ответ.</p>
@@ -435,6 +439,7 @@ body.portal-modal-open { overflow: hidden; }
           </div>
           <div class="admin-list" id="participantStatusResult" aria-live="polite"></div>
         </div>
+
         <h3 class="history-title">Моя история участия</h3>
         <div style="text-align:center;">
           <button class="button button-secondary" id="historyToggle" type="button" aria-expanded="false">📖 История участия</button>
@@ -446,6 +451,7 @@ body.portal-modal-open { overflow: hidden; }
         </div>
       </section>
 
+      <!-- РАЗДЕЛ: АВАТАРСКАЯ УДАЧА (АРХИВ ЗА ВСЕ ДАТЫ) -->
       <section class="panel content-section" id="articlesSection" hidden>
         <div class="section-heading">
           <span class="section-emoji small">📚</span>
@@ -500,18 +506,20 @@ body.portal-modal-open { overflow: hidden; }
         </div>
       </section>
 
+      <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ (СПИСОК) -->
       <section class="panel content-section" id="eventsSection" hidden>
         <div class="section-heading">
           <span class="section-emoji small">🏆</span>
           <h2>Ивенты проектов</h2>
-          <p>Выберите ивент, чтобы посмотреть детали, ссылки и свои задания.</p>
+          <p>Выберите нужный ивент, чтобы открыть линейку заданий и ссылки.</p>
         </div>
-        <div id="eventsList" class="publication-list"></div>
+        <div id="eventsList" class="publication-list" style="display:grid;gap:10px;"></div>
       </section>
 
       <div class="logout-row"><button class="button button-quiet" onclick="logout()">Выйти из личного кабинета</button></div>
     </section>
 
+    <!-- ПАНЕЛЬ АДМИНИСТРАТОРА -->
     <section class="panel admin-panel" id="adminPanel" hidden>
       <div class="section-heading">
         <span class="section-emoji small">⚙️</span>
@@ -580,6 +588,7 @@ body.portal-modal-open { overflow: hidden; }
     <div class="status-line" id="adminLoginMessage"></div>
   </section>
 
+  <!-- СЛУЖЕБНЫЙ ВХОД WEZY -->
   <section class="panel admin-login-box" id="wezyLoginBox" hidden>
     <h2>🎄 Служебный вход Wezy</h2>
     <label class="admin-field">Пароль Wezy<input id="wezyPassword" type="password" placeholder="Введите пароль"></label>
@@ -594,7 +603,7 @@ body.portal-modal-open { overflow: hidden; }
       <h2>Панель Wezy</h2>
       <p>Управление ивентами и заданиями участников</p>
     </div>
-    <h3 style="text-align:center;">Выбор участника для просмотра/редактирования</h3>
+    <h3 style="text-align:center;">Выбор участника для заданий</h3>
     <div class="admin-form">
       <label class="admin-field full">Участник
         <select id="wezyParticipantSelect"><option value="">Выберите участника</option></select>
@@ -607,6 +616,7 @@ body.portal-modal-open { overflow: hidden; }
     </div>
   </section>
 
+  <!-- МОДАЛЬНОЕ ОКНО -->
   <div class="portal-modal" id="portalModal" hidden>
     <div class="portal-modal-dialog" id="portalModalDialog" role="dialog" aria-modal="true" aria-labelledby="portalModalTitle">
       <button class="portal-modal-close" type="button" aria-label="Закрыть" onclick="closePortalModal()">×</button>
@@ -617,10 +627,12 @@ body.portal-modal-open { overflow: hidden; }
 
 <script>
 let currentUser = null;
-let wezyToken = sessionStorage.getItem('perforator_wezy_token') || '';
 let currentEventKey = null;
 let currentEventData = null;
 let personalTasks = [];
+let activeTaskIndex = 0;
+let wezyToken = sessionStorage.getItem('perforator_wezy_token') || '';
+
 const $ = id => document.getElementById(id);
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwbGOE4Q2Z6kL4BoAj0r6e0OmCSsgijdU26bWVfYpQC0kV5rkdd4XSPZ_qRSGFqX_kC/exec';
 let apiCounter = 0;
@@ -684,11 +696,13 @@ function logout() {
   showMessage('');
 }
 
+let latestPortalData = null;
 async function loadPortal() {
   if (!currentUser) return;
   $('todayAnswer').innerHTML = '<div class="loading">Загружаем данные…</div>';
   try {
     const data = await apiCall('portal', { id: currentUser.id });
+    latestPortalData = data;
     renderImmunity(data.immunity || {}, data.history || [], data.status || {});
     renderArticleArchive(data.articles || []);
     renderEvents(data.events || []);
@@ -735,8 +749,8 @@ function renderImmunity(data, historyItems, status) {
   });
 }
 
+// СТАТЬИ
 let cachedArticles = []; let currentSelectedDateKey = null;
-
 function renderArticleArchive(items) {
   cachedArticles = items || [];
   const target = $('articleDates'); target.replaceChildren();
@@ -813,7 +827,6 @@ function openArticleEditor(article = null) {
     $('articleTextInput').value = ''; $('articleLinkInput').value = ''; $('articleSaveBtn').textContent = 'Опубликовать';
   }
 }
-
 function closeArticleEditor() { $('articleEditorBox').hidden = true; if (currentSelectedDateKey) backToDayList(); else backToDateGrid(); }
 
 $('publicArticleForm').addEventListener('submit', async e => {
@@ -848,42 +861,233 @@ function appendTextWithLinks(container, value) {
   });
 }
 
+// ==============================================================
+// НОВЫЙ СОВРЕМЕННЫЙ ТРЁХПАНЕЛЬНЫЙ ДИЗАЙН «ИВЕНТОВ ПРОЕКТОВ»
+// ==============================================================
 function renderEvents(items) {
   const target = $('eventsList'); target.replaceChildren();
   if (!items || !items.length) { target.innerHTML = '<div class="empty-state compact">Пока нет опубликованных ивентов.</div>'; return; }
   items.forEach(item => {
-    const card = document.createElement('div'); card.className = 'event-card';
-    card.innerHTML = `<div class="publication-date">${item.date || ''}</div><h3>${item.title || 'Без названия'}</h3><div class="event-meta">${(item.text || '').slice(0, 110)}${(item.text || '').length > 110 ? '…' : ''}</div>`;
-    card.onclick = () => openEventDetail(item); target.appendChild(card);
+    const card = document.createElement('div'); card.className = 'publication';
+    card.style.cursor = 'pointer';
+    card.innerHTML = `<div class="publication-date">${item.date || ''}</div><h3>${item.title || 'Без названия'}</h3><p class="publication-text">${(item.text || '').slice(0, 110)}…</p>`;
+    card.onclick = () => openModernEventView(item);
+    target.appendChild(card);
   });
 }
 
-async function openEventDetail(event) {
+async function openModernEventView(event) {
   currentEventKey = event.key || ('event_' + (event.row || event.title || Date.now()));
   currentEventData = event;
-  const content = document.createElement('div');
-  content.innerHTML = `
-    <div class="publication-date">${escapeHtml(event.date || '')}</div>
-    <h3 style="color:var(--gold);margin:8px 0 12px;">${escapeHtml(event.title || '')}</h3>
-    <div class="answer-large-text" style="margin-bottom:14px;"></div>
-    <div class="event-detail-links" id="eventLinks"></div>
-    <h3 style="text-align:center;margin-top:18px;">Мой личный прогресс</h3>
-    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="eventProgressFill" style="width:0%"></div></div>
-    <div class="progress-label" id="eventProgressLabel">0 / 0</div>
-    <div class="task-list" id="eventTaskList"></div>
-    <div class="add-task-row"><input type="text" id="newTaskInput" placeholder="Новое задание…"><button class="button button-primary" type="button" id="addTaskBtn">Добавить</button></div>
-    <div class="status-line" id="eventTaskStatus"></div>`;
-  appendTextWithLinks(content.querySelector('.answer-large-text'), event.text || '');
-  const linksBox = content.querySelector('#eventLinks');
-  const links = extractLinks(event.text || '', event.links || event.link || '');
-  if (links.length) links.forEach(url => { const a=document.createElement('a'); a.href=url; a.target='_blank'; a.rel='noopener'; a.textContent=url; linksBox.appendChild(a); });
-  else linksBox.innerHTML = '<span class="muted">Ссылок пока нет</span>';
-  openPortalModal(content, event.title || 'Ивент');
-  try { const data=await apiCall('getPersonalTasks',{id:currentUser.id,eventKey:currentEventKey}); personalTasks=data.tasks||[]; }
-  catch(e){personalTasks=[];}
-  renderPersonalTasks();
-  content.querySelector('#addTaskBtn').onclick=addPersonalTask;
-  content.querySelector('#newTaskInput').addEventListener('keydown',e=>{if(e.key==='Enter')addPersonalTask();});
+  activeTaskIndex = 0;
+
+  const box = document.createElement('div');
+  box.innerHTML = `
+    <div style="text-align:center;margin-bottom:12px;">
+      <span class="publication-date">${escapeHtml(event.date || '')}</span>
+      <h3 style="color:var(--gold);margin:6px 0 2px;font-size:22px;">${escapeHtml(event.title || '')}</h3>
+    </div>
+    
+    <div class="event-layout-container">
+      <!-- 1. ЛЕВАЯ КОЛОНКА: ЗАДАНИЯ (1, 2, 3...) -->
+      <div class="event-col-tasks">
+        <strong style="color:var(--gold);font-size:13px;text-align:center;margin-bottom:4px;">📋 Линейка заданий</strong>
+        <div id="eventTaskCardsContainer" style="display:flex;flex-direction:column;gap:7px;"></div>
+        <div style="margin-top:auto;padding-top:8px;">
+          <input type="text" id="modernNewTaskName" placeholder="+ Новое задание" style="padding:8px 10px;font-size:12px;">
+          <button class="button button-primary" type="button" id="modernAddTaskBtn" style="width:100%;margin:6px 0 0;padding:8px;font-size:12px;">Добавить задание</button>
+        </div>
+      </div>
+
+      <!-- 2. ЦЕНТРАЛЬНАЯ КОЛОНКА: ПОДРОБНЫЙ ТЕКСТ И ПРОГРЕСС -->
+      <div class="event-col-content">
+        <h3 id="currentTaskTitle">Загрузка задания…</h3>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="eventProgressFill" style="width:0%"></div></div>
+        <div class="progress-label" id="eventProgressLabel">0 / 0 выполнено</div>
+        
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
+          <strong style="font-size:13px;color:var(--muted);">Подробное описание:</strong>
+          <button class="button button-quiet" type="button" id="toggleTaskDoneBtn" style="padding:5px 10px;font-size:11px;margin:0;">Отметить выполненным</button>
+        </div>
+        <div class="event-task-fulltext" id="currentTaskDescription"></div>
+
+        <div style="margin-top:auto;display:flex;gap:8px;justify-content:flex-end;">
+          <button class="button button-secondary" type="button" id="editTaskModalBtn" style="padding:7px 12px;font-size:12px;">✏️ Редактировать текст</button>
+          <button class="button button-danger" type="button" id="delTaskModalBtn" style="padding:7px 12px;font-size:12px;">🗑️ Удалить</button>
+        </div>
+      </div>
+
+      <!-- 3. ПРАВАЯ КОЛОНКА: ССЫЛКИ -->
+      <div class="event-col-links">
+        <h4>🔗 Ссылки</h4>
+        <div id="modernEventLinks" style="display:flex;flex-direction:column;gap:7px;"></div>
+      </div>
+    </div>
+  `;
+
+  openPortalModal(box, event.title || 'Ивент проектов');
+
+  // Загружаем личные задания участника
+  try {
+    const data = await apiCall('getPersonalTasks', { id: currentUser.id, eventKey: currentEventKey });
+    personalTasks = data.tasks || [];
+  } catch (e) {
+    personalTasks = [];
+  }
+
+  // Если заданий нет, подставим исходный текст ивента как базовое задание
+  if (!personalTasks.length && event.text) {
+    personalTasks.push({
+      text: 'Задание 1: ' + (event.title || 'Основное'),
+      description: event.text || '',
+      links: extractLinks(event.text || '', event.links || event.link || ''),
+      done: false
+    });
+  }
+
+  renderModernTaskLayout(box, event);
+
+  box.querySelector('#modernAddTaskBtn').onclick = async () => {
+    const input = box.querySelector('#modernNewTaskName');
+    const val = input.value.trim();
+    if (!val) return;
+    personalTasks.push({ text: val, description: 'Условия и подробности пока не добавлены.', links: [], done: false });
+    input.value = '';
+    activeTaskIndex = personalTasks.length - 1;
+    await savePersonalTasks();
+    renderModernTaskLayout(box, event);
+  };
+}
+
+function renderModernTaskLayout(box, event) {
+  const cardsBox = box.querySelector('#eventTaskCardsContainer');
+  cardsBox.replaceChildren();
+
+  const total = personalTasks.length;
+  const done = personalTasks.filter(t => t.done).length;
+  const pct = total ? Math.round(done / total * 100) : 0;
+  box.querySelector('#eventProgressFill').style.width = pct + '%';
+  box.querySelector('#eventProgressLabel').textContent = `${done} из ${total} выполнено (${pct}%)`;
+
+  if (!personalTasks.length) {
+    box.querySelector('#currentTaskTitle').textContent = 'Нет заданий';
+    box.querySelector('#currentTaskDescription').textContent = 'Нажмите «Добавить задание» слева, чтобы создать первое задание!';
+    box.querySelector('#modernEventLinks').innerHTML = '<span class="muted" style="text-align:center;font-size:12px;">Ссылок нет</span>';
+    return;
+  }
+
+  if (activeTaskIndex >= personalTasks.length) activeTaskIndex = 0;
+
+  personalTasks.forEach((task, index) => {
+    const card = document.createElement('div');
+    card.className = 'event-task-card' + (index === activeTaskIndex ? ' active' : '');
+    card.innerHTML = `
+      <div class="event-task-dot ${task.done ? 'done' : 'todo'}" title="${task.done ? 'Выполнено' : 'Не выполнено'}"></div>
+      <div class="event-task-card-name">${escapeHtml(task.text || ('Задание ' + (index + 1)))}</div>
+    `;
+    card.onclick = () => {
+      activeTaskIndex = index;
+      renderModernTaskLayout(box, event);
+    };
+    cardsBox.appendChild(card);
+  });
+
+  const cur = personalTasks[activeTaskIndex];
+  box.querySelector('#currentTaskTitle').textContent = cur.text || ('Задание ' + (activeTaskIndex + 1));
+  const descEl = box.querySelector('#currentTaskDescription');
+  descEl.replaceChildren();
+  appendTextWithLinks(descEl, cur.description || 'Описание задания отсутствует.');
+
+  const toggleBtn = box.querySelector('#toggleTaskDoneBtn');
+  toggleBtn.textContent = cur.done ? '✅ Выполнено' : '⭕ Отметить выполненным';
+  toggleBtn.className = 'button ' + (cur.done ? 'button-primary' : 'button-secondary');
+  toggleBtn.onclick = async () => {
+    cur.done = !cur.done;
+    await savePersonalTasks();
+    renderModernTaskLayout(box, event);
+  };
+
+  // Ссылки: собираем из задания и самого ивента
+  const linksBox = box.querySelector('#modernEventLinks');
+  linksBox.replaceChildren();
+  const allLinks = Array.from(new Set([
+    ...(cur.links || []),
+    ...extractLinks(cur.description || '', ''),
+    ...extractLinks(event.text || '', event.links || event.link || '')
+  ]));
+
+  if (allLinks.length) {
+    allLinks.forEach((url, i) => {
+      const a = document.createElement('a');
+      a.className = 'event-link-pill';
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = '🔗 Ссылка ' + (i + 1) + ' ↗';
+      linksBox.appendChild(a);
+    });
+  } else {
+    linksBox.innerHTML = '<span class="muted" style="text-align:center;font-size:12px;">Ссылок пока нет</span>';
+  }
+
+  // Редактирование текста задания
+  box.querySelector('#editTaskModalBtn').onclick = () => {
+    openTaskDetail(activeTaskIndex, () => renderModernTaskLayout(box, event));
+  };
+
+  // Удаление задания
+  box.querySelector('#delTaskModalBtn').onclick = async () => {
+    if (!confirm('Удалить это задание?')) return;
+    personalTasks.splice(activeTaskIndex, 1);
+    activeTaskIndex = Math.max(0, activeTaskIndex - 1);
+    await savePersonalTasks();
+    renderModernTaskLayout(box, event);
+  };
+}
+
+function openTaskDetail(index, onSavedCallback) {
+  const task = personalTasks[index];
+  if (!task) return;
+  const box = document.createElement('div');
+  box.className = 'task-detail';
+  box.innerHTML = `
+    <label class="admin-field">Название задания
+      <input id="taskEditTitle" type="text">
+    </label>
+    <label class="admin-field">Описание задания
+      <textarea id="taskEditDescription" placeholder="Подробности, условия и пояснения…"></textarea>
+    </label>
+    <label class="admin-field">Ссылки (каждую с новой строки)
+      <textarea id="taskEditLinks" placeholder="https://…"></textarea>
+    </label>
+    <div style="text-align:center;margin-top:14px;">
+      <button class="button button-primary" id="taskEditSave">Сохранить</button>
+      <button class="button button-quiet" id="taskEditClose">Отмена</button>
+    </div>`;
+
+  box.querySelector('#taskEditTitle').value = task.text || '';
+  box.querySelector('#taskEditDescription').value = task.description || '';
+  box.querySelector('#taskEditLinks').value = (task.links || []).join('\n');
+
+  openPortalModal(box, 'Редактировать: ' + (task.text || 'Задание'));
+
+  box.querySelector('#taskEditSave').onclick = async () => {
+    const title = box.querySelector('#taskEditTitle').value.trim();
+    if (!title) return alert('Введите название задания.');
+    personalTasks[index] = {
+      ...task,
+      text: title,
+      description: box.querySelector('#taskEditDescription').value.trim(),
+      links: box.querySelector('#taskEditLinks').value.split(/\n|;/).map(x => x.trim()).filter(x => /^https?:\/\//i.test(x))
+    };
+    closePortalModal();
+    await savePersonalTasks();
+    if (currentEventData) openModernEventView(currentEventData);
+  };
+  box.querySelector('#taskEditClose').onclick = () => {
+    closePortalModal();
+    if (currentEventData) openModernEventView(currentEventData);
+  };
 }
 
 function extractLinks(text, extra) {
@@ -893,67 +1097,171 @@ function extractLinks(text, extra) {
   return Array.from(set);
 }
 
-function renderPersonalTasks() {
-  const list=$('eventTaskList'); if(!list)return; list.replaceChildren();
-  const total=personalTasks.length, done=personalTasks.filter(t=>t.done).length, pct=total?Math.round(done/total*100):0;
-  $('eventProgressFill').style.width=pct+'%'; $('eventProgressLabel').textContent=`${done} / ${total} выполнено`;
-  if(!total){list.innerHTML='<div class="empty-state compact">Пока нет заданий. Добавьте первое!</div>';return;}
-  personalTasks.forEach((task,index)=>{
-    const row=document.createElement('div'); row.className='task-item'+(task.done?' done':'');
-    const dot=document.createElement('button'); dot.type='button'; dot.className='task-dot '+(task.done?'done':'todo'); dot.title=task.done?'Выполнено':'Не выполнено'; dot.setAttribute('aria-label',dot.title);
-    dot.onclick=e=>{e.stopPropagation();personalTasks[index].done=!personalTasks[index].done;savePersonalTasks().then(renderPersonalTasks);};
-    const label=document.createElement('div'); label.className='task-text'; label.textContent=task.text;
-    const actions=document.createElement('div'); actions.className='task-actions';
-    const edit=document.createElement('button'); edit.type='button'; edit.title='Открыть задание'; edit.textContent='↗';
-    edit.onclick=e=>{e.stopPropagation();openTaskDetail(index);};
-    const del=document.createElement('button'); del.type='button'; del.title='Удалить'; del.textContent='🗑️';
-    del.onclick=e=>{e.stopPropagation();if(!confirm('Удалить это задание?'))return;personalTasks.splice(index,1);savePersonalTasks().then(renderPersonalTasks);};
-    actions.append(edit,del); row.append(dot,label,actions); row.onclick=()=>openTaskDetail(index); list.appendChild(row);
-  });
-}
-function openTaskDetail(index) {
-  const task=personalTasks[index]; if(!task)return;
-  const box=document.createElement('div'); box.className='task-detail';
-  box.innerHTML=`<label class="admin-field">Название задания<input id="taskEditTitle" type="text"></label>
-    <label class="admin-field">Описание задания<textarea id="taskEditDescription" placeholder="Подробности, условия и пояснения…"></textarea></label>
-    <label class="admin-field">Ссылки (каждую с новой строки)<textarea id="taskEditLinks" placeholder="https://…"></textarea></label>
-    <div id="taskSavedLinks"></div><div style="text-align:center"><button class="button button-primary" id="taskEditSave">Сохранить</button><button class="button button-quiet" id="taskEditClose">Закрыть</button></div>`;
-  box.querySelector('#taskEditTitle').value=task.text||'';
-  box.querySelector('#taskEditDescription').value=task.description||'';
-  box.querySelector('#taskEditLinks').value=(task.links||[]).join('\n');
-  const saved=box.querySelector('#taskSavedLinks');
-  (task.links||[]).forEach(url=>{if(/^https?:\/\//i.test(url)){const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';a.textContent='🔗 '+url;saved.appendChild(a);}});
-  openPortalModal(box,'Задание '+(index+1));
-  box.querySelector('#taskEditSave').onclick=async()=>{
-    const title=box.querySelector('#taskEditTitle').value.trim(); if(!title)return alert('Введите название задания.');
-    personalTasks[index]={...task,text:title,description:box.querySelector('#taskEditDescription').value.trim(),links:box.querySelector('#taskEditLinks').value.split(/\n|;/).map(x=>x.trim()).filter(x=>/^https?:\/\//i.test(x))};
-    closePortalModal(); await savePersonalTasks(); renderPersonalTasks();
-    // reopen the event detail to keep the task list visible
-    if(currentEventData) openEventDetail(currentEventData);
-  };
-  box.querySelector('#taskEditClose').onclick=()=>closePortalModal();
-}
-
 function escapeHtml(str) {
   return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-async function addPersonalTask() {
-  const input = document.getElementById('newTaskInput'); if (!input) return;
-  const text = input.value.trim(); if (!text) return;
-  personalTasks.push({ text, done: false }); input.value = '';
-  await savePersonalTasks(); renderPersonalTasks();
-}
-
 async function savePersonalTasks() {
   if (!currentUser || !currentEventKey) return;
-  const status = document.getElementById('eventTaskStatus');
   try {
     await apiCall('savePersonalTasks', { id: currentUser.id, eventKey: currentEventKey, tasks: JSON.stringify(personalTasks) });
-    if (status) { status.textContent = 'Сохранено'; status.className = 'status-line success'; setTimeout(() => { if (status) status.textContent = ''; }, 1500); }
-  } catch (e) { if (status) { status.textContent = e.message || 'Ошибка сохранения'; status.className = 'status-line error'; } }
+  } catch (e) {
+    console.error(e);
+  }
 }
 
+// ==============================================================
+// ОКНО «ПЕЧЕНЬЕ СУДЬБЫ» + ТАЙМЕР + «👥 КТО ОТМЕТИЛ ПЕЧЕНЬЕ»
+// ==============================================================
+async function openCookieModal() {
+  const box = document.createElement('div');
+  box.className = 'cookie-modal-card';
+  box.innerHTML = `
+    <span style="font-size:42px;">🥠</span>
+    <h3 style="color:var(--gold);margin:8px 0;">Печенье судьбы</h3>
+    <p class="muted" style="margin:0 auto;max-width:440px;">Открывается строго по средам с 00:00 до 23:59 по московскому времени.</p>
+    
+    <div class="cookie-countdown-box">
+      <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;" id="cookieBoxTimerTitle">До открытия печенья:</div>
+      <div class="cookie-countdown-val" id="cookieBoxTimerVal">--:--:--</div>
+      <a id="cookieActionBtn" class="button button-primary" href="#" target="_blank" rel="noopener" style="font-size:15px;padding:12px 24px;margin-top:10px;">🥠 Открыть печенье судьбы ↗</a>
+    </div>
+
+    <div class="cookie-status-block">
+      <h3 style="margin-bottom:6px;">👥 Кто отметил печенье</h3>
+      <p class="muted" id="cookieStatusSubtitle" style="font-size:13px;">Загружаем отметки участников за сегодня…</p>
+      
+      <div style="margin:12px 0;">
+        <button class="button button-secondary" type="button" id="markCookieMeBtn">✨ Я взял печенье / Отметиться</button>
+      </div>
+
+      <div class="admin-list" id="cookieParticipantsList" style="margin-top:12px;text-align:left;"></div>
+    </div>
+  `;
+
+  openPortalModal(box, 'Печенье судьбы');
+
+  const status = latestPortalData ? latestPortalData.status : {};
+  const btn = box.querySelector('#cookieActionBtn');
+  btn.href = status.cookieUrl || CONFIG.COOKIE_URL;
+
+  if (!status.cookieOpen) {
+    btn.classList.add('is-disabled');
+    btn.onclick = e => { e.preventDefault(); alert('Печенье судьбы доступно только по средам!'); };
+  }
+
+  // Обновление таймера внутри модалки
+  const timerTitle = box.querySelector('#cookieBoxTimerTitle');
+  const timerVal = box.querySelector('#cookieBoxTimerVal');
+
+  const updateCookieModalClock = () => {
+    const now = Date.now();
+    if (status.cookieOpen && status.cookieEndsAt > now) {
+      timerTitle.textContent = '🟢 Печенье открыто! До закрытия осталось:';
+      timerVal.textContent = formatRemaining(status.cookieEndsAt - now);
+    } else if (status.cookieStartsAt > now) {
+      timerTitle.textContent = '⏳ До открытия следующего печенья:';
+      timerVal.textContent = formatRemaining(status.cookieStartsAt - now);
+    } else {
+      timerTitle.textContent = 'Печенье судьбы:';
+      timerVal.textContent = status.cookieOpen ? 'Доступно сегодня!' : 'Доступно по средам';
+    }
+  };
+  updateCookieModalClock();
+  const modalClock = setInterval(updateCookieModalClock, 1000);
+  box.dataset.clockId = modalClock;
+
+  // Загрузка участников, отметивших печенье
+  const loadCookieParticipants = async () => {
+    try {
+      const data = await apiCall('cookieStatus');
+      box.querySelector('#cookieStatusSubtitle').textContent = `Отметки за ${escapeHtml(data.date || 'сегодня')}: ${data.marked.length} из ${data.total}`;
+      const list = box.querySelector('#cookieParticipantsList');
+      list.replaceChildren();
+
+      const makeRow = (title, items, isGood) => {
+        const row = document.createElement('div');
+        row.className = 'admin-row';
+        row.innerHTML = `
+          <div>
+            <strong>${title} (${items.length})</strong>
+            <div style="margin-top:6px;font-size:13px;color:${isGood ? 'var(--green)' : 'var(--red)'};">
+              ${items.length ? items.map(escapeHtml).join(', ') : (isGood ? 'Пока никто не отметил' : 'Все участники отметились!')}
+            </div>
+          </div>
+        `;
+        return row;
+      };
+
+      list.append(
+        makeRow('✅ Отметились', data.marked || [], true),
+        makeRow('❌ Не отметились', data.missing || [], false)
+      );
+    } catch (e) {
+      box.querySelector('#cookieStatusSubtitle').textContent = 'Не удалось загрузить статус отметок.';
+    }
+  };
+
+  await loadCookieParticipants();
+
+  box.querySelector('#markCookieMeBtn').onclick = async () => {
+    if (!currentUser) return;
+    try {
+      await apiCall('markCookie', { id: currentUser.id });
+      alert('Ваша отметка сохранена!');
+      loadCookieParticipants();
+    } catch (e) {
+      alert(e.message || 'Ошибка');
+    }
+  };
+}
+
+// ТАЙМЕРЫ
+let portalClockTimer = null;
+function updatePortalTimers(status) {
+  const tick = () => {
+    const now = Date.now();
+    
+    // Иммунитет
+    const immEl = $('immunityCountdown');
+    if (immEl) {
+      if (status.immunityOpen && status.immunityEndsAt > now) immEl.textContent = 'Активен · до конца: ' + formatRemaining(status.immunityEndsAt - now);
+      else if (status.immunityStartsAt > now) immEl.textContent = 'До начала: ' + formatRemaining(status.immunityStartsAt - now);
+      else immEl.textContent = 'Неактивен';
+    }
+
+    // Печенье
+    const cookEl = $('cookieCountdown');
+    if (cookEl) {
+      if (status.cookieOpen && status.cookieEndsAt > now) cookEl.textContent = 'Открыто! До конца: ' + formatRemaining(status.cookieEndsAt - now);
+      else if (status.cookieStartsAt > now) cookEl.textContent = 'До среды: ' + formatRemaining(status.cookieStartsAt - now);
+      else cookEl.textContent = 'По средам (00:00 - 23:59)';
+    }
+  };
+  tick();
+  if (portalClockTimer) clearInterval(portalClockTimer);
+  portalClockTimer = setInterval(tick, 1000);
+}
+
+function formatRemaining(ms) {
+  const s = Math.max(0, Math.floor(ms / 1000));
+  const d = Math.floor(s / 86400);
+  const h = Math.floor((s % 86400) / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  return (d ? d + ' д. ' : '') + [h, m, sec].map(x => String(x).padStart(2, '0')).join(':');
+}
+
+function renderStatus(status) {
+  $('immunityLink').href = status.immunityUrl || '#';
+  updatePortalTimers(status);
+  $('immunityLink').classList.toggle('is-disabled', !status.immunityOpen);
+  $('answeredButton').disabled = !status.immunityOpen;
+  $('immunityStatus').textContent = status.immunityOpen ? 'Сейчас открыт ' + status.periodLabel + '.' : 'Сейчас иммунитет закрыт.';
+  $('cookieCardStatus').textContent = status.cookieOpen ? 'Открыто сегодня (до 23:59)' : 'Доступно по средам';
+}
+
+// ИСТОРИЯ
 function historyWeekLabel(weekKey) {
   const match = String(weekKey || '').match(/^(\d{4})-(\d{2})-(\d{2})$/); if (!match) return weekKey;
   const monday = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
@@ -1023,42 +1331,8 @@ async function markAnswered() {
   }
 }
 
-function renderStatus(status) {
-  $('immunityLink').href = status.immunityUrl || '#';
-  updatePortalTimers(status);
-  $('immunityLink').classList.toggle('is-disabled', !status.immunityOpen);
-  $('answeredButton').disabled = !status.immunityOpen;
-  $('immunityStatus').textContent = status.immunityOpen ? 'Сейчас открыт ' + status.periodLabel + '.' : 'Сейчас иммунитет закрыт. Отвечать можно только в активный день.';
-  $('cookieCard').href = status.cookieUrl || '#';
-  $('cookieCard').classList.toggle('is-disabled', !status.cookieOpen);
-  $('cookieCard').setAttribute('aria-disabled', String(!status.cookieOpen));
-  $('cookieCardStatus').textContent = status.cookieOpen ? 'Открыто сегодня (до 23:59)' : 'Доступно по средам';
-  apiCall('cookieStatus').then(data=>{$('cookieCountdown').textContent=`Отметились: ${data.marked.length} из ${data.total}`;}).catch(()=>{$('cookieCountdown').textContent='Статус недоступен';});
-}
-
-let portalClockTimer=null;
-function updatePortalTimers(status) {
-  const tick=()=>{
-    const now=Date.now(), el=$('immunityCountdown'); if(!el)return;
-    if(status.immunityOpen && status.immunityEndsAt>now) el.textContent='Активен · до следующего дня: '+formatRemaining(status.immunityEndsAt-now);
-    else if(status.immunityStartsAt>now) el.textContent='Неактивен · будет активен через '+formatRemaining(status.immunityStartsAt-now);
-    else el.textContent='Неактивен · следующий период ещё не опубликован';
-  };
-  tick(); if(portalClockTimer)clearInterval(portalClockTimer); portalClockTimer=setInterval(tick,1000);
-}
-function formatRemaining(ms){const s=Math.max(0,Math.floor(ms/1000)),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),sec=s%60;return (d?d+' д. ':'')+[h,m,sec].map(x=>String(x).padStart(2,'0')).join(':');}
-async function openCookieStatus(){
-  try{const data=await apiCall('cookieStatus');const box=document.createElement('div');box.innerHTML=`<p class="muted" style="text-align:center">Отметки за ${escapeHtml(data.date||'сегодня')}</p><h3>🥠 Отметились (${data.marked.length})</h3><p>${data.marked.map(escapeHtml).join(', ')||'Пока никто'}</p><h3>Не отметились (${data.missing.length})</h3><p>${data.missing.map(escapeHtml).join(', ')||'Все отметились'}</p><div style="text-align:center"><button class="button button-primary" id="cookieMarkMe">Отметить, что я отметился</button></div>`;openPortalModal(box,'Отметки печенья');box.querySelector('#cookieMarkMe').onclick=async()=>{try{await apiCall('markCookie',{id:currentUser.id});openCookieStatus();}catch(e){alert(e.message||'Ошибка');}};}
-  catch(e){alert(e.message||'Не удалось загрузить отметки');}
-}
-async function openArchive(){
-  try{const data=await apiCall('archiveData');const box=document.createElement('div');box.innerHTML=`<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px"><button class="button button-secondary" id="archiveArticlesTab">📚 Статьи</button><button class="button button-secondary" id="archiveImmunityTab">🛡️ Иммунитет</button></div><div id="archiveContent"></div>`;
-  const draw=kind=>{const target=box.querySelector('#archiveContent');target.replaceChildren();const items=kind==='articles'?data.articles:data.immunity;if(!items.length){target.textContent='В архиве пока нет записей.';return;}items.forEach(item=>{const card=document.createElement('article');card.className='publication';const date=document.createElement('div');date.className='publication-date';date.textContent=item.date||'';const title=document.createElement('h3');title.textContent=item.title||'Без названия';const text=document.createElement('p');text.className='publication-text';text.textContent=item.text||'';card.append(date,title,text);target.append(card);});};
-  box.querySelector('#archiveArticlesTab').onclick=()=>draw('articles');box.querySelector('#archiveImmunityTab').onclick=()=>draw('immunity');draw('articles');openPortalModal(box,'Архив');}
-  catch(e){alert(e.message||'Не удалось загрузить архив');}
-}
+// МОДАЛЬНЫЕ ОКНА
 let portalModalNode = null; let portalModalPlaceholder = null;
-
 function openPortalModal(element, title) {
   if (!element) return; if (portalModalNode) closePortalModal();
   const modal = $('portalModal'); const content = $('portalModalContent'); if (!modal || !content) return;
@@ -1070,6 +1344,9 @@ function openPortalModal(element, title) {
 
 function closePortalModal() {
   const modal = $('portalModal'); if (!modal) return;
+  if (portalModalNode && portalModalNode.dataset && portalModalNode.dataset.clockId) {
+    clearInterval(Number(portalModalNode.dataset.clockId));
+  }
   if (portalModalNode && portalModalPlaceholder && portalModalPlaceholder.parentNode) {
     portalModalPlaceholder.parentNode.insertBefore(portalModalNode, portalModalPlaceholder); portalModalPlaceholder.remove(); portalModalNode.hidden = true;
   }
@@ -1084,6 +1361,7 @@ document.querySelectorAll('.section-card[data-target]').forEach(button => {
 });
 $('portalModal').addEventListener('click', event => { if (event.target === $('portalModal')) closePortalModal(); });
 
+// КТО ОТВЕТИЛ НА ИММУНИТЕТ
 function initParticipantStatusView() {
   const weekInput = $('participantStatusWeek'); const loadButton = $('participantStatusLoad');
   if (!weekInput || !loadButton || loadButton.dataset.ready) return; loadButton.dataset.ready = '1';
@@ -1114,8 +1392,8 @@ async function loadParticipantStatus() {
   finally { button.disabled = false; }
 }
 
+// АДМИНКА
 let adminToken = sessionStorage.getItem('perforator_admin_token') || '';
-
 function openAdminLogin(){
   if (adminToken) { $('adminPanel').hidden = false; openPortalModal($('adminPanel'), 'Панель администратора'); adminLoadAnswers(); adminLoadParticipants(); return; }
   $('adminLoginBox').hidden = false; openPortalModal($('adminLoginBox'), 'Вход администратора'); $('adminPassword').focus();
@@ -1225,6 +1503,7 @@ $('adminManualHistoryForm').addEventListener('submit', async e => {
   finally { btn.disabled = false; }
 });
 
+// WEZY
 function openWezyLogin() {
   if (wezyToken) { showWezyPanel(); return; }
   $('wezyLoginBox').hidden = false; openPortalModal($('wezyLoginBox'), 'Служебный вход Wezy'); $('wezyPassword').focus();
@@ -1273,20 +1552,18 @@ async function openWezyEventTasks(event) {
       <div class="task-list" id="wezyTaskRows"></div>
       <div class="task-detail" style="margin-top:16px">
         <label class="admin-field">Название задания<input type="text" id="wezyNewTask" placeholder="Например: Задание 1"></label>
-        <label class="admin-field">Описание<textarea id="wezyNewDescription" placeholder="Условия и подробности задания…"></textarea></label>
+        <label class="admin-field">Описание<textarea id="wezyNewDescription" placeholder="Условия задания…"></textarea></label>
         <label class="admin-field">Ссылки (каждую с новой строки)<textarea id="wezyNewLinks" placeholder="https://…"></textarea></label>
         <div style="text-align:center"><button class="button button-primary" type="button" id="wezyAddTaskBtn">Добавить задание</button></div>
-      </div><div class="status-line" id="wezyTaskStatus"></div>`;
+      </div>`;
     const rows=box.querySelector('#wezyTaskRows');
     if(!tasks.length)rows.innerHTML='<div class="empty-state compact">У участника пока нет заданий</div>';
     tasks.forEach((t,i)=>{
-      const row=document.createElement('div');row.className='task-item';
-      const dot=document.createElement('span');dot.className='task-dot '+(t.done?'done':'todo');
-      const text=document.createElement('div');text.className='task-text';text.textContent=t.text;
-      const meta=document.createElement('small');meta.className='muted';meta.textContent=(t.description||'Описание не добавлено')+' · '+((t.links||[]).length)+' ссылок';text.appendChild(meta);
+      const row=document.createElement('div');row.className='admin-row';
+      row.innerHTML = `<div><strong>${escapeHtml(t.text)}</strong><small>${escapeHtml(t.description||'Без описания')}</small></div>`;
       const del=document.createElement('button');del.type='button';del.className='button button-danger';del.textContent='Удалить';
       del.onclick=async()=>{tasks.splice(i,1);await apiCall('savePersonalTasks',{id:participantId,eventKey,tasks:JSON.stringify(tasks)});openWezyEventTasks(event);};
-      row.append(dot,text,del);rows.appendChild(row);
+      row.append(del);rows.appendChild(row);
     });
     openPortalModal(box,'Задания: '+event.title);
     box.querySelector('#wezyAddTaskBtn').onclick=async()=>{
