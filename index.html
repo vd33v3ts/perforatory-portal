@@ -21,6 +21,29 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: auto; }
+
+/* КАСТОМНЫЙ ТЁМНЫЙ НЕОНОВЫЙ СКРОЛЛБАР */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(3, 7, 24, 0.7);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(130, 170, 255, 0.4), rgba(245, 203, 120, 0.5));
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(130, 170, 255, 0.75), rgba(245, 203, 120, 0.85));
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 203, 120, 0.4) rgba(3, 7, 24, 0.7);
+}
+
 body {
   margin: 0; min-height: 100vh; overflow-x: hidden; color: var(--text);
   font-family: Arial, Helvetica, sans-serif; background-color: #020512;
@@ -31,6 +54,15 @@ body {
     linear-gradient(155deg, #020512 0%, #060e29 32%, #180c33 65%, #050617 100%);
   background-attachment: fixed;
 }
+
+/* КЛАСС ДЛЯ ОТКЛЮЧЕНИЯ ВСЕХ АНИМАЦИЙ В НАСТРОЙКАХ */
+body.no-animations *,
+body.no-animations *::before,
+body.no-animations *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
 .winter-snow {
   position: fixed; inset: 0; z-index: 1; pointer-events: none !important; opacity: .42;
   background-image:
@@ -56,9 +88,7 @@ body {
 .site-header { text-align: center; padding: 26px 16px 14px; }
 .brand-mark { font-size: 26px; }
 
-/* ==============================================================
-   НЕОНОВАЯ ВОЛНА ПО БУКВАМ «ПЕРФОРАТОРЫ»
-   ============================================================== */
+/* НЕОНОВАЯ ВОЛНА ПО БУКВАМ */
 .brand-name {
   margin: 4px 0 2px;
   font-size: clamp(34px, 7vw, 68px);
@@ -123,17 +153,25 @@ body {
 }
 .header-squirrels { margin-top: 6px; font-size: 15px; letter-spacing: 6px; opacity: .85; }
 
-.admin-entry { margin: 16px auto 0; text-align: center; }
-.admin-entry button {
+/* КНОПКИ В ШАПКЕ: АДМИН И НАСТРОЙКИ (ШЕСТЕРЕНКА) */
+.header-buttons {
+  margin: 16px auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.header-pill-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 48px; padding: 0 26px; border-radius: 15px; cursor: pointer;
-  color: #fff4d8; font-size: 15px; font-weight: 800; letter-spacing: .03em;
+  min-height: 46px; padding: 0 22px; border-radius: 15px; cursor: pointer;
+  color: #fff4d8; font-size: 14px; font-weight: 800; letter-spacing: .03em;
   border: 1px solid rgba(255,218,145,.55);
   background: linear-gradient(110deg, #23356e, #532d78, #1d466e);
-  background-size: 200% 100%; box-shadow: 0 6px 22px rgba(3,6,22,.45);
+  background-size: 200% 100%; box-shadow: 0 6px 20px rgba(3,6,22,.45);
   transition: transform .2s ease, box-shadow .2s ease;
 }
-.admin-entry button:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(110,80,210,.4); }
+.header-pill-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(110,80,210,.4); }
 
 .container { width: min(1080px, 94%); margin: 12px auto 60px; }
 .panel {
@@ -177,82 +215,37 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
 .welcome p { max-width: 620px; margin: 0 auto; color: #d5def5; font-size: 16px; }
 .welcome-bottom { color: var(--gold); font-size: 13px; margin-top: 16px; }
 
-/* ==============================================================
-   КРУПНЫЕ ТАЙМЕРЫ (БОЛЬШЕ ИКОНОК И ЗАМЕТНЕЕ)
-   ============================================================== */
+/* КРУПНЫЕ ТАЙМЕРЫ */
 .welcome-timers {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 18px;
-  margin: 24px auto 8px;
-  max-width: 900px;
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 18px;
+  margin: 24px auto 8px; max-width: 900px;
 }
 .timer-chip {
-  flex: 1 1 340px;
-  padding: 20px 24px;
-  border: 1px solid rgba(245, 203, 120, .35);
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(16, 24, 60, .85), rgba(7, 12, 34, .95));
-  color: #f4f6ff;
-  box-shadow: 0 12px 32px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  flex: 1 1 340px; padding: 20px 24px; border: 1px solid rgba(245, 203, 120, .35);
+  border-radius: 20px; background: linear-gradient(135deg, rgba(16, 24, 60, .85), rgba(7, 12, 34, .95));
+  color: #f4f6ff; box-shadow: 0 12px 32px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
   transition: transform .2s ease, border-color .2s ease;
 }
-.timer-chip:hover {
-  transform: translateY(-3px);
-  border-color: rgba(245, 203, 120, .6);
-}
-.timer-chip-icon {
-  font-size: 48px;
-  line-height: 1;
-  margin-bottom: 8px;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,.5));
-}
-.timer-chip strong {
-  color: #fff;
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: .02em;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-}
+.timer-chip:hover { transform: translateY(-3px); border-color: rgba(245, 203, 120, .6); }
+.timer-chip-icon { font-size: 48px; line-height: 1; margin-bottom: 8px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.5)); }
+.timer-chip strong { color: #fff; font-size: 17px; font-weight: 800; letter-spacing: .02em; margin-bottom: 6px; text-transform: uppercase; }
 .timer-chip-val {
-  color: var(--gold);
-  font-size: clamp(24px, 3.2vw, 32px);
-  font-weight: 900;
-  letter-spacing: .05em;
-  font-variant-numeric: tabular-nums;
-  margin-top: 4px;
+  color: var(--gold); font-size: clamp(24px, 3.2vw, 32px); font-weight: 900;
+  letter-spacing: .05em; font-variant-numeric: tabular-nums; margin-top: 4px;
   text-shadow: 0 0 16px rgba(245, 203, 120, .45);
 }
 
 /* КАРТОЧКИ РАЗДЕЛОВ (ИКОНКИ 64px) */
 .section-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
-  margin: 22px 0 26px;
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin: 22px 0 26px;
 }
 .section-card {
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 20px 14px;
-  text-align: center;
-  color: var(--text);
-  text-decoration: none;
-  border: 1px solid var(--panel-border);
-  border-radius: 20px;
+  min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; padding: 20px 14px; text-align: center; color: var(--text); text-decoration: none;
+  border: 1px solid var(--panel-border); border-radius: 20px;
   background: linear-gradient(145deg, rgba(22, 29, 68, .94), rgba(16, 15, 46, .95));
-  box-shadow: 0 10px 26px rgba(0,0,0,.35);
-  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(0,0,0,.35); cursor: pointer;
   transition: transform .25s cubic-bezier(.2,.8,.2,1), border-color .25s ease, box-shadow .25s ease;
 }
 .section-card:hover {
@@ -260,79 +253,47 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
   border-color: rgba(244,201,121,.65);
   box-shadow: 0 14px 34px rgba(110,80,210,.35);
 }
-.section-emoji {
-  font-size: 64px;
-  line-height: 1;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,.4));
-  transition: transform .25s ease;
-}
-.section-card:hover .section-emoji {
-  transform: scale(1.12);
-}
+.section-emoji { font-size: 64px; line-height: 1; filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); transition: transform .25s ease; }
+.section-card:hover .section-emoji { transform: scale(1.12); }
 .section-card strong { font-size: 16px; letter-spacing: .02em; }
 .section-card small { color: var(--muted); font-size: 13px; line-height: 1.35; }
 
 .section-card.card-imm { grid-column: span 2; }
 .section-card.card-art { grid-column: span 2; }
 .section-card.card-cook { grid-column: span 2; }
-
 .section-card.events-nav-card { grid-column: 2 / span 2; }
 .section-card.archive-nav-card { grid-column: 4 / span 2; }
 
 @media (max-width: 820px) {
   .section-grid { grid-template-columns: 1fr; }
-  .section-card.card-imm,
-  .section-card.card-art,
-  .section-card.card-cook,
-  .section-card.events-nav-card,
-  .section-card.archive-nav-card { grid-column: 1 / -1; }
+  .section-card.card-imm, .section-card.card-art, .section-card.card-cook,
+  .section-card.events-nav-card, .section-card.archive-nav-card { grid-column: 1 / -1; }
 }
 
-/* ==============================================================
-   УВЕЛИЧЕННЫЕ ДИАЛОГОВЫЕ ОКНА (БОЛЬШЕ ПРОСТРАНСТВА)
-   ============================================================== */
+/* УВЕЛИЧЕННЫЕ МОДАЛЬНЫЕ ОКНА БЕЗ ЛИШНЕГО СКРОЛЛА */
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
   padding: 14px; background: rgba(1, 4, 16, .88); backdrop-filter: blur(12px);
-  opacity: 0; pointer-events: none;
-  transition: opacity .3s cubic-bezier(.16, 1, .3, 1);
+  opacity: 0; pointer-events: none; transition: opacity .3s cubic-bezier(.16, 1, .3, 1);
 }
-.portal-modal.is-open {
-  opacity: 1; pointer-events: auto;
-}
+.portal-modal.is-open { opacity: 1; pointer-events: auto; }
 .portal-modal[hidden] { display: none !important; }
 .portal-modal-dialog {
-  position: relative;
-  width: min(1160px, 98%); /* Увеличено окно */
-  max-height: 94vh;
-  overflow-y: auto;
-  padding: clamp(20px, 3.5vw, 36px);
-  border: 1px solid rgba(186, 174, 255, .32);
-  border-radius: 24px;
-  background: #090f2b;
-  box-shadow: 0 28px 100px rgba(0,0,0,.82);
-  overscroll-behavior: contain;
-  transform: scale(0.9) translateY(16px);
-  transition: transform .32s cubic-bezier(.16, 1, .3, 1);
+  position: relative; width: min(1180px, 98%); max-height: 94vh; overflow-y: auto;
+  padding: clamp(20px, 3.5vw, 36px); border: 1px solid rgba(186, 174, 255, .32); border-radius: 24px;
+  background: #090f2b; box-shadow: 0 28px 100px rgba(0,0,0,.82); overscroll-behavior: contain;
+  transform: scale(0.9) translateY(16px); transition: transform .32s cubic-bezier(.16, 1, .3, 1);
 }
-.portal-modal.is-open .portal-modal-dialog {
-  transform: scale(1) translateY(0);
-}
-.portal-modal-dialog.dialog-wide {
-  width: min(1320px, 99%);
-}
+.portal-modal.is-open .portal-modal-dialog { transform: scale(1) translateY(0); }
+.portal-modal-dialog.dialog-wide { width: min(1340px, 99%); }
 .portal-modal-close {
   position: absolute; top: 18px; right: 18px; z-index: 10; width: 42px; height: 42px;
-  border: 1px solid rgba(255,255,255,.2); border-radius: 12px;
-  color: #fff; background: #2c2957; font-size: 24px; line-height: 1; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,.2); border-radius: 12px; color: #fff; background: #2c2957;
+  font-size: 24px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: background .2s;
 }
 .portal-modal-close:hover { background: #443e85; }
-.portal-modal-title {
-  margin: 0 0 16px 0; text-align: center; color: var(--gold);
-  font-size: clamp(24px, 3.5vw, 32px); width: 100%;
-}
+.portal-modal-title { margin: 0 0 16px 0; text-align: center; color: var(--gold); font-size: clamp(24px, 3.5vw, 32px); width: 100%; }
 .portal-modal-content { clear: both; width: 100%; }
 body.portal-modal-open { overflow: hidden; }
 
@@ -355,8 +316,8 @@ body.portal-modal-open { overflow: hidden; }
 .period-card b { color: #f4f6ff; font-size: 15px; }
 .period-card span { color: var(--muted); font-size: 12px; line-height: 1.35; }
 .period-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 800; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px;
+  border-radius: 8px; font-size: 11px; font-weight: 800; white-space: nowrap;
 }
 .badge-answered { background: rgba(56, 142, 60, .28); color: #9be5bd; border: 1px solid rgba(155, 229, 189, .3); }
 .badge-missed { background: rgba(198, 40, 40, .25); color: #ff94aa; border: 1px solid rgba(255, 148, 170, .3); }
@@ -382,75 +343,61 @@ body.portal-modal-open { overflow: hidden; }
 .is-disabled { opacity: .4; pointer-events: none; filter: grayscale(.7); }
 .logout-row { text-align: center; margin-top: 24px; }
 
-/* ==============================================================
-   КОМПАКТНЫЕ ПЛАШКИ СТАТЕЙ (ДАТА + ТЕМА В РАМКЕ)
-   ============================================================== */
-.compact-articles-grid {
-  display: grid;
-  gap: 10px;
-  margin: 14px 0;
+/* ОБЪЕДИНЁННЫЕ ДАТЫ СТАТЕЙ (КАРТОЧКА ДАТЫ С ВЫБОРОМ СТАТЬИ 1, 2, 3...) */
+.date-group-card {
+  background: rgba(14, 22, 54, .85);
+  border: 1px solid rgba(186, 174, 255, .25);
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.35);
 }
-.article-item-pill {
+.date-group-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  padding: 14px 18px;
-  border: 1px solid rgba(186, 174, 255, .25);
-  border-radius: 16px;
-  background: rgba(14, 22, 54, .82);
-  color: #f4f6ff;
-  cursor: pointer;
-  text-align: left;
-  box-shadow: 0 4px 16px rgba(0,0,0,.25);
-  transition: all .2s ease;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(186, 174, 255, .15);
 }
-.article-item-pill:hover {
-  border-color: var(--gold);
-  background: #1c2658;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(110,80,210,.35);
-}
-.article-item-left {
+.date-group-title {
+  color: var(--gold);
+  font-size: 17px;
+  font-weight: 800;
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex: 1;
-  min-width: 0;
+  gap: 8px;
 }
-.article-date-badge {
+.articles-sub-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.article-sub-btn {
+  padding: 9px 14px;
+  border-radius: 11px;
+  border: 1px solid rgba(186, 174, 255, .25);
+  background: rgba(6, 12, 33, .7);
+  color: #e0e7fa;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .2s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 12px;
-  border-radius: 10px;
-  background: rgba(245, 203, 120, .14);
-  border: 1px solid rgba(245, 203, 120, .35);
-  color: var(--gold);
-  font-size: 13px;
-  font-weight: 800;
-  white-space: nowrap;
 }
-.article-theme-title {
-  font-size: 16px;
-  font-weight: 700;
+.article-sub-btn:hover {
+  background: #232a68;
+  border-color: var(--gold);
   color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  transform: translateY(-2px);
 }
-.article-album-chip {
-  padding: 3px 8px;
-  border-radius: 6px;
-  background: rgba(130, 170, 255, .2);
-  color: #82aaff;
-  font-size: 12px;
-  white-space: nowrap;
-}
-.article-item-arrow {
-  font-size: 20px;
-  color: var(--gold);
-  flex-shrink: 0;
+.article-sub-btn.active {
+  background: linear-gradient(135deg, #f8d990, #e7b65e);
+  color: #091532;
+  border-color: #f8d990;
+  box-shadow: 0 0 14px rgba(248, 217, 144, .4);
 }
 
 .article-top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
@@ -466,6 +413,13 @@ body.portal-modal-open { overflow: hidden; }
 .answer-large-text { font-size: 15px; line-height: 1.7; color: #f4f6ff; white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; }
 
 /* ИВЕНТЫ ПРОЕКТОВ */
+.event-top-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
 .event-layout-container {
   display: grid;
   grid-template-columns: 310px 1fr 240px;
@@ -509,16 +463,9 @@ body.portal-modal-open { overflow: hidden; }
 .event-col-content h3 { margin: 0; color: var(--gold); font-size: 24px; text-align: center; }
 
 .event-task-fulltext {
-  color: #f1f4ff;
-  font-size: 17px;
-  line-height: 1.75;
-  white-space: pre-wrap;
-  background: rgba(5, 9, 26, .6);
-  border: 1px solid rgba(186, 174, 255, .18);
-  padding: 18px 20px;
-  border-radius: 14px;
-  min-height: 180px;
-  overflow-wrap: anywhere;
+  color: #f1f4ff; font-size: 17px; line-height: 1.75; white-space: pre-wrap;
+  background: rgba(5, 9, 26, .6); border: 1px solid rgba(186, 174, 255, .18);
+  padding: 18px 20px; border-radius: 14px; min-height: 180px; overflow-wrap: anywhere;
 }
 .progress-bar-wrap { height: 11px; background: rgba(255,255,255,.08); border-radius: 6px; overflow: hidden; margin-top: 8px; }
 .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #6bbcff, #9be5bd); border-radius: 6px; transition: width .3s ease; }
@@ -533,137 +480,57 @@ body.portal-modal-open { overflow: hidden; }
 .event-link-pill {
   display: block; padding: 12px 14px; border-radius: 12px; text-decoration: none;
   background: #192759; border: 1px solid rgba(130, 170, 255, .35); color: #82aaff;
-  font-size: 14px; font-weight: 700; word-break: break-all; transition: background .18s;
-  text-align: center;
+  font-size: 14px; font-weight: 700; word-break: break-all; transition: background .18s; text-align: center;
 }
 .event-link-pill:hover { background: #263c8a; color: #fff; }
 
-/* ==============================================================
-   АРХИВ ИММУНИТЕТА В РАМКАХ (НЕДЕЛЯ + ДНИ 1 2 3 4)
-   ============================================================== */
+/* АРХИВ ИММУНИТЕТА В РАМКАХ ПО НЕДЕЛЯМ */
 .archive-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
 .archive-badge { display: inline-block; padding: 6px 14px; border-radius: 9px; background: rgba(245, 203, 120, .15); color: var(--gold); font-size: 13px; font-weight: 700; margin-bottom: 8px; }
 
 .archive-week-card {
-  background: rgba(14, 22, 54, .85);
-  border: 1px solid rgba(186, 174, 255, .28);
-  border-radius: 18px;
-  padding: 18px 20px;
-  margin-bottom: 14px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  background: rgba(14, 22, 54, .85); border: 1px solid rgba(186, 174, 255, .28);
+  border-radius: 18px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.35);
   transition: border-color .2s;
 }
-.archive-week-card:hover {
-  border-color: rgba(245, 203, 120, .5);
-}
+.archive-week-card:hover { border-color: rgba(245, 203, 120, .5); }
 .archive-week-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: transparent;
-  border: 0;
-  color: var(--gold);
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  padding: 4px 0 10px;
-  border-bottom: 1px solid rgba(186, 174, 255, .15);
-  margin-bottom: 12px;
-  text-align: left;
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  background: transparent; border: 0; color: var(--gold); font-size: 16px; font-weight: 800;
+  cursor: pointer; padding: 4px 0 10px; border-bottom: 1px solid rgba(186, 174, 255, .15);
+  margin-bottom: 12px; text-align: left;
 }
-.archive-days-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-@media (max-width: 700px) {
-  .archive-days-grid { grid-template-columns: repeat(2, 1fr); }
-}
+.archive-days-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+@media (max-width: 700px) { .archive-days-grid { grid-template-columns: repeat(2, 1fr); } }
 .archive-day-btn {
-  padding: 12px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(186, 174, 255, .2);
-  background: rgba(6, 12, 33, .7);
-  color: #e0e7fa;
-  font-weight: 700;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all .2s;
-  text-align: center;
+  padding: 12px 10px; border-radius: 12px; border: 1px solid rgba(186, 174, 255, .2);
+  background: rgba(6, 12, 33, .7); color: #e0e7fa; font-weight: 700; font-size: 13px;
+  cursor: pointer; transition: all .2s; text-align: center;
 }
-.archive-day-btn:hover {
-  background: #25225a;
-  border-color: var(--gold);
-  color: #fff;
-  transform: translateY(-2px);
-}
-.archive-day-btn.has-answer {
-  border-color: rgba(155, 229, 189, .35);
-}
+.archive-day-btn:hover { background: #25225a; border-color: var(--gold); color: #fff; transform: translateY(-2px); }
+.archive-day-btn.has-answer { border-color: rgba(155, 229, 189, .35); }
 
 .answer-box-framed {
-  background: rgba(6, 12, 33, .85);
-  border: 1px solid rgba(245, 203, 120, .35);
-  border-radius: 14px;
-  padding: 18px 20px;
-  margin-top: 14px;
-  box-shadow: 0 4px 18px rgba(0,0,0,.4);
-  animation: fadeInDown .25s ease;
+  background: rgba(6, 12, 33, .85); border: 1px solid rgba(245, 203, 120, .35);
+  border-radius: 14px; padding: 18px 20px; margin-top: 14px; box-shadow: 0 4px 18px rgba(0,0,0,.4);
 }
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.answer-box-framed h4 {
-  margin: 0 0 10px;
-  color: var(--gold);
-  font-size: 18px;
-}
-.answer-box-framed p {
-  color: #f1f4ff;
-  font-size: 15px;
-  line-height: 1.7;
-  white-space: pre-wrap;
-  margin: 0;
-}
+.answer-box-framed h4 { margin: 0 0 10px; color: var(--gold); font-size: 18px; }
+.answer-box-framed p { color: #f1f4ff; font-size: 15px; line-height: 1.7; white-space: pre-wrap; margin: 0; }
 
-/* ПАГИНАЦИЯ (1 2 3 4...) */
+/* ПАГИНАЦИЯ */
 .pagination-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin: 22px 0 10px;
-  padding: 14px 0 0;
-  border-top: 1px solid rgba(186, 174, 255, .15);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  flex-wrap: wrap; margin: 22px 0 10px; padding: 14px 0 0; border-top: 1px solid rgba(186, 174, 255, .15);
 }
 .page-btn {
-  min-width: 42px;
-  height: 42px;
-  padding: 0 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(186, 174, 255, .25);
-  background: rgba(12, 19, 46, .85);
-  color: #e0e7fa;
-  font-size: 15px;
-  font-weight: 800;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .18s;
+  min-width: 42px; height: 42px; padding: 0 12px; border-radius: 12px;
+  border: 1px solid rgba(186, 174, 255, .25); background: rgba(12, 19, 46, .85);
+  color: #e0e7fa; font-size: 15px; font-weight: 800; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; transition: all .18s;
 }
-.page-btn:hover {
-  background: #282163;
-  border-color: var(--gold);
-  color: #fff;
-}
+.page-btn:hover { background: #282163; border-color: var(--gold); color: #fff; }
 .page-btn.active {
-  background: linear-gradient(135deg, #f8d990, #e7b65e);
-  color: #091532;
-  border-color: #f8d990;
+  background: linear-gradient(135deg, #f8d990, #e7b65e); color: #091532; border-color: #f8d990;
   box-shadow: 0 0 16px rgba(248, 217, 144, .45);
 }
 
@@ -679,10 +546,6 @@ footer {
   text-align: center; padding: 24px 10px 34px; color: #8f9fc8; font-size: 13px; letter-spacing: .08em;
   display: flex; flex-direction: column; align-items: center; gap: 8px;
 }
-.wezy-secret-entry {
-  color: #9aa9ca; font-size: 11px; opacity: .45; text-decoration: underline; cursor: pointer;
-}
-.wezy-secret-entry:hover { opacity: 1; color: var(--gold); }
   </style>
 </head>
 <body>
@@ -697,8 +560,10 @@ footer {
     </div>
     <div class="brand-caption">ИНФОРМАЦИОННЫЙ ПОРТАЛ</div>
     <div class="header-squirrels">🐿️ ✦ 🐿️</div>
-    <div class="admin-entry">
-      <button type="button" onclick="openAdminLogin()">⚙ Администратор</button>
+    
+    <div class="header-buttons">
+      <button class="header-pill-btn" type="button" onclick="openAdminLogin()">⚙ Администратор</button>
+      <button class="header-pill-btn" type="button" onclick="openSettingsModal()">⚙ Настройки</button>
     </div>
   </header>
 
@@ -814,34 +679,31 @@ footer {
         </div>
       </section>
 
-      <!-- РАЗДЕЛ: АВАТАРСКАЯ УДАЧА (ТЕКУЩИЙ СЕЗОН: ДАТА + ТЕМА + ПАГИНАЦИЯ) -->
+      <!-- РАЗДЕЛ: АВАТАРСКАЯ УДАЧА (СТАТЬИ ОБЪЕДИНЕНЫ ПО ДАТАМ: СТАТЬЯ 1, 2, 3...) -->
       <section class="panel content-section" id="articlesSection" hidden>
         <div class="section-heading">
           <span class="section-emoji" style="font-size:48px;">📚</span>
           <h2>Аватарская удача</h2>
-          <p>Статьи текущего сезона. Кликните по любой статье, чтобы открыть её текст.</p>
+          <p>Статьи текущего сезона. Выберите нужную статью за интересующую вас дату.</p>
         </div>
         <div class="article-top-bar">
           <button class="button button-primary" type="button" onclick="openArticleEditor()">➕ Добавить новую статью</button>
           <span class="muted" id="articlesTotalCount"></span>
         </div>
         
-        <!-- СПИСОК ПЛАШЕК ДАТА + ТЕМА -->
         <div id="articleListView">
-          <div id="articleItemsContainer" class="compact-articles-grid"></div>
+          <div id="articleDateGroupsContainer"></div>
           <div id="articleListPagination" class="pagination-nav" hidden></div>
         </div>
 
-        <!-- ПРОСМОТР ТЕКСТА СТАТЬИ -->
         <div id="articleReaderView" hidden>
-          <div class="article-detail-top">
+          <div class="article-detail-top" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
             <button class="button button-quiet" type="button" onclick="backToArticleList()">← К списку статей</button>
             <span id="articleReaderDate" class="publication-date"></span>
           </div>
           <div id="articleReaderContent"></div>
         </div>
 
-        <!-- ФОРМА СОЗДАНИЯ / РЕДАКТИРОВАНИЯ -->
         <div id="articleEditorBox" class="article-edit-box" hidden>
           <h3 id="articleEditorTitle">Добавить статью</h3>
           <form id="publicArticleForm" class="admin-form">
@@ -870,13 +732,19 @@ footer {
         </div>
       </section>
 
-      <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ -->
+      <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ (С КНОПКАМИ СОЗДАНИЯ ИВЕНТА) -->
       <section class="panel content-section" id="eventsSection" hidden>
         <div class="section-heading">
           <span class="section-emoji" style="font-size:48px;">🏆</span>
           <h2>Ивенты проектов</h2>
-          <p>Выберите нужный проект, чтобы открыть задания и ссылки.</p>
+          <p>Выберите нужный проект, чтобы открыть его задания в отдельном окне.</p>
         </div>
+
+        <div class="event-top-controls">
+          <button class="button button-primary" type="button" onclick="openCreateEventModal(false)">➕ Создать ивент себе</button>
+          <button class="button button-secondary" type="button" onclick="openCreateEventModal(true)">📢 Создать ивент ВСЕМ участникам</button>
+        </div>
+
         <div id="eventsList" style="display:grid;gap:12px;"></div>
       </section>
 
@@ -940,7 +808,6 @@ footer {
 
   <footer>
     <div>🐿️ ПЕРФОРАТОРЫ · 2026</div>
-    <div><a class="wezy-secret-entry" href="#wezy-login" onclick="openWezyLogin();return false;">служебный вход</a></div>
   </footer>
 
   <!-- ОКНО ВХОДА АДМИНИСТРАТОРА -->
@@ -952,35 +819,23 @@ footer {
     <div class="status-line" id="adminLoginMessage"></div>
   </section>
 
-  <!-- ОКНО СЛУЖЕБНОГО ВХОДА WEZY -->
-  <section class="panel admin-login-box" id="wezyLoginBox" hidden>
-    <h2>🎄 Служебный вход Wezy</h2>
-    <label class="admin-field">Пароль Wezy<input id="wezyPassword" type="password" placeholder="Введите пароль"></label>
-    <button class="button button-primary" type="button" onclick="wezyLogin()">Войти</button>
-    <button class="button button-quiet" type="button" onclick="closeWezyLogin()">Отмена</button>
-    <div class="status-line" id="wezyLoginMessage"></div>
-  </section>
-
-  <!-- ПАНЕЛЬ WEZY -->
-  <section class="panel admin-panel" id="wezyPanel" hidden>
-    <div class="section-heading">
-      <span class="section-emoji" style="font-size:48px;">🎄</span>
-      <h2>Панель Wezy</h2>
-      <p>Управление заданиями участников (индивидуально или сразу всем 15 участникам)</p>
+  <!-- ОКНО НАСТРОЕК (ШЕСТЕРЕНКА) -->
+  <section class="panel" id="settingsBox" hidden style="max-width:540px;margin:0 auto;text-align:center;">
+    <h3 style="color:var(--gold);margin-top:0;">⚙ Настройки интерфейса</h3>
+    <p class="muted">Вы можете включить или отключить визуальные эффекты и анимации на портале для более плавной работы.</p>
+    <div style="margin:20px 0;padding:16px;background:rgba(6,12,33,.6);border:1px solid rgba(186,174,255,.2);border-radius:14px;text-align:left;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <strong style="color:#fff;font-size:15px;display:block;">Отключить анимации</strong>
+        <small style="color:var(--muted);font-size:12px;">Убирает движение неона, снегопад и эффекты перехода</small>
+      </div>
+      <input type="checkbox" id="disableAnimationsCheckbox" style="width:24px;height:24px;cursor:pointer;">
     </div>
-    <div class="admin-form">
-      <label class="admin-field full">Участник для просмотра/редактирования
-        <select id="wezyParticipantSelect"><option value="">Выберите участника</option></select>
-      </label>
-    </div>
-    <h3 style="text-align:center;margin-top:18px;">Ивенты</h3>
-    <div id="wezyEventsList" class="admin-list"></div>
-    <div style="text-align:center;margin-top:16px;">
-      <button class="button button-quiet" type="button" onclick="wezyLogout()">Выйти из панели Wezy</button>
+    <div style="text-align:center;">
+      <button class="button button-primary" type="button" onclick="closeSettingsModal()">Сохранить и закрыть</button>
     </div>
   </section>
 
-  <!-- УВЕЛИЧЕННОЕ МОДАЛЬНОЕ ОКНО -->
+  <!-- БОЛЬШОЕ МОДАЛЬНОЕ ОКНО -->
   <div class="portal-modal" id="portalModal" hidden>
     <div class="portal-modal-dialog" id="portalModalDialog" role="dialog" aria-modal="true" aria-labelledby="portalModalTitle">
       <button class="portal-modal-close" type="button" aria-label="Закрыть" onclick="closePortalModal()">×</button>
@@ -995,7 +850,6 @@ let currentEventKey = null;
 let currentEventData = null;
 let personalTasks = [];
 let activeTaskIndex = 0;
-let wezyToken = sessionStorage.getItem('perforator_wezy_token') || '';
 let latestPortalData = null;
 
 const $ = id => document.getElementById(id);
@@ -1007,7 +861,7 @@ function apiCall(action, params = {}) {
     const callback = '__perforatoryCallback' + (++apiCounter);
     const script = document.createElement('script');
     let finished = false;
-    let timeout = setTimeout(() => { cleanup(); reject(new Error('Сервер не ответил за 25 секунд.')); }, 25000);
+    let timeout = setTimeout(() => { cleanup(); reject(new Error('Сервер не ответил вовремя.')); }, 25000);
     const cleanup = () => { if (finished) return; finished = true; delete window[callback]; script.remove(); clearTimeout(timeout); };
     window[callback] = response => {
       if (finished) return; cleanup();
@@ -1016,7 +870,7 @@ function apiCall(action, params = {}) {
     };
     const query = new URLSearchParams({ action, callback });
     Object.entries(params).forEach(([key, value]) => query.set(key, String(value ?? '')));
-    script.onerror = () => { cleanup(); reject(new Error('Не удалось подключиться к Google Apps Script.')); };
+    script.onerror = () => { cleanup(); reject(new Error('Не удалось подключиться к серверу.')); };
     script.src = GAS_API_URL + '?' + query.toString();
     document.body.appendChild(script);
   });
@@ -1038,6 +892,30 @@ async function apiCallPost(action, payload = {}) {
   } catch(e) {
     return apiCall(action, payload);
   }
+}
+
+// НАСТРОЙКИ (ОТКЛЮЧЕНИЕ АНИМАЦИИ)
+function initSettings() {
+  const noAnim = localStorage.getItem('perforator_no_anim') === 'true';
+  $('disableAnimationsCheckbox').checked = noAnim;
+  if (noAnim) document.body.classList.add('no-animations');
+  
+  $('disableAnimationsCheckbox').addEventListener('change', e => {
+    if (e.target.checked) {
+      document.body.classList.add('no-animations');
+      localStorage.setItem('perforator_no_anim', 'true');
+    } else {
+      document.body.classList.remove('no-animations');
+      localStorage.setItem('perforator_no_anim', 'false');
+    }
+  });
+}
+function openSettingsModal() {
+  $('settingsBox').hidden = false;
+  openPortalModal($('settingsBox'), 'Настройки');
+}
+function closeSettingsModal() {
+  closePortalModal();
 }
 
 function showMessage(text, isError) {
@@ -1132,24 +1010,24 @@ function renderImmunity(data, historyItems, status) {
 }
 
 // ==============================================================
-// СТАТЬИ ТЕКУЩЕГО СЕЗОНА: ПЛАШКИ [ДАТА + ТЕМА В РАМКЕ] + ПАГИНАЦИЯ
+// СТАТЬИ ТЕКУЩЕГО СЕЗОНА: ОБЪЕДИНЕНЫ ПО ДАТАМ (СТАТЬЯ 1, 2, 3...)
 // ==============================================================
 let cachedArticles = [];
-let currentArticlesPage = 1;
-const ARTICLES_PER_PAGE = 7; // По 7 статей на страницу
+let currentArticlesDatePage = 1;
+const DATES_PER_PAGE = 5; // По 5 дат на страницу
 
 function renderArticleArchive(items) {
   cachedArticles = items || [];
-  currentArticlesPage = 1;
-  displayCurrentArticlesList();
+  currentArticlesDatePage = 1;
+  displayGroupedArticlesList();
 }
 
-function displayCurrentArticlesList() {
-  const container = $('articleItemsContainer');
+function displayGroupedArticlesList() {
+  const container = $('articleDateGroupsContainer');
   const pagNav = $('articleListPagination');
   container.replaceChildren();
 
-  $('articlesTotalCount').textContent = cachedArticles.length ? `Статей в сезоне: ${cachedArticles.length}` : '';
+  $('articlesTotalCount').textContent = cachedArticles.length ? `Всего статей: ${cachedArticles.length}` : '';
 
   if (!cachedArticles.length) {
     container.innerHTML = '<div class="empty-state compact">В текущем сезоне статей пока нет.</div>';
@@ -1157,34 +1035,55 @@ function displayCurrentArticlesList() {
     return;
   }
 
-  const totalPages = Math.ceil(cachedArticles.length / ARTICLES_PER_PAGE);
-  if (currentArticlesPage > totalPages) currentArticlesPage = 1;
+  // Группировка статей по дате
+  const dateMap = new Map();
+  cachedArticles.forEach(item => {
+    const dKey = item.dateKey || item.date || 'Без даты';
+    if (!dateMap.has(dKey)) {
+      dateMap.set(dKey, { label: item.date || dKey, list: [] });
+    }
+    dateMap.get(dKey).list.push(item);
+  });
 
-  const startIdx = (currentArticlesPage - 1) * ARTICLES_PER_PAGE;
-  const pageItems = cachedArticles.slice(startIdx, startIdx + ARTICLES_PER_PAGE);
+  const sortedDates = Array.from(dateMap.entries()).sort((a, b) => b[0].localeCompare(a[0]));
+  const totalPages = Math.ceil(sortedDates.length / DATES_PER_PAGE);
+  if (currentArticlesDatePage > totalPages) currentArticlesDatePage = 1;
 
-  pageItems.forEach(article => {
-    const pill = document.createElement('div');
-    pill.className = 'article-item-pill';
-    pill.innerHTML = `
-      <div class="article-item-left">
-        <span class="article-date-badge">📅 ${escapeHtml(article.date || '')}</span>
-        <div style="flex:1;min-width:0;">
-          <div class="article-theme-title">${escapeHtml(article.title || 'Без названия')}</div>
-        </div>
-        ${article.albumNumber ? `<span class="article-album-chip">Альбом №${escapeHtml(article.albumNumber)}</span>` : ''}
-      </div>
-      <div class="article-item-arrow">➔</div>
+  const startIdx = (currentArticlesDatePage - 1) * DATES_PER_PAGE;
+  const pageDateGroups = sortedDates.slice(startIdx, startIdx + DATES_PER_PAGE);
+
+  pageDateGroups.forEach(([key, group]) => {
+    const card = document.createElement('div');
+    card.className = 'date-group-card';
+
+    const header = document.createElement('div');
+    header.className = 'date-group-header';
+    header.innerHTML = `
+      <div class="date-group-title">📅 ${escapeHtml(group.label)}</div>
+      <span class="muted" style="font-size:13px;">${group.list.length} ${group.list.length === 1 ? 'статья' : 'статьи'}</span>
     `;
-    pill.onclick = () => openSingleArticle(article);
-    container.appendChild(pill);
+
+    const subBtnsBox = document.createElement('div');
+    subBtnsBox.className = 'articles-sub-buttons';
+
+    group.list.forEach((article, index) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'article-sub-btn';
+      btn.innerHTML = `<span>📖 Статья ${index + 1}: <strong>${escapeHtml(article.title || 'Тема')}</strong></span>`;
+      btn.onclick = () => openSingleArticle(article);
+      subBtnsBox.appendChild(btn);
+    });
+
+    card.append(header, subBtnsBox);
+    container.appendChild(card);
   });
 
   if (totalPages > 1) {
     pagNav.hidden = false;
-    renderPaginationControls(pagNav, totalPages, currentArticlesPage, newPage => {
-      currentArticlesPage = newPage;
-      displayCurrentArticlesList();
+    renderPaginationControls(pagNav, totalPages, currentArticlesDatePage, newPage => {
+      currentArticlesDatePage = newPage;
+      displayGroupedArticlesList();
     });
   } else {
     pagNav.hidden = true;
@@ -1328,10 +1227,12 @@ function appendTextWithLinks(container, value) {
   });
 }
 
-// ИВЕНТЫ ПРОЕКТОВ
+// ==============================================================
+// ИВЕНТЫ ПРОЕКТОВ (ОТКРЫВАЮТСЯ В ОТДЕЛЬНОМ ОКНЕ, СОЗДАНИЕ СЕБЕ / ВСЕМ)
+// ==============================================================
 function renderEvents(items) {
   const target = $('eventsList'); target.replaceChildren();
-  if (!items || !items.length) { target.innerHTML = '<div class="empty-state compact">Пока нет опубликованных ивентов.</div>'; return; }
+  if (!items || !items.length) { target.innerHTML = '<div class="empty-state compact">Пока нет опубликованных ивентов. Создайте первый выше!</div>'; return; }
   items.forEach(item => {
     const card = document.createElement('div');
     card.className = 'event-task-card';
@@ -1340,14 +1241,77 @@ function renderEvents(items) {
     card.innerHTML = `
       <div>
         <div class="publication-date">${item.date || ''}</div>
-        <strong style="font-size:17px;color:var(--gold);display:block;margin-top:2px;">${item.title || 'Без названия'}</strong>
-        <div style="font-size:13px;color:var(--muted);margin-top:4px;">${(item.text || '').slice(0, 110)}…</div>
+        <strong style="font-size:17px;color:var(--gold);display:block;margin-top:2px;">${escapeHtml(item.title || 'Без названия')}</strong>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;">${escapeHtml((item.text || '').slice(0, 110))}…</div>
       </div>
       <div style="font-size:24px;color:var(--gold);">➔</div>
     `;
     card.onclick = () => openModernEventView(item);
     target.appendChild(card);
   });
+}
+
+// Создание ивента себе или всем
+function openCreateEventModal(isForEveryone) {
+  const box = document.createElement('div');
+  box.innerHTML = `
+    <h3 style="color:var(--gold);text-align:center;margin-top:0;">
+      ${isForEveryone ? '📢 Создать ивент ВСЕМ участникам' : '➕ Создать ивент только себе'}
+    </h3>
+    <p class="muted" style="text-align:center;">
+      ${isForEveryone ? 'Этот ивент появится у всех 15 участников команды.' : 'Этот ивент будет виден только в вашем личном кабинете.'}
+    </p>
+    <form id="createEventForm">
+      <label class="admin-field">Название ивента
+        <input type="text" id="evNewTitle" placeholder="Например: Праздничный марафон" required>
+      </label>
+      <label class="admin-field">Дата проведения
+        <input type="text" id="evNewDate" placeholder="Например: 24.11 - 30.11" required>
+      </label>
+      <label class="admin-field">Описание первого задания
+        <textarea id="evNewText" placeholder="Подробные условия заданий или описание…" style="min-height:120px;" required></textarea>
+      </label>
+      <label class="admin-field">Ссылки (через новую строку)
+        <textarea id="evNewLinks" placeholder="https://…"></textarea>
+      </label>
+      <div style="text-align:center;margin-top:14px;">
+        <button class="button button-primary" type="submit" id="evSubmitBtn">Создать ивент</button>
+        <button class="button button-quiet" type="button" onclick="closePortalModal()">Отмена</button>
+      </div>
+    </form>
+  `;
+
+  openPortalModal(box, isForEveryone ? 'Создать ивент всем' : 'Создать ивент себе');
+
+  box.querySelector('#createEventForm').onsubmit = async e => {
+    e.preventDefault();
+    const btn = box.querySelector('#evSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Создаём…';
+
+    const title = box.querySelector('#evNewTitle').value.trim();
+    const date = box.querySelector('#evNewDate').value.trim();
+    const text = box.querySelector('#evNewText').value.trim();
+    const links = box.querySelector('#evNewLinks').value.trim();
+
+    try {
+      await apiCallPost('createCustomEvent', {
+        id: currentUser.id,
+        isForEveryone: isForEveryone ? 'true' : 'false',
+        title,
+        date,
+        text,
+        links
+      });
+      closePortalModal();
+      await loadPortal();
+      alert('Ивент успешно создан!');
+    } catch(err) {
+      alert(err.message || 'Ошибка создания ивента.');
+      btn.disabled = false;
+      btn.textContent = 'Создать ивент';
+    }
+  };
 }
 
 async function openModernEventView(event) {
@@ -1396,6 +1360,7 @@ async function openModernEventView(event) {
     </div>
   `;
 
+  // Открывается в отдельном модальном окне
   openPortalModal(box, event.title || 'Ивент проектов', true);
 
   try {
@@ -1571,20 +1536,18 @@ async function savePersonalTasks() {
   if (!currentUser || !currentEventKey) return;
   try {
     await apiCallPost('savePersonalTasks', { id: currentUser.id, eventKey: currentEventKey, tasks: JSON.stringify(personalTasks) });
-  } catch (e) {
-    console.error(e);
-  }
+  } catch (e) { console.error(e); }
 }
 
 // ==============================================================
-// СЕЗОННЫЙ АРХИВ (ИММУНИТЕТ ПО НЕДЕЛЯМ + СТАТЬИ ПЛАШКАМИ ДАТА+ТЕМА + ПАГИНАЦИЯ)
+// СЕЗОННЫЙ АРХИВ (ИММУНИТЕТ ПО НЕДЕЛЯМ + СТАТЬИ ПО ДАТАМ 1, 2, 3...)
 // ==============================================================
 let seasonalArchiveDataCache = null;
 let currentArchiveMode = 'immunity';
 let currentArchiveImmunityPage = 1;
 let currentArchiveArticlesPage = 1;
 const ARCHIVE_WEEKS_PER_PAGE = 4;
-const ARCHIVE_ARTICLES_PER_PAGE = 7; // По 7 статей на страницу в архиве
+const ARCHIVE_DATES_PER_PAGE = 5;
 
 async function openSeasonalArchiveModal() {
   const box = document.createElement('div');
@@ -1599,12 +1562,10 @@ async function openSeasonalArchiveModal() {
       <button class="button button-secondary" type="button" id="archTabArticles">📚 Архив статей</button>
     </div>
 
-    <!-- КОНТЕЙНЕР СОДЕРЖИМОГО АРХИВА -->
     <div id="seasonalArchiveContent" style="display:grid;gap:12px;margin-top:14px;">
       <div class="loading">Загружаем сезонный архив…</div>
     </div>
 
-    <!-- ПАГИНАЦИЯ -->
     <div id="seasonalArchivePagination" class="pagination-nav" hidden></div>
   `;
 
@@ -1757,7 +1718,7 @@ function renderArchiveView(modalBox) {
     }
 
   } else {
-    // 2. АРХИВ СТАТЕЙ: КОМПАКТНЫЕ ПЛАШКИ [ДАТА + ТЕМА В РАМКЕ] С КЛИКОМ НА СТАТЬЮ
+    // 2. АРХИВ СТАТЕЙ: ОБЪЕДИНЕНЫ ПО ДАТАМ (СТАТЬЯ 1, СТАТЬЯ 2...)
     const articles = seasonalArchiveDataCache.articles || [];
     if (!articles.length) {
       cont.innerHTML = '<div class="empty-state compact">В архиве статей пока нет записей.</div>';
@@ -1765,50 +1726,66 @@ function renderArchiveView(modalBox) {
       return;
     }
 
-    const totalPages = Math.ceil(articles.length / ARCHIVE_ARTICLES_PER_PAGE);
-    if (currentArchiveArticlesPage > totalPages) currentArchiveArticlesPage = 1;
-
-    const startIdx = (currentArchiveArticlesPage - 1) * ARCHIVE_ARTICLES_PER_PAGE;
-    const pageArticles = articles.slice(startIdx, startIdx + ARCHIVE_ARTICLES_PER_PAGE);
-
-    const grid = document.createElement('div');
-    grid.className = 'compact-articles-grid';
-
-    // Контейнер для раскрываемой статьи прямо в архиве
-    const articleReaderBox = document.createElement('div');
-    articleReaderBox.className = 'answer-box-framed';
-    articleReaderBox.hidden = true;
-
-    pageArticles.forEach(item => {
-      const pill = document.createElement('div');
-      pill.className = 'article-item-pill';
-      pill.innerHTML = `
-        <div class="article-item-left">
-          <span class="article-date-badge">📅 ${escapeHtml(item.date || '')}</span>
-          <div style="flex:1;min-width:0;">
-            <div class="article-theme-title">${escapeHtml(item.title || 'Без названия')}</div>
-          </div>
-          ${item.albumNumber ? `<span class="article-album-chip">Альбом №${escapeHtml(item.albumNumber)}</span>` : ''}
-        </div>
-        <div class="article-item-arrow">➔</div>
-      `;
-      pill.onclick = () => {
-        articleReaderBox.hidden = false;
-        articleReaderBox.innerHTML = `
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
-            <span class="publication-date">📅 ${escapeHtml(item.date || '')}</span>
-            ${item.albumNumber ? `<span class="archive-badge">Фотоальбом №${escapeHtml(item.albumNumber)}</span>` : ''}
-          </div>
-          <h4>📖 ${escapeHtml(item.title || 'Без названия')}</h4>
-          <p style="white-space:pre-wrap;margin:10px 0;line-height:1.7;">${escapeHtml(item.text || '')}</p>
-          ${item.link ? `<a class="button button-primary" href="${item.link}" target="_blank" rel="noopener" style="margin-top:10px;">🔗 Открыть ссылку на фотоальбом/статью ↗</a>` : ''}
-        `;
-        articleReaderBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      };
-      grid.appendChild(pill);
+    const dateMap = new Map();
+    articles.forEach(item => {
+      const dKey = item.dateKey || item.date || 'Без даты';
+      if (!dateMap.has(dKey)) {
+        dateMap.set(dKey, { label: item.date || dKey, list: [] });
+      }
+      dateMap.get(dKey).list.push(item);
     });
 
-    cont.append(grid, articleReaderBox);
+    const sortedDates = Array.from(dateMap.entries()).sort((a, b) => b[0].localeCompare(a[0]));
+    const totalPages = Math.ceil(sortedDates.length / ARCHIVE_DATES_PER_PAGE);
+    if (currentArchiveArticlesPage > totalPages) currentArchiveArticlesPage = 1;
+
+    const startIdx = (currentArchiveArticlesPage - 1) * ARCHIVE_DATES_PER_PAGE;
+    const pageDateGroups = sortedDates.slice(startIdx, startIdx + ARCHIVE_DATES_PER_PAGE);
+
+    const answerViewerBox = document.createElement('div');
+    answerViewerBox.className = 'answer-box-framed';
+    answerViewerBox.hidden = true;
+
+    pageDateGroups.forEach(([key, group]) => {
+      const card = document.createElement('div');
+      card.className = 'date-group-card';
+
+      const header = document.createElement('div');
+      header.className = 'date-group-header';
+      header.innerHTML = `
+        <div class="date-group-title">📅 ${escapeHtml(group.label)}</div>
+        <span class="muted" style="font-size:13px;">${group.list.length} ${group.list.length === 1 ? 'статья' : 'статьи'}</span>
+      `;
+
+      const subBtnsBox = document.createElement('div');
+      subBtnsBox.className = 'articles-sub-buttons';
+
+      group.list.forEach((article, index) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'article-sub-btn';
+        btn.innerHTML = `<span>📖 Статья ${index + 1}: <strong>${escapeHtml(article.title || 'Тема')}</strong></span>`;
+        btn.onclick = () => {
+          answerViewerBox.hidden = false;
+          answerViewerBox.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
+              <span class="publication-date">📅 ${escapeHtml(article.date || '')}</span>
+              ${article.albumNumber ? `<span class="archive-badge">Фотоальбом №${escapeHtml(article.albumNumber)}</span>` : ''}
+            </div>
+            <h4>📖 ${escapeHtml(article.title || 'Без названия')}</h4>
+            <p style="white-space:pre-wrap;margin:10px 0;line-height:1.7;">${escapeHtml(article.text || '')}</p>
+            ${article.link ? `<a class="button button-primary" href="${article.link}" target="_blank" rel="noopener" style="margin-top:10px;">🔗 Открыть ссылку на фотоальбом/статью ↗</a>` : ''}
+          `;
+          answerViewerBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        };
+        subBtnsBox.appendChild(btn);
+      });
+
+      card.append(header, subBtnsBox);
+      cont.appendChild(card);
+    });
+
+    cont.appendChild(answerViewerBox);
 
     if (totalPages > 1) {
       pagNav.hidden = false;
@@ -1850,7 +1827,7 @@ async function openCookieModal() {
   const status = latestPortalData ? latestPortalData.status : {};
   const btn = box.querySelector('#cookieActionBtn');
   const markBtn = box.querySelector('#markCookieMeBtn');
-  btn.href = status.cookieUrl || CONFIG.COOKIE_URL;
+  btn.href = status.cookieUrl || '#';
 
   if (!status.cookieOpen) {
     btn.classList.add('is-disabled');
@@ -1884,9 +1861,7 @@ async function openCookieModal() {
     try {
       await apiCallPost('markCookie', { id: currentUser.id });
       alert('Ваша отметка сохранена!');
-    } catch (e) {
-      alert(e.message || 'Ошибка');
-    }
+    } catch (e) { alert(e.message || 'Ошибка'); }
   };
 
   box.querySelector('#openCookieMarksModalBtn').onclick = () => {
@@ -1986,9 +1961,7 @@ function openImmunityStatusModal() {
         makeRow('✅ Ответили', data.answered || [], 'Пока нет отметок.'),
         makeRow('❌ Не ответили', data.missing || [], 'Все участники ответили.')
       );
-    } catch (e) {
-      resBox.textContent = e.message || 'Ошибка загрузки.';
-    }
+    } catch (e) { resBox.textContent = e.message || 'Ошибка загрузки.'; }
   };
 }
 
@@ -2282,136 +2255,8 @@ $('adminManualHistoryForm').addEventListener('submit', async e => {
   finally { btn.disabled = false; }
 });
 
-// WEZY: СЛУЖЕБНАЯ ПАНЕЛЬ
-function openWezyLogin() {
-  if (wezyToken) { showWezyPanel(); return; }
-  $('wezyLoginBox').hidden = false; openPortalModal($('wezyLoginBox'), 'Служебный вход Wezy'); $('wezyPassword').focus();
-}
-function closeWezyLogin() { if (portalModalNode === $('wezyLoginBox')) closePortalModal(); $('wezyLoginBox').hidden = true; $('wezyLoginMessage').textContent = ''; }
-async function wezyLogin() {
-  const password = $('wezyPassword').value; if (!password) { $('wezyLoginMessage').textContent = 'Введите пароль.'; return; }
-  $('wezyLoginMessage').textContent = 'Проверяем…';
-  try {
-    const data = await apiCall('wezyLogin', { password }); wezyToken = data.token; sessionStorage.setItem('perforator_wezy_token', wezyToken);
-    $('wezyPassword').value = ''; closeWezyLogin(); showWezyPanel();
-  } catch (err) { $('wezyLoginMessage').textContent = err.message || 'Ошибка входа.'; }
-}
-function wezyLogout() { if (portalModalNode === $('wezyPanel')) closePortalModal(); wezyToken = ''; sessionStorage.removeItem('perforator_wezy_token'); $('wezyPanel').hidden = true; }
-
-async function showWezyPanel() {
-  $('wezyPanel').hidden = false; openPortalModal($('wezyPanel'), 'Панель Wezy');
-  const select = $('wezyParticipantSelect'); select.replaceChildren();
-  const first = document.createElement('option'); first.value = ''; first.textContent = 'Выберите участника'; select.append(first);
-  try {
-    const people = await apiCall('adminParticipants', { token: wezyToken });
-    (people || []).forEach(p => { const o = document.createElement('option'); o.value = p.id; o.textContent = p.name; select.append(o); });
-  } catch (e) {}
-  try {
-    const data = await apiCall('portal', { id: currentUser ? currentUser.id : 'wezy' });
-    const list = $('wezyEventsList'); list.replaceChildren();
-    (data.events || []).forEach(ev => {
-      const row = document.createElement('div'); row.className = 'admin-row';
-      row.innerHTML = `<div><strong>${ev.title}</strong><small>${ev.date || ''}</small></div>`;
-      const btn = document.createElement('button'); btn.textContent = 'Управление заданиями';
-      btn.onclick = () => openWezyEventTasks(ev); row.appendChild(btn); list.appendChild(row);
-    });
-  } catch (e) { $('wezyEventsList').textContent = 'Не удалось загрузить ивенты.'; }
-}
-
-async function openWezyEventTasks(event) {
-  const participantId = $('wezyParticipantSelect').value;
-  const eventKey = String(event.key || event.row || event.title);
-
-  let currentTasks = [];
-  if (participantId) {
-    try {
-      const data = await apiCall('getPersonalTasks', { id: participantId, eventKey });
-      currentTasks = Array.isArray(data && data.tasks) ? data.tasks : [];
-    } catch(e) {}
-  }
-
-  const box = document.createElement('div');
-  box.innerHTML = `
-    <h3 style="text-align:center;color:var(--gold)">${escapeHtml(event.title)}</h3>
-    <p class="muted" style="text-align:center;">Управление заданиями проекта</p>
-    
-    <div style="background:rgba(245,203,120,.1);border:1px solid rgba(245,203,120,.3);border-radius:12px;padding:12px;margin-bottom:14px;text-align:center;">
-      <strong style="color:var(--gold);">📢 Массовое действие:</strong>
-      <p style="margin:4px 0 8px;font-size:13px;color:#d5def5;">Нажмите кнопку ниже, чтобы скопировать список заданий текущего экрана <strong>сразу всем 15 участникам</strong>!</p>
-      <button class="button button-primary" type="button" id="wezyBroadcastAllBtn" style="padding:10px 18px;">👥 Назначить этот список ВСЕМ участникам</button>
-    </div>
-
-    <div class="task-list" id="wezyTaskRows"></div>
-    
-    <div class="task-detail" style="margin-top:16px">
-      <h4 style="margin:0 0 8px;color:var(--gold);">Добавить новое задание:</h4>
-      <label class="admin-field">Название задания
-        <input type="text" id="wezyNewTask" placeholder="Например: Задание 1">
-      </label>
-      <label class="admin-field">Описание задания
-        <textarea id="wezyNewDescription" placeholder="Подробные условия задания…" style="min-height:120px;font-size:15px;"></textarea>
-      </label>
-      <label class="admin-field">Ссылки (каждую с новой строки)
-        <textarea id="wezyNewLinks" placeholder="https://…"></textarea>
-      </label>
-      
-      <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:10px;">
-        <button class="button button-secondary" type="button" id="wezyAddSingleBtn">Добавить этому участнику</button>
-        <button class="button button-primary" type="button" id="wezyAddAllBtn">📢 Добавить сразу ВСЕМ участникам</button>
-      </div>
-    </div>`;
-
-  const rows = box.querySelector('#wezyTaskRows');
-  if (!currentTasks.length) {
-    rows.innerHTML = '<div class="empty-state compact">Заданий пока нет. Создайте задание ниже!</div>';
-  } else {
-    currentTasks.forEach((t, i) => {
-      const row = document.createElement('div'); row.className = 'admin-row';
-      row.innerHTML = `<div><strong>${escapeHtml(t.text)}</strong><small>${escapeHtml(t.description || 'Без описания')}</small></div>`;
-      const del = document.createElement('button'); del.type = 'button'; del.className = 'button button-danger'; del.textContent = 'Удалить';
-      del.onclick = async () => {
-        currentTasks.splice(i, 1);
-        if (participantId) await apiCallPost('savePersonalTasks', { id: participantId, eventKey, tasks: JSON.stringify(currentTasks) });
-        openWezyEventTasks(event);
-      };
-      row.append(del); rows.appendChild(row);
-    });
-  }
-
-  openPortalModal(box, 'Задания: ' + event.title);
-
-  box.querySelector('#wezyAddSingleBtn').onclick = async () => {
-    if (!participantId) return alert('Сначала выберите участника вверху панели Wezy!');
-    const text = box.querySelector('#wezyNewTask').value.trim();
-    if (!text) return alert('Введите название задания.');
-    const description = box.querySelector('#wezyNewDescription').value.trim();
-    const links = box.querySelector('#wezyNewLinks').value.split(/\n|;/).map(x => x.trim()).filter(x => /^https?:\/\//i.test(x));
-    currentTasks.push({ text, description, links, done: false });
-    await apiCallPost('savePersonalTasks', { id: participantId, eventKey, tasks: JSON.stringify(currentTasks) });
-    openWezyEventTasks(event);
-  };
-
-  box.querySelector('#wezyAddAllBtn').onclick = async () => {
-    const text = box.querySelector('#wezyNewTask').value.trim();
-    if (!text) return alert('Введите название задания.');
-    const description = box.querySelector('#wezyNewDescription').value.trim();
-    const links = box.querySelector('#wezyNewLinks').value.split(/\n|;/).map(x => x.trim()).filter(x => /^https?:\/\//i.test(x));
-    currentTasks.push({ text, description, links, done: false });
-    
-    await apiCallPost('saveTasksToAllParticipants', { token: wezyToken, eventKey, tasks: JSON.stringify(currentTasks) });
-    alert('Задание успешно добавлено ВСЕМ 15 участникам!');
-    openWezyEventTasks(event);
-  };
-
-  box.querySelector('#wezyBroadcastAllBtn').onclick = async () => {
-    if (!currentTasks.length) return alert('Список заданий пуст! Сначала добавьте хотя бы одно задание.');
-    if (!confirm('Назначить весь этот список заданий ВСЕМ 15 участникам?')) return;
-    await apiCallPost('saveTasksToAllParticipants', { token: wezyToken, eventKey, tasks: JSON.stringify(currentTasks) });
-    alert('Список заданий успешно разослан всем участникам!');
-  };
-}
-
 window.addEventListener('load', () => {
+  initSettings();
   fillWeekSelectors(); syncAnswerDateFromSelectors();
   const saved = sessionStorage.getItem('perforator_user');
   if (saved) { try { const u = JSON.parse(saved); if (u && u.id) { currentUser = u; showPortal(u); } } catch(e){} }
