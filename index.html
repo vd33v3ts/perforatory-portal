@@ -74,7 +74,6 @@ body {
   text-shadow: 0 0 10px rgba(196,181,253,.4);
   animation: letterNeonPulse 4s infinite ease-in-out;
 }
-/* Задержки для каждой из 11 букв */
 .brand-name span:nth-child(1)  { animation-delay: 0.00s; }
 .brand-name span:nth-child(2)  { animation-delay: 0.15s; }
 .brand-name span:nth-child(3)  { animation-delay: 0.30s; }
@@ -102,7 +101,6 @@ body {
       0 0 75px #6366f1;
     transform: translateY(-3px) scale(1.08);
   }
-  /* Финальная синхронная вспышка всех букв */
   70% {
     color: #e0e7ff;
     text-shadow: 0 0 8px rgba(196,181,253,.4);
@@ -224,7 +222,6 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
   border-color: rgba(244,201,121,.65);
   box-shadow: 0 14px 34px rgba(110,80,210,.35);
 }
-/* ИКОНКИ В 2 РАЗА БОЛЬШЕ */
 .section-emoji {
   font-size: 64px;
   line-height: 1;
@@ -237,12 +234,10 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
 .section-card strong { font-size: 16px; letter-spacing: .02em; }
 .section-card small { color: var(--muted); font-size: 13px; line-height: 1.35; }
 
-/* 1 ряд: 3 кнопки по 2 колонки (2+2+2 = 6) */
 .section-card.card-imm { grid-column: span 2; }
 .section-card.card-art { grid-column: span 2; }
 .section-card.card-cook { grid-column: span 2; }
 
-/* 2 ряд: 2 кнопки ПОСЕРЕДИНЕ (пропуск 1, затем по 2 колонки: 1 + 2 + 2 + 1 = 6) */
 .section-card.events-nav-card { grid-column: 2 / span 2; }
 .section-card.archive-nav-card { grid-column: 4 / span 2; }
 
@@ -256,7 +251,7 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
 }
 
 /* ==============================================================
-   ПЛАВНАЯ АНИМАЦИЯ ОТКРЫТИЯ МОДАЛЬНЫХ ОКОН (SPRING & GLASS)
+   ПЛАВНАЯ АНИМАЦИЯ ОТКРЫТИЯ МОДАЛЬНЫХ ОКОН
    ============================================================== */
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
@@ -278,7 +273,6 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
 .portal-modal.is-open .portal-modal-dialog {
   transform: scale(1) translateY(0);
 }
-/* ОКНО ИВЕНТОВ СТАЛО ЕЩЁ БОЛЬШЕ */
 .portal-modal-dialog.dialog-wide {
   width: min(1240px, 98%);
 }
@@ -296,7 +290,6 @@ textarea { min-height: 110px; resize: vertical; line-height: 1.5; color: #f4f6ff
 .portal-modal-content { clear: both; width: 100%; }
 body.portal-modal-open { overflow: hidden; }
 
-/* ЗАГОЛОВКИ */
 .section-heading {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; gap: 6px; margin-bottom: 20px;
@@ -384,7 +377,6 @@ body.portal-modal-open { overflow: hidden; }
   .event-layout-container { grid-template-columns: 1fr; }
 }
 
-/* 1. Левая колонка */
 .event-col-tasks {
   display: flex; flex-direction: column; gap: 9px;
   background: rgba(6, 11, 31, .75); border: 1px solid rgba(186, 174, 255, .2);
@@ -410,7 +402,6 @@ body.portal-modal-open { overflow: hidden; }
 .event-task-dot.todo { background: #ff5267; color: #ff5267; }
 .event-task-card-name { font-size: 15px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* 2. Центральная колонка (ТЕКСТ ОПИСАНИЯ СТАЛ БОЛЬШЕ) */
 .event-col-content {
   display: flex; flex-direction: column; gap: 14px;
   background: rgba(8, 14, 38, .88); border: 1px solid rgba(186, 174, 255, .22);
@@ -418,7 +409,6 @@ body.portal-modal-open { overflow: hidden; }
 }
 .event-col-content h3 { margin: 0; color: var(--gold); font-size: 24px; text-align: center; }
 
-/* ТЕКСТ ОПИСАНИЯ КРУПНЫЙ И ЧИТАЕМЫЙ */
 .event-task-fulltext {
   color: #f1f4ff;
   font-size: 17px;
@@ -435,7 +425,6 @@ body.portal-modal-open { overflow: hidden; }
 .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #6bbcff, #9be5bd); border-radius: 6px; transition: width .3s ease; }
 .progress-label { font-size: 13px; color: var(--muted); text-align: center; margin-top: 4px; }
 
-/* 3. Правая колонка */
 .event-col-links {
   display: flex; flex-direction: column; gap: 9px;
   background: rgba(6, 11, 31, .75); border: 1px solid rgba(186, 174, 255, .2);
@@ -462,7 +451,6 @@ body.portal-modal-open { overflow: hidden; }
 }
 .cookie-countdown-val { font-size: clamp(26px, 5vw, 36px); font-weight: 900; color: var(--gold); margin: 6px 0; }
 
-/* ФУТЕР БЕЗ СЪЕЗЖАНИЯ */
 footer {
   text-align: center; padding: 24px 10px 34px; color: #8f9fc8; font-size: 13px; letter-spacing: .08em;
   display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -480,7 +468,6 @@ footer {
 
   <header class="site-header">
     <div class="brand-mark">🐿️</div>
-    <!-- НЕОНОВАЯ ВОЛНА ПО БУКВАМ -->
     <div class="brand-name" aria-label="ПЕРФОРАТОРЫ">
       <span>П</span><span>Е</span><span>Р</span><span>Ф</span><span>О</span><span>Р</span><span>А</span><span>Т</span><span>О</span><span>Р</span><span>Ы</span>
     </div>
@@ -533,7 +520,7 @@ footer {
         </div>
       </section>
 
-      <!-- НАВИГАЦИОННАЯ СЕТКА: ИКОНКИ В 2 РАЗА БОЛЬШЕ, 2-Й РЯД ПО ЦЕНТРУ -->
+      <!-- НАВИГАЦИОННАЯ СЕТКА -->
       <nav class="section-grid" aria-label="Разделы портала">
         <button class="section-card card-imm" data-target="immunitySection">
           <span class="section-emoji">🛡️</span>
@@ -551,7 +538,6 @@ footer {
           <small id="cookieCardStatus">Доступно по средам</small>
         </button>
         
-        <!-- 2-Й РЯД: ИВЕНТЫ И АРХИВ ПОСЕРЕДИНЕ -->
         <button class="section-card events-nav-card" data-target="eventsSection">
           <span class="section-emoji">🏆</span>
           <strong>Ивенты проектов</strong>
@@ -741,7 +727,7 @@ footer {
     <div class="status-line" id="wezyLoginMessage"></div>
   </section>
 
-  <!-- ПАНЕЛЬ WEZY: УПРАВЛЕНИЕ ЗАДАНИЯМИ ВСЕХ УЧАСТНИКОВ -->
+  <!-- ПАНЕЛЬ WEZY -->
   <section class="panel admin-panel" id="wezyPanel" hidden>
     <div class="section-heading">
       <span class="section-emoji" style="font-size:48px;">🎄</span>
@@ -782,12 +768,13 @@ const $ = id => document.getElementById(id);
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwbGOE4Q2Z6kL4BoAj0r6e0OmCSsgijdU26bWVfYpQC0kV5rkdd4XSPZ_qRSGFqX_kC/exec';
 let apiCounter = 0;
 
+// Чтение данных через GET / JSONP
 function apiCall(action, params = {}) {
   return new Promise((resolve, reject) => {
     const callback = '__perforatoryCallback' + (++apiCounter);
     const script = document.createElement('script');
     let finished = false;
-    let timeout = setTimeout(() => { cleanup(); reject(new Error('Сервер не ответил за 20 секунд.')); }, 20000);
+    let timeout = setTimeout(() => { cleanup(); reject(new Error('Сервер не ответил за 25 секунд.')); }, 25000);
     const cleanup = () => { if (finished) return; finished = true; delete window[callback]; script.remove(); clearTimeout(timeout); };
     window[callback] = response => {
       if (finished) return; cleanup();
@@ -800,6 +787,25 @@ function apiCall(action, params = {}) {
     script.src = GAS_API_URL + '?' + query.toString();
     document.body.appendChild(script);
   });
+}
+
+// Надежное сохранение больших данных через POST (для статей и заданий)
+async function apiCallPost(action, payload = {}) {
+  payload.action = action;
+  try {
+    const response = await fetch(GAS_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json();
+    if (!result || result.success !== true) {
+      throw new Error(result && result.error ? result.error : 'Ошибка сохранения на сервере.');
+    }
+    return result.data;
+  } catch(e) {
+    return apiCall(action, payload);
+  }
 }
 
 function showMessage(text, isError) {
@@ -973,25 +979,27 @@ function openArticleEditor(article = null) {
 }
 function closeArticleEditor() { $('articleEditorBox').hidden = true; if (currentSelectedDateKey) backToDayList(); else backToDateGrid(); }
 
+// СОХРАНЕНИЕ СТАТЬИ ЧЕРЕЗ apiCallPost
 $('publicArticleForm').addEventListener('submit', async e => {
   e.preventDefault(); if (!currentUser) return;
   const btn = $('articleSaveBtn'); btn.disabled = true; $('articleEditorMessage').textContent = 'Сохраняем…';
   try {
-    const res = await apiCall('saveArticle', {
-      id: currentUser.id, row: $('articleRow').value, date: $('articleDateInput').value,
+    const res = await apiCallPost('saveArticle', {
+      userId: currentUser.id, id: currentUser.id,
+      row: $('articleRow').value, date: $('articleDateInput').value,
       title: $('articleTitleInput').value, text: $('articleTextInput').value,
       link: $('articleLinkInput').value, albumNumber: $('articleAlbumNumber').value
     });
     $('articleEditorMessage').textContent = res.message || 'Сохранено!'; $('articleEditorMessage').className = 'status-line success';
     cachedArticles = res.articles || []; renderArticleArchive(cachedArticles);
     setTimeout(() => closeArticleEditor(), 700);
-  } catch (err) { $('articleEditorMessage').textContent = err.message || 'Ошибка.'; $('articleEditorMessage').className = 'status-line error'; }
+  } catch (err) { $('articleEditorMessage').textContent = err.message || 'Ошибка подключения.'; $('articleEditorMessage').className = 'status-line error'; }
   finally { btn.disabled = false; }
 });
 
 async function deleteArticle(article) {
   if (!confirm(`Удалить статью «${article.title}»?`)) return;
-  try { const res = await apiCall('deleteArticle', { id: currentUser.id, row: article.row }); cachedArticles = res.articles || []; renderArticleArchive(cachedArticles); backToDateGrid(); }
+  try { const res = await apiCallPost('deleteArticle', { userId: currentUser.id, id: currentUser.id, row: article.row }); cachedArticles = res.articles || []; renderArticleArchive(cachedArticles); backToDateGrid(); }
   catch (e) { alert(e.message || 'Ошибка удаления.'); }
 }
 
@@ -1030,7 +1038,7 @@ function renderEvents(items) {
 }
 
 async function openModernEventView(event) {
-  currentEventKey = event.key || ('event_' + (event.row || event.title || Date.now()));
+  currentEventKey = String(event.key || ('event_' + (event.row || event.title || Date.now())));
   currentEventData = event;
   activeTaskIndex = 0;
 
@@ -1042,7 +1050,6 @@ async function openModernEventView(event) {
     </div>
     
     <div class="event-layout-container">
-      <!-- 1. ЛЕВАЯ КОЛОНКА -->
       <div class="event-col-tasks">
         <strong style="color:var(--gold);font-size:14px;text-align:center;margin-bottom:6px;">📋 Выберите задание:</strong>
         <div id="eventTaskCardsContainer" style="display:flex;flex-direction:column;gap:8px;"></div>
@@ -1052,7 +1059,6 @@ async function openModernEventView(event) {
         </div>
       </div>
 
-      <!-- 2. ЦЕНТРАЛЬНАЯ КОЛОНКА: КРУПНЫЙ ТЕКСТ -->
       <div class="event-col-content">
         <h3 id="currentTaskTitle">Загрузка задания…</h3>
         <div class="progress-bar-wrap"><div class="progress-bar-fill" id="eventProgressFill" style="width:0%"></div></div>
@@ -1070,7 +1076,6 @@ async function openModernEventView(event) {
         </div>
       </div>
 
-      <!-- 3. ПРАВАЯ КОЛОНКА -->
       <div class="event-col-links">
         <h4>🔗 Ссылки</h4>
         <div id="modernEventLinks" style="display:flex;flex-direction:column;gap:8px;"></div>
@@ -1078,12 +1083,11 @@ async function openModernEventView(event) {
     </div>
   `;
 
-  // Открываем модальное окно с увеличенной шириной
   openPortalModal(box, event.title || 'Ивент проектов', true);
 
   try {
     const data = await apiCall('getPersonalTasks', { id: currentUser.id, eventKey: currentEventKey });
-    personalTasks = data.tasks || [];
+    personalTasks = Array.isArray(data && data.tasks) ? data.tasks : [];
   } catch (e) {
     personalTasks = [];
   }
@@ -1253,14 +1257,14 @@ function escapeHtml(str) {
 async function savePersonalTasks() {
   if (!currentUser || !currentEventKey) return;
   try {
-    await apiCall('savePersonalTasks', { id: currentUser.id, eventKey: currentEventKey, tasks: JSON.stringify(personalTasks) });
+    await apiCallPost('savePersonalTasks', { id: currentUser.id, eventKey: currentEventKey, tasks: JSON.stringify(personalTasks) });
   } catch (e) {
     console.error(e);
   }
 }
 
 // ==============================================================
-// ПЕЧЕНЬЕ СУДЬБЫ (ОТМЕТКА СТРОГО ПО СРЕДАМ 00:00 - 23:59)
+// ПЕЧЕНЬЕ СУДЬБЫ (СТРОГО ПО СРЕДАМ 00:00 - 23:59)
 // ==============================================================
 async function openCookieModal() {
   const box = document.createElement('div');
@@ -1291,7 +1295,6 @@ async function openCookieModal() {
   const markBtn = box.querySelector('#markCookieMeBtn');
   btn.href = status.cookieUrl || CONFIG.COOKIE_URL;
 
-  // Если не среда — кнопки неактивны
   if (!status.cookieOpen) {
     btn.classList.add('is-disabled');
     btn.onclick = e => { e.preventDefault(); alert('Печенье судьбы доступно только по средам с 00:00 до 23:59!'); };
@@ -1322,7 +1325,7 @@ async function openCookieModal() {
   markBtn.onclick = async () => {
     if (!currentUser) return;
     try {
-      await apiCall('markCookie', { id: currentUser.id });
+      await apiCallPost('markCookie', { id: currentUser.id });
       alert('Ваша отметка сохранена!');
     } catch (e) {
       alert(e.message || 'Ошибка');
@@ -1334,7 +1337,6 @@ async function openCookieModal() {
   };
 }
 
-// ОТДЕЛЬНОЕ ОКНО: КТО ОТМЕТИЛ ПЕЧЕНЬЕ
 async function openSeparateCookieMarksModal() {
   const box = document.createElement('div');
   box.innerHTML = `
@@ -1373,7 +1375,6 @@ async function openSeparateCookieMarksModal() {
   }
 }
 
-// ОТДЕЛЬНОЕ ОКНО: КТО ОТВЕТИЛ НА ИММУНИТЕТ
 function openImmunityStatusModal() {
   const box = document.createElement('div');
   box.innerHTML = `
@@ -1434,7 +1435,6 @@ function openImmunityStatusModal() {
   };
 }
 
-// СЕЗОННЫЙ АРХИВ
 async function openSeasonalArchiveModal() {
   const box = document.createElement('div');
   box.innerHTML = `
@@ -1542,7 +1542,6 @@ function renderStatus(status) {
   $('cookieCardStatus').textContent = status.cookieOpen ? 'Открыто сегодня (до 23:59)' : 'Доступно по средам';
 }
 
-// ИСТОРИЯ
 function historyWeekLabel(weekKey) {
   const match = String(weekKey || '').match(/^(\d{4})-(\d{2})-(\d{2})$/); if (!match) return weekKey;
   const monday = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
@@ -1603,7 +1602,7 @@ $('historyWeekSelect').addEventListener('change', renderSelectedHistoryWeek);
 async function markAnswered() {
   if (!currentUser) return; $('answeredButton').disabled = true;
   try {
-    const result = await apiCall('markAnswered', { id: currentUser.id });
+    const result = await apiCallPost('markAnswered', { id: currentUser.id });
     $('immunityStatus').textContent = result && result.already ? 'Вы уже отметили ответ за этот день!' : 'Ваш ответ сохранён!';
     $('immunityStatus').className = 'status-line success'; await loadHistory(); await loadPortal();
   } catch (err) {
@@ -1612,7 +1611,7 @@ async function markAnswered() {
   }
 }
 
-// МОДАЛЬНЫЕ ОКНА: ПЛАВНОЕ ОТКРЫТИЕ
+// МОДАЛЬНЫЕ ОКНА
 let portalModalNode = null; let portalModalPlaceholder = null;
 function openPortalModal(element, title, isWide = false) {
   if (!element) return;
@@ -1742,7 +1741,7 @@ async function adminLoadAnswers(){
       const del = document.createElement('button'); del.type = 'button'; del.className = 'btn-del'; del.textContent = 'Удалить';
       del.onclick = async () => {
         if (!confirm(`Удалить ответ «${item.title}» (${item.date})?`)) return; $('adminMessage').textContent = 'Удаляем…';
-        try { await apiCall('adminDeleteAnswer', { token: adminToken, row: item.row }); $('adminMessage').textContent = 'Ответ удалён!'; $('adminMessage').className = 'status-line success'; adminResetForm(); await adminLoadAnswers(); if (currentUser) await loadPortal(); }
+        try { await apiCallPost('adminDeleteAnswer', { token: adminToken, row: item.row }); $('adminMessage').textContent = 'Ответ удалён!'; $('adminMessage').className = 'status-line success'; adminResetForm(); await adminLoadAnswers(); if (currentUser) await loadPortal(); }
         catch(e) { $('adminMessage').textContent = e.message || 'Ошибка удаления.'; $('adminMessage').className = 'status-line error'; }
       };
       actions.append(edit, del); row.append(info, actions); box.appendChild(row);
@@ -1752,7 +1751,7 @@ async function adminLoadAnswers(){
 
 async function triggerManualArchive() {
   if (!adminToken) return; $('adminMessage').textContent = 'Переносим устаревшие ответы в архив…';
-  try { const res = await apiCall('adminArchive', { token: adminToken }); $('adminMessage').textContent = `Перенос выполнен! Перенесено: ${res.moved || 0}`; $('adminMessage').className = 'status-line success'; await adminLoadAnswers(); if (currentUser) await loadPortal(); }
+  try { const res = await apiCallPost('adminArchive', { token: adminToken }); $('adminMessage').textContent = `Перенос выполнен! Перенесено: ${res.moved || 0}`; $('adminMessage').className = 'status-line success'; await adminLoadAnswers(); if (currentUser) await loadPortal(); }
   catch(e) { $('adminMessage').textContent = e.message || 'Ошибка архивации.'; $('adminMessage').className = 'status-line error'; }
 }
 
@@ -1768,7 +1767,7 @@ async function adminLoadParticipants(){
 $('adminAnswerForm').addEventListener('submit', async e => {
   e.preventDefault(); if (!adminToken) return; $('adminSaveButton').disabled = true; $('adminMessage').textContent = 'Сохраняем…';
   try {
-    await apiCall('adminSaveAnswer', { token: adminToken, row: $('adminRow').value, date: $('adminDate').value, title: $('adminTitle').value, text: $('adminText').value });
+    await apiCallPost('adminSaveAnswer', { token: adminToken, row: $('adminRow').value, date: $('adminDate').value, title: $('adminTitle').value, text: $('adminText').value });
     $('adminMessage').textContent = 'Ответ успешно сохранён!'; $('adminMessage').className = 'status-line success'; adminResetForm(); await adminLoadAnswers(); if (currentUser) await loadPortal();
   } catch (err) { $('adminMessage').textContent = err.message || 'Ошибка сохранения.'; $('adminMessage').className = 'status-line error'; }
   finally { $('adminSaveButton').disabled = false; }
@@ -1777,13 +1776,13 @@ $('adminAnswerForm').addEventListener('submit', async e => {
 $('adminManualHistoryForm').addEventListener('submit', async e => {
   e.preventDefault(); if (!adminToken) return; const btn = $('manualHistorySave'); btn.disabled = true;
   try {
-    await apiCall('adminManualHistory', { token: adminToken, id: $('manualParticipant').value, weekStart: $('manualWeekStart').value, day: $('manualDay').value, result: $('manualResult').value });
+    await apiCallPost('adminManualHistory', { token: adminToken, id: $('manualParticipant').value, weekStart: $('manualWeekStart').value, day: $('manualDay').value, result: $('manualResult').value });
     $('adminMessage').textContent = 'Отметка участия сохранена!'; $('adminMessage').className = 'status-line success';
   } catch(err) { $('adminMessage').textContent = err.message || 'Ошибка добавления.'; $('adminMessage').className = 'status-line error'; }
   finally { btn.disabled = false; }
 });
 
-// WEZY: СЛУЖЕБНАЯ ПАНЕЛЬ И ДОБАВЛЕНИЕ ЗАДАНИЙ СРАЗУ ВСЕМ УЧАСТНИКАМ
+// WEZY: СЛУЖЕБНАЯ ПАНЕЛЬ
 function openWezyLogin() {
   if (wezyToken) { showWezyPanel(); return; }
   $('wezyLoginBox').hidden = false; openPortalModal($('wezyLoginBox'), 'Служебный вход Wezy'); $('wezyPassword').focus();
@@ -1821,13 +1820,13 @@ async function showWezyPanel() {
 
 async function openWezyEventTasks(event) {
   const participantId = $('wezyParticipantSelect').value;
-  const eventKey = event.key || event.row || event.title;
+  const eventKey = String(event.key || event.row || event.title);
 
   let currentTasks = [];
   if (participantId) {
     try {
       const data = await apiCall('getPersonalTasks', { id: participantId, eventKey });
-      currentTasks = data.tasks || [];
+      currentTasks = Array.isArray(data && data.tasks) ? data.tasks : [];
     } catch(e) {}
   }
 
@@ -1872,7 +1871,7 @@ async function openWezyEventTasks(event) {
       const del = document.createElement('button'); del.type = 'button'; del.className = 'button button-danger'; del.textContent = 'Удалить';
       del.onclick = async () => {
         currentTasks.splice(i, 1);
-        if (participantId) await apiCall('savePersonalTasks', { id: participantId, eventKey, tasks: JSON.stringify(currentTasks) });
+        if (participantId) await apiCallPost('savePersonalTasks', { id: participantId, eventKey, tasks: JSON.stringify(currentTasks) });
         openWezyEventTasks(event);
       };
       row.append(del); rows.appendChild(row);
@@ -1881,7 +1880,6 @@ async function openWezyEventTasks(event) {
 
   openPortalModal(box, 'Задания: ' + event.title);
 
-  // Добавить задание только одному выбранному участнику
   box.querySelector('#wezyAddSingleBtn').onclick = async () => {
     if (!participantId) return alert('Сначала выберите участника вверху панели Wezy!');
     const text = box.querySelector('#wezyNewTask').value.trim();
@@ -1889,11 +1887,10 @@ async function openWezyEventTasks(event) {
     const description = box.querySelector('#wezyNewDescription').value.trim();
     const links = box.querySelector('#wezyNewLinks').value.split(/\n|;/).map(x => x.trim()).filter(x => /^https?:\/\//i.test(x));
     currentTasks.push({ text, description, links, done: false });
-    await apiCall('savePersonalTasks', { id: participantId, eventKey, tasks: JSON.stringify(currentTasks) });
+    await apiCallPost('savePersonalTasks', { id: participantId, eventKey, tasks: JSON.stringify(currentTasks) });
     openWezyEventTasks(event);
   };
 
-  // Добавить новое задание СРАЗУ ВСЕМ участникам
   box.querySelector('#wezyAddAllBtn').onclick = async () => {
     const text = box.querySelector('#wezyNewTask').value.trim();
     if (!text) return alert('Введите название задания.');
@@ -1901,16 +1898,15 @@ async function openWezyEventTasks(event) {
     const links = box.querySelector('#wezyNewLinks').value.split(/\n|;/).map(x => x.trim()).filter(x => /^https?:\/\//i.test(x));
     currentTasks.push({ text, description, links, done: false });
     
-    await apiCall('saveTasksToAllParticipants', { token: wezyToken, eventKey, tasks: JSON.stringify(currentTasks) });
+    await apiCallPost('saveTasksToAllParticipants', { token: wezyToken, eventKey, tasks: JSON.stringify(currentTasks) });
     alert('Задание успешно добавлено ВСЕМ 15 участникам!');
     openWezyEventTasks(event);
   };
 
-  // Скопировать текущий список заданий ВСЕМ участникам
   box.querySelector('#wezyBroadcastAllBtn').onclick = async () => {
     if (!currentTasks.length) return alert('Список заданий пуст! Сначала добавьте хотя бы одно задание.');
     if (!confirm('Назначить весь этот список заданий ВСЕМ 15 участникам?')) return;
-    await apiCall('saveTasksToAllParticipants', { token: wezyToken, eventKey, tasks: JSON.stringify(currentTasks) });
+    await apiCallPost('saveTasksToAllParticipants', { token: wezyToken, eventKey, tasks: JSON.stringify(currentTasks) });
     alert('Список заданий успешно разослан всем участникам!');
   };
 }
