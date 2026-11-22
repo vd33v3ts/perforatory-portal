@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Портал перфораторов</title>
+  <title>Портал знаний</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwOTE2MzAiLz48cGF0aCBkPSJNMzIgNWw0LjIgOC41IDkuNCAxLjQtNi44IDYuNiAxLjYgOS40LTguNC00LjQtOC40IDQuNCAxLjYtOS40LTYuOC02LjYgOS40LTEuNHoiIGZpbGw9IiNmZmQzNmUiIHN0cm9rZT0iI2ZmZjBiNSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMyIDE3TDEzIDQwaDExTDExIDUzaDQyTDQwIDQwaDExeiIgZmlsbD0iIzEzODM0YyIgc3Ryb2tlPSIjNzJkNmEwIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yOCA1M2g4djdoLTh6IiBmaWxsPSIjOWI2MzNkIi8+PGNpcmNsZSBjeD0iMjMiIGN5PSIzOSIgcj0iMyIgZmlsbD0iI2ZmNTI2NyIvPjxjaXJjbGUgY3g9IjM5IiBjeT0iMzUiIHI9IjMiIGZpbGw9IiNmZmQzNmUiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjQ3IiByPSIzIiBmaWxsPSIjNmJiY2ZmIi8+PGNpcmNsZSBjeD0iNDUiIGN5PSI0OCIgcj0iMi41IiBmaWxsPSIjZmY1MjY3Ii8+PHBhdGggZD0iTTE5IDMxbC00LTNtMzAgNCA0LTQiIHN0cm9rZT0iI2U5ZjRmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTIiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjU0IiBjeT0iMTgiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI0OSIgcj0iMS4yIiBmaWxsPSIjZThmMmZmIi8+PC9zdmc+">
   <meta name="theme-color" content="#030718">
   <style>
@@ -55,7 +55,6 @@ body {
   background-attachment: fixed;
 }
 
-/* ОТКЛЮЧЕНИЕ АНИМАЦИИ */
 body.no-animations *,
 body.no-animations *::before,
 body.no-animations *::after {
@@ -183,7 +182,7 @@ p { line-height: 1.6; }
 .muted, .login-note { color: var(--muted); }
 .field-label { display: block; margin: 16px 0 6px; color: #dce5ff; font-size: 13px; }
 
-/* ТЕМНЫЙ СТИЛЬ ВСЕХ ПОЛЕЙ ВВОДА */
+/* ТЕМНЫЙ СТИЛЬ ВСЕХ ПОЛЕЙ */
 select, input[type="text"], input[type="password"], input[type="date"], input[type="url"], textarea {
   width: 100%; padding: 13px 14px; border-radius: 12px;
   border: 1px solid rgba(186, 174, 255, .32);
@@ -372,7 +371,7 @@ body.portal-modal-open { overflow: hidden; }
   margin-top: 14px;
 }
 
-/* ЧЕТЫРЕ ДНЯ ИММУНИТЕТА */
+/* ЧЕТЫРЕ ДНЯ ИММУНИТЕТА С УВЕЛИЧЕННЫМИ ИКОНКАМИ */
 .period-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 18px 0; }
 @media (max-width: 600px) { .period-grid { grid-template-columns: 1fr; } }
 .period-card {
@@ -410,7 +409,7 @@ body.portal-modal-open { overflow: hidden; }
 .history-title { margin-top: 24px; text-align: center; }
 .history-list { display: grid; gap: 8px; margin-top: 10px; }
 .history-controls { display: grid; gap: 8px; margin-top: 10px; }
-.history-controls[hidden] { display: none; }
+.history-controls[hidden] { display: none !important; }
 .history-week-select { width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 12px; color: var(--text); background: rgba(6, 12, 33, .85); border: 1px solid var(--panel-border); font: inherit; }
 .history-week-card { display: grid; gap: 8px; margin-top: 10px; padding: 14px; border: 1px solid var(--panel-border); border-radius: 13px; background: rgba(6, 12, 33, .45); }
 .history-week-heading { margin: 0 0 2px; font-size: 14px; color: var(--text); text-align: center; }
@@ -454,65 +453,6 @@ body.portal-modal-open { overflow: hidden; }
   color: #dce5ff;
 }
 
-/* ОБЪЕДИНЕННЫЕ ДАТЫ СТАТЕЙ */
-.date-group-card {
-  background: rgba(14, 22, 54, .85);
-  border: 1px solid rgba(186, 174, 255, .25);
-  border-radius: 18px;
-  padding: 16px 20px;
-  margin-bottom: 14px;
-  box-shadow: 0 6px 22px rgba(0,0,0,.35);
-}
-.date-group-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(186, 174, 255, .15);
-}
-.date-group-title {
-  color: var(--gold);
-  font-size: 17px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.articles-sub-buttons {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.article-sub-btn {
-  padding: 9px 14px;
-  border-radius: 11px;
-  border: 1px solid rgba(186, 174, 255, .25);
-  background: rgba(6, 12, 33, .7);
-  color: #e0e7fa;
-  font-weight: 700;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all .2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.article-sub-btn:hover {
-  background: #232a68;
-  border-color: var(--gold);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.article-top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-.article-reader { padding: clamp(16px, 3vw, 28px); border: 1px solid rgba(186, 174, 255, .22); border-radius: 18px; background: rgba(6, 12, 33, .65); }
-.article-reader h3 { margin: 0 0 14px; color: var(--gold); font-size: 24px; text-align: center; }
-.article-reader-text { color: #e5ecff; font-size: 16px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
-.article-reader-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--panel-border); }
-.article-edit-box { margin-top: 14px; padding: 18px; border: 1px solid var(--gold); border-radius: 16px; background: rgba(8, 14, 38, .85); }
-.article-edit-box h3 { text-align: center; color: var(--gold); margin-top: 0; }
-
 /* ИВЕНТЫ ПРОЕКТОВ */
 .event-top-controls {
   display: flex;
@@ -521,6 +461,11 @@ body.portal-modal-open { overflow: hidden; }
   flex-wrap: wrap;
   margin-bottom: 18px;
 }
+/* ВАЖНО: принудительное скрытие кнопок создания при hidden */
+.event-top-controls[hidden] {
+  display: none !important;
+}
+
 .projects-showcase-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -562,7 +507,7 @@ body.portal-modal-open { overflow: hidden; }
   margin: 0 0 16px;
 }
 
-/* ВНУТРИ ПРОЕКТА: СЛЕВА СПИСОК ЗАДАНИЙ, СПРАВА ПОДРОБНОЕ ОПИСАНИЕ */
+/* ВНУТРИ ПРОЕКТА */
 .project-detail-layout {
   display: grid;
   grid-template-columns: 340px 1fr;
@@ -630,14 +575,113 @@ body.portal-modal-open { overflow: hidden; }
   overflow-wrap: anywhere;
 }
 
+/* ИНТЕРАКТИВНЫЙ ЧЕКЛИСТ ДЛЯ НЕСКОЛЬКИХ УСЛОВИЙ */
+.subtasks-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.subtask-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(12, 19, 46, .6);
+  border: 1px solid rgba(186, 174, 255, .18);
+  cursor: pointer;
+  transition: all .18s ease;
+  user-select: none;
+}
+.subtask-item:hover {
+  background: rgba(22, 33, 76, .8);
+  border-color: var(--gold);
+}
+.subtask-item.checked {
+  background: rgba(18, 48, 42, .6);
+  border-color: rgba(155, 229, 189, .4);
+}
+.subtask-icon {
+  font-size: 20px;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+.subtask-text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #f5f6ff;
+  flex: 1;
+}
+.subtask-item.checked .subtask-text {
+  text-decoration: line-through;
+  color: #9be5bd;
+}
+
 .progress-bar-wrap { height: 11px; background: rgba(255,255,255,.08); border-radius: 6px; overflow: hidden; margin-top: 8px; }
 .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #6bbcff, #9be5bd); border-radius: 6px; transition: width .3s ease; }
 .progress-label { font-size: 13px; color: var(--muted); text-align: center; margin-top: 4px; }
 
-/* АРХИВ */
+/* СТАТЬИ И АРХИВ */
+.date-group-card {
+  background: rgba(14, 22, 54, .85);
+  border: 1px solid rgba(186, 174, 255, .25);
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.35);
+}
+.date-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(186, 174, 255, .15);
+}
+.date-group-title {
+  color: var(--gold);
+  font-size: 17px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.articles-sub-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.article-sub-btn {
+  padding: 9px 14px;
+  border-radius: 11px;
+  border: 1px solid rgba(186, 174, 255, .25);
+  background: rgba(6, 12, 33, .7);
+  color: #e0e7fa;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.article-sub-btn:hover {
+  background: #232a68;
+  border-color: var(--gold);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.article-top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.article-reader { padding: clamp(16px, 3vw, 28px); border: 1px solid rgba(186, 174, 255, .22); border-radius: 18px; background: rgba(6, 12, 33, .65); }
+.article-reader h3 { margin: 0 0 14px; color: var(--gold); font-size: 24px; text-align: center; }
+.article-reader-text { color: #e5ecff; font-size: 16px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.article-reader-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--panel-border); }
+.article-edit-box { margin-top: 14px; padding: 18px; border: 1px solid var(--gold); border-radius: 16px; background: rgba(8, 14, 38, .85); }
+.article-edit-box h3 { text-align: center; color: var(--gold); margin-top: 0; }
+
 .archive-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
 .archive-badge { display: inline-block; padding: 6px 14px; border-radius: 9px; background: rgba(245, 203, 120, .15); color: var(--gold); font-size: 13px; font-weight: 700; margin-bottom: 8px; }
-
 .archive-week-card {
   background: rgba(14, 22, 54, .85); border: 1px solid rgba(186, 174, 255, .28);
   border-radius: 18px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.35);
@@ -801,7 +845,6 @@ footer {
           <p>Ответ на сегодня и четыре дня иммунитета.</p>
         </div>
         
-        <!-- КРУПНЫЙ ОТВЕТ НА СЕГОДНЯ -->
         <div class="today-answer">
           <div class="answer-label">📅 ОТВЕТ НА СЕГОДНЯ</div>
           <div id="todayAnswer"><div class="empty-state compact">Ответ на сегодня ещё не опубликован.</div></div>
@@ -826,7 +869,7 @@ footer {
           <div id="historyList" class="history-list"><div class="loading">Загружаем историю…</div></div>
         </div>
 
-        <!-- УПРАВЛЕНИЕ ОТВЕТАМИ И АКТУАЛЬНЫМ ЗАЧИСЛЕНИЕМ НА ТЕКУЩУЮ НЕДЕЛЮ -->
+        <!-- УПРАВЛЕНИЕ ИММУНИТЕТОМ -->
         <div class="immunity-admin-card">
           <h3>📝 Добавить или изменить ответ иммунитета</h3>
           <form id="publicAnswerForm" class="admin-form">
@@ -937,7 +980,7 @@ footer {
         </div>
       </section>
 
-      <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ (ПРОЕКТЫ -> ЗАДАНИЯ -> ОПИСАНИЯ) -->
+      <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ -->
       <section class="panel content-section" id="eventsSection" hidden>
         <div class="section-heading">
           <span class="section-emoji" style="font-size:48px;">🏆</span>
@@ -945,7 +988,7 @@ footer {
           <p id="eventsSectionSubtitle">Выберите нужный проект, чтобы открыть его список заданий и подробности.</p>
         </div>
 
-        <!-- КНОПКИ СОЗДАНИЯ ПРОЕКТА (СКРЫВАЮТСЯ ВНУТРИ ПРОЕКТА С ЗАДАНИЯМИ) -->
+        <!-- КНОПКИ СОЗДАНИЯ (ПОЛНОСТЬЮ СКРЫВАЮТСЯ ВНУТРИ ПРОЕКТА) -->
         <div class="event-top-controls" id="projectCreationTopControls">
           <button class="button button-primary" type="button" onclick="openCreateProjectModal(false)">➕ Создать проект себе</button>
           <button class="button button-secondary" type="button" onclick="openCreateProjectModal(true)">📢 Создать проект ВСЕМ участникам</button>
@@ -962,35 +1005,39 @@ footer {
             <button class="button button-quiet" type="button" onclick="backToProjectsShowcase()">← К списку проектов</button>
             <div style="display:flex;align-items:center;gap:10px;">
               <span id="activeProjectBadge" class="publication-date" style="margin:0;"></span>
-              <button class="button button-danger" type="button" id="deleteWholeProjectBtn" style="padding:6px 14px;font-size:12px;margin:0;">🗑️ Удалить проект</button>
+              <button class="button button-danger" type="button" id="deleteWholeProjectBtn" style="padding:8px 14px;font-size:13px;margin:0;">🗑️ Удалить проект</button>
             </div>
           </div>
 
           <div class="project-detail-layout">
-            <!-- КОЛОНКА 1: ЗАДАНИЯ ПРОЕКТА -->
+            <!-- КОЛОНКА 1: ЗАДАНИЯ ПРОЕКТА (ДОБАВЛЯЮТСЯ ВРУЧНУЮ) -->
             <div class="tasks-sidebar">
               <strong style="color:var(--gold);font-size:15px;text-align:center;margin-bottom:4px;">📋 Задания проекта:</strong>
               <div id="projectTasksList" style="display:flex;flex-direction:column;gap:8px;"></div>
               
-              <div style="margin-top:auto;padding-top:10px;">
-                <input type="text" id="newTaskInput" placeholder="+ Название задания" style="padding:10px;font-size:13px;">
-                <button class="button button-primary" type="button" id="addNewTaskBtn" style="width:100%;margin:8px 0 0;padding:10px;font-size:13px;">Добавить задание</button>
+              <div style="margin-top:auto;padding-top:12px;border-top:1px solid rgba(186,174,255,.18);">
+                <button class="button button-primary" type="button" onclick="openNewTaskModal()" style="width:100%;margin:0;padding:12px;font-size:14px;">➕ Добавить задание вручную</button>
               </div>
             </div>
 
-            <!-- КОЛОНКА 2: ОПИСАНИЕ И УСЛОВИЯ ВЫБРАННОГО ЗАДАНИЯ -->
+            <!-- КОЛОНКА 2: ОПИСАНИЕ И УСЛОВИЯ ЗАДАНИЯ (1 УСЛОВИЕ ИЛИ ЧЕКЛИСТ) -->
             <div class="task-desc-panel">
-              <h3 id="selectedTaskTitle" style="color:var(--gold);margin:0;font-size:22px;text-align:center;">Задание</h3>
+              <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+                <h3 id="selectedTaskTitle" style="color:var(--gold);margin:0;font-size:22px;">Задание</h3>
+                <span id="selectedTaskFormatBadge" class="publication-date" style="margin:0;font-size:12px;padding:4px 10px;">1 условие</span>
+              </div>
               
               <div class="progress-bar-wrap"><div class="progress-bar-fill" id="eventProgressFill" style="width:0%"></div></div>
               <div class="progress-label" id="eventProgressLabel">0 из 0 выполнено</div>
 
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;">
-                <strong style="font-size:14px;color:var(--muted);">Условия и описание:</strong>
+              <div id="singleConditionToggleRow" style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;">
+                <strong style="font-size:14px;color:var(--muted);">Условие задания:</strong>
                 <button class="button button-quiet" type="button" id="toggleDoneBtn" style="padding:7px 14px;font-size:13px;margin:0;">Отметить выполненным</button>
               </div>
 
+              <!-- ТЕКСТ / ОПИСАНИЕ ИЛИ ЧЕКЛИСТ -->
               <div class="task-desc-box" id="selectedTaskDescription"></div>
+              <div id="selectedTaskChecklistBox" class="subtasks-checklist" hidden></div>
 
               <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid rgba(186,174,255,.2);">
                 <div id="selectedTaskLinks" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
@@ -1012,10 +1059,48 @@ footer {
     <div>ПЕРФОРАТОРЫ · 2026</div>
   </footer>
 
+  <!-- МОДАЛЬНОЕ ОКНО СОЗДАНИЯ / РЕДАКТИРОВАНИЯ ЗАДАНИЯ -->
+  <section class="panel" id="taskEditorBox" hidden style="max-width:560px;margin:0 auto;">
+    <h3 id="taskModalHeader" style="color:var(--gold);text-align:center;margin-top:0;">Добавить задание</h3>
+    <form id="taskEditorForm" class="admin-form">
+      <label class="admin-field">Название задания
+        <input type="text" id="mTaskName" placeholder="Например: Задание 1. Новогодний рисунок" required>
+      </label>
+
+      <label class="admin-field">Формат задания
+        <select id="mTaskFormatSelect">
+          <option value="single">1 задание — 1 условие (простая отметка «Выполнено»)</option>
+          <option value="multi">1 задание — несколько условий (интерактивный список условий с галочками)</option>
+        </select>
+      </label>
+
+      <div id="mTaskSingleField">
+        <label class="admin-field">Текст и условия задания
+          <textarea id="mTaskSingleDesc" placeholder="Подробное описание условий задания…" style="min-height:120px;"></textarea>
+        </label>
+      </div>
+
+      <div id="mTaskMultiField" hidden>
+        <label class="admin-field">Список условий (каждое условие с новой строки)
+          <textarea id="mTaskMultiItems" placeholder="Условие 1: Набрать 500 очков&#10;Условие 2: Сделать скриншот в игре&#10;Условие 3: Опубликовать в альбоме" style="min-height:130px;"></textarea>
+        </label>
+      </div>
+
+      <label class="admin-field">Ссылки (через новую строку, если есть)
+        <textarea id="mTaskLinks" placeholder="https://..." style="min-height:70px;"></textarea>
+      </label>
+
+      <div style="text-align:center;margin-top:14px;">
+        <button class="button button-primary" type="submit" id="taskModalSaveBtn">Сохранить задание</button>
+        <button class="button button-quiet" type="button" onclick="closePortalModal()">Отмена</button>
+      </div>
+    </form>
+  </section>
+
   <!-- ОКНО НАСТРОЕК -->
   <section class="panel" id="settingsBox" hidden style="max-width:540px;margin:0 auto;text-align:center;">
     <h3 style="color:var(--gold);margin-top:0;">⚙ Настройки интерфейса</h3>
-    <p class="muted">Вы можете отключить визуальные эффекты и анимации на портале для более плавной работы.</p>
+    <p class="muted">Вы можете отключить визуальные эффекты и анимации на портале для более быстрой работы.</p>
     <div style="margin:20px 0;padding:16px;background:rgba(6,12,33,.6);border:1px solid rgba(186,174,255,.2);border-radius:14px;text-align:left;display:flex;align-items:center;justify-content:space-between;">
       <div>
         <strong style="color:#fff;font-size:15px;display:block;">Отключить анимации</strong>
@@ -1028,7 +1113,7 @@ footer {
     </div>
   </section>
 
-  <!-- МОДАЛЬНОЕ ОКНО -->
+  <!-- ОБЩИЙ МОДАЛ ДИАЛОГА -->
   <div class="portal-modal" id="portalModal" hidden>
     <div class="portal-modal-dialog" id="portalModalDialog" role="dialog" aria-modal="true" aria-labelledby="portalModalTitle">
       <button class="portal-modal-close" type="button" aria-label="Закрыть" onclick="closePortalModal()">×</button>
@@ -1043,6 +1128,7 @@ let currentProject = null;
 let currentTasks = [];
 let selectedTaskIndex = 0;
 let latestPortalData = null;
+let editingTaskIndex = -1;
 
 const ALL_PARTICIPANTS = [
   "Оля Фоки", "Ксения Русакова", "Варя Белоус", "Дина Котенко",
@@ -1075,7 +1161,6 @@ function apiCall(action, params = {}) {
   });
 }
 
-// УНИВЕРСАЛЬНЫЙ МЕТОД: POST С МГНОВЕННЫМ JSONP-РЕЗЕРВОМ ПРИ CORS-ОШИБКАХ
 async function apiCallPost(action, payload = {}) {
   payload.action = action;
   try {
@@ -1085,13 +1170,9 @@ async function apiCallPost(action, payload = {}) {
       body: JSON.stringify(payload)
     });
     const result = await response.json();
-    if (result && result.success === true) {
-      return result.data;
-    }
-    // Если скрипт вернул { success: false, error: ... }
+    if (result && result.success === true) return result.data;
     throw new Error((result && result.error) || 'Ошибка обработки на сервере.');
   } catch(e) {
-    // Если fetch заблокирован CORS или бэкенд не поддерживает POST-действие, используем надёжный JSONP-fallback
     return await apiCall(action, payload);
   }
 }
@@ -1176,7 +1257,7 @@ function populateManualParticipants() {
   });
 }
 
-// ЛОКАЛЬНЫЕ ДАННЫЕ ПРОЕКТОВ (ДЛЯ МГНОВЕННОЙ И НАДЕЖНОЙ РАБОТЫ)
+// УПРАВЛЕНИЕ ЛОКАЛЬНЫМИ ПРОЕКТАМИ И УДАЛЕНИЕМ
 function getLocalProjects() {
   try {
     const saved = localStorage.getItem('perforator_custom_projects');
@@ -1188,6 +1269,21 @@ function saveLocalProjects(list) {
     localStorage.setItem('perforator_custom_projects', JSON.stringify(list));
   } catch(e) {}
 }
+function getDeletedProjectsList() {
+  try {
+    return JSON.parse(localStorage.getItem('perforator_deleted_projects') || '[]');
+  } catch(e) { return []; }
+}
+function isProjectDeleted(proj) {
+  const deleted = getDeletedProjectsList();
+  const key1 = String(proj.key || '').trim().toLowerCase();
+  const key2 = String(proj.row || '').trim().toLowerCase();
+  const key3 = String(proj.title || '').trim().toLowerCase();
+  return deleted.some(d => {
+    const dd = String(d || '').trim().toLowerCase();
+    return dd === key1 || (key2 && dd === key2) || (key3 && dd === key3);
+  });
+}
 
 async function loadPortal() {
   if (!currentUser) return;
@@ -1198,16 +1294,21 @@ async function loadPortal() {
     renderImmunity(data.immunity || {}, data.history || [], data.status || {});
     renderArticleArchive(data.articles || []);
     
-    // Объединяем проекты из таблицы с локально сохранёнными проектами
+    // Объединяем проекты и отсекаем навсегда удалённые
     const serverProjects = data.events || [];
     const localProjects = getLocalProjects();
-    const deletedProjects = JSON.parse(localStorage.getItem('perforator_deleted_projects') || '[]');
 
-    const combined = [...localProjects];
+    const combined = [];
+    localProjects.forEach(lp => {
+      if (!isProjectDeleted(lp)) combined.push(lp);
+    });
+
     serverProjects.forEach(sp => {
-      const spKey = String(sp.key || sp.row || sp.title);
-      if (!deletedProjects.includes(spKey) && !combined.some(cp => String(cp.key || cp.row || cp.title) === spKey)) {
-        combined.push(sp);
+      if (!isProjectDeleted(sp)) {
+        const spKey = String(sp.key || sp.row || sp.title);
+        if (!combined.some(cp => String(cp.key || cp.row || cp.title) === spKey)) {
+          combined.push(sp);
+        }
       }
     });
 
@@ -1228,7 +1329,7 @@ async function checkAutoArchiveImmunity() {
   } catch(e) {}
 }
 
-// РЕНДЕР ИММУНИТЕТА
+// ИММУНИТЕТ
 function renderImmunity(data, historyItems, status) {
   const today = $('todayAnswer');
   today.replaceChildren();
@@ -1236,14 +1337,11 @@ function renderImmunity(data, historyItems, status) {
   if (data.todayAnswer) {
     const card = document.createElement('article');
     card.className = 'today-answer-content';
-    
     const date = document.createElement('div');
     date.className = 'publication-date';
     date.textContent = '📅 ' + (data.todayAnswer.date || '');
-    
     const title = document.createElement('h3');
     title.textContent = data.todayAnswer.title || 'Ответ на сегодня';
-    
     const text = document.createElement('div');
     text.className = 'answer-large-text';
     appendTextWithLinks(text, data.todayAnswer.text || '');
@@ -1282,10 +1380,8 @@ function renderImmunity(data, historyItems, status) {
 
     const header = document.createElement('div');
     header.className = 'period-card-header';
-    
     const titleWrap = document.createElement('div');
     titleWrap.className = 'period-card-title-wrap';
-    
     const bigIcon = document.createElement('span');
     bigIcon.className = 'period-card-big-icon';
     bigIcon.textContent = dayIcons[idx % dayIcons.length];
@@ -1382,17 +1478,17 @@ $('publicManualHistoryForm').addEventListener('submit', async e => {
 });
 
 // ==============================================================
-// ИВЕНТЫ ПРОЕКТОВ (ИСПРАВЛЕНО СОЗДАНИЕ ВСЕМ, УДАЛЕНИЕ И СКРЫТИЕ КНОПОК)
+// ИВЕНТЫ ПРОЕКТОВ (СТРОГО: ПРОЕКТ -> ЗАДАНИЯ -> ОПИСАНИЯ)
 // ==============================================================
 let projectsCache = [];
 
 function renderProjects(items) {
-  projectsCache = items || [];
+  projectsCache = (items || []).filter(p => !isProjectDeleted(p));
   const grid = $('projectsGrid');
   grid.replaceChildren();
 
   if (!projectsCache.length) {
-    grid.innerHTML = '<div class="empty-state compact" style="grid-column:1/-1;">Пока нет проектов. Создайте проект выше!</div>';
+    grid.innerHTML = '<div class="empty-state compact" style="grid-column:1/-1;">Пока нет проектов. Нажмите кнопку выше, чтобы создать проект!</div>';
     return;
   }
 
@@ -1419,8 +1515,11 @@ async function openProjectWorkspace(project) {
   currentProject = project;
   selectedTaskIndex = 0;
 
-  // СКРЫВАЕМ КНОПКИ СОЗДАНИЯ ПРОЕКТА СЕБЕ И ВСЕМ
-  $('projectCreationTopControls').hidden = true;
+  // 1. НАДЁЖНО СКРЫВАЕМ КНОПКИ СОЗДАНИЯ ПРОЕКТА
+  const topControls = $('projectCreationTopControls');
+  topControls.hidden = true;
+  topControls.style.display = 'none';
+
   $('projectsShowcaseView').hidden = true;
   $('singleProjectWorkspace').hidden = false;
   $('activeProjectBadge').textContent = '🏆 ' + (project.title || 'Проект');
@@ -1434,65 +1533,86 @@ async function openProjectWorkspace(project) {
     currentTasks = localT ? JSON.parse(localT) : [];
   }
 
-  if (!currentTasks.length && (project.text || project.title)) {
-    currentTasks.push({
-      text: 'Задание 1: ' + (project.title || 'Основное'),
-      description: project.text || '',
-      links: extractLinks(project.text || '', project.links || project.link || ''),
-      done: false
-    });
-  }
-
+  // ЗАДАНИЯ ТОЛЬКО ВРУЧНУЮ: никаких одинаковых авто-заданий!
   renderTasksList();
 
-  // Удаление всего проекта целиком
+  // УДАЛЕНИЕ ПРОЕКТА НАВСЕГДА
   $('deleteWholeProjectBtn').onclick = async () => {
-    if (!confirm(`Вы действительно хотите удалить проект «${project.title}»?`)) return;
+    if (!confirm(`Вы действительно хотите навсегда удалить проект «${project.title}»?`)) return;
     
-    // 1. Помечаем проект удалённым локально
-    const pKey = String(project.key || project.row || project.title);
-    const deletedProjects = JSON.parse(localStorage.getItem('perforator_deleted_projects') || '[]');
-    deletedProjects.push(pKey);
-    localStorage.setItem('perforator_deleted_projects', JSON.stringify(deletedProjects));
+    const pKey = String(project.key || '').trim();
+    const pRow = String(project.row || '').trim();
+    const pTitle = String(project.title || '').trim();
 
-    let localList = getLocalProjects().filter(p => String(p.key || p.row || p.title) !== pKey);
+    // Заносим в черный список удаления
+    const deletedList = getDeletedProjectsList();
+    if (pKey) deletedList.push(pKey);
+    if (pRow) deletedList.push(pRow);
+    if (pTitle) deletedList.push(pTitle);
+    localStorage.setItem('perforator_deleted_projects', JSON.stringify(deletedList));
+
+    // Стираем из локальных проектов
+    let localList = getLocalProjects().filter(p => !isProjectDeleted(p));
     saveLocalProjects(localList);
 
-    // 2. Отправляем запрос на сервер
+    // Стираем сохранённые задания этого проекта
+    localStorage.removeItem('tasks_' + eventKey);
+
+    // Отправляем удаление на сервер (без вылета)
     try {
       await apiCallPost('deleteEvent', {
         id: currentUser.id,
         key: pKey,
-        row: project.row || ''
+        row: pRow,
+        title: pTitle
       });
     } catch(e) {}
 
     backToProjectsShowcase();
     await loadPortal();
+    alert('Проект удалён!');
   };
 }
 
 function backToProjectsShowcase() {
   $('singleProjectWorkspace').hidden = true;
   $('projectsShowcaseView').hidden = false;
+  
   // ПОКАЗЫВАЕМ ОБРАТНО КНОПКИ СОЗДАНИЯ ПРОЕКТА
-  $('projectCreationTopControls').hidden = false;
+  const topControls = $('projectCreationTopControls');
+  topControls.hidden = false;
+  topControls.style.display = 'flex';
 }
 
 function renderTasksList() {
   const container = $('projectTasksList');
   container.replaceChildren();
 
-  const total = currentTasks.length;
-  const done = currentTasks.filter(t => t.done).length;
-  const pct = total ? Math.round(done / total * 100) : 0;
+  // Расчёт общего прогресса
+  let totalPoints = 0;
+  let donePoints = 0;
+
+  currentTasks.forEach(t => {
+    if (t.format === 'multi' && Array.isArray(t.subtasks) && t.subtasks.length) {
+      totalPoints += t.subtasks.length;
+      donePoints += t.subtasks.filter(s => s.done).length;
+    } else {
+      totalPoints += 1;
+      if (t.done) donePoints += 1;
+    }
+  });
+
+  const pct = totalPoints ? Math.round(donePoints / totalPoints * 100) : 0;
   $('eventProgressFill').style.width = pct + '%';
-  $('eventProgressLabel').textContent = `${done} из ${total} выполнено (${pct}%)`;
+  $('eventProgressLabel').textContent = `${donePoints} из ${totalPoints} выполнено (${pct}%)`;
 
   if (!currentTasks.length) {
-    container.innerHTML = '<span class="muted" style="text-align:center;font-size:13px;">Заданий нет. Добавьте ниже!</span>';
+    container.innerHTML = '<span class="muted" style="text-align:center;font-size:13px;padding:12px;">Заданий пока нет.<br>Нажмите кнопку ниже, чтобы добавить задание!</span>';
     $('selectedTaskTitle').textContent = 'Нет заданий';
-    $('selectedTaskDescription').textContent = 'Добавьте первое задание слева.';
+    $('selectedTaskFormatBadge').textContent = '—';
+    $('singleConditionToggleRow').hidden = true;
+    $('selectedTaskDescription').textContent = 'Нажмите «➕ Добавить задание вручную» внизу слева!';
+    $('selectedTaskChecklistBox').hidden = true;
     $('selectedTaskLinks').replaceChildren();
     return;
   }
@@ -1500,11 +1620,15 @@ function renderTasksList() {
   if (selectedTaskIndex >= currentTasks.length) selectedTaskIndex = 0;
 
   currentTasks.forEach((task, idx) => {
+    const isFullyDone = (task.format === 'multi' && Array.isArray(task.subtasks) && task.subtasks.length)
+      ? task.subtasks.every(s => s.done)
+      : task.done;
+
     const pill = document.createElement('div');
     pill.className = 'task-pill' + (idx === selectedTaskIndex ? ' active' : '');
     pill.innerHTML = `
       <div style="display:flex;align-items:center;gap:8px;min-width:0;">
-        <span>${task.done ? '✅' : '⭕'}</span>
+        <span>${isFullyDone ? '✅' : '⭕'}</span>
         <strong style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(task.text || ('Задание ' + (idx + 1)))}</strong>
       </div>
       <span style="color:var(--gold);font-size:14px;">›</span>
@@ -1516,22 +1640,59 @@ function renderTasksList() {
     container.appendChild(pill);
   });
 
+  // Отображаем выбранное задание
   const cur = currentTasks[selectedTaskIndex];
   $('selectedTaskTitle').textContent = cur.text || ('Задание ' + (selectedTaskIndex + 1));
   
-  const descEl = $('selectedTaskDescription');
-  descEl.replaceChildren();
-  appendTextWithLinks(descEl, cur.description || 'Описание задания пока не добавлено.');
+  if (cur.format === 'multi') {
+    $('selectedTaskFormatBadge').textContent = 'Несколько условий';
+    $('singleConditionToggleRow').hidden = true;
+    $('selectedTaskDescription').hidden = true;
+    
+    const checklistBox = $('selectedTaskChecklistBox');
+    checklistBox.hidden = false;
+    checklistBox.replaceChildren();
 
-  const toggleBtn = $('toggleDoneBtn');
-  toggleBtn.textContent = cur.done ? '✅ Выполнено' : '⭕ Отметить выполненным';
-  toggleBtn.className = 'button ' + (cur.done ? 'button-primary' : 'button-secondary');
-  toggleBtn.onclick = async () => {
-    cur.done = !cur.done;
-    await saveProjectTasks();
-    renderTasksList();
-  };
+    const subtasks = Array.isArray(cur.subtasks) ? cur.subtasks : [];
+    if (!subtasks.length) {
+      checklistBox.innerHTML = '<span class="muted">Список условий пуст. Нажмите «Редактировать»!</span>';
+    } else {
+      subtasks.forEach((st, sIdx) => {
+        const item = document.createElement('div');
+        item.className = 'subtask-item' + (st.done ? ' checked' : '');
+        item.innerHTML = `
+          <span class="subtask-icon">${st.done ? '✅' : '⭕'}</span>
+          <span class="subtask-text">${escapeHtml(st.text || '')}</span>
+        `;
+        item.onclick = async () => {
+          st.done = !st.done;
+          await saveProjectTasks();
+          renderTasksList();
+        };
+        checklistBox.appendChild(item);
+      });
+    }
+  } else {
+    $('selectedTaskFormatBadge').textContent = '1 условие';
+    $('singleConditionToggleRow').hidden = false;
+    $('selectedTaskChecklistBox').hidden = true;
+    
+    const descEl = $('selectedTaskDescription');
+    descEl.hidden = false;
+    descEl.replaceChildren();
+    appendTextWithLinks(descEl, cur.description || 'Описание задания отсутствует.');
 
+    const toggleBtn = $('toggleDoneBtn');
+    toggleBtn.textContent = cur.done ? '✅ Выполнено' : '⭕ Отметить выполненным';
+    toggleBtn.className = 'button ' + (cur.done ? 'button-primary' : 'button-secondary');
+    toggleBtn.onclick = async () => {
+      cur.done = !cur.done;
+      await saveProjectTasks();
+      renderTasksList();
+    };
+  }
+
+  // Ссылки
   const linksBox = $('selectedTaskLinks');
   linksBox.replaceChildren();
   const allLinks = Array.from(new Set([
@@ -1568,56 +1729,104 @@ function renderTasksList() {
   };
 }
 
-// Добавление задания
-$('addNewTaskBtn').onclick = async () => {
-  const input = $('newTaskInput');
-  const val = input.value.trim();
-  if (!val) return;
-  currentTasks.push({
-    text: val,
-    description: 'Условия и подробности пока не добавлены.',
-    links: [],
-    done: false
-  });
-  input.value = '';
-  selectedTaskIndex = currentTasks.length - 1;
-  await saveProjectTasks();
-  renderTasksList();
-};
+// МОДАЛКА: СОЗДАНИЕ И РЕДАКТИРОВАНИЕ ЗАДАНИЯ (1 УСЛОВИЕ ИЛИ ЧЕКЛИСТ)
+function openNewTaskModal() {
+  editingTaskIndex = -1;
+  $('taskModalHeader').textContent = '➕ Добавить задание вручную';
+  $('mTaskName').value = '';
+  $('mTaskFormatSelect').value = 'single';
+  $('mTaskSingleDesc').value = '';
+  $('mTaskMultiItems').value = '';
+  $('mTaskLinks').value = '';
+  $('mTaskSingleField').hidden = false;
+  $('mTaskMultiField').hidden = true;
+  $('taskModalSaveBtn').textContent = 'Добавить задание';
+  
+  $('taskEditorBox').hidden = false;
+  openPortalModal($('taskEditorBox'), 'Новое задание');
+}
 
 function openEditTaskModal(task, index) {
-  const box = document.createElement('div');
-  box.innerHTML = `
-    <h3 style="color:var(--gold);text-align:center;margin-top:0;">✏️ Редактировать задание</h3>
-    <form id="editTaskModalForm" class="admin-form">
-      <label class="admin-field">Название задания
-        <input type="text" id="mTaskTitle" value="${escapeHtml(task.text || '')}" required>
-      </label>
-      <label class="admin-field">Описание и условия
-        <textarea id="mTaskDesc" style="min-height:140px;">${escapeHtml(task.description || '')}</textarea>
-      </label>
-      <label class="admin-field">Ссылки (через новую строку)
-        <textarea id="mTaskLinks">${escapeHtml((task.links || []).join('\n'))}</textarea>
-      </label>
-      <div style="text-align:center;margin-top:14px;">
-        <button class="button button-primary" type="submit">Сохранить задание</button>
-        <button class="button button-quiet" type="button" onclick="closePortalModal()">Отмена</button>
-      </div>
-    </form>
-  `;
+  editingTaskIndex = index;
+  $('taskModalHeader').textContent = '✏️ Редактировать задание';
+  $('mTaskName').value = task.text || '';
+  
+  const isMulti = task.format === 'multi';
+  $('mTaskFormatSelect').value = isMulti ? 'multi' : 'single';
+  $('mTaskSingleDesc').value = task.description || '';
+  
+  if (isMulti && Array.isArray(task.subtasks)) {
+    $('mTaskMultiItems').value = task.subtasks.map(s => s.text).join('\n');
+  } else {
+    $('mTaskMultiItems').value = '';
+  }
 
-  openPortalModal(box, 'Редактирование задания');
+  $('mTaskLinks').value = (task.links || []).join('\n');
+  $('mTaskSingleField').hidden = isMulti;
+  $('mTaskMultiField').hidden = !isMulti;
+  $('taskModalSaveBtn').textContent = 'Сохранить изменения';
 
-  box.querySelector('#editTaskModalForm').onsubmit = async e => {
-    e.preventDefault();
-    task.text = box.querySelector('#mTaskTitle').value.trim();
-    task.description = box.querySelector('#mTaskDesc').value.trim();
-    task.links = box.querySelector('#mTaskLinks').value.split(/\n|;/).map(x => x.trim()).filter(x => /^https?:\/\//i.test(x));
-    closePortalModal();
-    await saveProjectTasks();
-    renderTasksList();
-  };
+  $('taskEditorBox').hidden = false;
+  openPortalModal($('taskEditorBox'), 'Редактирование задания');
 }
+
+$('mTaskFormatSelect').addEventListener('change', e => {
+  const isMulti = e.target.value === 'multi';
+  $('mTaskSingleField').hidden = isMulti;
+  $('mTaskMultiField').hidden = !isMulti;
+});
+
+$('taskEditorForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const name = $('mTaskName').value.trim();
+  if (!name) return alert('Введите название задания!');
+
+  const format = $('mTaskFormatSelect').value;
+  const links = $('mTaskLinks').value.split(/\n|;/).map(x => x.trim()).filter(x => /^https?:\/\//i.test(x));
+
+  let newTaskData;
+  if (format === 'multi') {
+    const lines = $('mTaskMultiItems').value.split('\n').map(x => x.trim()).filter(Boolean);
+    const subtasks = lines.map(line => ({ text: line, done: false }));
+    newTaskData = {
+      text: name,
+      format: 'multi',
+      subtasks,
+      description: lines.join('\n'),
+      links,
+      done: false
+    };
+  } else {
+    newTaskData = {
+      text: name,
+      format: 'single',
+      description: $('mTaskSingleDesc').value.trim() || 'Условия задания пока не добавлены.',
+      subtasks: [],
+      links,
+      done: false
+    };
+  }
+
+  if (editingTaskIndex >= 0 && currentTasks[editingTaskIndex]) {
+    // Сохраняем состояние выполненности, если условия совпадают
+    if (format === 'multi' && currentTasks[editingTaskIndex].subtasks) {
+      const prevMap = new Map(currentTasks[editingTaskIndex].subtasks.map(s => [s.text, s.done]));
+      newTaskData.subtasks.forEach(st => {
+        if (prevMap.has(st.text)) st.done = prevMap.get(st.text);
+      });
+    } else {
+      newTaskData.done = currentTasks[editingTaskIndex].done;
+    }
+    currentTasks[editingTaskIndex] = newTaskData;
+  } else {
+    currentTasks.push(newTaskData);
+    selectedTaskIndex = currentTasks.length - 1;
+  }
+
+  closePortalModal();
+  await saveProjectTasks();
+  renderTasksList();
+});
 
 async function saveProjectTasks() {
   if (!currentUser || !currentProject) return;
@@ -1632,7 +1841,7 @@ async function saveProjectTasks() {
   } catch(e) { console.error(e); }
 }
 
-// СОЗДАНИЕ ПРОЕКТА (БЕЗ ОШИБОК API С ГАРАНТИРОВАННЫМ СОХРАНЕНИЕМ)
+// СОЗДАНИЕ ПРОЕКТА
 function openCreateProjectModal(isForEveryone) {
   const box = document.createElement('div');
   box.innerHTML = `
@@ -1644,7 +1853,7 @@ function openCreateProjectModal(isForEveryone) {
     </p>
     <form id="createProjectForm" class="admin-form">
       <label class="admin-field">Название проекта
-        <input type="text" id="pNewTitle" placeholder="Например: Новогодний проект" required>
+        <input type="text" id="pNewTitle" placeholder="Например: ЗГОТ | Коллекционные карточки" required>
       </label>
       <label class="admin-field">Даты проведения
         <input type="text" id="pNewDate" placeholder="Например: 24.11 - 30.11" required>
@@ -1678,12 +1887,10 @@ function openCreateProjectModal(isForEveryone) {
       isForEveryone: isForEveryone
     };
 
-    // 1. Сохраняем локально мгновенно
     const localList = getLocalProjects();
     localList.unshift(newProjectObj);
     saveLocalProjects(localList);
 
-    // 2. Отправляем в Google Таблицу через надёжный резерв
     try {
       await apiCallPost('createCustomEvent', {
         id: currentUser.id,
@@ -1694,8 +1901,6 @@ function openCreateProjectModal(isForEveryone) {
         links: newProjectObj.links
       });
     } catch(err) {
-      // Даже если скрипт в Google Apps Script ответил неизвестным методом,
-      // проект уже надёжно сохранён в интерфейсе портала!
       console.warn('Сервер вернул:', err.message);
     }
 
