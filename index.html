@@ -203,8 +203,15 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
 }
 .timer-chip-icon { font-size: 52px; line-height: 1; margin-bottom: 10px; filter: drop-shadow(0 0 14px rgba(245, 203, 120, .6)); }
 .timer-chip strong { color: #fff; font-size: 17px; font-weight: 800; letter-spacing: .03em; margin-bottom: 6px; text-transform: uppercase; }
-.timer-chip-val {
-  color: #ffe6a3; font-size: clamp(26px, 3.6vw, 36px); font-weight: 900;
+.timer-chip-state {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 7px 14px; margin: 7px 0 3px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.07);
+  color: #f4f6ff; font-size: 13px; font-weight: 900; letter-spacing: .08em;
+}
+.timer-chip-state.is-open { color: #a7f3c5; border-color: rgba(110,231,160,.42); background: rgba(34,197,94,.12); }
+.timer-chip-state.is-closed { color: #ffd6a0; border-color: rgba(245,203,120,.35); background: rgba(245,158,11,.1); }
+.timer-chip-val { color: #ffe6a3; font-size: clamp(26px, 3.6vw, 36px); font-weight: 900;
   letter-spacing: .06em; font-variant-numeric: tabular-nums; margin-top: 4px;
   text-shadow: 0 0 12px rgba(255, 230, 163, .9), 0 0 24px rgba(245, 203, 120, .8), 0 0 45px rgba(245, 203, 120, .5);
 }
@@ -291,8 +298,10 @@ body.portal-modal-open { overflow: hidden; }
 .answer-large-text {
   font-size: clamp(17px, 2.3vw, 21px); line-height: 1.85; color: #f7f9ff;
   white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; text-align: left;
-  background: rgba(4, 9, 28, .6); border: 1px solid rgba(186, 174, 255, .25);
-  padding: 20px 24px; border-radius: 16px; margin-top: 14px;
+  background: linear-gradient(145deg, rgba(4, 9, 28, .82), rgba(13, 20, 51, .88));
+  border: 1px solid rgba(245, 203, 120, .42); border-left: 4px solid var(--gold);
+  padding: 22px 26px; border-radius: 16px; margin-top: 16px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 8px 24px rgba(0,0,0,.28);
 }
 
 .period-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 18px 0; }
@@ -661,11 +670,13 @@ footer {
           <div class="timer-chip">
             <span class="timer-chip-icon">🛡️</span>
             <strong>Иммунитет</strong>
+            <span class="timer-chip-state" id="immunityTimerState">Проверяем статус…</span>
             <span class="timer-chip-val" id="immunityCountdown">Загружаем…</span>
           </div>
           <div class="timer-chip">
             <span class="timer-chip-icon">🥠</span>
             <strong>Печенье судьбы</strong>
+            <span class="timer-chip-state" id="cookieTimerState">Проверяем статус…</span>
             <span class="timer-chip-val" id="cookieCountdown">Загружаем…</span>
           </div>
         </div>
@@ -1363,10 +1374,7 @@ $('publicManualHistoryForm').addEventListener('submit', async e => {
   const userName = $('manualUserSelect').value;
   if (!userName) return;
   
-  const now = new Date();
-  const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
-  const currentWeekIso = monday.toISOString().slice(0, 10);
+  const currentWeekIso = (latestPortalData && latestPortalData.status && latestPortalData.status.week) || ''; 
 
   const btn = $('manualHistorySaveBtn');
   btn.disabled = true;
@@ -2630,10 +2638,7 @@ function openImmunityStatusModal() {
     const resBox = box.querySelector('#immunityModalResult');
     resBox.innerHTML = '<div class="loading">Загружаем список…</div>';
 
-    const now = new Date();
-    const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
-    const currentWeekIso = monday.toISOString().slice(0, 10);
+    const currentWeekIso = (latestPortalData && latestPortalData.status && latestPortalData.status.week) || '';
 
     try {
       const data = await apiCall('participantImmunityStatus', { id: currentUser.id, week: currentWeekIso, day });
@@ -2664,27 +2669,40 @@ function openImmunityStatusModal() {
 
 let portalClockTimer = null;
 function updatePortalTimers(status) {
+  let refreshedForExpiry = false;
   const tick = () => {
     const now = Date.now();
+    const immunityExpired = (status.immunityOpen && status.immunityEndsAt && status.immunityEndsAt <= now) || (!status.immunityOpen && status.immunityStartsAt && status.immunityStartsAt <= now);
+    const cookieExpired = (status.cookieOpen && status.cookieEndsAt && status.cookieEndsAt <= now) || (!status.cookieOpen && status.cookieStartsAt && status.cookieStartsAt <= now);
+    if (!refreshedForExpiry && (immunityExpired || cookieExpired)) {
+      refreshedForExpiry = true;
+      loadPortal();
+    }
     const immEl = $('immunityCountdown');
+    const immState = $('immunityTimerState');
     if (immEl) {
       if (status.immunityOpen && status.immunityEndsAt > now) {
-        immEl.textContent = formatRemaining(status.immunityEndsAt - now);
-      } else if (status.immunityStartsAt > now) {
-        immEl.textContent = formatRemaining(status.immunityStartsAt - now);
+        immEl.textContent = 'До закрытия: ' + formatRemaining(status.immunityEndsAt - now);
+        if (immState) { immState.textContent = '🟢 ИММУНИТЕТ ОТКРЫТ'; immState.className = 'timer-chip-state is-open'; }
       } else {
-        immEl.textContent = 'Неактивен';
+        immEl.textContent = status.immunityStartsAt > now
+          ? 'До открытия: ' + formatRemaining(status.immunityStartsAt - now)
+          : 'Ожидайте следующего периода';
+        if (immState) { immState.textContent = '🔒 ИММУНИТЕТ ЗАКРЫТ'; immState.className = 'timer-chip-state is-closed'; }
       }
     }
 
     const cookEl = $('cookieCountdown');
+    const cookState = $('cookieTimerState');
     if (cookEl) {
       if (status.cookieOpen && status.cookieEndsAt > now) {
-        cookEl.textContent = formatRemaining(status.cookieEndsAt - now);
-      } else if (status.cookieStartsAt > now) {
-        cookEl.textContent = formatRemaining(status.cookieStartsAt - now);
+        cookEl.textContent = 'До закрытия: ' + formatRemaining(status.cookieEndsAt - now);
+        if (cookState) { cookState.textContent = '🟢 ПЕЧЕНЬЕ ОТКРЫТО'; cookState.className = 'timer-chip-state is-open'; }
       } else {
-        cookEl.textContent = 'По средам';
+        cookEl.textContent = status.cookieStartsAt > now
+          ? 'До открытия: ' + formatRemaining(status.cookieStartsAt - now)
+          : 'Следующая среда';
+        if (cookState) { cookState.textContent = '🔒 ПЕЧЕНЬЕ ЗАКРЫТО'; cookState.className = 'timer-chip-state is-closed'; }
       }
     }
   };
