@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Портал знаний</title>
+  <title>ПЕРФОРАТОРЫ</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwOTE2MzAiLz48cGF0aCBkPSJNMzIgNWw0LjIgOC41IDkuNCAxLjQtNi44IDYuNiAxLjYgOS40LTguNC00LjQtOC40IDQuNCAxLjYtOS40LTYuOC02LjYgOS40LTEuNHoiIGZpbGw9IiNmZmQzNmUiIHN0cm9rZT0iI2ZmZjBiNSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMyIDE3TDEzIDQwaDExTDExIDUzaDQyTDQwIDQwaDExeiIgZmlsbD0iIzEzODM0YyIgc3Ryb2tlPSIjNzJkNmEwIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yOCA1M2g4djdoLTh6IiBmaWxsPSIjOWI2MzNkIi8+PGNpcmNsZSBjeD0iMjMiIGN5PSIzOSIgcj0iMyIgZmlsbD0iI2ZmNTI2NyIvPjxjaXJjbGUgY3g9IjM5IiBjeT0iMzUiIHI9IjMiIGZpbGw9IiNmZmQzNmUiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjQ3IiByPSIzIiBmaWxsPSIjNmJiY2ZmIi8+PGNpcmNsZSBjeD0iNDUiIGN5PSI0OCIgcj0iMi41IiBmaWxsPSIjZmY1MjY3Ii8+PHBhdGggZD0iTTE5IDMxbC00LTNtMzAgNCA0LTQiIHN0cm9rZT0iI2U5ZjRmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTIiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjU0IiBjeT0iMTgiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI0OSIgcj0iMS4yIiBmaWxsPSIjZThmMmZmIi8+PC9zdmc+">
   <meta name="theme-color" content="#030718">
   <style>
@@ -20,6 +20,7 @@
   --red: #ff94aa;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: auto; }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -240,19 +241,16 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
 }
 
 .portal-modal {
-  position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
+  position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center;
   padding: 14px; background: rgba(1, 4, 16, .88); backdrop-filter: blur(12px);
-  opacity: 0; pointer-events: none; transition: opacity .3s cubic-bezier(.16, 1, .3, 1);
+  opacity: 0; pointer-events: none; transition: opacity .25s ease;
 }
-.portal-modal.is-open { opacity: 1; pointer-events: auto; }
-.portal-modal[hidden] { display: none !important; }
+.portal-modal.is-open { display: flex !important; opacity: 1; pointer-events: auto; }
 .portal-modal-dialog {
   position: relative; width: min(1180px, 98%); max-height: 94vh; overflow-y: auto;
   padding: clamp(20px, 3.5vw, 36px); border: 1px solid rgba(186, 174, 255, .32); border-radius: 24px;
   background: #090f2b; box-shadow: 0 28px 100px rgba(0,0,0,.82); overscroll-behavior: contain;
-  transform: scale(0.9) translateY(16px); transition: transform .32s cubic-bezier(.16, 1, .3, 1);
 }
-.portal-modal.is-open .portal-modal-dialog { transform: scale(1) translateY(0); }
 .portal-modal-dialog.dialog-wide { width: min(1340px, 99%); }
 .portal-modal-close {
   position: absolute; top: 18px; right: 18px; z-index: 10; width: 42px; height: 42px;
@@ -264,30 +262,6 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
 .portal-modal-title { margin: 0 0 16px 0; text-align: center; color: var(--gold); font-size: clamp(24px, 3.5vw, 32px); width: 100%; }
 .portal-modal-content { clear: both; width: 100%; }
 body.portal-modal-open { overflow: hidden; }
-
-/* КАСТОМНЫЙ ДИАЛОГ ПОДТВЕРЖДЕНИЯ (БЕЗ BROWSER CONFIRM/ALERT) */
-.custom-confirm-backdrop {
-  position: fixed; inset: 0; z-index: 20000; display: flex; align-items: center; justify-content: center;
-  background: rgba(1, 3, 12, 0.85); backdrop-filter: blur(10px); padding: 16px;
-  animation: fadeIn .2s ease-out;
-}
-.custom-confirm-backdrop[hidden] {
-  display: none !important;
-}
-.custom-confirm-card {
-  width: min(480px, 96%); border-radius: 20px;
-  background: linear-gradient(145deg, #0e173e, #070c24);
-  border: 1px solid rgba(245, 203, 120, 0.45);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.85), 0 0 30px rgba(245, 203, 120, 0.2);
-  padding: 24px 26px; text-align: center;
-  transform: scale(0.96); animation: scaleUp .2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes scaleUp { to { transform: scale(1); } }
-.custom-confirm-icon { font-size: 46px; margin-bottom: 10px; line-height: 1; }
-.custom-confirm-title { font-size: 20px; font-weight: 800; color: var(--gold); margin: 0 0 10px; }
-.custom-confirm-text { font-size: 15px; color: #dce5ff; line-height: 1.6; margin: 0 0 20px; white-space: pre-wrap; word-break: break-word; }
-.custom-confirm-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 
 .section-heading {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -348,7 +322,6 @@ body.portal-modal-open { overflow: hidden; }
 .history-title { margin-top: 24px; text-align: center; }
 .history-list { display: grid; gap: 8px; margin-top: 10px; }
 .history-controls { display: grid; gap: 8px; margin-top: 10px; }
-.history-controls[hidden] { display: none !important; }
 .history-week-select { width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 12px; color: var(--text); background: rgba(6, 12, 33, .85); border: 1px solid var(--panel-border); font: inherit; }
 .history-week-card { display: grid; gap: 8px; margin-top: 10px; padding: 14px; border: 1px solid var(--panel-border); border-radius: 13px; background: rgba(6, 12, 33, .45); }
 .history-week-heading { margin: 0 0 2px; font-size: 14px; color: var(--text); text-align: center; }
@@ -378,7 +351,6 @@ body.portal-modal-open { overflow: hidden; }
 .event-top-controls {
   display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px;
 }
-.event-top-controls[hidden] { display: none !important; }
 
 .projects-showcase-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px;
@@ -407,7 +379,7 @@ body.portal-modal-open { overflow: hidden; }
   padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(186, 174, 255, .15);
 }
 
-/* БОЛЬШАЯ ПАНЕЛЬ ОБЩЕГО ОПИСАНИЯ ВНУТРИ ПРОЕКТА */
+/* БОЛЬШАЯ ПАНЕЛЬ ОБЩЕГО ОПИСАНИЯ */
 .project-overview-panel {
   background: linear-gradient(145deg, rgba(15, 24, 62, 0.95), rgba(7, 12, 36, 0.98));
   border: 2px solid rgba(245, 203, 120, 0.45);
@@ -420,9 +392,7 @@ body.portal-modal-open { overflow: hidden; }
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
   margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid rgba(186, 174, 255, 0.2);
 }
-.project-overview-title-wrap {
-  display: flex; align-items: center; gap: 10px;
-}
+.project-overview-title-wrap { display: flex; align-items: center; gap: 10px; }
 .project-overview-title {
   margin: 0; color: var(--gold); font-size: 22px; font-weight: 800;
   text-shadow: 0 0 12px rgba(245, 203, 120, 0.4);
@@ -432,12 +402,8 @@ body.portal-modal-open { overflow: hidden; }
   white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere;
   background: rgba(3, 7, 22, 0.65); padding: 18px 22px; border-radius: 14px;
   border: 1px solid rgba(186, 174, 255, 0.2);
-  max-height: 42vh;          /* примерно половина экрана */
-  overflow-y: auto;          /* скролл внутри блока, если текст длинный */
-  overscroll-behavior: contain;
 }
 
-/* ВНУТРИ ПРОЕКТА - КОЛОНКИ */
 .project-detail-layout {
   display: grid; grid-template-columns: 340px 1fr; gap: 18px; min-height: 540px;
 }
@@ -461,7 +427,7 @@ body.portal-modal-open { overflow: hidden; }
   background: rgba(8, 14, 38, .88); border: 1px solid rgba(186, 174, 255, .22); min-height: 520px;
 }
 
-/* КАРТОЧКА УСЛОВИЯ С ОПИСАНИЕМ И НУМЕРОВАННЫМИ ССЫЛКАМИ */
+/* КАРТОЧКА УСЛОВИЯ С НУМЕРОВАННЫМИ ССЫЛКАМИ 1. 2. 3. */
 .conditions-container { display: flex; flex-direction: column; gap: 16px; margin-top: 10px; }
 .condition-card {
   display: flex; flex-direction: column; gap: 12px; padding: 20px 22px; border-radius: 18px;
@@ -502,7 +468,6 @@ body.portal-modal-open { overflow: hidden; }
   padding: 14px 18px; border-radius: 12px; word-break: break-word; overflow-wrap: anywhere;
 }
 
-/* НУМЕРОВАННЫЙ СПИСОК ССЫЛОК К УСЛОВИЮ: 1. ссылка 2. ссылка ... */
 .condition-links-box {
   margin-top: 4px; padding: 12px 16px; border-radius: 14px;
   background: rgba(4, 8, 22, .7); border: 1px solid rgba(130, 170, 255, .28);
@@ -870,7 +835,6 @@ footer {
 
       <!-- РАЗДЕЛ: ИВЕНТЫ ПРОЕКТОВ -->
       <section class="panel content-section" id="eventsSection" hidden>
-        <!-- ВЕРХНИЙ БЛОК: СКРЫВАЕТСЯ ПРИ ВХОДЕ В ПРОЕКТ, ЧТОБЫ НЕ СЪЕЗЖАЛА ВЁРСТКА -->
         <div id="eventsOverviewHeader">
           <div class="section-heading">
             <span class="section-emoji" style="font-size:48px;">🏆</span>
@@ -884,24 +848,23 @@ footer {
           </div>
         </div>
 
-        <!-- 1. СПИСОК ПРОЕКТОВ -->
+        <!-- СПИСОК ПРОЕКТОВ -->
         <div id="projectsShowcaseView">
           <div id="projectsGrid" class="projects-showcase-grid"></div>
         </div>
 
-        <!-- 2. ВНУТРИ ПРОЕКТА: ПОЛНОЕ ОПИСАНИЕ + ССЫЛКИ + ЗАДАНИЯ -->
+        <!-- ВНУТРИ ПРОЕКТА -->
         <div id="singleProjectWorkspace" hidden>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
             <button class="button button-quiet" type="button" onclick="backToProjectsShowcase()">← К списку проектов</button>
             <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <!-- Кнопка «Раздать задания ВСЕМ» появляется ТОЛЬКО В ОБЩИХ ПРОЕКТАХ -->
               <button class="button button-success" type="button" id="shareAllTasksBtn" style="padding:8px 14px;font-size:13px;margin:0;display:none;" onclick="shareTasksWithEveryone()">📢 Раздать задания ВСЕМ</button>
               <span id="activeProjectBadge" class="publication-date" style="margin:0;"></span>
               <button class="button button-danger" type="button" id="deleteWholeProjectBtn" style="padding:8px 14px;font-size:13px;margin:0;">🗑️ Удалить проект</button>
             </div>
           </div>
 
-          <!-- БОЛЬШОЙ БЛОК ОБЩЕГО ОПИСАНИЯ ПРОЕКТА (НИКАКИХ ОБРЕЗОК) -->
+          <!-- БОЛЬШОЙ БЛОК ОБЩЕГО ОПИСАНИЯ ПРОЕКТА -->
           <div class="project-overview-panel" id="projectOverviewPanel">
             <div class="project-overview-header">
               <div class="project-overview-title-wrap">
@@ -1024,24 +987,11 @@ footer {
   </section>
 
   <!-- ОБЩИЙ МОДАЛ ДИАЛОГА -->
-  <div class="portal-modal" id="portalModal" hidden>
+  <div class="portal-modal" id="portalModal">
     <div class="portal-modal-dialog" id="portalModalDialog" role="dialog" aria-modal="true" aria-labelledby="portalModalTitle">
       <button class="portal-modal-close" type="button" aria-label="Закрыть" onclick="closePortalModal()">×</button>
       <h2 class="portal-modal-title" id="portalModalTitle">Информация</h2>
       <div class="portal-modal-content" id="portalModalContent"></div>
-    </div>
-  </div>
-
-  <!-- ВСТРОЕННЫЙ ДИАЛОГ ПОДТВЕРЖДЕНИЯ (БЕЗ BROWSER CONFIRM/ALERT) -->
-  <div id="customConfirmModal" class="custom-confirm-backdrop" hidden>
-    <div class="custom-confirm-card">
-      <div class="custom-confirm-icon" id="confirmModalIcon">❓</div>
-      <h3 class="custom-confirm-title" id="confirmModalTitle">Подтверждение</h3>
-      <div class="custom-confirm-text" id="confirmModalText">Вы уверены?</div>
-      <div class="custom-confirm-btns">
-        <button class="button button-primary" type="button" id="confirmModalYesBtn">Да</button>
-        <button class="button button-quiet" type="button" id="confirmModalNoBtn">Отмена</button>
-      </div>
     </div>
   </div>
 
@@ -1064,51 +1014,6 @@ const ALL_PARTICIPANTS = [
 const $ = id => document.getElementById(id);
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwbGOE4Q2Z6kL4BoAj0r6e0OmCSsgijdU26bWVfYpQC0kV5rkdd4XSPZ_qRSGFqX_kC/exec';
 let apiCounter = 0;
-
-// СОБСТВЕННЫЙ ДИАЛОГ ПОДТВЕРЖДЕНИЯ
-function showCustomConfirm(options) {
-  return new Promise((resolve) => {
-    const modal = $('customConfirmModal');
-    $('confirmModalIcon').textContent = options.icon || '❓';
-    $('confirmModalTitle').textContent = options.title || 'Подтверждение';
-    $('confirmModalText').textContent = options.text || 'Вы уверены?';
-    
-    const yesBtn = $('confirmModalYesBtn');
-    const noBtn = $('confirmModalNoBtn');
-
-    yesBtn.textContent = options.yesText || 'Да';
-    yesBtn.className = 'button ' + (options.danger ? 'button-danger' : 'button-primary');
-    noBtn.textContent = options.noText || 'Отмена';
-
-    if (options.hideNo) {
-      noBtn.hidden = true;
-    } else {
-      noBtn.hidden = false;
-    }
-
-    modal.hidden = false;
-
-    const cleanup = (val) => {
-      modal.hidden = true;
-      yesBtn.onclick = null;
-      noBtn.onclick = null;
-      resolve(val);
-    };
-
-    yesBtn.onclick = () => cleanup(true);
-    noBtn.onclick = () => cleanup(false);
-  });
-}
-
-function showCustomAlert(text, title = 'Уведомление', icon = 'ℹ️') {
-  return showCustomConfirm({
-    icon: icon,
-    title: title,
-    text: text,
-    yesText: 'Понятно',
-    hideNo: true
-  });
-}
 
 function apiCall(action, params = {}) {
   return new Promise((resolve, reject) => {
@@ -1443,7 +1348,7 @@ $('publicAnswerForm').addEventListener('submit', async e => {
 $('publicManualHistoryForm').addEventListener('submit', async e => {
   e.preventDefault(); if (!currentUser) return;
   const userName = $('manualUserSelect').value;
-  if (!userName) return showCustomAlert('Выберите участника из списка!', 'Внимание', '⚠️');
+  if (!userName) return;
   
   const now = new Date();
   const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -1613,16 +1518,7 @@ async function openProjectWorkspace(project) {
 
   renderTasksList();
 
-  $('deleteWholeProjectBtn').onclick = async () => {
-    const ok = await showCustomConfirm({
-      icon: '🗑️',
-      title: 'Удаление проекта',
-      text: `Вы действительно хотите удалить проект «${project.title}»? Это действие нельзя отменить.`,
-      yesText: 'Да, удалить',
-      danger: true
-    });
-    if (!ok) return;
-    
+  $('deleteWholeProjectBtn').onclick = () => {
     const pKey = String(project.key || '').trim();
     const pRow = String(project.row || '').trim();
 
@@ -1648,25 +1544,13 @@ async function openProjectWorkspace(project) {
 
     backToProjectsShowcase();
     renderFromLocalCache();
-    showCustomAlert('Проект успешно удален.', 'Удалено', '✅');
   };
 }
 
 async function shareTasksWithEveryone() {
-  if (!currentProject || !currentTasks.length) {
-    return showCustomAlert('В этом проекте ещё нет заданий для раздачи. Сначала добавьте задание!', 'Внимание', '⚠️');
-  }
-
-  const ok = await showCustomConfirm({
-    icon: '📢',
-    title: 'Раздать задания всем',
-    text: `Опубликовать эти ${currentTasks.length} заданий для ВСЕХ участников команды?\nЗадания появятся в этом общем проекте у всех 15 человек.`,
-    yesText: 'Да, раздать'
-  });
-  if (!ok) return;
+  if (!currentProject || !currentTasks.length) return;
 
   const eventKey = String(currentProject.key || ('event_' + (currentProject.row || currentProject.title || Date.now())));
-  
   const sharedKey = 'perforator_shared_tasks_' + eventKey;
   localStorage.setItem(sharedKey, JSON.stringify(currentTasks));
 
@@ -1685,7 +1569,10 @@ async function shareTasksWithEveryone() {
     tasks: JSON.stringify(currentTasks)
   }).catch(() => {});
 
-  showCustomAlert('Задания успешно переданы всем 15 участникам!', 'Готово', '✅');
+  const shareBtn = $('shareAllTasksBtn');
+  const origText = shareBtn.textContent;
+  shareBtn.textContent = '✅ Задания розданы!';
+  setTimeout(() => { shareBtn.textContent = origText; }, 2500);
 }
 
 function backToProjectsShowcase() {
@@ -1833,15 +1720,6 @@ function renderTasksList() {
   };
 
   $('deleteTaskBtn').onclick = async () => {
-    const ok = await showCustomConfirm({
-      icon: '🗑️',
-      title: 'Удаление задания',
-      text: 'Вы действительно хотите удалить это задание со всеми его условиями?',
-      yesText: 'Да, удалить',
-      danger: true
-    });
-    if (!ok) return;
-
     currentTasks.splice(selectedTaskIndex, 1);
     selectedTaskIndex = Math.max(0, selectedTaskIndex - 1);
     await saveProjectTasks();
@@ -1979,7 +1857,7 @@ function openEditTaskModal(task, index) {
 $('taskEditorForm').addEventListener('submit', async e => {
   e.preventDefault();
   const name = $('mTaskName').value.trim();
-  if (!name) return showCustomAlert('Введите название задания!', 'Внимание', '⚠️');
+  if (!name) return;
 
   const builderItems = $('conditionsBuilderList').querySelectorAll('.condition-builder-item');
   builderItems.forEach((card, idx) => {
@@ -2091,7 +1969,7 @@ function openCreateProjectModal(isForEveryone) {
     } else {
       const privateList = getPrivateProjects(currentUser.name);
       privateList.unshift(newProjectObj);
-      savePrivateProjects(privateList);
+      savePrivateProjects(currentUser.name, privateList);
     }
 
     apiCallPost('createCustomEvent', {
@@ -2107,7 +1985,6 @@ function openCreateProjectModal(isForEveryone) {
 
     closePortalModal();
     renderFromLocalCache();
-    showCustomAlert('Проект успешно создан!', 'Успех', '✅');
   };
 }
 
@@ -2299,23 +2176,12 @@ $('publicArticleForm').addEventListener('submit', async e => {
 });
 
 async function deleteArticle(article) {
-  const ok = await showCustomConfirm({
-    icon: '🗑️',
-    title: 'Удаление статьи',
-    text: `Удалить статью «${article.title}»?`,
-    yesText: 'Да, удалить',
-    danger: true
-  });
-  if (!ok) return;
-
   try {
     const res = await apiCallPost('deleteArticle', { userId: currentUser.id, id: currentUser.id, row: article.row });
     cachedArticles = res.articles || [];
     renderArticleArchive(cachedArticles);
     backToArticleList();
-  } catch (e) {
-    showCustomAlert(e.message || 'Ошибка удаления.', 'Ошибка', '⚠️');
-  }
+  } catch (e) {}
 }
 
 function appendTextWithLinks(container, value) {
@@ -2614,7 +2480,7 @@ async function openCookieModal() {
 
   if (!status.cookieOpen) {
     btn.classList.add('is-disabled');
-    btn.onclick = e => { e.preventDefault(); showCustomAlert('Печенье судьбы доступно только по средам с 00:00 до 23:59!', 'Печенье закрыто', '🥠'); };
+    btn.onclick = e => { e.preventDefault(); };
     markBtn.disabled = true;
   }
 
@@ -2642,8 +2508,8 @@ async function openCookieModal() {
     if (!currentUser) return;
     try {
       await apiCallPost('markCookie', { id: currentUser.id });
-      showCustomAlert('Ваша отметка сохранена!', 'Отметка принята', '✨');
-    } catch (e) { showCustomAlert(e.message || 'Ошибка', 'Ошибка', '⚠️'); }
+      markBtn.textContent = '✅ Отметка сохранена!';
+    } catch (e) {}
   };
 
   box.querySelector('#openCookieMarksModalBtn').onclick = () => {
@@ -2889,11 +2755,8 @@ function openPortalModal(element, title, isWide = false) {
   element.hidden = false;
   $('portalModalTitle').textContent = title || 'Информация';
 
-  modal.hidden = false;
-  requestAnimationFrame(() => {
-    modal.classList.add('is-open');
-    document.body.classList.add('portal-modal-open');
-  });
+  modal.classList.add('is-open');
+  document.body.classList.add('portal-modal-open');
 }
 
 function closePortalModal() {
@@ -2914,8 +2777,7 @@ function closePortalModal() {
     }
     $('portalModalContent').replaceChildren();
     portalModalNode = null;
-    modal.hidden = true;
-  }, 250);
+  }, 200);
 }
 
 document.querySelectorAll('.section-card[data-target]').forEach(button => {
