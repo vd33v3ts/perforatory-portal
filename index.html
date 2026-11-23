@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ПЕРФОРАТОРЫ</title>
+  <title>Портал знаний</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwOTE2MzAiLz48cGF0aCBkPSJNMzIgNWw0LjIgOC41IDkuNCAxLjQtNi44IDYuNiAxLjYgOS40LTguNC00LjQtOC40IDQuNCAxLjYtOS40LTYuOC02LjYgOS40LTEuNHoiIGZpbGw9IiNmZmQzNmUiIHN0cm9rZT0iI2ZmZjBiNSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMyIDE3TDEzIDQwaDExTDExIDUzaDQyTDQwIDQwaDExeiIgZmlsbD0iIzEzODM0YyIgc3Ryb2tlPSIjNzJkNmEwIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yOCA1M2g4djdoLTh6IiBmaWxsPSIjOWI2MzNkIi8+PGNpcmNsZSBjeD0iMjMiIGN5PSIzOSIgcj0iMyIgZmlsbD0iI2ZmNTI2NyIvPjxjaXJjbGUgY3g9IjM5IiBjeT0iMzUiIHI9IjMiIGZpbGw9IiNmZmQzNmUiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjQ3IiByPSIzIiBmaWxsPSIjNmJiY2ZmIi8+PGNpcmNsZSBjeD0iNDUiIGN5PSI0OCIgcj0iMi41IiBmaWxsPSIjZmY1MjY3Ii8+PHBhdGggZD0iTTE5IDMxbC00LTNtMzAgNCA0LTQiIHN0cm9rZT0iI2U5ZjRmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTIiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjU0IiBjeT0iMTgiIHI9IjEuNSIgZmlsbD0iI2U4ZjJmZiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI0OSIgcj0iMS4yIiBmaWxsPSIjZThmMmZmIi8+PC9zdmc+">
   <meta name="theme-color" content="#030718">
   <style>
@@ -413,7 +413,16 @@ body.portal-modal-open { overflow: hidden; }
 .tasks-sidebar {
   display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 18px;
   background: rgba(6, 11, 31, .8); border: 1px solid rgba(186, 174, 255, .2);
-  max-height: 640px; overflow-y: auto;
+  height: 640px; min-height: 420px; overflow: hidden;
+}
+.project-tasks-list { display:flex; flex-direction:column; gap:8px; flex:1 1 auto; min-height:0; overflow-y:auto; padding-right:3px; }
+.tasks-sidebar-footer { flex:0 0 auto; position:sticky; bottom:0; z-index:2; padding-top:12px; border-top:1px solid rgba(186,174,255,.18); background:rgba(6,11,31,.98); }
+.tasks-sidebar-footer .button { width:100%; margin:0; padding:12px; font-size:14px; }
+.project-overview-controls { display:flex; justify-content:flex-start; margin-top:4px; }
+.project-overview-controls .button { margin:0; }
+@media (max-width: 860px) {
+  .tasks-sidebar { height:auto; max-height:520px; }
+  .project-tasks-list { min-height:120px; max-height:340px; }
 }
 .task-pill {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
@@ -876,10 +885,15 @@ footer {
                 <span id="projectOverviewDates" class="publication-date" style="margin:0;font-size:12px;padding:4px 10px;"></span>
               </div>
             </div>
-            <div id="projectOverviewBody" class="project-overview-body"></div>
-            <div id="projectOverviewLinksWrap" class="condition-links-box" style="margin-top:14px;" hidden>
-              <div class="condition-links-title">🔗 Ссылки проекта:</div>
-              <ol id="projectOverviewLinksList" class="condition-links-list"></ol>
+            <div class="project-overview-controls">
+              <button class="button button-secondary" type="button" id="projectOverviewToggle" aria-expanded="false" onclick="toggleProjectDescription()">Показать описание</button>
+            </div>
+            <div id="projectOverviewDetails" hidden>
+              <div id="projectOverviewBody" class="project-overview-body"></div>
+              <div id="projectOverviewLinksWrap" class="condition-links-box" style="margin-top:14px;" hidden>
+                <div class="condition-links-title">🔗 Ссылки проекта:</div>
+                <ol id="projectOverviewLinksList" class="condition-links-list"></ol>
+              </div>
             </div>
           </div>
 
@@ -887,14 +901,13 @@ footer {
             <!-- КОЛОНКА 1: ЗАДАНИЯ ПРОЕКТА -->
             <div class="tasks-sidebar">
               <strong style="color:var(--gold);font-size:15px;text-align:center;margin-bottom:4px;">📋 Задания проекта:</strong>
-              <div id="projectTasksList" style="display:flex;flex-direction:column;gap:8px;"></div>
-              
-              <div style="margin-top:auto;padding-top:12px;border-top:1px solid rgba(186,174,255,.18);display:flex;flex-direction:column;gap:8px;">
-                <button class="button button-primary" type="button" onclick="openNewTaskModal()" style="width:100%;margin:0;padding:12px;font-size:14px;">➕ Добавить задание</button>
+              <div id="projectTasksList" class="project-tasks-list"></div>
+              <div class="tasks-sidebar-footer">
+                <button class="button button-primary" type="button" onclick="openNewTaskModal()">➕ Добавить задание</button>
               </div>
             </div>
 
-            <!-- КОЛОНКА 2: ОПИСАНИЕ И УСЛОВИЯ ЗАДАНИЯ -->
+                        <!-- КОЛОНКА 2: ОПИСАНИЕ И УСЛОВИЯ ЗАДАНИЯ -->
             <div class="task-desc-panel">
               <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
                 <h3 id="selectedTaskTitle" style="color:var(--gold);margin:0;font-size:22px;">Задание</h3>
@@ -1437,6 +1450,16 @@ function normalizeTaskConditions(task) {
   }];
 }
 
+function toggleProjectDescription(forceOpen) {
+  const details = $('projectOverviewDetails');
+  const button = $('projectOverviewToggle');
+  if (!details || !button) return;
+  const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : details.hidden;
+  details.hidden = !shouldOpen;
+  button.textContent = shouldOpen ? 'Скрыть описание' : 'Показать описание';
+  button.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+}
+
 async function openProjectWorkspace(project) {
   currentProject = project;
   selectedTaskIndex = 0;
@@ -1458,6 +1481,7 @@ async function openProjectWorkspace(project) {
     }
   }
 
+  toggleProjectDescription(false);
   $('projectOverviewHeading').textContent = '📋 Описание проекта: ' + (project.title || '');
   $('projectOverviewTypeBadge').textContent = isPersonal ? '🔒 Личный проект' : '📢 Общий проект';
   $('projectOverviewDates').textContent = project.date ? ('📅 Сроки: ' + project.date) : '📅 Даты не указаны';
@@ -1490,32 +1514,41 @@ async function openProjectWorkspace(project) {
   const personalKey = 'tasks_' + (currentUser ? currentUser.name : 'user') + '_' + eventKey;
   let loadedTasks = null;
 
-  const savedLocal = localStorage.getItem(personalKey);
-  if (savedLocal) {
-    try { loadedTasks = JSON.parse(savedLocal); } catch(e) {}
+  // Загружаем персональные задания из Google Sheets; localStorage — резерв.
+  try {
+    const serverData = await apiCallPost('getPersonalTasks', { id: currentUser.id, eventKey });
+    if (serverData && Array.isArray(serverData.tasks) && serverData.tasks.length) {
+      loadedTasks = serverData.tasks;
+    }
+  } catch (e) {
+    console.warn('Не удалось загрузить задания с сервера:', e);
   }
 
   if (!loadedTasks || !loadedTasks.length) {
-    const sharedTasksKey = 'perforator_shared_tasks_' + eventKey;
-    const sharedData = localStorage.getItem(sharedTasksKey);
+    const savedLocal = localStorage.getItem(personalKey);
+    if (savedLocal) {
+      try {
+        const parsed = JSON.parse(savedLocal);
+        if (Array.isArray(parsed) && parsed.length) loadedTasks = parsed;
+      } catch(e) {}
+    }
+  }
+
+  if (!loadedTasks || !loadedTasks.length) {
+    const sharedData = localStorage.getItem('perforator_shared_tasks_' + eventKey);
     if (sharedData) {
       try {
         const parsed = JSON.parse(sharedData);
         if (Array.isArray(parsed) && parsed.length) {
-          loadedTasks = JSON.parse(JSON.stringify(parsed)).map(t => {
-            const conds = normalizeTaskConditions(t).map(c => ({ ...c, done: false }));
-            return { ...t, conditions: conds, done: false };
-          });
+          loadedTasks = parsed.map(t => ({
+            ...t, conditions: normalizeTaskConditions(t).map(c => ({ ...c, done: false })), done: false
+          }));
         }
       } catch(e) {}
     }
   }
 
-  currentTasks = (loadedTasks || []).map(t => {
-    t.conditions = normalizeTaskConditions(t);
-    return t;
-  });
-
+  currentTasks = (loadedTasks || []).map(t => ({ ...t, conditions: normalizeTaskConditions(t) }));
   renderTasksList();
 
   $('deleteWholeProjectBtn').onclick = () => {
@@ -1548,31 +1581,44 @@ async function openProjectWorkspace(project) {
 }
 
 async function shareTasksWithEveryone() {
-  if (!currentProject || !currentTasks.length) return;
-
-  const eventKey = String(currentProject.key || ('event_' + (currentProject.row || currentProject.title || Date.now())));
-  const sharedKey = 'perforator_shared_tasks_' + eventKey;
-  localStorage.setItem(sharedKey, JSON.stringify(currentTasks));
-
-  ALL_PARTICIPANTS.forEach(name => {
-    const pKey = 'tasks_' + name + '_' + eventKey;
-    const cloned = JSON.parse(JSON.stringify(currentTasks)).map(t => {
-      const conds = normalizeTaskConditions(t).map(c => ({ ...c, done: false }));
-      return { ...t, conditions: conds, done: false };
-    });
-    localStorage.setItem(pKey, JSON.stringify(cloned));
-  });
-
-  apiCallPost('shareProjectTasks', {
-    id: currentUser.id,
-    eventKey: eventKey,
-    tasks: JSON.stringify(currentTasks)
-  }).catch(() => {});
-
+  if (!currentProject || !currentTasks.length || !currentUser) {
+    alert('Сначала добавьте хотя бы одно задание.');
+    return;
+  }
+  const eventKey = String(currentProject.key || ('event_' + (currentProject.row || currentProject.title || '')));
+  if (!eventKey || eventKey === 'event_') {
+    alert('Не удалось определить ключ проекта. Обновите страницу и попробуйте снова.');
+    return;
+  }
   const shareBtn = $('shareAllTasksBtn');
-  const origText = shareBtn.textContent;
-  shareBtn.textContent = '✅ Задания розданы!';
-  setTimeout(() => { shareBtn.textContent = origText; }, 2500);
+  const originalText = shareBtn ? shareBtn.textContent : '📢 Раздать задания ВСЕМ';
+  if (shareBtn) { shareBtn.disabled = true; shareBtn.textContent = 'Раздаём задания…'; }
+
+  const tasksForEveryone = currentTasks.map(task => ({
+    text: String(task.text || ''), done: false,
+    conditions: normalizeTaskConditions(task).map(cond => ({
+      id: cond.id, title: cond.title, desc: cond.desc, links: cond.links || [], done: false
+    }))
+  }));
+
+  try {
+    // Сохраняем на сервер и ждём подтверждения: localStorage не виден другим участникам.
+    const result = await apiCallPost('shareProjectTasks', {
+      id: currentUser.id, eventKey, tasks: JSON.stringify(tasksForEveryone)
+    });
+    if (!result || result.saved !== true) throw new Error('Сервер не подтвердил сохранение заданий.');
+
+    localStorage.setItem('perforator_shared_tasks_' + eventKey, JSON.stringify(tasksForEveryone));
+    localStorage.setItem('tasks_' + currentUser.name + '_' + eventKey, JSON.stringify(currentTasks));
+    if (shareBtn) {
+      shareBtn.textContent = '✅ Раздано участникам: ' + (result.count || 'всем');
+      setTimeout(() => { shareBtn.textContent = originalText; shareBtn.disabled = false; }, 3000);
+    }
+  } catch (error) {
+    console.error('Ошибка раздачи заданий:', error);
+    alert('Не удалось раздать задания. ' + (error.message || 'Проверьте подключение и попробуйте ещё раз.'));
+    if (shareBtn) { shareBtn.textContent = originalText; shareBtn.disabled = false; }
+  }
 }
 
 function backToProjectsShowcase() {
@@ -1906,14 +1952,14 @@ async function saveProjectTasks() {
   const eventKey = String(currentProject.key || ('event_' + (currentProject.row || currentProject.title || Date.now())));
   const personalKey = 'tasks_' + currentUser.name + '_' + eventKey;
   
+  localStorage.setItem(personalKey, JSON.stringify(currentTasks));
   try {
-    localStorage.setItem(personalKey, JSON.stringify(currentTasks));
-    apiCallPost('savePersonalTasks', {
-      id: currentUser.id,
-      eventKey,
-      tasks: JSON.stringify(currentTasks)
-    }).catch(() => {});
-  } catch(e) {}
+    await apiCallPost('savePersonalTasks', {
+      id: currentUser.id, eventKey, tasks: JSON.stringify(currentTasks)
+    });
+  } catch (e) {
+    console.error('Не удалось сохранить личные задания:', e);
+  }
 }
 
 function openCreateProjectModal(isForEveryone) {
