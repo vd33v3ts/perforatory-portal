@@ -432,6 +432,9 @@ body.portal-modal-open { overflow: hidden; }
   white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere;
   background: rgba(3, 7, 22, 0.65); padding: 18px 22px; border-radius: 14px;
   border: 1px solid rgba(186, 174, 255, 0.2);
+  max-height: 42vh;          /* примерно половина экрана */
+  overflow-y: auto;          /* скролл внутри блока, если текст длинный */
+  overscroll-behavior: contain;
 }
 
 /* ВНУТРИ ПРОЕКТА - КОЛОНКИ */
