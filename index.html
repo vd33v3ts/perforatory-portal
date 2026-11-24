@@ -249,6 +249,10 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
 
 
 .section-card.guide-nav-card { grid-column: span 2; }
+
+.quiz-archive-nav-card { grid-column: span 2; }
+.quiz-editor-options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+@media(max-width:700px){.quiz-editor-options{grid-template-columns:1fr;}}
 .history-row .result { white-space: normal; text-align: right; max-width: 58%; line-height: 1.45; }
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center;
@@ -692,7 +696,7 @@ footer {
           <small>Ответ дня и четыре дня</small>
         </button>
         <button class="section-card card-art" data-target="articlesSection">
-          <span class="section-emoji">📚</span>
+          <span class="section-emoji">📰</span>
           <strong>Аватарская удача</strong>
           <small>Статьи текущего сезона</small>
         </button>
@@ -2735,14 +2739,15 @@ function renderStatus(status) {
 
 const DEFAULT_SITE_GUIDE = `КАК ПОЛЬЗОВАТЬСЯ ПОРТАЛОМ
 
-1. Войдите в личный кабинет, выбрав своё имя из списка.
-2. «Иммунитет» — здесь публикуется ответ дня, отображаются периоды иммунитета и ваша история участия. Отметку об ответе можно поставить в открытый период.
-3. «Аватарская удача» — раздел с актуальными статьями текущего сезона. Откройте карточку, чтобы выбрать публикацию.
-4. «Печенье судьбы» — отдельное окно с печеньем; доступность отображается на карточке и в таймере.
-5. «Ивенты проектов» — актуальные задания, события и ссылки.
-6. «Сезонный архив» — материалы и ответы иммунитета за прошедшие сезоны.
+1. Вход — выберите своё имя в списке участников, чтобы открыть личный кабинет.
+2. Иммунитет — ответ на текущий день, периоды иммунитета и ваша личная история отметок.
+3. Аватарская удача — актуальные статьи и публикации сезона. Нажмите на карточку, чтобы открыть материалы.
+4. Печенье судьбы — отдельное окно с печеньем и отметками участников. Доступность указана на карточке и таймере.
+5. Ивенты проектов — действующие события, задания и необходимые ссылки.
+6. Сезонный архив — архив ответов иммунитета и публикаций прошлых сезонов.
+7. Архив викторин — старые вопросы викторин. Выберите вариант ответа из трёх и сразу увидите, верно ли ответили.
 
-Если информация не обновилась, обновите страницу. При проблемах со входом проверьте, что выбрано ваше имя.`;
+Если данные не обновились, обновите страницу. Если возникли проблемы со входом, проверьте выбранное имя участника.`;
 
 function renderNavigation(items) {
   const nav = document.querySelector('.section-grid');
@@ -2757,6 +2762,8 @@ function renderNavigation(items) {
     if (item.action === 'cookie') button.classList.add('card-cook');
     if (item.id === 'eventsSection') button.classList.add('events-nav-card');
     if (item.action === 'archive') button.classList.add('archive-nav-card');
+    if (item.action === 'quizArchive') button.classList.add('quiz-archive-nav-card');
+    if (item.id === 'articlesSection') item.icon = '📰';
     if (item.action === 'guide') button.classList.add('guide-nav-card');
     const emoji = document.createElement('span'); emoji.className = 'section-emoji'; emoji.textContent = item.icon || '✦';
     const title = document.createElement('strong'); title.textContent = item.title || 'Раздел';
@@ -2765,6 +2772,7 @@ function renderNavigation(items) {
     button.addEventListener('click', () => {
       if (item.action === 'cookie') return openCookieModal();
       if (item.action === 'archive') return openSeasonalArchiveModal();
+      if (item.action === 'quizArchive') return openQuizArchiveModal();
       if (item.action === 'guide') {
         const guide = document.createElement('div');
         guide.className = 'guide-content';
@@ -2803,34 +2811,92 @@ window.addEventListener('keydown', async event => {
 });
 
 function openNavigationEditor() {
-  const current = latestPortalData?.navigation || [];
+  const guideItem = (latestPortalData?.navigation || []).find(x => x.action === 'guide') || {};
   const box = document.createElement('div');
   box.innerHTML = `
-    <h3 style="color:var(--gold);text-align:center;margin-top:0;">✦ Навигация портала</h3>
-    <p class="muted" style="text-align:center;">Автор: <b>Wezy Allinvain</b>. Измените список, порядок, названия, иконки и описания. Скрытые пункты можно оставить с enabled:false.</p>
-    <label class="admin-field">Настройки пунктов навигации (JSON)
-      <textarea id="wezyNavigationJson" style="min-height:360px;font-family:monospace;font-size:13px;"></textarea>
-    </label>
-    <div class="message" id="wezyNavigationMessage"></div>
-    <div style="text-align:center;margin-top:12px;">
-      <button class="button button-primary" type="button" id="saveWezyNavigation">Сохранить навигацию</button>
-      <button class="button button-quiet" type="button" onclick="closePortalModal()">Закрыть</button>
+    <h3 style="color:var(--gold);text-align:center;margin-top:0;">✦ Информация для участников</h3>
+    <p class="muted">Автор: <b>Wezy Allinvain</b>. Здесь можно менять содержание справки, которую участники открывают кнопкой «?». Технические настройки навигации скрыты.</p>
+    <label class="admin-field">Заголовок справки<input id="guideTitleEdit" maxlength="80"></label>
+    <label class="admin-field">Краткое описание кнопки<input id="guideDescriptionEdit" maxlength="180"></label>
+    <label class="admin-field">Текст инструкции для участников<textarea id="guideTextEdit" rows="14" style="min-height:260px;"></textarea></label>
+    <div class="message" id="guideSaveMessage"></div>
+    <div style="text-align:center;margin:12px 0 24px;"><button class="button button-primary" type="button" id="saveGuideInfo">Сохранить инструкцию</button></div>
+    <hr style="border-color:var(--panel-border);margin:22px 0;">
+    <h3 style="color:var(--gold);text-align:center;">🗂️ Архив викторин — управление</h3>
+    <p class="muted">Добавляйте вопросы, указывайте три варианта и отмечайте правильный. Вопросы сразу появятся участникам в архиве.</p>
+    <label class="admin-field">Вопрос<textarea id="quizQuestionInput" rows="2" placeholder="Введите вопрос"></textarea></label>
+    <div class="quiz-editor-options">
+      <label class="admin-field">Вариант 1<input id="quizOption0" maxlength="240"></label>
+      <label class="admin-field">Вариант 2<input id="quizOption1" maxlength="240"></label>
+      <label class="admin-field">Вариант 3<input id="quizOption2" maxlength="240"></label>
     </div>
-    <p class="muted" style="font-size:12px;">Для перехода к существующему разделу укажите его id: immunitySection, articlesSection или eventsSection. Для специальных окон используйте action: cookie, archive или guide. Текст руководства редактируется в поле guideText у карточки с action: guide.</p>
+    <label class="admin-field">Правильный вариант<select id="quizCorrect"><option value="0">Вариант 1</option><option value="1">Вариант 2</option><option value="2">Вариант 3</option></select></label>
+    <div class="message" id="quizSaveMessage"></div>
+    <div style="text-align:center;margin:10px 0;"><button class="button button-primary" type="button" id="addQuizQuestion">Добавить вопрос в архив</button></div>
+    <div id="quizAdminList" style="display:grid;gap:8px;"></div>
+    <div style="text-align:center;margin-top:20px;"><button class="button button-quiet" type="button" onclick="closePortalModal()">Закрыть</button></div>
   `;
-  box.querySelector('#wezyNavigationJson').value = JSON.stringify(current, null, 2);
-  openPortalModal(box, 'Редактор навигации Wezy', true);
-  box.querySelector('#saveWezyNavigation').onclick = async () => {
-    const msg = box.querySelector('#wezyNavigationMessage');
+  box.querySelector('#guideTitleEdit').value = guideItem.title || 'Навигация по сайту';
+  box.querySelector('#guideDescriptionEdit').value = guideItem.description || 'Где что находится и как пользоваться порталом';
+  box.querySelector('#guideTextEdit').value = guideItem.guideText || DEFAULT_SITE_GUIDE;
+  openPortalModal(box, 'Редактор информации сайта', true);
+  const saveMsg = box.querySelector('#guideSaveMessage');
+  box.querySelector('#saveGuideInfo').onclick = async () => {
     try {
-      const items = JSON.parse(box.querySelector('#wezyNavigationJson').value);
-      if (!Array.isArray(items)) throw new Error('Нужен JSON-массив пунктов навигации.');
+      const items = (latestPortalData?.navigation || []).map(x => x.action === 'guide' ? ({...x,
+        title: box.querySelector('#guideTitleEdit').value.trim() || 'Навигация по сайту',
+        description: box.querySelector('#guideDescriptionEdit').value.trim(),
+        icon: '❔', guideText: box.querySelector('#guideTextEdit').value
+      }) : ({...x, ...(x.id === 'articlesSection' ? {icon:'📰'} : {})}));
       const result = await apiCallPost('navigationSave', { token: wezyNavigationToken, items: JSON.stringify(items) });
-      latestPortalData.navigation = result.items || items;
-      renderNavigation(latestPortalData.navigation);
-      msg.textContent = 'Навигация сохранена.'; msg.className = 'message success';
-    } catch (e) { msg.textContent = e.message || 'Ошибка сохранения.'; msg.className = 'message error'; }
+      latestPortalData.navigation = result.items || items; renderNavigation(latestPortalData.navigation);
+      saveMsg.textContent = 'Инструкция сохранена.'; saveMsg.className = 'message success';
+    } catch (e) { saveMsg.textContent = e.message || 'Ошибка сохранения.'; saveMsg.className = 'message error'; }
   };
+  let quizItems = [];
+  const list = box.querySelector('#quizAdminList');
+  const renderQuizAdmin = () => {
+    list.replaceChildren();
+    quizItems.forEach((q, i) => {
+      const row = document.createElement('div'); row.className = 'archive-week-card'; row.style.padding='12px';
+      const title = document.createElement('strong'); title.textContent = `${i+1}. ${q.question}`;
+      const del = document.createElement('button'); del.className='button button-quiet'; del.textContent='Удалить'; del.style.marginLeft='10px';
+      del.onclick = async () => { try { const r=await apiCallPost('quizArchiveDelete',{token:wezyNavigationToken,id:q.id}); quizItems=r.items||[]; renderQuizAdmin(); } catch(e){ alert(e.message||'Не удалось удалить вопрос'); } };
+      row.append(title,del); list.append(row);
+    });
+    if (!quizItems.length) list.innerHTML='<p class="muted">В архиве пока нет вопросов.</p>';
+  };
+  const loadQuizAdmin = async () => { try { const r=await apiCall('quizArchiveList'); quizItems=r.items||[]; renderQuizAdmin(); } catch(e){ list.textContent=e.message||'Не удалось загрузить вопросы.'; } };
+  box.querySelector('#addQuizQuestion').onclick = async () => {
+    const question=box.querySelector('#quizQuestionInput').value.trim();
+    const options=[0,1,2].map(i=>box.querySelector('#quizOption'+i).value.trim());
+    const correct=Number(box.querySelector('#quizCorrect').value);
+    const msg=box.querySelector('#quizSaveMessage');
+    if(!question || options.some(x=>!x)){ msg.textContent='Заполните вопрос и все три варианта.'; msg.className='message error'; return; }
+    try { const r=await apiCallPost('quizArchiveSave',{token:wezyNavigationToken,question,options:JSON.stringify(options),correct}); quizItems=r.items||[]; renderQuizAdmin();
+      box.querySelector('#quizQuestionInput').value=''; [0,1,2].forEach(i=>box.querySelector('#quizOption'+i).value='');
+      msg.textContent='Вопрос добавлен в архив.'; msg.className='message success';
+    } catch(e){ msg.textContent=e.message||'Не удалось сохранить вопрос.'; msg.className='message error'; }
+  };
+  loadQuizAdmin();
+}
+
+async function openQuizArchiveModal() {
+  const box=document.createElement('div');
+  box.innerHTML='<p class="muted">Проверьте свои знания: выберите один из трёх вариантов ответа.</p><div id="quizArchiveItems" style="display:grid;gap:14px;"><p class="muted">Загрузка архива…</p></div>';
+  openPortalModal(box,'Архив викторин',true);
+  try {
+    const data=await apiCall('quizArchiveList'); const target=box.querySelector('#quizArchiveItems'); target.replaceChildren();
+    if(!data.items?.length){target.innerHTML='<div class="empty-state compact">В архиве пока нет викторин.</div>';return;}
+    data.items.forEach((q,index)=>{
+      const card=document.createElement('article'); card.className='archive-week-card'; card.style.padding='18px';
+      const heading=document.createElement('h3'); heading.textContent=`${index+1}. ${q.question}`; card.append(heading);
+      const feedback=document.createElement('p'); feedback.className='muted'; feedback.setAttribute('aria-live','polite');
+      q.options.forEach((option,i)=>{const b=document.createElement('button');b.type='button';b.className='button button-secondary';b.style.display='block';b.style.width='100%';b.style.margin='8px 0';b.textContent=option;
+        b.onclick=()=>{Array.from(card.querySelectorAll('button')).forEach(x=>x.disabled=true);feedback.textContent=i===Number(q.correct)?'✓ Верно! Отличный результат.':`✕ Неверно. Правильный ответ: ${q.options[Number(q.correct)]}`;feedback.className=i===Number(q.correct)?'message success':'message error';};card.append(b);});
+      card.append(feedback);target.append(card);
+    });
+  } catch(e){box.querySelector('#quizArchiveItems').textContent=e.message||'Не удалось загрузить архив.';}
 }
 
 function historyWeekLabel(weekKey) {
