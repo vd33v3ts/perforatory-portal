@@ -2871,18 +2871,6 @@ function openNavigationEditor() {
     <label class="admin-field">Текст инструкции для участников<textarea id="guideTextEdit" rows="14" style="min-height:260px;"></textarea></label>
     <div class="message" id="guideSaveMessage"></div>
     <div style="text-align:center;margin:12px 0 24px;"><button class="button button-primary" type="button" id="saveGuideInfo">Сохранить инструкцию</button></div>
-    <hr style="border-color:var(--panel-border);margin:22px 0;">
-    <h3 style="color:var(--gold);text-align:center;">🗂️ Архив викторин — управление</h3>
-    <p class="muted">Сначала выберите дату, затем добавляйте столько вопросов, сколько нужно. Все вопросы за дату сохраняются одной викториной.</p>
-    <div class="quiz-admin-datebar">
-      <label class="admin-field">Дата викторины<input id="quizDateInput" type="date"></label>
-      <button class="button button-secondary" type="button" id="addQuizQuestionCard">＋ Добавить вопрос</button>
-    </div>
-    <div id="quizQuestionBuilder" style="display:grid;gap:14px;margin:14px 0;"></div>
-    <div class="message" id="quizSaveMessage"></div>
-    <div style="text-align:center;margin:10px 0 18px;"><button class="button button-primary" type="button" id="saveWholeQuiz">💾 Сохранить викторину за выбранную дату</button></div>
-    <h4 style="color:var(--gold);margin:16px 0 8px;">Уже добавленные викторины</h4>
-    <div id="quizAdminList" style="display:grid;gap:8px;"></div>
     <div style="text-align:center;margin-top:20px;"><button class="button button-quiet" type="button" onclick="closePortalModal()">Закрыть</button></div>
   `;
   box.querySelector('#guideTitleEdit').value = guideItem.title || 'Навигация по сайту';
@@ -2902,125 +2890,113 @@ function openNavigationEditor() {
       saveMsg.textContent = 'Инструкция сохранена.'; saveMsg.className = 'message success';
     } catch (e) { saveMsg.textContent = e.message || 'Ошибка сохранения.'; saveMsg.className = 'message error'; }
   };
-  let quizItems = [];
-  const list = box.querySelector('#quizAdminList');
-  const builder = box.querySelector('#quizQuestionBuilder');
-  const dateLabel = value => {
-    const m = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    return m ? `${m[3]}.${m[2]}.${m[1]}` : (value || 'Дата не указана');
-  };
-  const addQuestionCard = () => {
-    const index = builder.children.length + 1;
-    const card = document.createElement('section');
-    card.className = 'quiz-question-card quiz-editor-question';
-    card.innerHTML = `
-      <div class="quiz-editor-question-head"><strong>Вопрос <span class="quiz-question-number">${index}</span></strong><button type="button" class="button button-quiet quiz-remove-draft">Удалить вопрос</button></div>
-      <label class="admin-field">Текст вопроса<textarea class="quiz-draft-question" rows="2" placeholder="Введите вопрос"></textarea></label>
-      <div class="quiz-draft-options"></div>
-      <small class="muted">Отметьте кружком один правильный вариант ответа.</small>`;
-    const opts = card.querySelector('.quiz-draft-options');
-    for (let i=0;i<3;i++) {
-      const label=document.createElement('label'); label.className='admin-field quiz-editor-option';
-      label.innerHTML=`<input type="radio" name="quiz-correct-${Date.now()}-${Math.random()}" class="quiz-draft-correct" value="${i}"><span style="min-width:88px;color:var(--gold);font-weight:800;">✓ Верный</span><input class="quiz-draft-option" type="text" maxlength="240" placeholder="Вариант ответа ${i+1}">`;
-      opts.append(label);
-    }
-    card.querySelector('.quiz-remove-draft').onclick=()=>{card.remove();renumberDrafts();};
-    builder.append(card); renumberDrafts();
-  };
-  const renumberDrafts=()=>Array.from(builder.children).forEach((c,i)=>c.querySelector('.quiz-question-number').textContent=i+1);
-  const renderQuizAdmin = () => {
-    list.replaceChildren();
-    const groups = new Map();
-    quizItems.forEach(q => { const d=q.date || (q.createdAt ? String(q.createdAt).slice(0,10) : ''); if(!groups.has(d)) groups.set(d,[]); groups.get(d).push(q); });
-    [...groups.keys()].sort((a,b)=>b.localeCompare(a)).forEach(date => {
-      const group=document.createElement('section'); group.className='quiz-date-group';
-      const heading=document.createElement('h4'); heading.className='quiz-date-heading'; heading.textContent=`📅 ${dateLabel(date)} · ${groups.get(date).length} вопросов`; group.append(heading);
-      groups.get(date).forEach((q,i)=>{
-        const row=document.createElement('div'); row.className='quiz-question-card';
-        const title=document.createElement('strong'); title.textContent=`${i+1}. ${q.question}`;
-        const correct=document.createElement('p'); correct.className='muted'; correct.textContent=`✓ ${q.options[Number(q.correct)] || ''}`;
-        const del=document.createElement('button'); del.className='button button-quiet'; del.textContent='Удалить вопрос';
-        del.onclick=async()=>{try{const r=await apiCallPost('quizArchiveDelete',{token:wezyNavigationToken,id:q.id});quizItems=r.items||[];renderQuizAdmin();}catch(e){alert(e.message||'Не удалось удалить вопрос');}};
-        row.append(title,correct,del); group.append(row);
-      }); list.append(group);
-    });
-    if(!quizItems.length) list.innerHTML='<p class="muted">В архиве пока нет вопросов.</p>';
-  };
-  const localToday = () => { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
-  box.querySelector('#quizDateInput').value=localToday();
-  box.querySelector('#addQuizQuestionCard').onclick=addQuestionCard;
-  addQuestionCard();
-  const loadQuizAdmin = async () => { try { const r=await apiCall('quizArchiveList'); quizItems=r.items||[]; renderQuizAdmin(); } catch(e){ list.textContent=e.message||'Не удалось загрузить вопросы.'; } };
-  box.querySelector('#saveWholeQuiz').onclick=async()=>{
-    const date=box.querySelector('#quizDateInput').value;
-    const cards=Array.from(builder.querySelectorAll('.quiz-editor-question'));
-    const msg=box.querySelector('#quizSaveMessage');
-    if(!date){msg.textContent='Сначала выберите дату викторины.';msg.className='message error';return;}
-    if(!cards.length){msg.textContent='Добавьте хотя бы один вопрос.';msg.className='message error';return;}
-    const questions=[];
-    for(let i=0;i<cards.length;i++){
-      const c=cards[i], question=c.querySelector('.quiz-draft-question').value.trim();
-      const options=Array.from(c.querySelectorAll('.quiz-draft-option')).map(x=>x.value.trim());
-      const correctEl=c.querySelector('.quiz-draft-correct:checked');
-      if(!question || options.some(x=>!x) || !correctEl){msg.textContent=`Заполните вопрос ${i+1}, все три варианта и отметьте правильный ответ.`;msg.className='message error';c.scrollIntoView({behavior:'smooth',block:'center'});return;}
-      questions.push({question,options,correct:Number(correctEl.value)});
-    }
-    const saveBtn=box.querySelector('#saveWholeQuiz'); saveBtn.disabled=true; saveBtn.textContent='Сохраняем…';
-    try{
-      const r=await apiCallPost('quizArchiveSave',{token:wezyNavigationToken,date,questions:JSON.stringify(questions)});
-      quizItems=r.items||[];renderQuizAdmin();builder.replaceChildren();addQuestionCard();
-      msg.textContent=`Сохранено вопросов: ${questions.length}. Дата ${dateLabel(date)} добавлена в архив.`;msg.className='message success';
-    }catch(e){msg.textContent=e.message||'Не удалось сохранить викторину.';msg.className='message error';}
-    finally{saveBtn.disabled=false;saveBtn.textContent='💾 Сохранить викторину за выбранную дату';}
-  };
-  loadQuizAdmin();
+
 }
 
 async function openQuizArchiveModal() {
   const box=document.createElement('div');
-  box.innerHTML=`<p class="muted" style="text-align:center;">Выберите дату — вопросы этой викторины появятся ниже.</p>
+  box.innerHTML=`
+    <div class="quiz-create-launch" style="display:flex;justify-content:center;margin:4px 0 18px;">
+      <button type="button" class="button button-primary" id="openPublicQuizCreator">＋ Создать викторину</button>
+    </div>
+    <section id="publicQuizCreator" class="quiz-question-card" hidden style="margin-bottom:20px;border:1px solid rgba(233,189,103,.55);box-shadow:0 0 18px rgba(218,170,75,.13);">
+      <h3 style="margin:0 0 12px;color:var(--gold);text-align:center;">Создание викторины</h3>
+      <p class="muted" style="text-align:center;">Выберите дату и добавьте нужное количество вопросов. Каждый вопрос содержит три варианта ответа.</p>
+      <label class="admin-field">Дата викторины<input id="publicQuizDate" type="date"></label>
+      <div id="publicQuizQuestionBuilder" style="display:grid;gap:12px;margin:14px 0;"></div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button type="button" class="button button-secondary" id="publicAddQuizQuestion">＋ Добавить вопрос</button>
+        <button type="button" class="button button-primary" id="publicSaveQuiz">Сохранить викторину</button>
+        <button type="button" class="button button-quiet" id="publicCancelQuiz">Отмена</button>
+      </div>
+      <div class="message" id="publicQuizMessage" aria-live="polite"></div>
+    </section>
+    <p class="muted" style="text-align:center;">Выберите дату — вопросы этой викторины появятся ниже.</p>
     <div id="quizArchiveDates" class="quiz-date-picker"></div>
     <div id="quizArchivePagination" class="pagination-nav" hidden></div>
     <div id="quizArchiveItems" style="display:grid;gap:14px;margin-top:16px;"><p class="muted">Загрузка архива…</p></div>`;
   openPortalModal(box,'Архив викторин',true);
-  try {
-    const data=await apiCall('quizArchiveList');
+
+  const dateLabel=value=>{const m=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);return m?`${m[3]}.${m[2]}`:(value||'');};
+  const localToday=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+  const creator=box.querySelector('#publicQuizCreator');
+  const builder=box.querySelector('#publicQuizQuestionBuilder');
+  let archiveItems=[];
+  let selectedDate='';
+  let currentPage=1;
+  const perPage=6;
+
+  const renumber=()=>Array.from(builder.children).forEach((card,i)=>{const n=card.querySelector('.quiz-question-number');if(n)n.textContent=String(i+1);});
+  const addQuestion=()=>{
+    const index=builder.children.length+1;
+    const card=document.createElement('section');card.className='quiz-question-card quiz-editor-question';
+    card.innerHTML=`<div class="quiz-editor-question-head"><strong>Вопрос <span class="quiz-question-number">${index}</span></strong><button type="button" class="button button-quiet quiz-remove-draft">Удалить</button></div>
+      <label class="admin-field">Вопрос<textarea class="quiz-draft-question" rows="2" maxlength="1500" placeholder="Введите текст вопроса"></textarea></label>
+      <div class="quiz-draft-options"></div><small class="muted">Поставьте отметку напротив правильного ответа.</small>`;
+    const opts=card.querySelector('.quiz-draft-options');
+    for(let i=0;i<3;i++){
+      const label=document.createElement('label');label.className='admin-field quiz-editor-option';
+      label.innerHTML=`<input type="radio" name="public-quiz-correct-${Date.now()}-${Math.random()}" class="quiz-draft-correct" value="${i}"><span style="color:var(--gold);font-weight:800;">✓ Верный</span><input class="quiz-draft-option" type="text" maxlength="240" placeholder="Вариант ответа ${i+1}">`;
+      opts.append(label);
+    }
+    card.querySelector('.quiz-remove-draft').onclick=()=>{card.remove();renumber();};
+    builder.append(card);renumber();
+  };
+
+  const renderArchive=()=>{
     const groups=new Map();
-    (data.items||[]).forEach(q=>{const d=q.date||(q.createdAt?String(q.createdAt).slice(0,10):'');if(!groups.has(d))groups.set(d,[]);groups.get(d).push(q);});
-    const dates=[...groups.keys()].filter(Boolean).sort((a,b)=>b.localeCompare(a));
-    const dateBox=box.querySelector('#quizArchiveDates'), target=box.querySelector('#quizArchiveItems'), pag=box.querySelector('#quizArchivePagination');
-    if(!dates.length){dateBox.innerHTML='<div class="empty-state compact">В архиве пока нет викторин.</div>';target.replaceChildren();pag.hidden=true;return;}
-    const dateLabel=value=>{const m=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);return m?`${m[3]}.${m[2]}`:(value||'');};
-    const perPage=6; let page=1, selectedDate=dates[0];
-    const renderDates=()=>{
-      dateBox.replaceChildren();
-      dates.slice((page-1)*perPage,page*perPage).forEach(date=>{
-        const b=document.createElement('button');b.type='button';b.className='quiz-date-chip'+(date===selectedDate?' active':'');
-        b.innerHTML=`<strong>${dateLabel(date)}</strong><small>${groups.get(date).length} ${groups.get(date).length===1?'вопрос':'вопросов'}</small>`;
-        b.onclick=()=>{selectedDate=date;renderDates();renderQuestions();};dateBox.append(b);
+    archiveItems.forEach(q=>{const d=q.date||(q.createdAt?String(q.createdAt).slice(0,10):'');if(d){if(!groups.has(d))groups.set(d,[]);groups.get(d).push(q);}});
+    const dates=[...groups.keys()].sort((a,b)=>b.localeCompare(a));
+    const dateBox=box.querySelector('#quizArchiveDates'),target=box.querySelector('#quizArchiveItems'),pag=box.querySelector('#quizArchivePagination');
+    dateBox.replaceChildren();target.replaceChildren();
+    if(!dates.length){dateBox.innerHTML='<div class="empty-state compact">В архиве пока нет викторин. Вы можете создать первую.</div>';pag.hidden=true;return;}
+    if(!selectedDate||!groups.has(selectedDate))selectedDate=dates[0];
+    const total=Math.ceil(dates.length/perPage);if(currentPage>total)currentPage=total;
+    dates.slice((currentPage-1)*perPage,currentPage*perPage).forEach(date=>{
+      const b=document.createElement('button');b.type='button';b.className='quiz-date-chip'+(date===selectedDate?' active':'');
+      b.innerHTML=`<strong>${dateLabel(date)}</strong><small>${groups.get(date).length} ${groups.get(date).length===1?'вопрос':'вопросов'}</small>`;
+      b.onclick=()=>{selectedDate=date;renderArchive();};dateBox.append(b);
+    });
+    if(total>1){pag.hidden=false;renderPaginationControls(pag,total,currentPage,n=>{currentPage=n;renderArchive();});}else pag.hidden=true;
+    const heading=document.createElement('h3');heading.className='quiz-date-heading';heading.textContent=`📅 Викторина · ${dateLabel(selectedDate)}.${String(selectedDate).slice(0,4)}`;target.append(heading);
+    groups.get(selectedDate).forEach((q,index)=>{
+      const card=document.createElement('article');card.className='quiz-question-card quiz-participant-question';
+      const title=document.createElement('h4');title.style.cssText='margin:0 0 12px;color:#fff;font-size:17px;line-height:1.5';title.textContent=`Вопрос ${index+1}. ${q.question}`;card.append(title);
+      const feedback=document.createElement('p');feedback.className='muted';feedback.setAttribute('aria-live','polite');
+      q.options.forEach((option,i)=>{
+        const b=document.createElement('button');b.type='button';b.className='quiz-option-choice';
+        const mark=document.createElement('span');mark.textContent='○';mark.style.cssText='font-size:19px;color:var(--gold);flex:0 0 20px';
+        const label=document.createElement('span');label.textContent=option;b.append(mark,label);
+        b.onclick=()=>{Array.from(card.querySelectorAll('.quiz-option-choice')).forEach(x=>{x.disabled=true;x.style.opacity='.72';});mark.textContent='✓';b.style.borderColor='var(--gold)';b.style.opacity='1';const right=Number(q.correct);feedback.textContent=i===right?'✓ Верно! Отличный результат.':`✕ Неверно. Правильный ответ: ${q.options[right]}`;feedback.className=i===right?'message success':'message error';};card.append(b);
       });
-      const total=Math.ceil(dates.length/perPage);
-      if(total>1){pag.hidden=false;renderPaginationControls(pag,total,page,n=>{page=n;renderDates();});}else pag.hidden=true;
-    };
-    const renderQuestions=()=>{
-      target.replaceChildren();
-      const heading=document.createElement('h3');heading.className='quiz-date-heading';heading.textContent=`📅 Викторина · ${dateLabel(selectedDate)}.${String(selectedDate).slice(0,4)}`;target.append(heading);
-      groups.get(selectedDate).forEach((q,index)=>{
-        const card=document.createElement('article');card.className='quiz-question-card quiz-participant-question';
-        const title=document.createElement('h4');title.style.cssText='margin:0 0 12px;color:#fff;font-size:17px;line-height:1.5';title.textContent=`Вопрос ${index+1}. ${q.question}`;card.append(title);
-        const feedback=document.createElement('p');feedback.className='muted';feedback.setAttribute('aria-live','polite');
-        q.options.forEach((option,i)=>{
-          const b=document.createElement('button');b.type='button';b.className='quiz-option-choice';
-          const mark=document.createElement('span');mark.textContent='○';mark.style.cssText='font-size:19px;color:var(--gold);flex:0 0 20px';
-          const label=document.createElement('span');label.textContent=option;b.append(mark,label);
-          b.onclick=()=>{Array.from(card.querySelectorAll('.quiz-option-choice')).forEach(x=>{x.disabled=true;x.style.opacity='.72';});mark.textContent='✓';b.style.borderColor='var(--gold)';b.style.opacity='1';
-            const right=Number(q.correct);feedback.textContent=i===right?'✓ Верно! Отличный результат.':`✕ Неверно. Правильный ответ: ${q.options[right]}`;feedback.className=i===right?'message success':'message error';};card.append(b);
-        });
-        card.append(feedback);target.append(card);
-      });
-    };
-    renderDates();renderQuestions();
-  }catch(e){box.querySelector('#quizArchiveItems').textContent=e.message||'Не удалось загрузить архив.';}
+      card.append(feedback);target.append(card);
+    });
+  };
+
+  box.querySelector('#openPublicQuizCreator').onclick=()=>{creator.hidden=false;box.querySelector('#publicQuizDate').value=localToday();if(!builder.children.length)addQuestion();creator.scrollIntoView({behavior:'smooth',block:'start'});};
+  box.querySelector('#publicAddQuizQuestion').onclick=addQuestion;
+  box.querySelector('#publicCancelQuiz').onclick=()=>{creator.hidden=true;builder.replaceChildren();box.querySelector('#publicQuizMessage').textContent='';};
+  box.querySelector('#publicSaveQuiz').onclick=async()=>{
+    const date=box.querySelector('#publicQuizDate').value,cards=Array.from(builder.querySelectorAll('.quiz-editor-question')),msg=box.querySelector('#publicQuizMessage');
+    if(!date){msg.textContent='Выберите дату викторины.';msg.className='message error';return;}
+    if(!cards.length){msg.textContent='Добавьте хотя бы один вопрос.';msg.className='message error';return;}
+    const questions=[];
+    for(let i=0;i<cards.length;i++){
+      const c=cards[i],question=c.querySelector('.quiz-draft-question').value.trim(),options=Array.from(c.querySelectorAll('.quiz-draft-option')).map(x=>x.value.trim()),correct=c.querySelector('.quiz-draft-correct:checked');
+      if(!question||options.some(x=>!x)||!correct){msg.textContent=`Заполните вопрос ${i+1}, три варианта и отметьте правильный ответ.`;msg.className='message error';c.scrollIntoView({behavior:'smooth',block:'center'});return;}
+      questions.push({question,options,correct:Number(correct.value)});
+    }
+    const btn=box.querySelector('#publicSaveQuiz');btn.disabled=true;btn.textContent='Сохраняем…';
+    try{
+      const result=await apiCallPost('quizArchiveSave',{date,questions:JSON.stringify(questions)});
+      archiveItems=result.items||[];selectedDate=date;currentPage=1;renderArchive();
+      msg.textContent=`Готово! Добавлено вопросов: ${questions.length}.`;msg.className='message success';
+      creator.hidden=true;builder.replaceChildren();
+    }catch(e){msg.textContent=e.message||'Не удалось сохранить викторину.';msg.className='message error';}
+    finally{btn.disabled=false;btn.textContent='Сохранить викторину';}
+  };
+  try{const data=await apiCall('quizArchiveList');archiveItems=data.items||[];renderArchive();}
+  catch(e){box.querySelector('#quizArchiveItems').textContent=e.message||'Не удалось загрузить архив.';}
 }
 
 function historyWeekLabel(weekKey) {
