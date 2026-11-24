@@ -192,14 +192,14 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
   border-radius: 22px;
   background: linear-gradient(135deg, rgba(16, 24, 60, .9), rgba(7, 12, 34, .98));
   color: #f4f6ff;
-  box-shadow: 0 14px 40px rgba(0,0,0,.6), 0 0 25px rgba(245, 203, 120, .25), inset 0 1px 0 rgba(255,255,255,.12);
+  box-shadow: 0 14px 40px rgba(0,0,0,.6), 0 0 16px rgba(245, 203, 120, .19), 0 0 3px rgba(245, 203, 120, .16), inset 0 1px 0 rgba(255,255,255,.12);
   display: flex; flex-direction: column; align-items: center; text-align: center;
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 .timer-chip:hover {
   transform: translateY(-4px);
   border-color: rgba(245, 203, 120, .85);
-  box-shadow: 0 18px 46px rgba(0,0,0,.65), 0 0 38px rgba(245, 203, 120, .45);
+  box-shadow: 0 18px 46px rgba(0,0,0,.65), 0 0 22px rgba(245, 203, 120, .28);
 }
 .timer-chip-icon { font-size: 52px; line-height: 1; margin-bottom: 10px; filter: drop-shadow(0 0 14px rgba(245, 203, 120, .6)); }
 .timer-chip strong { color: #fff; font-size: 17px; font-weight: 800; letter-spacing: .03em; margin-bottom: 6px; text-transform: uppercase; }
@@ -239,20 +239,37 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
 .section-card.card-art { grid-column: span 2; }
 .section-card.card-cook { grid-column: span 2; }
 .section-card.events-nav-card { grid-column: 2 / span 2; }
-.section-card.archive-nav-card { grid-column: 4 / span 2; }
+.section-card.archive-nav-card, .section-card.quiz-archive-nav-card { grid-column: 4 / span 2; }
 
 @media (max-width: 820px) {
   .section-grid { grid-template-columns: 1fr; }
   .section-card.card-imm, .section-card.card-art, .section-card.card-cook,
-  .section-card.events-nav-card, .section-card.archive-nav-card, .section-card.guide-nav-card { grid-column: 1 / -1; }
+  .section-card.events-nav-card, .section-card.archive-nav-card, .section-card.quiz-archive-nav-card { grid-column: 1 / -1; }
 }
 
 
-.section-card.guide-nav-card { grid-column: span 2; }
-
-.quiz-archive-nav-card { grid-column: span 2; }
+.quiz-archive-nav-card { grid-column: 4 / span 2; }
 .quiz-editor-options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
 @media(max-width:700px){.quiz-editor-options{grid-template-columns:1fr;}}
+
+.help-fab {
+  position: fixed; top: 18px; right: 20px; z-index: 9000;
+  width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,220,150,.85);
+  color: #241833; background: linear-gradient(145deg,#ffe8ad,#e9b95e);
+  font-size: 27px; font-weight: 900; line-height: 1; cursor: pointer;
+  box-shadow: 0 5px 18px rgba(0,0,0,.45), 0 0 14px rgba(245,203,120,.28);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.help-fab:hover { transform: translateY(-2px) scale(1.06); box-shadow: 0 7px 22px rgba(0,0,0,.5), 0 0 20px rgba(245,203,120,.38); }
+.quiz-date-group { border:1px solid rgba(245,203,120,.3); border-radius:18px; padding:16px; background:linear-gradient(145deg,rgba(25,30,66,.82),rgba(9,14,38,.88)); }
+.quiz-date-heading { color:var(--gold); font-size:18px; font-weight:900; margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid rgba(245,203,120,.22); }
+.quiz-question-card { border:1px solid rgba(186,174,255,.22); border-radius:14px; padding:14px; margin:10px 0; background:rgba(5,10,30,.48); }
+.quiz-option-choice { width:100%; text-align:left; display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:12px; margin:8px 0; border:1px solid rgba(186,174,255,.24); background:rgba(34,40,88,.62); color:var(--text); cursor:pointer; }
+.quiz-option-choice:hover { border-color:rgba(245,203,120,.65); }
+.quiz-editor-option { display:flex; align-items:center; gap:9px; }
+.quiz-editor-option input[type=checkbox] { width:19px; height:19px; accent-color:#e9bd67; flex:0 0 auto; }
+.quiz-editor-option input[type=text] { min-width:0; }
+@media(max-width:700px){.help-fab{top:12px;right:12px;width:44px;height:44px}.quiz-date-group{padding:12px}}
 .history-row .result { white-space: normal; text-align: right; max-width: 58%; line-height: 1.45; }
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center;
@@ -716,6 +733,11 @@ footer {
           <strong>Сезонный архив</strong>
           <small>Архив прошлых сезонов</small>
         </button>
+        <button class="section-card quiz-archive-nav-card" type="button" onclick="openQuizArchiveModal()">
+          <span class="section-emoji">🧩</span>
+          <strong>Архив викторин</strong>
+          <small>Вопросы прошлых викторин по датам</small>
+        </button>
       </nav>
 
       <!-- РАЗДЕЛ: ИММУНИТЕТ -->
@@ -1016,6 +1038,8 @@ footer {
       <button class="button button-primary" type="button" onclick="closeSettingsModal()">Сохранить и закрыть</button>
     </div>
   </section>
+
+  <button class="help-fab" id="siteHelpButton" type="button" aria-label="Навигация по сайту" title="Навигация по сайту">?</button>
 
   <!-- ОБЩИЙ МОДАЛ ДИАЛОГА -->
   <div class="portal-modal" id="portalModal">
@@ -2739,57 +2763,60 @@ function renderStatus(status) {
 
 const DEFAULT_SITE_GUIDE = `КАК ПОЛЬЗОВАТЬСЯ ПОРТАЛОМ
 
-1. Вход — выберите своё имя в списке участников, чтобы открыть личный кабинет.
-2. Иммунитет — ответ на текущий день, периоды иммунитета и ваша личная история отметок.
-3. Аватарская удача — актуальные статьи и публикации сезона. Нажмите на карточку, чтобы открыть материалы.
+1. Вход — выберите своё имя участника, чтобы открыть личный кабинет.
+2. Иммунитет — ответ на текущий день, четыре периода и ваша личная история отметок.
+3. Аватарская удача 📰 — актуальные статьи и публикации сезона.
 4. Печенье судьбы — отдельное окно с печеньем и отметками участников. Доступность указана на карточке и таймере.
 5. Ивенты проектов — действующие события, задания и необходимые ссылки.
-6. Сезонный архив — архив ответов иммунитета и публикаций прошлых сезонов.
-7. Архив викторин — старые вопросы викторин. Выберите вариант ответа из трёх и сразу увидите, верно ли ответили.
+6. Сезонный архив — ответы иммунитета и публикации прошлых сезонов.
+7. Архив викторин — викторины, сгруппированные по датам. Откройте нужную дату, ответьте на вопросы и проверьте результат.
 
 Если данные не обновились, обновите страницу. Если возникли проблемы со входом, проверьте выбранное имя участника.`;
+
+function getCurrentGuideItem() {
+  return (latestPortalData?.navigation || []).find(x => x.action === 'guide') || { title:'Навигация по сайту', guideText:DEFAULT_SITE_GUIDE };
+}
+function openSiteGuide() {
+  const item = getCurrentGuideItem();
+  const guide = document.createElement('div'); guide.className = 'guide-content';
+  const pre = document.createElement('div');
+  pre.style.cssText = 'white-space:pre-wrap;line-height:1.85;color:var(--text);font-size:15px';
+  pre.textContent = item.guideText || DEFAULT_SITE_GUIDE; guide.appendChild(pre);
+  openPortalModal(guide, item.title || 'Навигация по сайту');
+}
+$('siteHelpButton')?.addEventListener('click', openSiteGuide);
 
 function renderNavigation(items) {
   const nav = document.querySelector('.section-grid');
   if (!nav || !Array.isArray(items) || !items.length) return;
+  // Справка теперь всегда открывается круглой кнопкой ? в углу, а не карточкой.
+  const visible = items.filter(item => item && item.enabled !== false && item.action !== 'guide');
   nav.replaceChildren();
-  items.filter(item => item && item.enabled !== false).forEach(item => {
+  visible.forEach(item => {
     const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'section-card';
+    button.type = 'button'; button.className = 'section-card';
     if (item.id === 'immunitySection') button.classList.add('card-imm');
     if (item.id === 'articlesSection') button.classList.add('card-art');
     if (item.action === 'cookie') button.classList.add('card-cook');
     if (item.id === 'eventsSection') button.classList.add('events-nav-card');
     if (item.action === 'archive') button.classList.add('archive-nav-card');
     if (item.action === 'quizArchive') button.classList.add('quiz-archive-nav-card');
-    if (item.id === 'articlesSection') item.icon = '📰';
-    if (item.action === 'guide') button.classList.add('guide-nav-card');
-    const emoji = document.createElement('span'); emoji.className = 'section-emoji'; emoji.textContent = item.icon || '✦';
-    const title = document.createElement('strong'); title.textContent = item.title || 'Раздел';
+    const emoji = document.createElement('span'); emoji.className = 'section-emoji';
+    emoji.textContent = item.id === 'articlesSection' ? '📰' : (item.icon || '✦');
+    const title = document.createElement('strong'); title.textContent = item.id === 'articlesSection' ? 'Аватарская удача' : (item.title || 'Раздел');
     const desc = document.createElement('small'); desc.textContent = item.description || '';
     button.append(emoji, title, desc);
     button.addEventListener('click', () => {
       if (item.action === 'cookie') return openCookieModal();
       if (item.action === 'archive') return openSeasonalArchiveModal();
       if (item.action === 'quizArchive') return openQuizArchiveModal();
-      if (item.action === 'guide') {
-        const guide = document.createElement('div');
-        guide.className = 'guide-content';
-        const pre = document.createElement('div');
-        pre.style.cssText = 'white-space:pre-wrap;line-height:1.8;color:var(--text);font-size:15px';
-        pre.textContent = item.guideText || DEFAULT_SITE_GUIDE;
-        guide.appendChild(pre);
-        return openPortalModal(guide, item.title || 'Навигация');
-      }
       const target = item.id && $(item.id);
-      if (target) openPortalModal(target, item.title || 'Информация');
-      else { const note = document.createElement('div'); note.textContent = 'Раздел пока не подключён.'; openPortalModal(note, item.title || 'Информация'); }
+      if (target) openPortalModal(target, title.textContent);
+      else { const note = document.createElement('div'); note.textContent = 'Раздел пока не подключён.'; openPortalModal(note, title.textContent); }
     });
     nav.appendChild(button);
   });
 }
-
 let wezyNavigationToken = '';
 let wezyKeyBuffer = '';
 const WEZY_SECRET_SEQUENCE = 'WEZY';
@@ -2824,13 +2851,14 @@ function openNavigationEditor() {
     <hr style="border-color:var(--panel-border);margin:22px 0;">
     <h3 style="color:var(--gold);text-align:center;">🗂️ Архив викторин — управление</h3>
     <p class="muted">Добавляйте вопросы, указывайте три варианта и отмечайте правильный. Вопросы сразу появятся участникам в архиве.</p>
+    <label class="admin-field">Дата викторины<input id="quizDateInput" type="date"></label>
     <label class="admin-field">Вопрос<textarea id="quizQuestionInput" rows="2" placeholder="Введите вопрос"></textarea></label>
-    <div class="quiz-editor-options">
-      <label class="admin-field">Вариант 1<input id="quizOption0" maxlength="240"></label>
-      <label class="admin-field">Вариант 2<input id="quizOption1" maxlength="240"></label>
-      <label class="admin-field">Вариант 3<input id="quizOption2" maxlength="240"></label>
+    <div class="quiz-editor-options" style="grid-template-columns:1fr;">
+      <label class="admin-field quiz-editor-option"><input type="checkbox" class="quiz-correct-check" data-index="0"><span style="min-width:92px;color:var(--gold);font-weight:800;">✓ Верный</span><input id="quizOption0" type="text" maxlength="240" placeholder="Вариант ответа 1"></label>
+      <label class="admin-field quiz-editor-option"><input type="checkbox" class="quiz-correct-check" data-index="1"><span style="min-width:92px;color:var(--gold);font-weight:800;">✓ Верный</span><input id="quizOption1" type="text" maxlength="240" placeholder="Вариант ответа 2"></label>
+      <label class="admin-field quiz-editor-option"><input type="checkbox" class="quiz-correct-check" data-index="2"><span style="min-width:92px;color:var(--gold);font-weight:800;">✓ Верный</span><input id="quizOption2" type="text" maxlength="240" placeholder="Вариант ответа 3"></label>
     </div>
-    <label class="admin-field">Правильный вариант<select id="quizCorrect"><option value="0">Вариант 1</option><option value="1">Вариант 2</option><option value="2">Вариант 3</option></select></label>
+    <small class="muted">Отметьте галочкой ровно один правильный вариант. К одной дате можно добавить несколько вопросов.</small>
     <div class="message" id="quizSaveMessage"></div>
     <div style="text-align:center;margin:10px 0;"><button class="button button-primary" type="button" id="addQuizQuestion">Добавить вопрос в архив</button></div>
     <div id="quizAdminList" style="display:grid;gap:8px;"></div>
@@ -2855,50 +2883,80 @@ function openNavigationEditor() {
   };
   let quizItems = [];
   const list = box.querySelector('#quizAdminList');
+  const dateLabel = value => {
+    if (!value) return 'Дата не указана';
+    const m = String(value).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    return m ? `${m[3]}.${m[2]}.${m[1]}` : value;
+  };
   const renderQuizAdmin = () => {
     list.replaceChildren();
-    quizItems.forEach((q, i) => {
-      const row = document.createElement('div'); row.className = 'archive-week-card'; row.style.padding='12px';
-      const title = document.createElement('strong'); title.textContent = `${i+1}. ${q.question}`;
-      const del = document.createElement('button'); del.className='button button-quiet'; del.textContent='Удалить'; del.style.marginLeft='10px';
-      del.onclick = async () => { try { const r=await apiCallPost('quizArchiveDelete',{token:wezyNavigationToken,id:q.id}); quizItems=r.items||[]; renderQuizAdmin(); } catch(e){ alert(e.message||'Не удалось удалить вопрос'); } };
-      row.append(title,del); list.append(row);
+    const groups = new Map();
+    quizItems.forEach(q => { const d=q.date || (q.createdAt ? String(q.createdAt).slice(0,10) : ''); if(!groups.has(d)) groups.set(d,[]); groups.get(d).push(q); });
+    [...groups.keys()].sort((a,b)=>b.localeCompare(a)).forEach(date => {
+      const group=document.createElement('section'); group.className='quiz-date-group';
+      const heading=document.createElement('h4'); heading.className='quiz-date-heading'; heading.textContent=`📅 ${dateLabel(date)} · ${groups.get(date).length} вопросов`; group.append(heading);
+      groups.get(date).forEach((q,i)=>{
+        const row=document.createElement('div'); row.className='quiz-question-card';
+        const title=document.createElement('strong'); title.textContent=`${i+1}. ${q.question}`;
+        const correct=document.createElement('p'); correct.className='muted'; correct.textContent=`✓ ${q.options[Number(q.correct)] || ''}`;
+        const del=document.createElement('button'); del.className='button button-quiet'; del.textContent='Удалить вопрос';
+        del.onclick=async()=>{try{const r=await apiCallPost('quizArchiveDelete',{token:wezyNavigationToken,id:q.id});quizItems=r.items||[];renderQuizAdmin();}catch(e){alert(e.message||'Не удалось удалить вопрос');}};
+        row.append(title,correct,del); group.append(row);
+      }); list.append(group);
     });
-    if (!quizItems.length) list.innerHTML='<p class="muted">В архиве пока нет вопросов.</p>';
+    if(!quizItems.length) list.innerHTML='<p class="muted">В архиве пока нет вопросов.</p>';
   };
+  const localToday = () => { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+  box.querySelector('#quizDateInput').value=localToday();
+  box.querySelectorAll('.quiz-correct-check').forEach(check=>check.addEventListener('change',()=>{
+    if(check.checked) box.querySelectorAll('.quiz-correct-check').forEach(other=>{if(other!==check)other.checked=false;});
+  }));
   const loadQuizAdmin = async () => { try { const r=await apiCall('quizArchiveList'); quizItems=r.items||[]; renderQuizAdmin(); } catch(e){ list.textContent=e.message||'Не удалось загрузить вопросы.'; } };
   box.querySelector('#addQuizQuestion').onclick = async () => {
+    const date=box.querySelector('#quizDateInput').value;
     const question=box.querySelector('#quizQuestionInput').value.trim();
     const options=[0,1,2].map(i=>box.querySelector('#quizOption'+i).value.trim());
-    const correct=Number(box.querySelector('#quizCorrect').value);
+    const checked=Array.from(box.querySelectorAll('.quiz-correct-check')).find(x=>x.checked);
+    const correct=checked ? Number(checked.dataset.index) : -1;
     const msg=box.querySelector('#quizSaveMessage');
-    if(!question || options.some(x=>!x)){ msg.textContent='Заполните вопрос и все три варианта.'; msg.className='message error'; return; }
-    try { const r=await apiCallPost('quizArchiveSave',{token:wezyNavigationToken,question,options:JSON.stringify(options),correct}); quizItems=r.items||[]; renderQuizAdmin();
-      box.querySelector('#quizQuestionInput').value=''; [0,1,2].forEach(i=>box.querySelector('#quizOption'+i).value='');
-      msg.textContent='Вопрос добавлен в архив.'; msg.className='message success';
-    } catch(e){ msg.textContent=e.message||'Не удалось сохранить вопрос.'; msg.className='message error'; }
+    if(!date || !question || options.some(x=>!x) || correct<0){msg.textContent='Укажите дату, вопрос, три варианта и отметьте правильный галочкой.';msg.className='message error';return;}
+    try { const r=await apiCallPost('quizArchiveSave',{token:wezyNavigationToken,date,question,options:JSON.stringify(options),correct});quizItems=r.items||[];renderQuizAdmin();
+      box.querySelector('#quizQuestionInput').value='';[0,1,2].forEach(i=>box.querySelector('#quizOption'+i).value='');box.querySelectorAll('.quiz-correct-check').forEach(x=>x.checked=false);
+      msg.textContent='Вопрос добавлен к викторине за выбранную дату.';msg.className='message success';
+    }catch(e){msg.textContent=e.message||'Не удалось сохранить вопрос.';msg.className='message error';}
   };
   loadQuizAdmin();
 }
 
 async function openQuizArchiveModal() {
   const box=document.createElement('div');
-  box.innerHTML='<p class="muted">Проверьте свои знания: выберите один из трёх вариантов ответа.</p><div id="quizArchiveItems" style="display:grid;gap:14px;"><p class="muted">Загрузка архива…</p></div>';
+  box.innerHTML='<p class="muted">Выберите дату викторины, ответьте на вопросы и проверьте свои знания.</p><div id="quizArchiveItems" style="display:grid;gap:16px;"><p class="muted">Загрузка архива…</p></div>';
   openPortalModal(box,'Архив викторин',true);
   try {
     const data=await apiCall('quizArchiveList'); const target=box.querySelector('#quizArchiveItems'); target.replaceChildren();
-    if(!data.items?.length){target.innerHTML='<div class="empty-state compact">В архиве пока нет викторин.</div>';return;}
-    data.items.forEach((q,index)=>{
-      const card=document.createElement('article'); card.className='archive-week-card'; card.style.padding='18px';
-      const heading=document.createElement('h3'); heading.textContent=`${index+1}. ${q.question}`; card.append(heading);
-      const feedback=document.createElement('p'); feedback.className='muted'; feedback.setAttribute('aria-live','polite');
-      q.options.forEach((option,i)=>{const b=document.createElement('button');b.type='button';b.className='button button-secondary';b.style.display='block';b.style.width='100%';b.style.margin='8px 0';b.textContent=option;
-        b.onclick=()=>{Array.from(card.querySelectorAll('button')).forEach(x=>x.disabled=true);feedback.textContent=i===Number(q.correct)?'✓ Верно! Отличный результат.':`✕ Неверно. Правильный ответ: ${q.options[Number(q.correct)]}`;feedback.className=i===Number(q.correct)?'message success':'message error';};card.append(b);});
-      card.append(feedback);target.append(card);
+    const groups=new Map();
+    (data.items||[]).forEach(q=>{const d=q.date||(q.createdAt?String(q.createdAt).slice(0,10):'');if(!groups.has(d))groups.set(d,[]);groups.get(d).push(q);});
+    if(!groups.size){target.innerHTML='<div class="empty-state compact">В архиве пока нет викторин.</div>';return;}
+    const dateLabel=value=>{const m=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);return m?`${m[3]}.${m[2]}.${m[1]}`:(value||'Дата не указана');};
+    [...groups.keys()].sort((a,b)=>b.localeCompare(a)).forEach(date=>{
+      const group=document.createElement('section');group.className='quiz-date-group';
+      const heading=document.createElement('h3');heading.className='quiz-date-heading';heading.textContent=`📅 Викторина · ${dateLabel(date)}`;group.append(heading);
+      groups.get(date).forEach((q,index)=>{
+        const card=document.createElement('article');card.className='quiz-question-card';
+        const title=document.createElement('h4');title.style.cssText='margin:0 0 12px;color:#fff;font-size:17px;line-height:1.5';title.textContent=`Вопрос ${index+1}. ${q.question}`;card.append(title);
+        const feedback=document.createElement('p');feedback.className='muted';feedback.setAttribute('aria-live','polite');
+        q.options.forEach((option,i)=>{
+          const b=document.createElement('button');b.type='button';b.className='quiz-option-choice';
+          const mark=document.createElement('span');mark.textContent='○';mark.style.cssText='font-size:19px;color:var(--gold);flex:0 0 20px';
+          const label=document.createElement('span');label.textContent=option;b.append(mark,label);
+          b.onclick=()=>{Array.from(card.querySelectorAll('.quiz-option-choice')).forEach(x=>{x.disabled=true;x.style.opacity='.72';});mark.textContent='✓';b.style.borderColor='var(--gold)';b.style.opacity='1';
+            const right=Number(q.correct);feedback.textContent=i===right?'✓ Верно! Отличный результат.':`✕ Неверно. Правильный ответ: ${q.options[right]}`;feedback.className=i===right?'message success':'message error';};card.append(b);
+        });
+        card.append(feedback);group.append(card);
+      });target.append(group);
     });
-  } catch(e){box.querySelector('#quizArchiveItems').textContent=e.message||'Не удалось загрузить архив.';}
+  }catch(e){box.querySelector('#quizArchiveItems').textContent=e.message||'Не удалось загрузить архив.';}
 }
-
 function historyWeekLabel(weekKey) {
   const match = String(weekKey || '').match(/^(\d{4})-(\d{2})-(\d{2})$/); if (!match) return weekKey;
   const monday = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
