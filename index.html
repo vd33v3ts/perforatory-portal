@@ -216,10 +216,10 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
   text-shadow: 0 0 12px rgba(255, 230, 163, .9), 0 0 24px rgba(245, 203, 120, .8), 0 0 45px rgba(245, 203, 120, .5);
 }
 
-.section-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin: 22px 0 26px; }
+.section-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 26px 0 32px; }
 .section-card {
-  min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 10px; padding: 20px 14px; text-align: center; color: var(--text); text-decoration: none;
+  min-height: 218px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 13px; padding: 26px 18px; text-align: center; color: var(--text); text-decoration: none;
   border: 1px solid var(--panel-border); border-radius: 20px;
   background: linear-gradient(145deg, rgba(22, 29, 68, .94), rgba(16, 15, 46, .95));
   box-shadow: 0 10px 26px rgba(0,0,0,.35); cursor: pointer;
@@ -230,10 +230,10 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
   border-color: rgba(244,201,121,.65);
   box-shadow: 0 14px 34px rgba(110,80,210,.35);
 }
-.section-emoji { font-size: 64px; line-height: 1; filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); transition: transform .25s ease; }
+.section-emoji { font-size: 76px; line-height: 1; filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); transition: transform .25s ease; }
 .section-card:hover .section-emoji { transform: scale(1.12); }
-.section-card strong { font-size: 16px; letter-spacing: .02em; }
-.section-card small { color: var(--muted); font-size: 13px; line-height: 1.35; }
+.section-card strong { font-size: 19px; letter-spacing: .02em; }
+.section-card small { color: var(--muted); font-size: 14px; line-height: 1.35; }
 
 .section-card.card-imm { grid-column: span 2; }
 .section-card.card-art { grid-column: span 2; }
@@ -241,11 +241,14 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
 .section-card.events-nav-card { grid-column: 2 / span 2; }
 .section-card.archive-nav-card { grid-column: 4 / span 2; }
 
+
+.history-row .result { white-space: normal; text-align: right; max-width: 58%; line-height: 1.45; }
 @media (max-width: 820px) {
-  .section-grid { grid-template-columns: 1fr; }
+  .section-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .section-card.card-imm, .section-card.card-art, .section-card.card-cook,
   .section-card.events-nav-card, .section-card.archive-nav-card { grid-column: 1 / -1; }
 }
+@media (max-width: 560px) { .section-grid { grid-template-columns: 1fr; } }
 
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center;
@@ -1250,6 +1253,7 @@ async function loadPortal() {
     renderProjects(combined);
     renderHistory(data.history || []);
     renderStatus(data.status || {});
+    renderNavigation(data.navigation || []);
   } catch (err) { console.warn('Фоновое обновление:', err); }
 }
 
@@ -2729,6 +2733,80 @@ function renderStatus(status) {
   $('cookieCardStatus').textContent = status.cookieOpen ? 'Открыто сегодня (до 23:59)' : 'Доступно по средам';
 }
 
+function renderNavigation(items) {
+  const nav = document.querySelector('.section-grid');
+  if (!nav || !Array.isArray(items) || !items.length) return;
+  nav.replaceChildren();
+  items.forEach(item => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'section-card';
+    const emoji = document.createElement('span'); emoji.className = 'section-emoji'; emoji.textContent = item.icon || '✦';
+    const title = document.createElement('strong'); title.textContent = item.title || 'Раздел';
+    const desc = document.createElement('small'); desc.textContent = item.description || '';
+    button.append(emoji, title, desc);
+    button.addEventListener('click', () => {
+      if (item.action === 'cookie') return openCookieModal();
+      if (item.action === 'archive') return openSeasonalArchiveModal();
+      const target = item.id && $(item.id);
+      if (target) openPortalModal(target, item.title || 'Информация');
+      else { const note = document.createElement('div'); note.textContent = 'Раздел пока не подключён.'; openPortalModal(note, item.title || 'Информация'); }
+    });
+    nav.appendChild(button);
+  });
+}
+
+let wezyNavigationToken = '';
+let wezyKeyBuffer = '';
+const WEZY_SECRET_SEQUENCE = 'WEZY';
+window.addEventListener('keydown', async event => {
+  if (event.ctrlKey || event.altKey || event.metaKey || event.target?.matches('input,textarea,select,[contenteditable="true"]')) return;
+  const key = String(event.key || '').toUpperCase();
+  if (!/^[A-Z]$/.test(key)) return;
+  wezyKeyBuffer = (wezyKeyBuffer + key).slice(-WEZY_SECRET_SEQUENCE.length);
+  if (wezyKeyBuffer !== WEZY_SECRET_SEQUENCE) return;
+  wezyKeyBuffer = '';
+  if (!currentUser) return;
+  try {
+    const password = prompt('Панель автора Wezy Allinvain. Введите пароль автора:');
+    if (!password) return;
+    const auth = await apiCall('wezyLogin', { password });
+    wezyNavigationToken = auth.token || '';
+    openNavigationEditor();
+  } catch (e) { alert(e.message || 'Не удалось открыть редактор навигации.'); }
+});
+
+function openNavigationEditor() {
+  const current = latestPortalData?.navigation || [];
+  const box = document.createElement('div');
+  box.innerHTML = `
+    <h3 style="color:var(--gold);text-align:center;margin-top:0;">✦ Навигация портала</h3>
+    <p class="muted" style="text-align:center;">Автор: <b>Wezy Allinvain</b>. Измените список, порядок, названия, иконки и описания. Скрытые пункты можно оставить с enabled:false.</p>
+    <label class="admin-field">Настройки пунктов навигации (JSON)
+      <textarea id="wezyNavigationJson" style="min-height:360px;font-family:monospace;font-size:13px;"></textarea>
+    </label>
+    <div class="message" id="wezyNavigationMessage"></div>
+    <div style="text-align:center;margin-top:12px;">
+      <button class="button button-primary" type="button" id="saveWezyNavigation">Сохранить навигацию</button>
+      <button class="button button-quiet" type="button" onclick="closePortalModal()">Закрыть</button>
+    </div>
+    <p class="muted" style="font-size:12px;">Для перехода к существующему разделу укажите его id: immunitySection, articlesSection или eventsSection. Для специальных окон используйте action: cookie или archive.</p>
+  `;
+  box.querySelector('#wezyNavigationJson').value = JSON.stringify(current, null, 2);
+  openPortalModal(box, 'Редактор навигации Wezy', true);
+  box.querySelector('#saveWezyNavigation').onclick = async () => {
+    const msg = box.querySelector('#wezyNavigationMessage');
+    try {
+      const items = JSON.parse(box.querySelector('#wezyNavigationJson').value);
+      if (!Array.isArray(items)) throw new Error('Нужен JSON-массив пунктов навигации.');
+      const result = await apiCallPost('navigationSave', { token: wezyNavigationToken, items: JSON.stringify(items) });
+      latestPortalData.navigation = result.items || items;
+      renderNavigation(latestPortalData.navigation);
+      msg.textContent = 'Навигация сохранена.'; msg.className = 'message success';
+    } catch (e) { msg.textContent = e.message || 'Ошибка сохранения.'; msg.className = 'message error'; }
+  };
+}
+
 function historyWeekLabel(weekKey) {
   const match = String(weekKey || '').match(/^(\d{4})-(\d{2})-(\d{2})$/); if (!match) return weekKey;
   const monday = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
@@ -2767,7 +2845,12 @@ function renderSelectedHistoryWeek() {
     const small = document.createElement('small'); small.textContent = item && item.source ? item.source : 'Неделя от ' + week;
     left.append(strong, small); const result = document.createElement('span');
     if (!item) { result.className = 'result neutral'; result.textContent = 'Нет отметки'; }
-    else { result.className = item.result === 'Ответил' ? 'result good' : 'result bad'; result.textContent = item.result === 'Ответил' ? 'Ответил' : 'Не ответил'; }
+    else {
+      result.className = item.result === 'Ответил' ? 'result good' : 'result bad';
+      result.textContent = item.result === 'Ответил'
+        ? ('Ответил' + (item.answerText ? ' · ' + item.answerText : (item.answerTitle ? ' · ' + item.answerTitle : '')))
+        : 'Не ответил';
+    }
     row.append(left, result); card.appendChild(row);
   }
   target.appendChild(card);
