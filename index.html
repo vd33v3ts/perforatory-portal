@@ -216,10 +216,10 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
   text-shadow: 0 0 12px rgba(255, 230, 163, .9), 0 0 24px rgba(245, 203, 120, .8), 0 0 45px rgba(245, 203, 120, .5);
 }
 
-.section-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 26px 0 32px; }
+.section-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin: 22px 0 26px; }
 .section-card {
-  min-height: 218px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 13px; padding: 26px 18px; text-align: center; color: var(--text); text-decoration: none;
+  min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; padding: 20px 14px; text-align: center; color: var(--text); text-decoration: none;
   border: 1px solid var(--panel-border); border-radius: 20px;
   background: linear-gradient(145deg, rgba(22, 29, 68, .94), rgba(16, 15, 46, .95));
   box-shadow: 0 10px 26px rgba(0,0,0,.35); cursor: pointer;
@@ -230,10 +230,10 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
   border-color: rgba(244,201,121,.65);
   box-shadow: 0 14px 34px rgba(110,80,210,.35);
 }
-.section-emoji { font-size: 76px; line-height: 1; filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); transition: transform .25s ease; }
+.section-emoji { font-size: 64px; line-height: 1; filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); transition: transform .25s ease; }
 .section-card:hover .section-emoji { transform: scale(1.12); }
-.section-card strong { font-size: 19px; letter-spacing: .02em; }
-.section-card small { color: var(--muted); font-size: 14px; line-height: 1.35; }
+.section-card strong { font-size: 16px; letter-spacing: .02em; }
+.section-card small { color: var(--muted); font-size: 13px; line-height: 1.35; }
 
 .section-card.card-imm { grid-column: span 2; }
 .section-card.card-art { grid-column: span 2; }
@@ -241,15 +241,15 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
 .section-card.events-nav-card { grid-column: 2 / span 2; }
 .section-card.archive-nav-card { grid-column: 4 / span 2; }
 
-
-.history-row .result { white-space: normal; text-align: right; max-width: 58%; line-height: 1.45; }
 @media (max-width: 820px) {
-  .section-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .section-grid { grid-template-columns: 1fr; }
   .section-card.card-imm, .section-card.card-art, .section-card.card-cook,
-  .section-card.events-nav-card, .section-card.archive-nav-card { grid-column: 1 / -1; }
+  .section-card.events-nav-card, .section-card.archive-nav-card, .section-card.guide-nav-card { grid-column: 1 / -1; }
 }
-@media (max-width: 560px) { .section-grid { grid-template-columns: 1fr; } }
 
+
+.section-card.guide-nav-card { grid-column: span 2; }
+.history-row .result { white-space: normal; text-align: right; max-width: 58%; line-height: 1.45; }
 .portal-modal {
   position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center;
   padding: 14px; background: rgba(1, 4, 16, .88); backdrop-filter: blur(12px);
@@ -2733,14 +2733,31 @@ function renderStatus(status) {
   $('cookieCardStatus').textContent = status.cookieOpen ? 'Открыто сегодня (до 23:59)' : 'Доступно по средам';
 }
 
+const DEFAULT_SITE_GUIDE = `КАК ПОЛЬЗОВАТЬСЯ ПОРТАЛОМ
+
+1. Войдите в личный кабинет, выбрав своё имя из списка.
+2. «Иммунитет» — здесь публикуется ответ дня, отображаются периоды иммунитета и ваша история участия. Отметку об ответе можно поставить в открытый период.
+3. «Аватарская удача» — раздел с актуальными статьями текущего сезона. Откройте карточку, чтобы выбрать публикацию.
+4. «Печенье судьбы» — отдельное окно с печеньем; доступность отображается на карточке и в таймере.
+5. «Ивенты проектов» — актуальные задания, события и ссылки.
+6. «Сезонный архив» — материалы и ответы иммунитета за прошедшие сезоны.
+
+Если информация не обновилась, обновите страницу. При проблемах со входом проверьте, что выбрано ваше имя.`;
+
 function renderNavigation(items) {
   const nav = document.querySelector('.section-grid');
   if (!nav || !Array.isArray(items) || !items.length) return;
   nav.replaceChildren();
-  items.forEach(item => {
+  items.filter(item => item && item.enabled !== false).forEach(item => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'section-card';
+    if (item.id === 'immunitySection') button.classList.add('card-imm');
+    if (item.id === 'articlesSection') button.classList.add('card-art');
+    if (item.action === 'cookie') button.classList.add('card-cook');
+    if (item.id === 'eventsSection') button.classList.add('events-nav-card');
+    if (item.action === 'archive') button.classList.add('archive-nav-card');
+    if (item.action === 'guide') button.classList.add('guide-nav-card');
     const emoji = document.createElement('span'); emoji.className = 'section-emoji'; emoji.textContent = item.icon || '✦';
     const title = document.createElement('strong'); title.textContent = item.title || 'Раздел';
     const desc = document.createElement('small'); desc.textContent = item.description || '';
@@ -2748,6 +2765,15 @@ function renderNavigation(items) {
     button.addEventListener('click', () => {
       if (item.action === 'cookie') return openCookieModal();
       if (item.action === 'archive') return openSeasonalArchiveModal();
+      if (item.action === 'guide') {
+        const guide = document.createElement('div');
+        guide.className = 'guide-content';
+        const pre = document.createElement('div');
+        pre.style.cssText = 'white-space:pre-wrap;line-height:1.8;color:var(--text);font-size:15px';
+        pre.textContent = item.guideText || DEFAULT_SITE_GUIDE;
+        guide.appendChild(pre);
+        return openPortalModal(guide, item.title || 'Навигация');
+      }
       const target = item.id && $(item.id);
       if (target) openPortalModal(target, item.title || 'Информация');
       else { const note = document.createElement('div'); note.textContent = 'Раздел пока не подключён.'; openPortalModal(note, item.title || 'Информация'); }
@@ -2790,7 +2816,7 @@ function openNavigationEditor() {
       <button class="button button-primary" type="button" id="saveWezyNavigation">Сохранить навигацию</button>
       <button class="button button-quiet" type="button" onclick="closePortalModal()">Закрыть</button>
     </div>
-    <p class="muted" style="font-size:12px;">Для перехода к существующему разделу укажите его id: immunitySection, articlesSection или eventsSection. Для специальных окон используйте action: cookie или archive.</p>
+    <p class="muted" style="font-size:12px;">Для перехода к существующему разделу укажите его id: immunitySection, articlesSection или eventsSection. Для специальных окон используйте action: cookie, archive или guide. Текст руководства редактируется в поле guideText у карточки с action: guide.</p>
   `;
   box.querySelector('#wezyNavigationJson').value = JSON.stringify(current, null, 2);
   openPortalModal(box, 'Редактор навигации Wezy', true);
